@@ -1,0 +1,34 @@
+﻿<Window x:Class="Desktop_Fox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Desktop_Fox"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="CanResizeWithGrip"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MWViewModel/>
+    </Window.DataContext>
+    <Border Height="400" Width="700" Background="{StaticResource BackgroundBrush}">
+        <Grid>
+            <StackPanel Orientation="Horizontal">
+                <Button Height="100" Width="100" Content="Add Item">
+                    
+                </Button>
+                <ListBox x:Name="PictureSetListBox"
+                     IsSynchronizedWithCurrentItem="True"
+                     ScrollViewer.CanContentScroll="false"
+                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                     BorderBrush="Transparent"
+                     Background="Transparent"
+                     ItemsSource="{Binding Path=pictureViews}">
+                </ListBox>
+            </StackPanel>
+        </Grid>
+    </Border>
+    
+</Window>

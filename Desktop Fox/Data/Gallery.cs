@@ -17,6 +17,7 @@ namespace Desktop_Fox
 
         private MainWindow _mainWindow;
         public List<String> activeSetsList = new List<String>() { "Empty", "Empty", "Empty" };
+        public String selectedSet = "Empty";
 
         public Gallery(MainWindow mainWindow)
         {

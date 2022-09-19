@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Media.Imaging;
@@ -12,13 +13,17 @@ namespace Desktop_Fox
         /// Name des PictureSets
         /// </summary>
         public String Name { get; set; }
-
         /// <summary>
         /// Das erste Bild in der Tages Collection. Falls die Collection keinen Inhalt hat, wird ein schwarzes Bild zurück gegeben.
         /// </summary>
         public BitmapImage DayImage {
             get
             {
+                if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                {
+                    return ImageHandler.load("pack://application:,,,/Assets/murmel.png");
+                }
+                    
                 if (DayCol.singlePics.Count() > 0)
                     return ImageHandler.load(this.DayCol.singlePics.ElementAt(0).Value.Name);
                 else

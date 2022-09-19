@@ -6,6 +6,14 @@
              xmlns:local="clr-namespace:Desktop_Fox"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="360">
+    <UserControl.DataContext>
+        <local:PictureViewViewModel/>
+    </UserControl.DataContext>
+    
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+    </UserControl.Resources>
+    
     <Border x:Name="pBorder" 
                 BorderThickness="0"
                 CornerRadius="20">
@@ -15,7 +23,7 @@
                                    Rect="0,0,360,200"/>
         </Border.Clip>
         <Grid>
-            <Image x:Name="pImageDay" Source="/Assets/murmel.png" Stretch="UniformToFill"/>
+            <Image x:Name="pImageDay" Source="{Binding pictureSet.DayImage}" Stretch="UniformToFill"/>
             <Border HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
                 <Border.Clip>
@@ -32,7 +40,7 @@
                 </Border.Clip>
                 <Image x:Name="pImageNight" Source="/Assets/きつね - 狐.png" Stretch="UniformToFill"/>
             </Border>
-            <Label x:Name="pLabel" Content="Label" 
+            <Label x:Name="pLabel" Content="{Binding pictureSet.Name}" 
                    FontSize="22" FontFamily="/Assets/#Nunito" FontWeight="Bold"
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Bottom" 
@@ -60,7 +68,7 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
-                      Visibility="Collapsed">
+                      Visibility="{Binding }">
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FF61EB4E"
                              Margin="1"/>
@@ -115,12 +123,12 @@
 
 
             <Rectangle x:Name="pSelectedMarker"
-                Width="10" Height="200" 
+                       Width="10" Height="200" 
                        VerticalAlignment="Top"
                        HorizontalAlignment="Left" 
                        RenderTransformOrigin="0.5,0.5"
                        Margin="0,0,0,0"
-                       Visibility="Hidden">
+                       Visibility="{Binding IsSelected, Converter={StaticResource VisibilityConverter}}">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF362806" Offset="1"/>

@@ -12,27 +12,24 @@ namespace Desktop_Fox
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        Desktopfox desktopfox;
+        public MainWindow(Desktopfox desktopfox)
         {
+            this.desktopfox = desktopfox;
+            this.DataContext = desktopfox;
             InitializeComponent();
-            Pictures = new List<PictureView>();
         }
-
-        public int setCount = 0;
-  
-
-        public List<PictureView> Pictures;
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            PictureSet PS = new PictureSet("Picture Set " + setCount);
-            setCount++;
 
-            PictureSetListBox.ItemsSource = Pictures;
-            PictureSetListBox.Items.Refresh();
         }
 
-        private void Button_Make_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
 
         }

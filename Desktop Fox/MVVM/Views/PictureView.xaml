@@ -6,17 +6,14 @@
              xmlns:local="clr-namespace:Desktop_Fox"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="360">
-    <UserControl.DataContext>
-        <local:PictureViewViewModel/>
-    </UserControl.DataContext>
-    
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
     </UserControl.Resources>
     
     <Border x:Name="pBorder" 
                 BorderThickness="0"
-                CornerRadius="20">
+                CornerRadius="20"
+            Height="200" Width="360">
         <Border.Clip>
             <RectangleGeometry RadiusX="20"
                                    RadiusY="20"

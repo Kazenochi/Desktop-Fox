@@ -17,6 +17,9 @@ namespace Desktop_Fox
     public partial class Desktopfox : Window
     {
         MainWindow MW;
+        Gallery gallery;
+        GalleryManager GM; 
+        MWViewModel ViewModel;
 
         /// <summary>
         /// Konstruktor
@@ -24,9 +27,7 @@ namespace Desktop_Fox
         public Desktopfox()
         {
             InitializeComponent();
-            this.Hide();
-            MainWindow mainWindow = new MainWindow();
-            NotifyIcon notifyIcon = new NotifyIcon(mainWindow);
+
         }
 
     }

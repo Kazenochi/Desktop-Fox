@@ -42,7 +42,7 @@ namespace Desktop_Fox
         {
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri("pack://application:,,,/Assets/Dummy.jpg");
+            bitmapImage.UriSource = new Uri("F:\\DesktopFoxTestPicture\\Normal\\1.jpg");
             bitmapImage.EndInit();
             return bitmapImage;
         }

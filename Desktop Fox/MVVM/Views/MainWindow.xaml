@@ -10,14 +10,18 @@
         Background="Transparent"
         ResizeMode="CanResizeWithGrip"
         Title="MainWindow" Height="450" Width="800">
-    <Window.DataContext>
-        <local:MWViewModel/>
-    </Window.DataContext>
+    
     <Border Height="400" Width="700" Background="{StaticResource BackgroundBrush}">
         <Grid>
             <StackPanel Orientation="Horizontal">
-                <Button Height="100" Width="100" Content="Add Item">
-                    
+                <Button Height="100" Width="100" Content="Add Item" Click="Button_Click">
+
+                </Button>
+                <Button Height="100" Width="100" Content="Make Item" Click="Button_Make_Click">
+
+                </Button>
+                <Button Height="100" Width="100" Content="Add Item" Click="Button_Click">
+
                 </Button>
                 <ListBox x:Name="PictureSetListBox"
                      IsSynchronizedWithCurrentItem="True"
@@ -25,10 +29,11 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                      BorderBrush="Transparent"
                      Background="Transparent"
-                     ItemsSource="{Binding Path=pictureViews}">
+                         Width="200"
+                         Height="300">
                 </ListBox>
+                <Image Height="200" Width="200" Source="{Binding PictureSet.DayImage}" ></Image>
             </StackPanel>
         </Grid>
     </Border>
-    
 </Window>

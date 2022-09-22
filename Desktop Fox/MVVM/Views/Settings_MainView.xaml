@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="DesktopFox.MVVM.Views.Settings_MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DesktopFox.MVVM.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="900">
+    <UserControl.DataContext>
+        <local:Settings_PreviewView/>
+    </UserControl.DataContext>
+    <Border Height="250" Width="500"
+            Background="Transparent"
+            CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,-0.1">
+                <RadioButton x:Name="settings_radio_Preview" 
+                             Content="Preview"
+                             IsChecked="True"
+                             Style="{StaticResource DF_FolderRadioButton}" 
+                           />
+                <RadioButton x:Name="settings_radio_Shuffle"
+                             Content="Shuffle"
+                             Style="{StaticResource DF_FolderRadioButton}" 
+                            />
+                <RadioButton x:Name="settings_radio_Daytime"
+                             Content="Daytime"
+                             Style="{StaticResource DF_FolderRadioButton}" 
+                       />
+                <RadioButton x:Name="settings_radio_Style"
+                             Content="Style"
+                             Style="{StaticResource DF_FolderRadioButton}" 
+                        />
+                <RadioButton x:Name="settings_radio_DMode"
+                             Content="Position"
+                             Style="{StaticResource DF_FolderRadioButton}" 
+               />
+            </StackPanel>
+            <local:Settings_PreviewView x:Name="previewView" 
+                                        Grid.Row="1"
+                                        Visibility="Visible"/>
+            <local:Settings_ShuffleView x:Name="shuffleView" 
+                                        Grid.Row="1"
+                                        Visibility="Hidden"/>
+            <local:Settings_DaytimeView x:Name="daytimeView" 
+                                        Grid.Row="1"
+                                        Visibility="Hidden"/>
+            <local:Settings_StyleView x:Name="styleView" 
+                                        Grid.Row="1"
+                                        Visibility="Hidden"/>
+            <local:Settings_DModeView x:Name="dModeView"
+                                        Grid.Row="1"
+                                        Visibility="Hidden"/>
+        </Grid>     
+    </Border>
+</UserControl>

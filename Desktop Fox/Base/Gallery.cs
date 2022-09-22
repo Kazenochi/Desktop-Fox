@@ -1,9 +1,9 @@
-﻿using Desktop_Fox;
+﻿using DesktopFox;
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
 
-namespace Desktop_Fox
+namespace DesktopFox
 {
     public class Gallery
     {

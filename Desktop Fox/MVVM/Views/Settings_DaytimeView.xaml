@@ -1,0 +1,196 @@
+﻿<UserControl x:Class="DesktopFox.MVVM.Views.Settings_DaytimeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DesktopFox.MVVM.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="Set_DaytimeView">
+    <UserControl.Resources>
+        <Storyboard x:Key="ConfirmationLight">
+            <ColorAnimation To="LightGreen" 
+                            Storyboard.TargetProperty="(Border.Background).Color" 
+                            Storyboard.TargetName="border1"
+                            From="#FF347FE6"
+                            AutoReverse="True"
+                            Duration="0:0:0.5"/>
+            <ColorAnimation To="LightGreen" 
+                            Storyboard.TargetProperty="(Border.Background).Color" 
+                            Storyboard.TargetName="border2"
+                            From="#FF347FE6"
+                            AutoReverse="True"
+                            Duration="0:0:0.5"/>
+            <ColorAnimation To="LightGreen" 
+                            Storyboard.TargetProperty="(Border.Background).Color" 
+                            Storyboard.TargetName="border3"
+                            From="#FF347FE6"
+                            AutoReverse="True"
+                            Duration="0:0:0.5"/>
+            <ColorAnimation To="LightGreen" 
+                            Storyboard.TargetProperty="(Border.Background).Color" 
+                            Storyboard.TargetName="border4"
+                            From="#FF347FE6"
+                            AutoReverse="True"
+                            Duration="0:0:0.5"/>
+        </Storyboard>
+    </UserControl.Resources>
+    <Border Background="#FF2C394A"
+            CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Margin="0,25,0,0">
+                <TextBlock FontFamily="/Assets/#Nunito"
+                        Foreground="White"
+                        FontSize="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                       TextAlignment="Center"
+                           Margin="0,0,0,5">
+                    When should the day start
+                </TextBlock>
+
+                <StackPanel Orientation="Horizontal">
+                        
+                    <Border Height="30" Width="70" 
+                            Background="#FF347FE6" 
+                            CornerRadius="15"
+                            Margin="10,0,10,0"
+                            x:Name="border1">
+                        <TextBox x:Name="dayHours"
+                 
+                  
+                             MaxLength="2"
+                             Foreground="White"
+                             FontSize="20"
+                             VerticalAlignment="Center"
+                             Background="Transparent"
+                             BorderBrush="Transparent"
+                             TextAlignment="Center"
+                             Margin="10,1,10,1" />
+                    </Border>
+                        
+                    <TextBlock FontFamily="/Assets/#Nunito"
+                        Foreground="White"
+                        FontSize="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        TextAlignment="Center">
+                            Hour
+                        </TextBlock>
+                        
+                    <Border Height="30" Width="70" 
+                            Background="#FF347FE6" 
+                            CornerRadius="15"
+                            Margin="10,0,10,0"
+                            x:Name="border2">
+                        <TextBox x:Name="dayMinutes"
+                      
+                                 MaxLength="2"
+                                 Foreground="White"
+                                 FontSize="20"
+                                 VerticalAlignment="Center"
+                                 Background="Transparent"
+                                 BorderBrush="Transparent"
+                                 TextAlignment="Center"
+                                 Margin="10,1,10,1"/>
+                    </Border>
+                        
+                    <TextBlock FontFamily="/Assets/#Nunito"
+                        Foreground="White"
+                        FontSize="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        TextAlignment="Center">
+                            Minute
+                    </TextBlock>
+                        
+                </StackPanel>
+                
+                <TextBlock FontFamily="/Assets/#Nunito"
+                        Foreground="White"
+                        FontSize="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                       TextAlignment="Center"
+                           Margin="0,30,0,5">
+                    When should the night start
+                </TextBlock>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <Border Height="30" Width="70" 
+                            Background="#FF347FE6" 
+                            CornerRadius="15"
+                            Margin="10,0,10,0"
+                            x:Name="border3">
+                        <TextBox x:Name="nightHours"
+                            
+                                 MaxLength="2"
+                                 Foreground="White"
+                                 FontSize="20"
+                                 VerticalAlignment="Center"
+                                 Background="Transparent"
+                                 BorderBrush="Transparent"
+                                 TextAlignment="Center"
+                                 Margin="10,1,10,1"/>
+                    </Border>
+
+                    <TextBlock FontFamily="/Assets/#Nunito"
+                        Foreground="White"
+                        FontSize="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        TextAlignment="Center">
+                            Hour
+                    </TextBlock>
+
+                    <Border Height="30" Width="70" 
+                            Background="#FF347FE6" 
+                            CornerRadius="15"
+                            Margin="10,0,10,0"
+                            x:Name="border4">
+                        <TextBox x:Name="nightMinutes"
+                         
+                                 MaxLength="2"
+                                 Foreground="White"
+                                 FontSize="20"
+                                 VerticalAlignment="Center"
+                                 Background="Transparent"
+                                 BorderBrush="Transparent"
+                                 TextAlignment="Center"
+                                 Margin="10,1,10,1"/>
+                    </Border>
+
+                    <TextBlock FontFamily="/Assets/#Nunito"
+                        Foreground="White"
+                        FontSize="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        TextAlignment="Center">
+                            Minute
+                    </TextBlock>
+
+                </StackPanel>
+
+            </StackPanel>
+            <Button Content="Save"
+                    Grid.Column="1"
+                    VerticalAlignment="Top"
+                    Margin="0,80,0,0"
+                    FontSize="20"
+                    Style="{StaticResource DF_Button_Border}" 
+       
+                    />
+        </Grid>
+    </Border>
+</UserControl>

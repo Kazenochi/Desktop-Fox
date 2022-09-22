@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 using Application = System.Windows.Application;
 
-namespace Desktop_Fox
+namespace DesktopFox
 {
     internal class NotifyIcon
     {
@@ -19,11 +19,12 @@ namespace Desktop_Fox
         private System.Windows.Forms.ToolStripMenuItem AutostartMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AutoSetChangeMenuItem;
 
-        private MainWindow MW;
+        private MainWindowVM MWVM;
+        private Fox DF;
         private SettingsManager SM;
-        public NotifyIcon(MainWindow mainWindow)
+        public NotifyIcon(Fox DesktopFox)
         {
-            MW = mainWindow;
+            DF = DesktopFox;
             notifyIcon = new System.Windows.Forms.NotifyIcon();
            
 
@@ -96,7 +97,7 @@ namespace Desktop_Fox
         /// <param name="e"></param>
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            MW.Show();
+            DF.makeMainWindow();
         }
 
         /// <summary>

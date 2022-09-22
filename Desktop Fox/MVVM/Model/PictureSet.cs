@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Media.Imaging;
 using static System.Windows.Forms.DataFormats;
 
-namespace Desktop_Fox
+namespace DesktopFox
 {
     
     public class PictureSet : INotifyPropertyChanged
@@ -14,7 +14,7 @@ namespace Desktop_Fox
 
         private BitmapImage _dayImage;
         public BitmapImage DayImage { 
-            get { return _dayImage; }
+            get { return DayCol.getPreview(); }
             set
             {
                 _dayImage = value;
@@ -23,13 +23,26 @@ namespace Desktop_Fox
         }
         private BitmapImage _nightImage;
         public BitmapImage NightImage {
-            get { return _nightImage; }
+            get { return NightCol.getPreview(); }
             set 
             {
                 _nightImage = value;
                 RaisePropertyChanged(nameof(NightImage));
             } 
         }
+
+
+        /// <summary>
+        /// Sammlung von Bilder die wärend des Tages angezeigt werden
+        /// </summary>
+        public Collection DayCol { get; set; }
+
+        /// <summary>
+        /// Sammlung von Bilder die wärend der Nacht angezeigt werden
+        /// </summary>
+        public Collection NightCol { get; set; }
+
+
 
         public PictureSet(string name)
         {

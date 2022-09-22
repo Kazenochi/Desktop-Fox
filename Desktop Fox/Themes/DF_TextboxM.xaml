@@ -1,0 +1,58 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--Beispiel stammt von Payload. https://www.youtube.com/watch?v=PzP8mw7JUzI. Code wurde nur leicht verändert-->
+    <Style TargetType="{x:Type TextBox}"
+       x:Key="DF_TextboxM">
+        <Setter Property="FontFamily" Value="/Assets/#Nunito"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border CornerRadius="20"
+                            Background="#FF7B85AF"
+                            Width="80" Height="40">
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox x:Name="InputField"
+                                     Margin="1"
+                                     Text="{TemplateBinding Text}"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     Foreground="Beige"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"/>
+
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="MM"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Foreground="DarkGray"
+                                       Grid.Column="1">
+
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=InputField}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Background" Value="#FF7B85AF"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FF80CCDD"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,4 +1,4 @@
-﻿using Desktop_Fox;
+﻿using DesktopFox;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Media.Imaging;
 
-namespace Desktop_Fox
+namespace DesktopFox
 {
 
     /// <summary>
@@ -16,8 +16,20 @@ namespace Desktop_Fox
     /// </summary>
     public class GalleryManager
     {
+        private Gallery _gallery;
+        private SettingsManager SM;
+        public GalleryManager(Gallery gallery)
+        {
+            _gallery = gallery;
+        }
+        
 
-    
+
+
+        public void reInit(SettingsManager settingsManager)
+        {
+            SM = settingsManager;
+        }
     }
 
 }

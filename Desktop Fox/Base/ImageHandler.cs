@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace Desktop_Fox
+namespace DesktopFox
 {
     internal class ImageHandler
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Desktop_Fox.MVVM.Views
+namespace DesktopFox.MVVM.Views
 {
     /// <summary>
     /// Interaktionslogik für PictureView.xaml

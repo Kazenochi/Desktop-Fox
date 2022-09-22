@@ -1,14 +1,26 @@
-﻿using Desktop_Fox;
+﻿using DesktopFox;
 using System;
 using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Media;
 using DPos = IDesktopWallpaperWrapper.Win32.DESKTOP_WALLPAPER_POSITION;
 
-namespace Desktop_Fox
+namespace DesktopFox
 {
     public class SettingsManager
     {
+        private Settings _settings;
+        private GalleryManager GM;
+        public SettingsManager(Settings settings)
+        {
+            this._settings = settings;
+        }
+
+        public void reInit(GalleryManager galleryManager)
+        {
+            GM = galleryManager;
+        }
+
         /*
         private Settings _settings;
         //private Settings_MainView _settingsView;
@@ -26,42 +38,7 @@ namespace Desktop_Fox
             GM = galleryManager;
         }
 
-        public Settings load()
-        {
-            //_settings = DF_Json.loadSettings();
-
-            //Falls es keine Settings File gibt wird eine neue Default angelegt
-            //Neues Object wird nur erzeugt wenn _settings == null ist
-            _settings ??= new Settings();
-
-            BigPreview();
-
-            //Weiterführen des Aktiven Sets falls der "Tageswechsel geschehen ist
-            /*
-            if(DateTime.Now > _settings.NextDaySwitch && GM.getActiveSet() != null)
-            {
-                GM.setActiveSet(GM.getNextSet(GM.getActiveSet()));
-            }
-            //
-
-            //Note: Check auf den State in den Settings um benötigte Timer direkt wieder zu starten
-            //Fehler abfangen falls das Programm lief aber in der zwischenzeit die Gallery nicht mehr existiert
-            if (_settings.isRunning && GM.areSetsActive() == false)
-            {
-                _settings.isRunning = false;
-            }
-            else if (_settings.isRunning)
-            {
-                _shuffler.picShuffleStart();
-            }
-
-            if (_settings.autostartOn)
-                setAutostart(true);
-            else
-                setAutostart(false);
-
-            return _settings;
-        }
+       
 
         /// <summary>
         /// Gibt das Einstellungsobject zurück
@@ -372,6 +349,6 @@ namespace Desktop_Fox
         }
 
         */
-    }
+        }
 
-}
+    }

@@ -1,28 +1,38 @@
 ﻿using IDesktopWallpaperWrapper.Win32;
 using System;
+using System.ComponentModel;
 using System.Windows.Media;
 
 namespace DesktopFox
 {
-    public class Settings
+    public class Settings : INotifyPropertyChanged
     {
         /// <summary>
         /// Zeitspannen für die umstellung zwischen dem Tag und Nacht Set, sowie der Zeit zwischen den Bildwechseln
         /// </summary>        
-        public TimeSpan DayStart = new TimeSpan(8, 0, 0);               //Beginn des Tageszeitraums Bsp: 08:00 Uhr
-        public TimeSpan NightStart = new TimeSpan(20, 0, 0);             //Beginn des Nachtzeitraums Bsp: 20:00 Uhr
-        public TimeSpan ShuffleTime = new TimeSpan(0, 5, 0);
+        private TimeSpan _dayStart = new TimeSpan(8, 0, 0);               //Beginn des Tageszeitraums Bsp: 08:00 Uhr
+        public TimeSpan DayStart { get { return _dayStart; } set { _dayStart = value; RaisePropertyChanged(nameof(DayStart)); } }
+        
+        private TimeSpan _nightStart = new TimeSpan(20, 0, 0);             //Beginn des Nachtzeitraums Bsp: 20:00 Uhr
+        public TimeSpan NightStart { get { return _nightStart; } set { _nightStart = value; RaisePropertyChanged(nameof(NightStart)); } }
+
+        private TimeSpan _shuffleTime = new TimeSpan(0, 5, 0);
+        public TimeSpan ShufflerTime { get { return _shuffleTime; } set { _shuffleTime = value; RaisePropertyChanged(nameof(ShufflerTime)); } }
 
         /// <summary>
         /// Gibt den Zeitpunkt an ab dem ein neuer Tag angebrochen ist. 
         /// Bezieht sich auf das Ende der Programm Tageszeit nicht auf auf den Tatsächlichen Datumswechsel
         /// </summary>
-        public DateTime NextDaySwitch = new DateTime();
+        private DateTime _nextDaySwitch = new DateTime();
+        public DateTime NextDaySwitch { get { return _nextDaySwitch; } set { _nextDaySwitch = value; RaisePropertyChanged(nameof(NextDaySwitch)); } } 
+
 
         /// <summary>
         /// Sollen die Bilder Shuffeln
         /// </summary>
-        public Boolean Shuffle = true;
+        private Boolean _shuffle = true;
+        public Boolean Shuffle { get { return _shuffle; } set { _shuffle = value; RaisePropertyChanged(nameof(Shuffle)); } }
+
 
         /// <summary>
         /// Wie das Preview Bild in der Anwendung angezeigt werden soll
@@ -62,5 +72,17 @@ namespace DesktopFox
         /// Multi   = Zeigt unterschiedliche Sets pro Monitor an
         /// </summary>
         public String DesktopMode = "Single";
+
+
+
+
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -8,10 +8,6 @@
              xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels" x:Class="DesktopFox.MVVM.Views.AddSetView"
              mc:Ignorable="d" 
              d:DesignHeight="460" d:DesignWidth="500">
-    
-    <UserControl.DataContext>
-        <ViewModels:AddsetVM/>
-    </UserControl.DataContext>
 
     <Border Background="{StaticResource BackgroundBrush}"
             CornerRadius="20"
@@ -75,7 +71,8 @@
                            MaxWidth="200"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
-                           Grid.ColumnSpan="2"/>
+                           Grid.ColumnSpan="2"
+                               Content="{Binding Path=AddSetModel.PictureSetName}"/>
                         <StackPanel Orientation="Horizontal"
                                 Grid.Column="1"
                                 HorizontalAlignment="Right">

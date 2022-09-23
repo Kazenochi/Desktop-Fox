@@ -5,6 +5,7 @@ using Windows.ApplicationModel.Contacts.Provider;
 using DesktopFox.MVVM.Views;
 using System.Collections.Generic;
 using System.Diagnostics;
+using DesktopFox.MVVM.ViewModels;
 
 namespace DesktopFox
 {
@@ -22,7 +23,7 @@ namespace DesktopFox
         private MainWindowVM mainWindowVM;
         private PictureSet pictureSet;
         private PictureViewVM pictureViewVM;
-
+        private AddSetVM addSetVM;
 
         /// <summary>
         /// Konstruktor
@@ -34,6 +35,9 @@ namespace DesktopFox
             notifyIcon = new NotifyIcon(this);
 
             mainWindowVM = new MainWindowVM();
+            addSetVM = new AddSetVM(mainWindowVM);
+            
+
 
             loadFiles();
             GM = new GalleryManager(gallery);
@@ -94,6 +98,12 @@ namespace DesktopFox
                 mainWindowVM.MainWindowModel._pictureViews.Add(tmpView);
             }
             MW.lbPictures.Items.Refresh();
+
+            MW.button_Add.DataContext = addSetVM;
+            MW.addSetView.DataContext = addSetVM;
+
+            MW.button_Settings.DataContext = 
+
             MW.Show();
         }
 

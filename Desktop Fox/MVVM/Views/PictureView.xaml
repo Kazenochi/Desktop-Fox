@@ -3,14 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DesktopFox.MVVM.Views"
+             xmlns:local="clr-namespace:DesktopFox"
              xmlns:Desktop_Fox="clr-namespace:DesktopFox"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="360">
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
-    </UserControl.Resources>
-    
+
     <Border x:Name="pBorder" 
                 BorderThickness="0"
                 CornerRadius="20"
@@ -36,9 +33,9 @@
                         </RectangleGeometry.Transform>
                     </RectangleGeometry>
                 </Border.Clip>
-                <Image x:Name="pImageNight" Source="/Assets/きつね - 狐.png" Stretch="UniformToFill"/>
+                <Image x:Name="pImageNight" Source="{Binding pictureSet.NightImage}" Stretch="UniformToFill"/>
             </Border>
-            <Label x:Name="pLabel" Content="{Binding pictureSet.Name}" 
+            <Label x:Name="pLabel" Content="{Binding pictureSet.SetName}" 
                    FontSize="22" FontFamily="/Assets/#Nunito" FontWeight="Bold"
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Bottom" 
@@ -66,7 +63,8 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
-                      Visibility="{Binding }">
+                      Visibility="{Binding Path=pictureSet.IsActive1, Mode=TwoWay, Converter={StaticResource BoolConverter}}"
+                      >
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FF61EB4E"
                              Margin="1"/>
@@ -77,7 +75,7 @@
                            HorizontalContentAlignment="Center"
                            FontFamily="/Assets/#Nunito"
                            FontSize="20" FontWeight="Bold" 
-                        />
+                           />
                 </Grid>
 
                 <Grid x:Name="pActiveMarker2"
@@ -85,7 +83,7 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
-                      Visibility="Collapsed">
+                      Visibility="{Binding Path=pictureSet.IsActive3, Mode=TwoWay, Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FF41A6FF"
                              Margin="1"/>
@@ -104,7 +102,7 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
-                      Visibility="Collapsed">
+                      Visibility="{Binding Path=pictureSet.IsActive3, Mode=TwoWay, Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FFFF3C3C"
                              Margin="1"/>
@@ -126,7 +124,7 @@
                        HorizontalAlignment="Left" 
                        RenderTransformOrigin="0.5,0.5"
                        Margin="0,0,0,0"
-                       Visibility="{Binding IsSelected, Converter={StaticResource VisibilityConverter}}">
+                       Visibility="{Binding Path=pictureSet.IsSelectedDF, Mode=TwoWay, Converter={StaticResource BoolConverter}}">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF362806" Offset="1"/>

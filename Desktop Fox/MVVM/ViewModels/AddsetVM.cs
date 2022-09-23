@@ -8,5 +8,6 @@ namespace DesktopFox.MVVM.ViewModels
 {
     internal class AddsetVM
     {
+
     }
 }

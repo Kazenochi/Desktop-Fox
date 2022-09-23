@@ -9,4 +9,5 @@
     <SolidColorBrush x:Key="BackgroundBrush">#FF2C394A</SolidColorBrush>
     <SolidColorBrush x:Key="BorderBrush">DarkGray</SolidColorBrush>
     <Image x:Key="DF_Icon" Source="MVVM\Views\DF_Icon.ico"/>
+    <BooleanToVisibilityConverter x:Key="BoolConverter"/>
 </ResourceDictionary>

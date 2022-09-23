@@ -7,6 +7,9 @@
         xmlns:view="clr-namespace:DesktopFox.MVVM.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="820" Width="1690">
+    <Window.DataContext>
+        <local:MainWindowVM/>
+    </Window.DataContext>
     <Border Background="{StaticResource BackgroundBrush}"
             BorderBrush="DarkGray"
             BorderThickness="0.5"
@@ -52,18 +55,20 @@
                             Margin="10,0,0,0"
                             Visibility="Collapsed"
                             Style="{StaticResource DF_Button_Border}"/>
-                    <Button x:Name="button_SelectCollection" 
+                    <Button x:Name="button_Add" 
                             Content="Add"
                             FontSize="20"
                             Grid.Column="0" 
                             Margin="10,0,0,0"
-                            Style="{StaticResource DF_Button_Border}"/>
+                            Style="{StaticResource DF_Button_Border}"
+                            Command="{Binding ToggleAddSetCommand}"/>
                     <Button x:Name="button_Settings" 
                             Content="Settings" 
                             FontSize="20"
                             Grid.Column="1" 
                             Margin="10,0,0,0"
-                            Style="{StaticResource DF_Button_Border}"/>
+                            Style="{StaticResource DF_Button_Border}"
+                            Command="{Binding ToggleAddSetCommand}"/>
                 </StackPanel>
 
             </StackPanel>
@@ -108,7 +113,9 @@
                      Grid.Row="1"         
                      BorderBrush="Transparent" 
                      Background="Transparent"
+                     SelectionChanged="SelectionChanged"
                      Panel.ZIndex="3">
+
             </ListBox>
             <Grid x:Name="multiView"
                   Grid.RowSpan="2"
@@ -128,7 +135,7 @@
                                         Panel.ZIndex="2">
                 </view:Settings_MainView>
                 <view:AddSetView x:Name="addSetView"
-                                 Visibility="Hidden"
+                                 Visibility="{Binding Path=AddSetVisible, Converter={StaticResource BoolConverter}}"
                                  HorizontalAlignment="Right"
                                  VerticalAlignment="Bottom"
                                  Margin="0,0,30,30">

@@ -40,12 +40,14 @@ namespace DesktopFox
             SM = new SettingsManager(settings);
 
             readyPictureVMs();
-
-
-
-
         }
 
+        public MainWindow GetMainWindow()
+        {
+            if(MW != null)
+                return MW;
+            return null;
+        }
 
         public void readyPictureVMs()
         {

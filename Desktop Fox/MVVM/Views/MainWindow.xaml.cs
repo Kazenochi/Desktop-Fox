@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace DesktopFox
 {
@@ -16,6 +17,20 @@ namespace DesktopFox
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MainWindowVM myVM = (MainWindowVM)this.DataContext;
+            var item = (ListBox)sender;
+            var selected = (PictureView)item.SelectedItem;
+            
+
+            if (selected != null)
+            {
+                var logic = (PictureViewVM)selected.DataContext;
+                myVM.SChange(logic);
+            }             
         }
     }
 }

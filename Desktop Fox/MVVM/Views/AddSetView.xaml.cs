@@ -18,5 +18,7 @@ namespace DesktopFox.MVVM.Views
         {
             InitializeComponent();
         }
+
+
     }
 }

@@ -21,7 +21,6 @@ namespace DesktopFox
             return getList(getFileInfo(folderDialog.SelectedPath)); 
         }
 
-
         private static List<String> getList(List<FileInfo> fileInfos)
         {
             List<String> list = new List<String>();

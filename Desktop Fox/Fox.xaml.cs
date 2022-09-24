@@ -24,6 +24,7 @@ namespace DesktopFox
         private PictureSet pictureSet;
         private PictureViewVM pictureViewVM;
         private AddSetVM addSetVM;
+        private SettingsVM settingsVM;
 
         /// <summary>
         /// Konstruktor
@@ -34,12 +35,13 @@ namespace DesktopFox
             this.Hide();
             notifyIcon = new NotifyIcon(this);
 
+            loadFiles();
+
             mainWindowVM = new MainWindowVM();
             addSetVM = new AddSetVM(mainWindowVM);
-            
+            settingsVM = new SettingsVM(settings);
 
 
-            loadFiles();
             GM = new GalleryManager(gallery);
             SM = new SettingsManager(settings);
 
@@ -102,7 +104,8 @@ namespace DesktopFox
             MW.button_Add.DataContext = addSetVM;
             MW.addSetView.DataContext = addSetVM;
 
-            MW.button_Settings.DataContext = 
+            MW.button_Settings.DataContext = settingsVM;
+            MW.settingsMainView.DataContext = settingsVM;
 
             MW.Show();
         }

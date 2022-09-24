@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,17 +26,28 @@ namespace DesktopFox.MVVM.ViewModels
         }
 
         private Boolean _addSetVisible = false;
-
- 
-
-        public Boolean AddSetVisible { get { return _addSetVisible; } set { _addSetVisible = value; RaisePropertyChanged(nameof(AddSetVisible)); } }
-
+        public Boolean AddSetVisible { get { return _addSetVisible; } set { _addSetVisible = value; GetSetName(); RaisePropertyChanged(nameof(AddSetVisible)); } }
         public ICommand ToggleAddSetCommand { get { return new DF_Command.DelegateCommand(o => this.AddSetVisible = !this.AddSetVisible); } }
+        public ICommand OpenFolderDialog { get { return new DelegateCommand(o => OpenFD()); } }
+        public ICommand AddNewSet { get { return new DF_Command.DelegateCommand(o => AddNS()); } }
 
+        private void AddNS()
+        {
+
+        }
+        private void GetSetName()
+        {
+            if(MWVM.SelectedItem != null)
+                AddSetModel.PictureSetName = MWVM.SelectedItem.Name;
+            else
+                AddSetModel.PictureSetName = NewName();
+        }
 
         private void OpenFD()
         {
             List<String> fileList = DF_FolderDialog.openFolderDialog();
+            if(fileList != null)
+                AddSetModel.FolderPath = Path.GetDirectoryName(fileList[0]);
         }
 
         private String NewName()
@@ -61,11 +73,6 @@ namespace DesktopFox.MVVM.ViewModels
         {
 
         }
-
-        public ICommand OpenFolderDialog { get { return new DelegateCommand(o => OpenFD()); } }
-        //public ICommand NewPictureSet { get { return new DelegateCommand(o => )} }
-
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

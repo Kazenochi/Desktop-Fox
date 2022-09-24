@@ -74,13 +74,15 @@
                 </StackPanel>
 
             </StackPanel>
+            
+            
             <Border Grid.RowSpan="2"
                     Grid.Row="1"
                     Margin="10,0,10,10"
                     x:Name="previewBorder">
                 <Image x:Name="image_PreviewBig" 
-                   Stretch="UniformToFill"
-                   Grid.RowSpan="2"
+                       Stretch="UniformToFill"
+                       Grid.RowSpan="2"
                        Source="Assets/murmel.png"/>
             </Border>
             <Border x:Name="doubleClickPane"
@@ -101,6 +103,9 @@
                        Source="/MVVM/Views/murmel.png"/>
 
             </Border>
+            
+            
+            
             <ListBox x:Name="lbPictures" 
                      Margin="10,0,10,10" 
                      IsSynchronizedWithCurrentItem="True" 
@@ -160,7 +165,7 @@
                        Height="20"
                        Width="20" 
                        Margin="0,0,0,0"/>
-                <Label FontFamily="/Assets/#Nunito"
+                <Label FontFamily="{StaticResource Default}"
                        Content="Desktop Fox"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"

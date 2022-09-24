@@ -1,11 +1,11 @@
-﻿<UserControl
+﻿<UserControl x:Class="DesktopFox.MVVM.Views.AddSetView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:DesktopFox.MVVM.Views"
              xmlns:local="clr-namespace:DesktopFox"
-             xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels" x:Class="DesktopFox.MVVM.Views.AddSetView"
+             xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels" 
              mc:Ignorable="d" 
              d:DesignHeight="460" d:DesignWidth="500">
 
@@ -19,7 +19,7 @@
             <StackPanel VerticalAlignment="Stretch">
                 <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-                    <TextBlock FontFamily="/Assets/#Nunito"
+                    <TextBlock FontFamily="{StaticResource Default}"
                         Foreground="White"
                         FontSize="20"
                         HorizontalAlignment="Center"
@@ -31,16 +31,17 @@
                         VerticalAlignment="Top"
                         Margin="0,10,0,0">
                         <RadioButton x:Name="radio_Day"
-                                 Content="Day" 
-                                 FontSize="20"          
-                                 Margin="5,5,5,5"
-                                 Style="{StaticResource DF_RadioButton_Border}" 
-                                 IsChecked="True"/>
+                                     Content="Day" 
+                                     FontSize="20"          
+                                     Margin="5,5,5,5"
+                                     Style="{StaticResource DF_RadioButton_Border}" 
+                                     IsChecked="{Binding AddSetModel.Day}"/>
                         <RadioButton x:Name="radio_Night"
-                                 Content="Night" 
-                                 FontSize="20"
-                                 Margin="5,5,5,5"
-                                 Style="{StaticResource DF_RadioButton_Border}"/>
+                                     Content="Night" 
+                                     FontSize="20"
+                                     Margin="5,5,5,5"
+                                     Style="{StaticResource DF_RadioButton_Border}"
+                                     IsChecked="{Binding AddSetModel.Day, Converter={StaticResource BoolInverter}}"/>
                     </StackPanel>
                 </StackPanel>
                 <Border Background="DarkGray"
@@ -53,7 +54,7 @@
                         VerticalAlignment="Center"
                         Grid.Row="1"
                         Margin="20,0,20,0">
-                    <TextBlock FontFamily="/Assets/#Nunito"
+                    <TextBlock FontFamily="{StaticResource Default}"
                             Foreground="White"
                             FontSize="20"
                             HorizontalAlignment="Center"
@@ -65,23 +66,23 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label x:Name="label_ActiveSet"
-                           FontFamily="/Assets/#Nunito"
-                           Foreground="White"
-                           FontSize="15"
-                           MaxWidth="200"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
-                           Grid.ColumnSpan="2"
+                               FontFamily="{StaticResource Default}"
+                               Foreground="White"
+                               FontSize="15"
+                               MaxWidth="200"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Grid.ColumnSpan="2"
                                Content="{Binding Path=AddSetModel.PictureSetName}"/>
                         <StackPanel Orientation="Horizontal"
-                                Grid.Column="1"
-                                HorizontalAlignment="Right">
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Right">
                             <Button x:Name="button_CreateNewSet"
-                            Content="New"
-                            FontSize="20"
-                            Style="{StaticResource DF_Button_Border}"
-                            HorizontalAlignment="Right"
-                            Grid.Column="1"/>
+                                    Content="New"
+                                    FontSize="20"
+                                    Style="{StaticResource DF_Button_Border}"
+                                    HorizontalAlignment="Right"
+                                    Grid.Column="1"/>
 
                         </StackPanel>
 
@@ -98,7 +99,7 @@
                             VerticalAlignment="Center"
                             Grid.Row="2"
                             Margin="20,0,20,0">
-                    <TextBlock FontFamily="/Assets/#Nunito"
+                    <TextBlock FontFamily="{StaticResource Default}"
                             Foreground="White"
                             FontSize="20"
                             HorizontalAlignment="Center"
@@ -110,21 +111,22 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label x:Name="label_SelectedFolder"
-                           FontFamily="/Assets/#Nunito"
-                           Foreground="White"
-                           FontSize="15"
+                               FontFamily="{StaticResource Default}"
+                               Foreground="White"
+                               FontSize="15"
 
-                           MaxWidth="300"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
-                           Content=""
-                           Grid.ColumnSpan="2"/>
+                               MaxWidth="300"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="{Binding Path=AddSetModel.FolderPath}"
+                               Grid.ColumnSpan="2"/>
                         <Button x:Name="button_SelectFolder"
-                            Content="Select"
-                            FontSize="20"
-                            Style="{StaticResource DF_Button_Border}"
-                            HorizontalAlignment="Right"
-                            Grid.Column="1"/>
+                                Content="Select"
+                                FontSize="20"
+                                Style="{StaticResource DF_Button_Border}"
+                                HorizontalAlignment="Right"
+                                Grid.Column="1"
+                                Command="{Binding OpenFolderDialog}"/>
                     </Grid>
 
                 </StackPanel>
@@ -136,16 +138,16 @@
                         Margin="10"/>
                 <Grid>
                     <Button Content="Add"
-                    FontSize="20"
-                    Background="Gray"
-                    Foreground="DarkGray"
-                    Style="{StaticResource DF_Button_Border}"
-                    Grid.Row="3"/>
+                            FontSize="20"
+                            Background="Gray"
+                            Foreground="DarkGray"
+                            Style="{StaticResource DF_Button_Border}"
+                            Grid.Row="3"/>
                     <Button x:Name="button_AddPictures"
-                    Content="Add"
-                    FontSize="20"
-                    Style="{StaticResource DF_Button_Border}"
-                    Grid.Row="3"/>
+                            Content="Add"
+                            FontSize="20"
+                            Style="{StaticResource DF_Button_Border}"
+                            Grid.Row="3"/>
                 </Grid>
             </StackPanel>
         </Grid>

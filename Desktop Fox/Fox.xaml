@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopFox"
         mc:Ignorable="d"
-        Title="Fox" Height="450" Width="800"
+        Title="Fox" Height="1" Width="1"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent">

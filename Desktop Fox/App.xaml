@@ -9,7 +9,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Data/ValueDictionary.xaml"/>
+                <ResourceDictionary Source="Themes/ValueDictionary.xaml"/>
                 <ResourceDictionary Source="Themes/DF_Button.xaml"/>
                 <ResourceDictionary Source="Themes/DF_TextboxH.xaml"/>
                 <ResourceDictionary Source="Themes/DF_TextboxM.xaml"/>

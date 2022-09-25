@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -10,7 +11,7 @@ using static System.Windows.Forms.DataFormats;
 namespace DesktopFox
 {
     
-    public class PictureSet : ListBoxItem, INotifyPropertyChanged
+    public class PictureSet : INotifyPropertyChanged
     {
         private String _setName;
         public String SetName { get { return _setName; } set { _setName = value; RaisePropertyChanged(nameof(SetName)); } }
@@ -29,8 +30,9 @@ namespace DesktopFox
 
 
         private BitmapImage _dayImage;
+        [JsonIgnore]
         public BitmapImage DayImage { 
-            get { return DayCol.getPreview(); }
+            get { return DayCol.getPreview() ?? ImageHandler.dummy(); }
             set
             {
                 _dayImage = value;
@@ -38,6 +40,7 @@ namespace DesktopFox
             } 
         }
         private BitmapImage _nightImage;
+        [JsonIgnore]
         public BitmapImage NightImage {
             get { return NightCol.getPreview(); }
             set 
@@ -47,23 +50,23 @@ namespace DesktopFox
             } 
         }
 
-
-
         /// <summary>
         /// Sammlung von Bilder die wärend des Tages angezeigt werden
         /// </summary>
-        public Collection DayCol { get; set; }
+        private Collection _dayCol;
+        public Collection DayCol { get { return _dayCol ?? _nightCol; } set { _dayCol = value; DayImage = value.getPreview(); RaisePropertyChanged(nameof(DayCol)); } }
 
         /// <summary>
         /// Sammlung von Bilder die wärend der Nacht angezeigt werden
         /// </summary>
-        public Collection NightCol { get; set; }
+        private Collection _nightCol;
+        public Collection NightCol { get { return _nightCol ?? _dayCol; } set { _nightCol = value; NightImage = value.getPreview(); RaisePropertyChanged(nameof(NightCol)); } }
 
         public PictureSet(string name)
         {
-            Name = name;
-            DayImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\Normal\\1.jpg");
-            NightImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\Normal\\2.jpg");
+            SetName = name;
+            //DayImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\Normal\\1.jpg");
+            //NightImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\Normal\\2.jpg");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

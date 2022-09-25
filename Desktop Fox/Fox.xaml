@@ -8,7 +8,8 @@
         Title="Fox" Height="1" Width="1"
         WindowStyle="None"
         AllowsTransparency="True"
-        Background="Transparent">
+        Background="Transparent"
+        Closing="Application_Close">
     <Grid>
         
     </Grid>

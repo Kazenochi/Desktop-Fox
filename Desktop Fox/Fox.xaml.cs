@@ -6,6 +6,8 @@ using DesktopFox.MVVM.Views;
 using System.Collections.Generic;
 using System.Diagnostics;
 using DesktopFox.MVVM.ViewModels;
+using DesktopFox.Base;
+using System.ComponentModel;
 
 namespace DesktopFox
 {
@@ -25,7 +27,7 @@ namespace DesktopFox
         private PictureViewVM pictureViewVM;
         private AddSetVM addSetVM;
         private SettingsVM settingsVM;
-
+        private GalleryShadow shadow;
         /// <summary>
         /// Konstruktor
         /// </summary>
@@ -36,14 +38,14 @@ namespace DesktopFox
             notifyIcon = new NotifyIcon(this);
 
             loadFiles();
-
+            shadow = new GalleryShadow(gallery);
             mainWindowVM = new MainWindowVM();
-            addSetVM = new AddSetVM(mainWindowVM);
-            settingsVM = new SettingsVM(settings);
 
-
-            GM = new GalleryManager(gallery);
+            GM = new GalleryManager(gallery, shadow);
             SM = new SettingsManager(settings);
+
+            addSetVM = new AddSetVM(mainWindowVM, GM);
+            settingsVM = new SettingsVM(settings);
 
             readyPictureVMs();
         }
@@ -53,6 +55,11 @@ namespace DesktopFox
             if(MW != null)
                 return MW;
             return null;
+        }
+
+        public Gallery GetGallery()
+        {
+            return gallery;
         }
 
         public void readyPictureVMs()
@@ -111,25 +118,20 @@ namespace DesktopFox
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Cleanupfunktion beim Beenden der Application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Application_Close(object sender, CancelEventArgs e)
         {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            pictureSet.DayImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\HQ\\Day\\79238609_p1.jpg");
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            pictureSet.DayImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\HQ\\Day\\900540.jpg");
-        }
-
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-
+            //shuffler.ShufflerStopCleanup();
+            //notifyIcon.Dispose();
+            //Debugnachrichten werden nicht auf der Konsole ausgegeben
+            if (DF_Json.saveFile(gallery) & DF_Json.saveFile(settings))
+                Debug.WriteLine("Programm wurde Beendet. Speichern der Daten war erfolgreich");
+            else
+                Debug.WriteLine("Program wurde Beendet. FEHLER. Daten konnten nicht gespeichert werden.");
         }
     }
 }

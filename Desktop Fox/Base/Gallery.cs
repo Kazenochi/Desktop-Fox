@@ -7,12 +7,12 @@ namespace DesktopFox
 {
     public class Gallery
     {
-        public IDictionary<String, PictureSet> PictureSetList { get; set; }
+        public IDictionary<int, PictureSet> PictureSetList { get; set; }
         public List<String> activeSetsList = new List<String>() { "Empty", "Empty", "Empty" };
 
         public Gallery()
         {
-            PictureSetList = new Dictionary<String, PictureSet>();
+            PictureSetList = new Dictionary<int, PictureSet>();
         }
     }
 }

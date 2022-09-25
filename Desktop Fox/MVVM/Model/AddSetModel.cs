@@ -21,9 +21,6 @@ namespace DesktopFox.MVVM.Model
         private string _folderPath;
         public String FolderPath { get { return _folderPath; } set { _folderPath = value; RaisePropertyChanged(nameof(FolderPath)); } }
 
-        private Boolean _day;
-        public Boolean Day { get { return _day; } set { _day = value; RaisePropertyChanged(nameof(Day)); } }
-
         public event PropertyChangedEventHandler? PropertyChanged;
         public void RaisePropertyChanged(string propertyName)
         {

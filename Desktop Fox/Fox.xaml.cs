@@ -41,7 +41,7 @@ namespace DesktopFox
             shadow = new GalleryShadow(gallery);
             mainWindowVM = new MainWindowVM();
 
-            GM = new GalleryManager(gallery, shadow);
+            GM = new GalleryManager(gallery, shadow, mainWindowVM);
             SM = new SettingsManager(settings);
 
             addSetVM = new AddSetVM(mainWindowVM, GM);

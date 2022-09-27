@@ -32,7 +32,7 @@ namespace DesktopFox
         private BitmapImage _dayImage;
         [JsonIgnore]
         public BitmapImage DayImage { 
-            get { return DayCol.getPreview() ?? ImageHandler.dummy(); }
+            get { return DayCol.getPreview(); }
             set
             {
                 _dayImage = value;

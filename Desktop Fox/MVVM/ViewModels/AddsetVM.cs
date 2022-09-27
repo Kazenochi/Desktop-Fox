@@ -30,7 +30,7 @@ namespace DesktopFox.MVVM.ViewModels
         }
 
         private Boolean _addSetVisible = false;
-        public Boolean AddSetVisible { get { return _addSetVisible; } set { _addSetVisible = value; GetSetName(); RaisePropertyChanged(nameof(AddSetVisible)); } }
+        public Boolean AddSetVisible { get { return _addSetVisible; } set { _addSetVisible = value; GetSetName(newName: false); RaisePropertyChanged(nameof(AddSetVisible)); } }
 
         private Boolean _day;
         public Boolean Day { get { return _day; } set { _day = value; RaisePropertyChanged(nameof(Day)); } }
@@ -48,9 +48,9 @@ namespace DesktopFox.MVVM.ViewModels
             
         }
 
-        private void GetSetName()
+        private void GetSetName(Boolean newName = true)
         {
-            if(MWVM.SelectedVM != null)
+            if(!newName && MWVM.SelectedVM != null)
                 AddSetModel.PictureSetName = MWVM.SelectedVM.pictureSet.SetName;
             else
                 AddSetModel.PictureSetName = NewName();
@@ -66,18 +66,21 @@ namespace DesktopFox.MVVM.ViewModels
         private String NewName()
         {
             String newName;
+            Boolean newNameExists = false;
+
             for( int i = 1; i < 100; i++)
             {
+                newNameExists = false;
                 newName = "New Picture Set " + i;
                 if(MWVM.MainWindowModel._pictureViewVMs.Count == 0) return newName;
 
                 foreach (var VMs in MWVM.MainWindowModel._pictureViewVMs)
                 {
                     if (newName == VMs.pictureSet.SetName)
-                        continue;
-                    else
-                        return newName;
+                        newNameExists = true;
                 }
+                if (!newNameExists)
+                    return newName;
             }
             newName = "Error";
             Debug.WriteLine("Maximaler Anzahl von NewSets erreicht. New Name = " + newName);

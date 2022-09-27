@@ -1,5 +1,6 @@
 ﻿using DesktopFox;
 using DesktopFox.Base;
+using DesktopFox.MVVM.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -20,11 +21,12 @@ namespace DesktopFox
         private Gallery _gallery;
         private GalleryShadow _shadow;
         private SettingsManager SM;
-
-        public GalleryManager(Gallery gallery, GalleryShadow shadow)
+        private MainWindowVM MWVM;
+        public GalleryManager(Gallery gallery, GalleryShadow shadow, MainWindowVM MainWindowViewModel)
         {
             _gallery = gallery;
             _shadow = shadow; 
+            MWVM = MainWindowViewModel;
         }
 
 
@@ -47,6 +49,14 @@ namespace DesktopFox
             {
                 addCollection(pictureSet, nwCollection, day);
                 _shadow.Add(pictureSet);
+
+                PictureViewVM newVM = new PictureViewVM(pictureSet);
+                PictureView newView = new PictureView();
+                newView.DataContext = newVM;
+
+                MWVM.MainWindowModel._pictureViewVMs.Add(newVM);
+                MWVM.MainWindowModel._pictureViews.Add(newView);
+
             }
 
             return;

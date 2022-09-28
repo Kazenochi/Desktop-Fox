@@ -12,7 +12,7 @@ using static DesktopFox.DF_Command;
 
 namespace DesktopFox.MVVM.ViewModels
 {
-    internal class AddSetVM : INotifyPropertyChanged
+    internal class AddSetVM : ObserverNotifyChange
     {
         public AddSetModel AddSetModel { get; set; }
         private MainWindowVM MWVM { get; set; }
@@ -90,14 +90,6 @@ namespace DesktopFox.MVVM.ViewModels
         private void NewPS()
         {
 
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }

@@ -42,8 +42,7 @@ namespace DesktopFox
             {
                 CollectionChanged(this, new CollectionChangeEventArgs(CollectionChangeAction.Add, propertyName));
                 CollectionChanged(this, new CollectionChangeEventArgs(CollectionChangeAction.Remove, propertyName));
-            }
-               
+            }      
         }
     }
 

@@ -12,7 +12,7 @@ namespace DesktopFox.MVVM.ViewModels
 {
     public class SettingsVM : ObserverNotifyChange
     {
-        private Settings settings;
+        public Settings settings;
         private Settings_DaytimeView _daytimeView = new Settings_DaytimeView();
         private Settings_DModeView _dmodeView = new Settings_DModeView();
         private Settings_PreviewView _previewView = new Settings_PreviewView();

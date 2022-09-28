@@ -38,7 +38,9 @@ namespace DesktopFox
         /// Wie das Preview Bild in der Anwendung angezeigt werden soll
         /// Gültige Werte sind: "Fill" & "Stretch" & "UniFill"
         /// </summary>
-        public Stretch PreviewFillMode = Stretch.Fill;
+        private Stretch _previewFillMode = Stretch.Fill;
+        public Stretch PreviewFillMode { get { return _previewFillMode; } set { _previewFillMode = value; RaisePropertyChanged(nameof(PreviewFillMode)); } }
+
 
         //Note: Tile macht meines erachtens wenig sinn für die meiste art von Hintergründen (Niemand mag Tile -_- )
         /// <summary>
@@ -49,29 +51,37 @@ namespace DesktopFox
         ///DWPOS_FILL    = Stretches image across the screen and cropps as neccesary to avoid letterboxes
         ///DWPOS_FIT     = Scales image to monitor size without changing aspect ratio. Can lead to letterboxes.
         /// </summary>
-        public DESKTOP_WALLPAPER_POSITION DesktopFillMode = DESKTOP_WALLPAPER_POSITION.DWPOS_FILL;
+        private DESKTOP_WALLPAPER_POSITION _desktopFillMode = DESKTOP_WALLPAPER_POSITION.DWPOS_FILL;
+        public DESKTOP_WALLPAPER_POSITION DesktopFillMode { get { return _desktopFillMode; } set { _desktopFillMode = value; RaisePropertyChanged(nameof(DesktopFillMode)); } }
+
 
         /// <summary>
         /// Marker ob das Programm aktuell den Desktop Managed. Wird beim Start abgefragt um die nötigen Timer zu starten
         /// </summary>
-        public Boolean isRunning = false;
+        private Boolean _isRunning = false;
+        public Boolean IsRunning { get { return _isRunning; } set { _isRunning = value; RaisePropertyChanged(nameof(IsRunning)); } }
+
 
         /// <summary>
         /// Flag ob das Programm im Autostart ausgeführt wird
         /// </summary>
-        public Boolean autostartOn = false;
+        private Boolean _autostartOn = false;
+        public Boolean AutostartOn { get { return _autostartOn; } set { _autostartOn = value; RaisePropertyChanged(nameof(AutostartOn)); } }
+
 
         /// <summary>
         /// Flag ob beim Tageswechsel die Aktiven Sets gewechselt werden sollen
         /// </summary>
-        public Boolean autoSetChange = false;
+        private Boolean _autoSetChange = false;
+        public Boolean AutoSetChange { get { return _autoSetChange; } set { _autoSetChange = value; RaisePropertyChanged(nameof(AutoSetChange)); } }
+
 
         /// <summary>
         /// Einstellung welcher Shuffler verwendet werden soll, eigener oder Windows
-        /// Single  = Zeigt ein Set auf beiden Monitoren an
-        /// Multi   = Zeigt unterschiedliche Sets pro Monitor an
+        /// true = Single = Zeigt ein Set auf beiden Monitoren an
+        /// false = Multi = Zeigt unterschiedliche Sets pro Monitor an
         /// </summary>
-        public String DesktopMode = "Single";
-
+        private Boolean _desktopModeSingle = true;
+        public Boolean DesktopModeSingle { get { return _desktopModeSingle; } set { _desktopModeSingle = value; RaisePropertyChanged(nameof(DesktopModeSingle)); } }
     }
 }

@@ -16,9 +16,9 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock FontFamily="/Assets/#Nunito"
-                           Foreground="White"
-                           FontSize="20"
-                           HorizontalAlignment="Center"
+                       Foreground="White"
+                       FontSize="20"
+                       HorizontalAlignment="Center"
                        VerticalAlignment="Center">
                     How should the big picture be displayed
             </TextBlock>
@@ -28,23 +28,23 @@
                         VerticalAlignment="Top"
                         Margin="0,10,0,0">
                 <RadioButton x:Name="radio_Preview_Fill"
-                                 Content="Fill" 
-                                 FontSize="20"
-                                 Margin="5,5,5,5"
-                                 GroupName="PreviewFormatGroup"                                
-                                 Style="{StaticResource DF_RadioButton_Border}"/>
+                             Content="Fill" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             GroupName="PreviewFormatGroup"                                
+                             Style="{StaticResource DF_RadioButton_Border}"/>
                 <RadioButton x:Name="radio_Preview_Uniform"
-                                 Content="Uniform" 
-                                 FontSize="20"
-                                 Margin="5,5,5,5"
-                                 GroupName="PreviewFormatGroup"
-                                 Style="{StaticResource DF_RadioButton_Border}"/>
+                             Content="Uniform" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             GroupName="PreviewFormatGroup"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
                 <RadioButton x:Name="radio_Preview_Uni_Fill"
-                                 Content="Uni Fill" 
-                                 FontSize="20"
-                                 Margin="5,5,5,5"
-                                 GroupName="PreviewFormatGroup"
-                                 Style="{StaticResource DF_RadioButton_Border}"/>
+                             Content="Uni Fill" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             GroupName="PreviewFormatGroup"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
             </StackPanel>
         </Grid>
     </Border>

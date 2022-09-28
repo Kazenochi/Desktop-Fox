@@ -52,11 +52,11 @@
                         VerticalAlignment="Top"
                         Margin="0,25,0,0">
                 <TextBlock FontFamily="/Assets/#Nunito"
-                        Foreground="White"
-                        FontSize="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                       TextAlignment="Center"
+                           Foreground="White"
+                           FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"
                            Margin="0,0,0,5">
                     When should the day start
                 </TextBlock>
@@ -69,22 +69,22 @@
                             Margin="10,0,10,0"
                             x:Name="border1">
                         <TextBox x:Name="dayHours"
-                             MaxLength="2"
-                             Foreground="White"
-                             FontSize="20"
-                             VerticalAlignment="Center"
-                             Background="Transparent"
-                             BorderBrush="Transparent"
-                             TextAlignment="Center"
-                             Margin="10,1,10,1" />
+                                 MaxLength="2"
+                                 Foreground="White"
+                                 FontSize="20"
+                                 VerticalAlignment="Center"
+                                 Background="Transparent"
+                                 BorderBrush="Transparent"
+                                 TextAlignment="Center"
+                                 Margin="10,1,10,1" />
                     </Border>
                         
                     <TextBlock FontFamily="/Assets/#Nunito"
-                        Foreground="White"
-                        FontSize="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        TextAlignment="Center">
+                               Foreground="White"
+                               FontSize="20"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center">
                             Hour
                         </TextBlock>
                         
@@ -94,7 +94,6 @@
                             Margin="10,0,10,0"
                             x:Name="border2">
                         <TextBox x:Name="dayMinutes"
-                      
                                  MaxLength="2"
                                  Foreground="White"
                                  FontSize="20"
@@ -106,22 +105,22 @@
                     </Border>
                         
                     <TextBlock FontFamily="/Assets/#Nunito"
-                        Foreground="White"
-                        FontSize="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        TextAlignment="Center">
+                               Foreground="White"
+                               FontSize="20"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center">
                             Minute
                     </TextBlock>
                         
                 </StackPanel>
                 
                 <TextBlock FontFamily="/Assets/#Nunito"
-                        Foreground="White"
-                        FontSize="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                       TextAlignment="Center"
+                           Foreground="White"
+                           FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"
                            Margin="0,30,0,5">
                     When should the night start
                 </TextBlock>
@@ -134,7 +133,6 @@
                             Margin="10,0,10,0"
                             x:Name="border3">
                         <TextBox x:Name="nightHours"
-                            
                                  MaxLength="2"
                                  Foreground="White"
                                  FontSize="20"
@@ -146,11 +144,11 @@
                     </Border>
 
                     <TextBlock FontFamily="/Assets/#Nunito"
-                        Foreground="White"
-                        FontSize="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        TextAlignment="Center">
+                               Foreground="White"
+                               FontSize="20"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center">
                             Hour
                     </TextBlock>
 
@@ -160,7 +158,6 @@
                             Margin="10,0,10,0"
                             x:Name="border4">
                         <TextBox x:Name="nightMinutes"
-                         
                                  MaxLength="2"
                                  Foreground="White"
                                  FontSize="20"
@@ -172,25 +169,22 @@
                     </Border>
 
                     <TextBlock FontFamily="/Assets/#Nunito"
-                        Foreground="White"
-                        FontSize="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        TextAlignment="Center">
+                               Foreground="White"
+                               FontSize="20"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center">
                             Minute
                     </TextBlock>
-
                 </StackPanel>
-
             </StackPanel>
+            
             <Button Content="Save"
                     Grid.Column="1"
                     VerticalAlignment="Top"
                     Margin="0,80,0,0"
                     FontSize="20"
-                    Style="{StaticResource DF_Button_Border}" 
-       
-                    />
+                    Style="{StaticResource DF_Button_Border}"/>
         </Grid>
     </Border>
 </UserControl>

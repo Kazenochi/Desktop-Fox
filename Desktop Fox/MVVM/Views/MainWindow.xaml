@@ -130,10 +130,10 @@
                   Panel.ZIndex="3">
               
                 <view:Preview_ControlView x:Name="previewControlView"
-                                      HorizontalAlignment="Stretch" 
-                                      VerticalAlignment="Stretch" 
-                                      Grid.RowSpan="2"
-                                      Grid.Row="1"/>
+                                          HorizontalAlignment="Stretch" 
+                                          VerticalAlignment="Stretch" 
+                                          Grid.RowSpan="2"
+                                          Grid.Row="1"/>
                 <view:Settings_MainView x:Name="settingsMainView"
                                         Visibility="{Binding Path=SettingsVisible, Converter={StaticResource BoolConverter}}"
                                         HorizontalAlignment="Right"
@@ -185,23 +185,18 @@
                         Height="40"
                         FontWeight="Bold"
                         FontSize="20"
-                        Content="_"                      
-                       
+                        Content="_"                         
                         Margin="0,-7,0,0"/>
                 <Button Style="{StaticResource DF_ButtonTitleBarDef}"
                         Width="50"
                         Height="30"
                         FontSize="18"
-                        Content="▢"
-                        />
+                        Content="▢"/>
                 <Button Style="{StaticResource DF_ButtonTitleBarExit}"
                         Width="50"
                         Height="30"
-                        Content="╳"
-                        />
-
+                        Content="╳"/>
             </StackPanel>
-
         </Grid>
     </Border>
 </Window>

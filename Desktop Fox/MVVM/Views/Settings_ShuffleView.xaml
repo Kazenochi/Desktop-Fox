@@ -27,10 +27,10 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock FontFamily="/Assets/#Nunito"
-                        Foreground="White"
-                        FontSize="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
+                       Foreground="White"
+                       FontSize="20"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
                        TextAlignment="Center">
                     Linear presentation or shuffle the pictuers
             </TextBlock>
@@ -40,15 +40,15 @@
                         VerticalAlignment="Top"
                         Margin="0,5,0,0">
                 <RadioButton x:Name="radio_Shuffle_False"
-                                 Content="Linear" 
-                                 FontSize="20"          
-                                 Margin="5,5,5,5"
-                                 Style="{StaticResource DF_RadioButton_Border}"/>
+                             Content="Linear" 
+                             FontSize="20"          
+                             Margin="5,5,5,5"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
                 <RadioButton x:Name="radio_Shuffle_True"
-                                 Content="Shuffle" 
-                                 FontSize="20"
-                                 Margin="5,5,5,5"
-                                 Style="{StaticResource DF_RadioButton_Border}"/>
+                             Content="Shuffle" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" 
                         Grid.Row="3"
@@ -87,8 +87,7 @@
                         VerticalAlignment="Center"
                         Margin="30,0,0,0"
                         FontSize="20"
-                        Style="{StaticResource DF_Button_Border}" 
-                     />
+                        Style="{StaticResource DF_Button_Border}"/>
             </StackPanel>
         </Grid>
     </Border>

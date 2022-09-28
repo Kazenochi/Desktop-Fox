@@ -9,13 +9,13 @@
              d:DesignHeight="200" d:DesignWidth="360">
 
     <Border x:Name="pBorder" 
-                BorderThickness="0"
-                CornerRadius="20"
+            BorderThickness="0"
+            CornerRadius="20"
             Height="200" Width="360">
         <Border.Clip>
             <RectangleGeometry RadiusX="20"
-                                   RadiusY="20"
-                                   Rect="0,0,360,200"/>
+                               RadiusY="20"
+                               Rect="0,0,360,200"/>
         </Border.Clip>
         <Grid>
             <Image x:Name="pImageDay" Source="{Binding pictureSet.DayImage}" Stretch="UniformToFill"/>
@@ -74,8 +74,7 @@
                            Margin="0,-6"
                            HorizontalContentAlignment="Center"
                            FontFamily="/Assets/#Nunito"
-                           FontSize="20" FontWeight="Bold" 
-                           />
+                           FontSize="20" FontWeight="Bold"/>
                 </Grid>
 
                 <Grid x:Name="pActiveMarker2"

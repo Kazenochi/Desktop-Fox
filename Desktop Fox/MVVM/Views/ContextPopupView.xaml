@@ -33,13 +33,12 @@
                         Content="Rename"
                         FontSize="20"/>
             </StackPanel>
-
             <Border Background="DarkGray"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                        Height="2"
-                        CornerRadius="1"
-                        Margin="10"/>
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    Height="2"
+                    CornerRadius="1"
+                    Margin="10"/>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="5">
@@ -76,7 +75,6 @@
                             x:Name="button_Delete"
                             Margin="0"/>
                 </Grid>
-
             </StackPanel>
         </StackPanel>
     </Border>

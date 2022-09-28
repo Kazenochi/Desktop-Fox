@@ -16,10 +16,10 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock FontFamily="/Assets/#Nunito"
-                        Foreground="White"
-                        FontSize="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
+                       Foreground="White"
+                       FontSize="20"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
                        TextAlignment="Center">
                     Do want to use a single picture set<LineBreak/>or use different sets for each monitor
             </TextBlock>
@@ -35,11 +35,11 @@
                              IsChecked="{Binding settings.DesktopModeSingle}"
                              Style="{StaticResource DF_RadioButton_Border}"/>
                 <RadioButton x:Name="radio_Shuffle_Multi"
-                                 Content="Multi" 
-                                 FontSize="20"
-                                 Margin="5,5,5,5"
+                             Content="Multi" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
                              IsChecked="{Binding settings.DesktopModeSingle, Converter={StaticResource BoolInverter}}"
-                                 Style="{StaticResource DF_RadioButton_Border}"/>
+                             Style="{StaticResource DF_RadioButton_Border}"/>
             </StackPanel>
         </Grid>
     </Border>

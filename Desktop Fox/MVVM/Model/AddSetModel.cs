@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace DesktopFox.MVVM.Model
 {
-    internal class AddSetModel : INotifyPropertyChanged
+    internal class AddSetModel : ObserverNotifyChange
     {
         public AddSetModel(String Name)
         {
@@ -21,11 +21,5 @@ namespace DesktopFox.MVVM.Model
         private string _folderPath;
         public String FolderPath { get { return _folderPath; } set { _folderPath = value; RaisePropertyChanged(nameof(FolderPath)); } }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

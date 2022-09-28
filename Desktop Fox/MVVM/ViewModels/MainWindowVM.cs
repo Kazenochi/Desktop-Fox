@@ -1,15 +1,15 @@
-﻿
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using System;
 using System.ComponentModel;
 using DesktopFox.MVVM.Views;
 using DesktopFox;
 using WinRT;
 using System.Diagnostics;
+using DesktopFox.MVVM.ViewModels;
 
 namespace DesktopFox
 {
-    public class MainWindowVM : INotifyPropertyChanged
+    public class MainWindowVM : ObserverNotifyChange
     {
 
         public MainWindowVM()
@@ -26,7 +26,6 @@ namespace DesktopFox
         private PictureView _selectedItem;
         public PictureView SelectedItem { get { return _selectedItem; } set { _selectedItem = value; SelectedVM = (PictureViewVM)value.DataContext; RaisePropertyChanged(nameof(SelectedItem)); } }
 
-
         public void SChange(PictureViewVM selectedVM)
         {
             SelectedVM = selectedVM;
@@ -35,14 +34,6 @@ namespace DesktopFox
                 i.pictureSet.IsSelectedDF = false;                
             }
             SelectedVM.pictureSet.IsSelectedDF = true;
-        }
-
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }

@@ -11,7 +11,7 @@ using static System.Windows.Forms.DataFormats;
 namespace DesktopFox
 {
     
-    public class PictureSet : INotifyPropertyChanged
+    public class PictureSet : ObserverNotifyChange
     {
         private String _setName;
         public String SetName { get { return _setName; } set { _setName = value; RaisePropertyChanged(nameof(SetName)); } }
@@ -67,13 +67,6 @@ namespace DesktopFox
             SetName = name;
             //DayImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\Normal\\1.jpg");
             //NightImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\Normal\\2.jpg");
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

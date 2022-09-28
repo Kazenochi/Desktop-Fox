@@ -1,5 +1,6 @@
 ﻿using DesktopFox;
 using DesktopFox.Base;
+using DesktopFox.MVVM.ViewModels;
 using DesktopFox.MVVM.Views;
 using System;
 using System.Collections.Generic;

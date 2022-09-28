@@ -1,4 +1,4 @@
-﻿namespace DesktopFox
+﻿namespace DesktopFox.MVVM.ViewModels
 {
     public class PictureViewVM
     {

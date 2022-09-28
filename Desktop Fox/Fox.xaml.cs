@@ -113,10 +113,11 @@ namespace DesktopFox
 
             MW.button_Settings.DataContext = settingsVM;
             MW.settingsMainView.DataContext = settingsVM;
+            
+
 
             MW.Show();
         }
-
 
         /// <summary>
         /// Cleanupfunktion beim Beenden der Application

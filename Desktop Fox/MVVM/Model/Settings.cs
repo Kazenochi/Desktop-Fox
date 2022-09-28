@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace DesktopFox
 {
-    public class Settings : INotifyPropertyChanged
+    public class Settings : ObserverNotifyChange
     {
         /// <summary>
         /// Zeitspannen für die umstellung zwischen dem Tag und Nacht Set, sowie der Zeit zwischen den Bildwechseln
@@ -73,16 +73,5 @@ namespace DesktopFox
         /// </summary>
         public String DesktopMode = "Single";
 
-
-
-
-
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

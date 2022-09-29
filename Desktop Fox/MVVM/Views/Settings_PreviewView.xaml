@@ -31,19 +31,19 @@
                              Content="Fill" 
                              FontSize="20"
                              Margin="5,5,5,5"
-                             GroupName="PreviewFormatGroup"                                
+                             IsChecked="{Binding settings.PreviewFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=1}"
                              Style="{StaticResource DF_RadioButton_Border}"/>
                 <RadioButton x:Name="radio_Preview_Uniform"
                              Content="Uniform" 
                              FontSize="20"
                              Margin="5,5,5,5"
-                             GroupName="PreviewFormatGroup"
+                             IsChecked="{Binding settings.PreviewFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=2}"
                              Style="{StaticResource DF_RadioButton_Border}"/>
                 <RadioButton x:Name="radio_Preview_Uni_Fill"
                              Content="Uni Fill" 
                              FontSize="20"
                              Margin="5,5,5,5"
-                             GroupName="PreviewFormatGroup"
+                             IsChecked="{Binding settings.PreviewFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
                              Style="{StaticResource DF_RadioButton_Border}"/>
             </StackPanel>
         </Grid>

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using DesktopFox.MVVM.Views;
+using IDesktopWallpaperWrapper.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,6 +37,7 @@ namespace DesktopFox.MVVM.ViewModels
 
         private object _currentView;
         public object CurrentView { get { return _currentView; } set { _currentView = value; RaisePropertyChanged(nameof(CurrentView)); } }
+
 
         public ICommand ToggleSettingsCommand { get { return new DF_Command.DelegateCommand(o => this.SettingsVisible = !this.SettingsVisible); } }
         public ICommand DaytimeCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _daytimeView); } }

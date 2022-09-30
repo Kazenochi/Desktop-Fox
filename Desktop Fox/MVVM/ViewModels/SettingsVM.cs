@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using DesktopFox.MVVM.Model;
 using DesktopFox.MVVM.Views;
 using IDesktopWallpaperWrapper.Win32;
 using System;
@@ -14,12 +15,14 @@ namespace DesktopFox.MVVM.ViewModels
     public class SettingsVM : ObserverNotifyChange
     {
         public Settings settings { get; set; }
+        public Settings_DaytimeModel DaytimeModel { get; set; } = new Settings_DaytimeModel();
+
         private Settings_DaytimeView _daytimeView = new Settings_DaytimeView();
         private Settings_DModeView _dmodeView = new Settings_DModeView();
         private Settings_PreviewView _previewView = new Settings_PreviewView();
         private Settings_ShuffleView _shuffleView = new Settings_ShuffleView();
         private Settings_StyleView _styleView = new Settings_StyleView();
-
+        
         public SettingsVM(Settings settings)
         {
             this.settings = settings;
@@ -33,10 +36,22 @@ namespace DesktopFox.MVVM.ViewModels
         }
 
         private Boolean _settingsVisible = false;
-        public Boolean SettingsVisible { get { return _settingsVisible; } set { _settingsVisible = value; RaisePropertyChanged(nameof(SettingsVisible)); } }
+        public Boolean SettingsVisible { get { return _settingsVisible; } set { _settingsVisible = value; UpdateNumbers(); RaisePropertyChanged(nameof(SettingsVisible)); } }
 
         private object _currentView;
         public object CurrentView { get { return _currentView; } set { _currentView = value; RaisePropertyChanged(nameof(CurrentView)); } }
+
+        private void UpdateNumbers()
+        {
+            DaytimeModel.SetDaySwitch(settings.DayStart, settings.NightStart);
+        }
+
+        private void SaveDaytimeValues()
+        {
+            List<TimeSpan> tmpValues = DaytimeModel.SaveValues();
+            settings.DayStart = tmpValues[0];
+            settings.NightStart = tmpValues[1];
+        }
 
 
         public ICommand ToggleSettingsCommand { get { return new DF_Command.DelegateCommand(o => this.SettingsVisible = !this.SettingsVisible); } }
@@ -45,5 +60,7 @@ namespace DesktopFox.MVVM.ViewModels
         public ICommand PreviewCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _previewView); } }
         public ICommand ShuffleCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _shuffleView); } }
         public ICommand StyleCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _styleView); } }
+        public ICommand SaveDaytimeCommand { get { return new DF_Command.DelegateCommand(o => SaveDaytimeValues()); } }
+        public ICommand DaytimeTextChangedCommand { get { return new DF_Command.DelegateCommand(o => SaveDaytimeValues()); } }
     }
 }

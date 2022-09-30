@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace DesktopFox.MVVM.Model
 {
-    internal class AddSetModel : ObserverNotifyChange
+    public class AddSetModel : ObserverNotifyChange
     {
         public AddSetModel(String Name)
         {

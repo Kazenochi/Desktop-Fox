@@ -43,11 +43,13 @@
                              Content="Linear" 
                              FontSize="20"          
                              Margin="5,5,5,5"
+                             IsChecked="{Binding settings.Shuffle, Converter={StaticResource BoolInverter}}"
                              Style="{StaticResource DF_RadioButton_Border}"/>
                 <RadioButton x:Name="radio_Shuffle_True"
                              Content="Shuffle" 
                              FontSize="20"
                              Margin="5,5,5,5"
+                             IsChecked="{Binding settings.Shuffle}"
                              Style="{StaticResource DF_RadioButton_Border}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" 
@@ -73,7 +75,9 @@
                              Background="Transparent"
                              BorderBrush="Transparent"
                              TextAlignment="Center"
-                             Margin="10,1,10,1"/>
+                             Margin="10,1,10,1"
+                             TextChanged="TextBox_TextChanged"
+                             />
                 </Border>
 
                 <TextBlock FontFamily="/Assets/#Nunito"

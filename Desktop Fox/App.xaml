@@ -10,6 +10,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ValueDictionary.xaml"/>
+                <ResourceDictionary Source="Themes/Animations.xaml"/>
                 <ResourceDictionary Source="Themes/DF_Button.xaml"/>
                 <ResourceDictionary Source="Themes/DF_TextboxH.xaml"/>
                 <ResourceDictionary Source="Themes/DF_TextboxM.xaml"/>

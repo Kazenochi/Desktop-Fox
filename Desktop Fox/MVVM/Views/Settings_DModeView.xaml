@@ -33,21 +33,25 @@
                                  Content="Span" 
                                  FontSize="20"
                                  Margin="5,5,5,5"
+                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=5}"
                                  Style="{StaticResource DF_RadioButton_Border}"/>
                     <RadioButton x:Name="radio_DMode_Center"
                                  Content="Center" 
                                  FontSize="20"
                                  Margin="5,5,5,5"
+                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=0}"
                                  Style="{StaticResource DF_RadioButton_Border}"/>
                     <RadioButton x:Name="radio_DMode_Fill"
                                  Content="Fill" 
                                  FontSize="20"
                                  Margin="5,5,5,5"
+                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=4}"
                                  Style="{StaticResource DF_RadioButton_Border}"/>
                     <RadioButton x:Name="radio_DMode_Fit"
                                  Content="Fit" 
                                  FontSize="20"
                                  Margin="5,5,5,5"
+                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
                                  Style="{StaticResource DF_RadioButton_Border}"/>
                 </StackPanel>
             </StackPanel>

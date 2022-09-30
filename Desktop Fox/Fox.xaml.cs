@@ -8,6 +8,7 @@ using System.Diagnostics;
 using DesktopFox.MVVM.ViewModels;
 using DesktopFox.Base;
 using System.ComponentModel;
+using System;
 
 namespace DesktopFox
 {
@@ -91,32 +92,41 @@ namespace DesktopFox
 
         public void makeMainWindow()
         {
-            //Note: ACHTUNG
-            //Sollte beim Schließen des Fensters ausgefürht werden
-            mainWindowVM.MainWindowModel._pictureViews.Clear();
-            //Platzhalter
+            if(MW == null) 
+            { 
+                MW ??= new MainWindow();
+                //MW.Closing += MW_Closed;
+                MW.DataContext = mainWindowVM;
+                MW.lbPictures.ItemsSource = mainWindowVM.MainWindowModel._pictureViews;
 
-            MW ??= new MainWindow();
-            MW.DataContext = mainWindowVM;
-            MW.lbPictures.ItemsSource = mainWindowVM.MainWindowModel._pictureViews;
+                foreach (var i in mainWindowVM.MainWindowModel._pictureViewVMs)
+                {
+                    var tmpView = new PictureView();
+                    tmpView.DataContext = i;
+                    mainWindowVM.MainWindowModel._pictureViews.Add(tmpView);
+                }
+                MW.lbPictures.Items.Refresh();
 
-            foreach (var i in mainWindowVM.MainWindowModel._pictureViewVMs)
-            {
-                var tmpView = new PictureView();
-                tmpView.DataContext = i;
-                mainWindowVM.MainWindowModel._pictureViews.Add(tmpView);
+                mainWindowVM.AddSetView.DataContext = addSetVM;
+                mainWindowVM.Settings_MainView.DataContext = settingsVM;
             }
-            MW.lbPictures.Items.Refresh();
-
-            MW.button_Add.DataContext = addSetVM;
-            MW.addSetView.DataContext = addSetVM;
-
-            MW.button_Settings.DataContext = settingsVM;
-            MW.settingsMainView.DataContext = settingsVM;
-            
-
-
             MW.Show();
+        }
+
+        private void MW_Closed(object? sender, System.EventArgs e)
+        {
+            MW.Hide();
+            /*
+            foreach (var i in mainWindowVM.MainWindowModel._pictureViews)
+            {
+                i.DataContext = null; 
+            }
+            mainWindowVM.MainWindowModel._pictureViews.Clear();
+            MW.DataContext = null;
+            MW.Closed -= MW_Closed;
+            MW = null;
+            GC.Collect();
+            */
         }
 
         /// <summary>

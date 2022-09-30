@@ -33,5 +33,10 @@ namespace DesktopFox
                 myVM.SChange(logic);
             }             
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

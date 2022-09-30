@@ -19,9 +19,7 @@ namespace DesktopFox
         private System.Windows.Forms.ToolStripMenuItem AutostartMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AutoSetChangeMenuItem;
 
-        private MainWindowVM MWVM;
         private Fox DF;
-        private SettingsManager SM;
         public NotifyIcon(Fox DesktopFox)
         {
             DF = DesktopFox;

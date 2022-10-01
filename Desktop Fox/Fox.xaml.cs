@@ -108,8 +108,9 @@ namespace DesktopFox
                 MW.lbPictures.Items.Refresh();
 
                 mainWindowVM.AddSetView.DataContext = addSetVM;
-                mainWindowVM.Settings_MainView.DataContext = settingsVM;
+                mainWindowVM.Settings_MainView.DataContext = settingsVM;             
             }
+            mainWindowVM.SetCurrentMain(MW);
             MW.Show();
         }
 

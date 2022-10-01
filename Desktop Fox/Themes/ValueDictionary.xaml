@@ -13,4 +13,6 @@
     <BooleanToVisibilityConverter x:Key="BoolConverter"/>
     <local:BoolInverter x:Key="BoolInverter"/>
     <local:BoolToIntConverter x:Key="BoolToIntConverter"/>
+    <local:BorderClipConverter x:Key="BorderClipConverter"/>
+    
 </ResourceDictionary>

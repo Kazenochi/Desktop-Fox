@@ -7,11 +7,27 @@
         xmlns:view="clr-namespace:DesktopFox.MVVM.Views"
         d:DataContext="{d:DesignInstance Type=local:MainWindowVM}"
         mc:Ignorable="d"      
-        Title="MainWindow" Height="820" Width="1690">
+        Title="MainWindow" Height="820" Width="1690"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        MouseDown="WindowClickAndDrag">
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="8,2,8,8" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
     <Border Background="{StaticResource BackgroundBrush}"
             BorderBrush="DarkGray"
             BorderThickness="0.5"
-            CornerRadius="10">
+            CornerRadius="10"
+            Name="MainBorder"
+            ClipToBounds="True">
+        <Border.Clip>
+            <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                <Binding Path="CornerRadius" RelativeSource="{RelativeSource Self}"/>
+            </MultiBinding>
+        </Border.Clip>
         <Grid x:Name="mainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -110,8 +126,8 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                      HorizontalAlignment="Right"
                      VerticalAlignment="Top"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Left"
+                     VerticalContentAlignment="Top"
                      Grid.Column="1" 
                      Grid.Row="1"         
                      BorderBrush="Transparent" 
@@ -169,23 +185,25 @@
                         Grid.Column="1"
                         Margin="0,0,0,0"
                         Panel.ZIndex="3">
-                <Button Style="{StaticResource DF_ButtonTitleBarDef}"
-                        Width="50"
+                <Button Width="50"
                         Height="40"
                         FontWeight="Bold"
                         FontSize="20"
                         Content="_"                         
-                        Margin="0,-7,0,0"/>
-                <Button Style="{StaticResource DF_ButtonTitleBarDef}"
-                        Width="50"
+                        Margin="0,-7,0,0"
+                        Style="{StaticResource DF_ButtonTitleBarDef}"
+                        Command="{Binding MinimizeCommand}"/>
+                <Button Width="50"
                         Height="30"
                         FontSize="18"
-                        Content="▢"/>
-                <Button Style="{StaticResource DF_ButtonTitleBarExit}"
-                        Width="50"
+                        Content="▢"
+                        Style="{StaticResource DF_ButtonTitleBarDef}"
+                        Command="{Binding MaximizeCommand}"/>
+                <Button Width="50"
                         Height="30"
                         Content="╳"
-                        Click="Button_Click"/>
+                        Style="{StaticResource DF_ButtonTitleBarExit}"
+                        Command="{Binding CloseCommand}"/>
             </StackPanel>
         </Grid>
     </Border>

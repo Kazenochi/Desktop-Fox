@@ -12,7 +12,7 @@ using static DesktopFox.DF_Command;
 
 namespace DesktopFox.MVVM.ViewModels
 {
-    internal class AddSetVM : ObserverNotifyChange
+    public class AddSetVM : ObserverNotifyChange
     {
         public AddSetModel AddSetModel { get; set; }
         private MainWindowVM MWVM { get; set; }
@@ -44,8 +44,7 @@ namespace DesktopFox.MVVM.ViewModels
         {
             if (AddSetModel.FolderPath != null && AddSetModel.PictureSetName != "Error")
                 GM.addSet(AddSetModel.PictureSetName, GalleryManager.makeCollection(fileList, AddSetModel.FolderPath), Day);
-
-            
+  
         }
 
         private void GetSetName(Boolean newName = true)

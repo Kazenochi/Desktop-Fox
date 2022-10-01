@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DesktopFox.MVVM.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace DesktopFox
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void ContentChange(PictureViewVM pictureView) { }
     }
 }

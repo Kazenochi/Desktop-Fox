@@ -2,6 +2,7 @@
 using DesktopFox.MVVM.Views;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,10 @@ namespace DesktopFox
             var item = (ListBox)sender;
             var selected = (PictureView)item.SelectedItem;
             
+            if(Mouse.RightButton == MouseButtonState.Pressed)
+            {
+                myVM.SwitchViews(myVM.ContextPopupView);
+            }
 
             if (selected != null)
             {
@@ -42,11 +47,6 @@ namespace DesktopFox
         /// <param name="e"></param>
         private void WindowClickAndDrag(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Right)
-            {
-                //contextPopupView.Visibility = Visibility.Hidden;
-            }
-
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }

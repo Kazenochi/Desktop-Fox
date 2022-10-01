@@ -29,13 +29,13 @@ namespace DesktopFox.MVVM.ViewModels
                 AddSetModel = new AddSetModel(NewName());         
         }
 
-        private Boolean _addSetVisible = false;
-        public Boolean AddSetVisible { get { return _addSetVisible; } set { _addSetVisible = value; GetSetName(newName: false); RaisePropertyChanged(nameof(AddSetVisible)); } }
+        public new void ContentChange(PictureViewVM pictureViewVM)
+        {
+            AddSetModel.PictureSetName = pictureViewVM.pictureSet.SetName;
+        }
 
         private Boolean _day;
         public Boolean Day { get { return _day; } set { _day = value; RaisePropertyChanged(nameof(Day)); } }
-
-        public ICommand ToggleAddSetCommand { get { return new DF_Command.DelegateCommand(o => this.AddSetVisible = !this.AddSetVisible); } }
         public ICommand OpenFolderDialog { get { return new DelegateCommand(o => OpenFD()); } }
         public ICommand AddNewSet { get { return new DF_Command.DelegateCommand(o => AddNS()); } }
         public ICommand GenerateSetName { get { return new DF_Command.DelegateCommand(o => GetSetName()); } }

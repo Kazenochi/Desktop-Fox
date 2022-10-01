@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:DesktopFox" 
         xmlns:view="clr-namespace:DesktopFox.MVVM.Views"
         d:DataContext="{d:DesignInstance Type=local:MainWindowVM}"
@@ -89,7 +90,6 @@
 
             </StackPanel>
 
-
             <Border Grid.RowSpan="2"
                     Grid.Row="1"
                     Margin="10,0,10,10"
@@ -116,8 +116,6 @@
                 </Border.Background>
             </Border>
 
-
-
             <ListBox x:Name="lbPictures" 
                      Margin="10,0,10,10" 
                      IsSynchronizedWithCurrentItem="True" 
@@ -134,7 +132,6 @@
                      Background="Transparent"
                      SelectionChanged="SelectionChanged"
                      Panel.ZIndex="3">
-
             </ListBox>
             <Grid x:Name="multiView"
                   Grid.RowSpan="2"
@@ -150,16 +147,8 @@
                                 VerticalAlignment="Bottom"
                                 Margin="0,0,30,30"
                                 Content="{Binding CurrentView}" 
-                                d:Content="{view:AddSetView}"/>
+                                d:Content="{view:ContextPopupView}"/>
             </Grid>
-            <view:ContextPopupView x:Name="contextPopupView"
-                                   Grid.Column="1"
-                                   Grid.Row="1"
-                                   VerticalAlignment="Bottom"
-                                   Margin="-5,0,5,0"
-                                   Visibility="Hidden"
-                                   Panel.ZIndex="3">
-            </view:ContextPopupView>
 
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Stretch"

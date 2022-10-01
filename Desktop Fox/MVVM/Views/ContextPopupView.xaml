@@ -3,11 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DesktopFox.MVVM.Views"
+             xmlns:local="clr-namespace:DesktopFox"
+             xmlns:views="clr-namespace:DesktopFox.MVVM.Views"
+             xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=ViewModels:ContextPopupVM}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="400">
-    <Border Background="#FF1D2E44"
-            CornerRadius="40"
+    <Border Background="{StaticResource BackgroundBrush}"
+            BorderBrush="{StaticResource BorderBrush}"
+            BorderThickness="0.5"
+            CornerRadius="20"
             Height="270"
             Width="350">
         <StackPanel HorizontalAlignment="Center"
@@ -16,7 +21,7 @@
                         VerticalAlignment="Center">
                 <Border Height="40" Width="300" 
                         Background="#FF347FE6" 
-                        CornerRadius="15"
+                        CornerRadius="20"
                         Margin="10,0,10,0">
                     <TextBox x:Name="pictureSetName"
                              MaxLength="20"
@@ -26,7 +31,8 @@
                              Background="Transparent"
                              BorderBrush="Transparent"
                              TextAlignment="Center"
-                             Margin="10,1,10,1"/>
+                             Margin="10,1,10,1"
+                             Text="{Binding contextModel.PictureSetName}"/>
                 </Border>
                 <Button x:Name="button_Rename"
                         Style="{StaticResource DF_Button_Border}"

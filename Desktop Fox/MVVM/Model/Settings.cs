@@ -36,8 +36,8 @@ namespace DesktopFox
         /// <summary>
         /// Sollen die Bilder Shuffeln
         /// </summary>
-        public Boolean Shuffle { get { return _shuffle; } set { _shuffle = value; RaisePropertyChanged(nameof(Shuffle)); } }
-        private Boolean _shuffle = true;
+        public bool Shuffle { get { return _shuffle; } set { _shuffle = value; RaisePropertyChanged(nameof(Shuffle)); } }
+        private bool _shuffle = true;
 
         /// <summary>
         /// Wie das Preview Bild in der Anwendung angezeigt werden soll
@@ -62,27 +62,27 @@ namespace DesktopFox
         /// <summary>
         /// Marker ob das Programm aktuell den Desktop Managed. Wird beim Start abgefragt um die nötigen Timer zu starten
         /// </summary>
-        public Boolean IsRunning { get { return _isRunning; } set { _isRunning = value; RaisePropertyChanged(nameof(IsRunning)); } }
-        private Boolean _isRunning = false;
+        public bool IsRunning { get { return _isRunning; } set { _isRunning = value; RaisePropertyChanged(nameof(IsRunning)); } }
+        private bool _isRunning = false;
 
         /// <summary>
         /// Flag ob das Programm im Autostart ausgeführt wird
         /// </summary>
-        public Boolean AutostartOn { get { return _autostartOn; } set { _autostartOn = value; RaisePropertyChanged(nameof(AutostartOn)); } }
-        private Boolean _autostartOn = false;
+        public bool AutostartOn { get { return _autostartOn; } set { _autostartOn = value; RaisePropertyChanged(nameof(AutostartOn)); } }
+        private bool _autostartOn = false;
 
         /// <summary>
         /// Flag ob beim Tageswechsel die Aktiven Sets gewechselt werden sollen
         /// </summary>
-        public Boolean AutoSetChange { get { return _autoSetChange; } set { _autoSetChange = value; RaisePropertyChanged(nameof(AutoSetChange)); } }
-        private Boolean _autoSetChange = false;
+        public bool AutoSetChange { get { return _autoSetChange; } set { _autoSetChange = value; RaisePropertyChanged(nameof(AutoSetChange)); } }
+        private bool _autoSetChange = false;
 
         /// <summary>
         /// Einstellung welcher Shuffler verwendet werden soll, eigener oder Windows
         /// true = Single = Zeigt ein Set auf beiden Monitoren an
         /// false = Multi = Zeigt unterschiedliche Sets pro Monitor an
         /// </summary>
-        public Boolean DesktopModeSingle { get { return _desktopModeSingle; } set { _desktopModeSingle = value; RaisePropertyChanged(nameof(DesktopModeSingle)); } }
-        private Boolean _desktopModeSingle = true;
+        public bool DesktopModeSingle { get { return _desktopModeSingle; } set { _desktopModeSingle = value; RaisePropertyChanged(nameof(DesktopModeSingle)); } }
+        private bool _desktopModeSingle = true;
     }
 }

@@ -36,15 +36,15 @@ namespace DesktopFox
         /// </summary>
         /// <param name="nwPictureSet"></param>
         /// <returns></returns>
-        public void addSet(String SetName, Collection nwCollection, Boolean day = true)
+        public void addSet(String SetName, Collection nwCollection, bool day = true)
         {
             if(nwCollection == null) return;
             
             PictureSet pictureSet = new PictureSet(SetName);
 
-            if (_gallery.PictureSetList.ContainsKey(_shadow.GetKey(pictureSet)))
+            if (_gallery.PictureSetList.ContainsKey(_shadow.GetKey(pictureSet.SetName)))
             {
-                addCollection(_gallery.PictureSetList[_shadow.GetKey(pictureSet)], nwCollection, day);
+                addCollection(_gallery.PictureSetList[_shadow.GetKey(pictureSet.SetName)], nwCollection, day);
             }
             else
             {
@@ -60,6 +60,16 @@ namespace DesktopFox
 
             }
             return;
+        }
+
+        /// <summary>
+        /// Erfrägt welche Collections im Pictureset vorhanden sind <see cref="PictureSet.ContainsCollections"/>
+        /// </summary>
+        /// <param name="pictureSetName"></param>
+        /// <returns>1=Day, 2=Night, 3=Both, 4=Twins</returns>
+        public int ContainsCollections(String pictureSetName)
+        {
+            return _gallery.PictureSetList[_shadow.GetKey(pictureSetName)].ContainsCollections();
         }
 
         public void RenameSet(String pictureSet, String newName)
@@ -81,7 +91,7 @@ namespace DesktopFox
             return collection;
         }
 
-        public void addCollection(PictureSet pictureSet, Collection nwCollection, Boolean day)
+        public void addCollection(PictureSet pictureSet, Collection nwCollection, bool day)
         {
             if (day)
             {
@@ -91,6 +101,38 @@ namespace DesktopFox
             {
                 pictureSet.NightCol = nwCollection;
             }
+        }
+
+        public void removeCollection(String pictureSet, bool day, bool all=false)
+        {
+            if (all)
+            {
+                _shadow.Remove(pictureSet);
+                MWVM.SelectedVM = null;
+                PictureView? tmpDeleteViews = null;
+                PictureViewVM? tmpDeleteVM = null;
+                
+                foreach(PictureView i in MWVM.MainWindowModel._pictureViews)
+                {
+                    if (i.pLabel.Content == pictureSet)
+                    {
+                        tmpDeleteViews = i;
+                        tmpDeleteVM = (PictureViewVM)i.DataContext;
+                    }  
+                }
+                if (tmpDeleteViews != null && tmpDeleteVM != null)
+                {
+                    MWVM.MainWindowModel._pictureViews.Remove(tmpDeleteViews);
+                    MWVM.MainWindowModel._pictureViewVMs.Remove(tmpDeleteVM);
+                }
+                return;
+            }
+
+            if (day)
+                _gallery.PictureSetList[_shadow.GetKey(pictureSet)].DayCol = null;
+            else
+                _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol = null;
+
         }
 
         /// <summary>

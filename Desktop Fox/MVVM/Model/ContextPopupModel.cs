@@ -11,7 +11,6 @@ namespace DesktopFox.MVVM.Model
         private string _pictureSetName;
         public String PictureSetName { get { return _pictureSetName; } set { _pictureSetName = value; RaisePropertyChanged(nameof(PictureSetName)); } }
 
-        private int _deletionSelect;
-        public int DeletionSelect { get { return _deletionSelect; } set { _deletionSelect = value; RaisePropertyChanged(nameof(DeletionSelect)); } }
+
     }
 }

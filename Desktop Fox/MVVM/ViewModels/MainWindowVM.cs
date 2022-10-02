@@ -37,13 +37,26 @@ namespace DesktopFox
         private PictureViewVM _selectedVM;
         public PictureViewVM SelectedVM { get { return _selectedVM; } set { _selectedVM = value; RaisePropertyChanged(nameof(SelectedVM)); } }
 
+        /*
         private PictureView _selectedItem;
-        public PictureView SelectedItem { get { return _selectedItem; } set { _selectedItem = value; SelectedVM = (PictureViewVM)value.DataContext; RaisePropertyChanged(nameof(SelectedItem)); } }
+        public PictureView SelectedItem { get { return _selectedItem; } 
+            set 
+            { 
+                _selectedItem = value;
+                if (value != null)
+                    SelectedVM = (PictureViewVM)value.DataContext;
+                else
+                    SelectedVM = null;
+
+                RaisePropertyChanged(nameof(SelectedItem)); 
+            } 
+        }
+        */
 
         public ICommand AddSetViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(AddSetView)); } }
         public ICommand SettingsMainViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(Settings_MainView)); } }
         public ICommand ContextPopupViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(ContextPopupView)); } }
-        //public ICommand ContextPopupViewCommand { get { return new DF_Command.DelegateCommand(o => SChange(x as PictureViewxtPopupView)); } }
+        public ICommand HideViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(null)); } }
         public ICommand CloseCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.Hide()); } }
         public ICommand MinimizeCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.WindowState = WindowState.Minimized); } }
         public ICommand MaximizeCommand { get { return new DF_Command.DelegateCommand(o => MaximizeWindow()); } }
@@ -75,7 +88,7 @@ namespace DesktopFox
 
         public void SwitchViews(UserControl newView)
         {
-            if (newView != CurrentView || newView == ContextPopupView)
+            if (newView != null && (newView != CurrentView || newView == ContextPopupView))
                 CurrentView = newView;
             else
                 CurrentView = null;

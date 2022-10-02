@@ -95,6 +95,10 @@
                 <Setter Property="Background" Value="{StaticResource ControlPressedBrush}"/>
                 <Setter Property="BorderBrush" Value="Transparent"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="DarkGray"/>
+                <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
 

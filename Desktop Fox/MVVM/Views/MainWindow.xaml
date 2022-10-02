@@ -102,9 +102,14 @@
             <Border x:Name="doubleClickPane"
                     Background="Transparent"
                     Opacity="0.5"
+                    Grid.Row="1"
+                    Margin="5"
                     Grid.RowSpan="3"
                     Grid.ColumnSpan="2"
                     Panel.ZIndex="2">
+                <Border.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding HideViewCommand}"/>
+                </Border.InputBindings>
             </Border>
             <Border x:Name="previewBorderFade"
                     Grid.RowSpan="2"

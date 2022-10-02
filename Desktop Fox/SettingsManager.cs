@@ -98,7 +98,7 @@ namespace DesktopFox
         /// Setzt ob der Desktop geshuffelt werden soll
         /// </summary>
         /// <param name="state"></param>
-        public void setShuffle(Boolean state)
+        public void setShuffle(bool state)
         {
             _settings.Shuffle = state;
             if (_settings.isRunning) ;
@@ -109,7 +109,7 @@ namespace DesktopFox
         /// Soll der Desktop geshuffelt oder linear angezeigt werden. true = shuffeln
         /// </summary>
         /// <returns></returns>
-        public Boolean getShuffle()
+        public bool getShuffle()
         {
             return _settings.Shuffle;
 
@@ -159,7 +159,7 @@ namespace DesktopFox
         /// Setzt das Flag das angibt ob das Programm den Desktop Managed
         /// </summary>
         /// <param name="state"></param>
-        public void setRunning(Boolean state)
+        public void setRunning(bool state)
         {
             _settings.isRunning = state;
         }
@@ -168,7 +168,7 @@ namespace DesktopFox
         /// Gibt zurück ob das Programm den Desktophintergrund Managed
         /// </summary>
         /// <returns></returns>
-        public Boolean isRunning()
+        public bool isRunning()
         {
             return _settings.isRunning;
         }
@@ -188,7 +188,7 @@ namespace DesktopFox
         /// Setzt den Wert, wann der Tag beginnen soll
         /// </summary>
         /// <param name="nwDayStart"></param>
-        public void setDayStart(TimeSpan nwDayStart, Boolean wait = false)
+        public void setDayStart(TimeSpan nwDayStart, bool wait = false)
         {
             _settings.DayStart = nwDayStart;
             if (wait == false)
@@ -199,7 +199,7 @@ namespace DesktopFox
         /// Setzt den Wert, wann die Nacht beginnen soll
         /// </summary>
         /// <param name="nwNightStart"></param>
-        public void setNightStart(TimeSpan nwNightStart, Boolean wait = false)
+        public void setNightStart(TimeSpan nwNightStart, bool wait = false)
         {
             _settings.NightStart = nwNightStart;
             if (wait == false)
@@ -302,7 +302,7 @@ namespace DesktopFox
         /// Setzt ob das Programm im Autostart sein soll
         /// </summary>
         /// <param name="state"></param>
-        public void setAutostart(Boolean state)
+        public void setAutostart(bool state)
         {
             if (state && regKey.GetValue("Desktopfox") == null)
             {
@@ -324,7 +324,7 @@ namespace DesktopFox
         /// Gibt zurück ob das Programm im Autostart ist
         /// </summary>
         /// <returns></returns>
-        public Boolean getAutostart()
+        public bool getAutostart()
         {
             return _settings.autostartOn;
         }
@@ -333,7 +333,7 @@ namespace DesktopFox
         /// Setzt den Flag ob beim Tageswechsel das Aktive Set Automatisch gewechselt werden soll
         /// </summary>
         /// <param name="value">true = Automatischer Wechsel, false = Kein Wechsel</param>
-        public void setAutoSetChange(Boolean value)
+        public void setAutoSetChange(bool value)
         {
             _settings.autoSetChange = value;
             Debug.WriteLine("Auto SetChange wurde geändert, ist jetzt: " + value);
@@ -343,7 +343,7 @@ namespace DesktopFox
         /// Gibt zurück ob beim Tageswechsel das Aktive Set Automatisch gewechselt werden soll
         /// </summary>
         /// <returns></returns>
-        public Boolean getAutoSetChange()
+        public bool getAutoSetChange()
         {
             return _settings.autoSetChange;
         }

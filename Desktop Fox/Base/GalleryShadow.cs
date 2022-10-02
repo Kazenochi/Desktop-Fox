@@ -13,25 +13,25 @@ namespace DesktopFox.Base
         private IDictionary<int, PictureSet> _pictureSetList;
         private Random _random = new Random();
 
-        private IDictionary<String, int> _shadow;
+        private IDictionary<String, int> _shadowList;
 
 
         public GalleryShadow(Gallery gallery)
         {
             _pictureSetList = gallery.PictureSetList;
-            _shadow = new Dictionary<String, int>();
+            _shadowList = new Dictionary<String, int>();
 
             foreach (var i in _pictureSetList.Keys)
             {
-                _shadow.Add(_pictureSetList[i].SetName, i);
+                _shadowList.Add(_pictureSetList[i].SetName, i);
             }
         }
 
-        public int GetKey(PictureSet pictureSet)
+        public int GetKey(String pictureSet)
         {
             try
             {
-                return _shadow[pictureSet.SetName];
+                return _shadowList[pictureSet];
             }
             catch (System.Collections.Generic.KeyNotFoundException)
             {
@@ -43,24 +43,23 @@ namespace DesktopFox.Base
         {
             int tmpKey = GetNewKey();
             _pictureSetList.Add(tmpKey, pictureSet);
-            _shadow.Add(pictureSet.SetName, tmpKey);
+            _shadowList.Add(pictureSet.SetName, tmpKey);
         }
 
-        public void Remove(PictureSet pictureSet)
+        public void Remove(String pictureSet)
         {
-            int tmpKey = _shadow[pictureSet.SetName];
-            _pictureSetList.Remove(tmpKey);
-            _shadow.Remove(pictureSet.SetName);
+            _pictureSetList.Remove(_shadowList[pictureSet]);
+            _shadowList.Remove(pictureSet);
         }
 
         public void Rename(String pictureset, String newName)
         {
-            if (_shadow.ContainsKey(pictureset))
+            if (_shadowList.ContainsKey(pictureset))
             {
-                int tmpKey = _shadow[pictureset];
+                int tmpKey = _shadowList[pictureset];
                 _pictureSetList[tmpKey].SetName = newName;
-                _shadow.Remove(pictureset);
-                _shadow.Add(newName, tmpKey);
+                _shadowList.Remove(pictureset);
+                _shadowList.Add(newName, tmpKey);
                 return;
             }
             Debug.WriteLine("Pictureset ist nicht vorhanden");

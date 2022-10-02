@@ -53,19 +53,22 @@
                              Content="Day"
                              FontSize="20"
                              Margin="5"
-                             IsChecked="{Binding contextModel.DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=1}"
+                             IsEnabled="{Binding CanDeleteDay}"
+                             IsChecked="{Binding DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=1}"
                              Style="{StaticResource DF_RadioButton_Border}"/>
                 <RadioButton x:Name="radio_Night"
                              Content="Night"
                              FontSize="20"
                              Margin="5"
-                             IsChecked="{Binding contextModel.DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=2}"
+                             IsEnabled="{Binding CanDeleteNight}"
+                             IsChecked="{Binding DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=2}"
                              Style="{StaticResource DF_RadioButton_Border}"/>
                 <RadioButton x:Name="radio_Both"
                              Content="Both"
                              FontSize="20"
                              Margin="5"
-                             IsChecked="{Binding contextModel.DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
+                             IsEnabled="{Binding CanDeleteBoth}"
+                             IsChecked="{Binding DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
                              Style="{StaticResource DF_RadioButton_Border}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
@@ -81,6 +84,8 @@
                             Content="Delete"
                             FontSize="20"  
                             Margin="0"
+                            Command="{Binding RemoveCommand}"
+                            IsEnabled="{Binding CanDelete}"
                             Style="{StaticResource DF_Button_Red_Border}"/>
                 </Grid>
             </StackPanel>

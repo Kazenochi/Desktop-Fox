@@ -23,7 +23,7 @@ namespace DesktopFox.MVVM.ViewModels
         {
             MWVM = MainWindowViewModel;
             GM = galleryManager;
-            if(MWVM.SelectedItem != null)
+            if(MWVM.SelectedVM != null)
                 AddSetModel = new AddSetModel(MWVM.SelectedVM.pictureSet.SetName);
             else
                 AddSetModel = new AddSetModel(NewName());         
@@ -34,8 +34,8 @@ namespace DesktopFox.MVVM.ViewModels
             AddSetModel.PictureSetName = pictureViewVM.pictureSet.SetName;
         }
 
-        private Boolean _day;
-        public Boolean Day { get { return _day; } set { _day = value; RaisePropertyChanged(nameof(Day)); } }
+        private bool _day;
+        public bool Day { get { return _day; } set { _day = value; RaisePropertyChanged(nameof(Day)); } }
         public ICommand OpenFolderDialog { get { return new DelegateCommand(o => OpenFD()); } }
         public ICommand AddNewSet { get { return new DF_Command.DelegateCommand(o => AddNS()); } }
         public ICommand GenerateSetName { get { return new DF_Command.DelegateCommand(o => GetSetName()); } }
@@ -47,7 +47,7 @@ namespace DesktopFox.MVVM.ViewModels
   
         }
 
-        private void GetSetName(Boolean newName = true)
+        private void GetSetName(bool newName = true)
         {
             if(!newName && MWVM.SelectedVM != null)
                 AddSetModel.PictureSetName = MWVM.SelectedVM.pictureSet.SetName;
@@ -65,7 +65,7 @@ namespace DesktopFox.MVVM.ViewModels
         private String NewName()
         {
             String newName;
-            Boolean newNameExists = false;
+            bool newNameExists = false;
 
             for( int i = 1; i < 100; i++)
             {

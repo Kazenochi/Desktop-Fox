@@ -187,19 +187,19 @@
                                 <ColorAnimation To="LightGreen" 
                                                 Storyboard.TargetProperty="(Border.Background).Color" 
                                                 Storyboard.TargetName="border2"
-                                                From="#FF347FE6"
+                                                From="{StaticResource Color_Control}"
                                                 AutoReverse="True"
                                                 Duration="0:0:0.5"/>
                                 <ColorAnimation To="LightGreen" 
                                                 Storyboard.TargetProperty="(Border.Background).Color" 
                                                 Storyboard.TargetName="border3"
-                                                From="#FF347FE6"
+                                                From="{StaticResource Color_Control}"
                                                 AutoReverse="True"
                                                 Duration="0:0:0.5"/>
                                 <ColorAnimation To="LightGreen" 
                                                 Storyboard.TargetProperty="(Border.Background).Color" 
                                                 Storyboard.TargetName="border4"
-                                                From="#FF347FE6"
+                                                From="{StaticResource Color_Control}"
                                                 AutoReverse="True"
                                                 Duration="0:0:0.5"/>
                             </Storyboard>

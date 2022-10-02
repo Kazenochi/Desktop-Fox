@@ -32,8 +32,8 @@
     <Style BasedOn="{StaticResource {x:Type Button}}"
            TargetType="{x:Type Button}"
            x:Key="DF_Button_Border">
-        <Setter Property="Background" Value="#FF4C77D7"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource ControlBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Margin" Value="10,10,10,10"/>
@@ -56,10 +56,51 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="FontFamily" Value="/Assets/#Nunito"/>
+        <Setter Property="FontFamily" Value="{StaticResource Default}"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="#FFC6F2FC"/>
+                <Setter Property="BorderBrush" Value="{StaticResource HighlightBrush}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource ControlPressedBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource {x:Type Button}}"
+           TargetType="{x:Type Button}"
+           x:Key="DF_Button_Red_Border">
+        <Setter Property="Background" Value="{StaticResource ControlBrushRed}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Margin" Value="10,10,10,10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Width="90" Height="50"
+                                CornerRadius="25"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"/>
+                        </Border>
+                        <Border Width="93" Height="53"
+                                CornerRadius="25"
+                                BorderThickness="3"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Default}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource HighlightBrushRed}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource ControlPressedBrushRed}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

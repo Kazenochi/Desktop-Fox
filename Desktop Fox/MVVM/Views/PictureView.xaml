@@ -13,12 +13,15 @@
             CornerRadius="20"
             Height="200" Width="360">
         <Border.Clip>
-            <RectangleGeometry RadiusX="20"
-                               RadiusY="20"
-                               Rect="0,0,360,200"/>
+            <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                <Binding Path="CornerRadius" RelativeSource="{RelativeSource Self}"/>
+            </MultiBinding>
         </Border.Clip>
         <Grid>
-            <Image x:Name="pImageDay" Source="{Binding pictureSet.DayImage}" Stretch="UniformToFill"/>
+            <Image x:Name="pImageDay" Source="{Binding pictureSet.DayImage}" 
+                   Stretch="UniformToFill" d:Source="/Assets/murmel.png"/>
             <Border HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
                 <Border.Clip>
@@ -33,14 +36,15 @@
                         </RectangleGeometry.Transform>
                     </RectangleGeometry>
                 </Border.Clip>
-                <Image x:Name="pImageNight" Source="{Binding pictureSet.NightImage}" Stretch="UniformToFill"/>
+                <Image x:Name="pImageNight" Source="{Binding pictureSet.NightImage}" 
+                       Stretch="UniformToFill" d:Source="/Assets/よぞら - 夜空 .png"/>
             </Border>
-            <Label x:Name="pLabel" Content="{Binding pictureSet.SetName}" 
+            <Label x:Name="pLabel" Content="{Binding pictureSet.SetName}" d:Content="Pictureset great"
                    FontSize="22" FontFamily="/Assets/#Nunito" FontWeight="Bold"
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Bottom" 
                    Width="414" Height="30" 
-                   Padding="20,1,5,5" 
+                   Padding="20,1,5,0" 
                    Grid.IsSharedSizeScope="True">
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.7">
@@ -63,8 +67,8 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
-                      Visibility="{Binding Path=pictureSet.IsActive1, Mode=TwoWay, Converter={StaticResource BoolConverter}}"
-                      >
+                      Visibility="{Binding Path=pictureSet.IsActive1, Mode=TwoWay, 
+                                    Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FF61EB4E"
                              Margin="1"/>
@@ -82,7 +86,8 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
-                      Visibility="{Binding Path=pictureSet.IsActive3, Mode=TwoWay, Converter={StaticResource BoolConverter}}">
+                      Visibility="{Binding Path=pictureSet.IsActive3, Mode=TwoWay, 
+                                    Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FF41A6FF"
                              Margin="1"/>
@@ -101,7 +106,8 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
-                      Visibility="{Binding Path=pictureSet.IsActive3, Mode=TwoWay, Converter={StaticResource BoolConverter}}">
+                      Visibility="{Binding Path=pictureSet.IsActive3, Mode=TwoWay, 
+                                    Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FFFF3C3C"
                              Margin="1"/>
@@ -116,14 +122,14 @@
                 </Grid>
             </StackPanel>
 
-
             <Rectangle x:Name="pSelectedMarker"
                        Width="10" Height="200" 
                        VerticalAlignment="Top"
                        HorizontalAlignment="Left" 
                        RenderTransformOrigin="0.5,0.5"
                        Margin="0,0,0,0"
-                       Visibility="{Binding Path=pictureSet.IsSelectedDF, Mode=TwoWay, Converter={StaticResource BoolConverter}}">
+                       Visibility="{Binding Path=pictureSet.IsSelectedDF, Mode=TwoWay, 
+                                     Converter={StaticResource BoolConverter}}">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF362806" Offset="1"/>

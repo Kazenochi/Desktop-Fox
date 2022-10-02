@@ -25,12 +25,17 @@ namespace DesktopFox.MVVM.ViewModels
                    
         }
 
-        public ICommand VisibilitySwitchCommand { get { return new DF_Command.DelegateCommand(o => dummy()); } }
-        private void dummy() { }
+        public ICommand RenameSetCommand { get { return new DF_Command.DelegateCommand(o => RenameSet()); } }
+
+        private void RenameSet() 
+        {
+            GM.RenameSet(MWVM.SelectedVM.pictureSet.SetName, contextModel.PictureSetName);            
+        }
 
         public new void ContentChange(PictureViewVM pictureViewVM)
         {
             contextModel.PictureSetName = pictureViewVM.pictureSet.SetName;
         }
+
     }
 }

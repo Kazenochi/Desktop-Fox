@@ -4,11 +4,30 @@
 
     <Color x:Key="Color_Background">#FF2C394A</Color>
     <Color x:Key="Color_Border">DarkGray</Color>
+    
     <Color x:Key="Color_Control">#FF4C77D7</Color>
+    <Color x:Key="Color_ControlPressed">#FF161558</Color>
+    <Color x:Key="Color_Highlight">#FFC6F2FC</Color>
+    <Color x:Key="Color_ControlPressedText">Aqua</Color>
+    
     <Color x:Key="Color_Text">White</Color>
+    
     <FontFamily x:Key="Default">/Assets/#Nunito</FontFamily>
+    
+    <SolidColorBrush x:Key="TextBrush">White</SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundBrush">#FF2C394A</SolidColorBrush>
     <SolidColorBrush x:Key="BorderBrush">DarkGray</SolidColorBrush>
+    
+    <SolidColorBrush x:Key="ControlBrush">#FF4C77D7</SolidColorBrush>
+    <SolidColorBrush x:Key="ControlPressedBrush">#FF161558</SolidColorBrush>
+    <SolidColorBrush x:Key="HighlightBrush">#FFC6F2FC</SolidColorBrush>
+    <SolidColorBrush x:Key="ControlPressedTextBrush">Aqua</SolidColorBrush>
+    
+    <!-- FF0839A7   FF161558 -->
+    <SolidColorBrush x:Key="ControlBrushRed">#FFC81E1E</SolidColorBrush>
+    <SolidColorBrush x:Key="ControlPressedBrushRed">#FF8D0F0F</SolidColorBrush>
+    <SolidColorBrush x:Key="HighlightBrushRed">#FFFF8A00</SolidColorBrush>
+    
     <Image x:Key="DF_Icon" Source="\MVVM\Views\DF_Icon.ico"/>
     <BooleanToVisibilityConverter x:Key="BoolConverter"/>
     <local:BoolInverter x:Key="BoolInverter"/>

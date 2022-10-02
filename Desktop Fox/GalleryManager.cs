@@ -59,8 +59,12 @@ namespace DesktopFox
                 MWVM.MainWindowModel._pictureViews.Add(newView);
 
             }
-
             return;
+        }
+
+        public void RenameSet(String pictureSet, String newName)
+        {
+            _shadow.Rename(pictureSet, newName);
         }
 
         public static Collection makeCollection(List<String> pictures, String path)
@@ -76,8 +80,6 @@ namespace DesktopFox
 
             return collection;
         }
-
-
 
         public void addCollection(PictureSet pictureSet, Collection nwCollection, Boolean day)
         {
@@ -125,8 +127,5 @@ namespace DesktopFox
             Console.WriteLine("Beim Einlesen wurden Doppelte Dateien Gefunden. " + files.Count + " Bilder wurden nicht eingelesen");
             return files;
         }
-
-
     }
-
 }

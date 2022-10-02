@@ -37,7 +37,8 @@
                 <Button x:Name="button_Rename"
                         Style="{StaticResource DF_Button_Border}"
                         Content="Rename"
-                        FontSize="20"/>
+                        FontSize="20"
+                        Command="{Binding RenameSetCommand}"/>
             </StackPanel>
             <Border Background="DarkGray"
                     HorizontalAlignment="Stretch"
@@ -48,21 +49,24 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="5">
-                <RadioButton Style="{StaticResource DF_RadioButton_Border}"
+                <RadioButton x:Name="radio_Day"
                              Content="Day"
                              FontSize="20"
                              Margin="5"
-                             x:Name="radio_Day"/>
-                <RadioButton Style="{StaticResource DF_RadioButton_Border}"
+                             IsChecked="{Binding contextModel.DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=1}"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
+                <RadioButton x:Name="radio_Night"
                              Content="Night"
                              FontSize="20"
                              Margin="5"
-                             x:Name="radio_Night"/>
-                <RadioButton Style="{StaticResource DF_RadioButton_Border}"
+                             IsChecked="{Binding contextModel.DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=2}"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
+                <RadioButton x:Name="radio_Both"
                              Content="Both"
                              FontSize="20"
                              Margin="5"
-                             x:Name="radio_Both"/>
+                             IsChecked="{Binding contextModel.DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
@@ -73,13 +77,11 @@
                             Foreground="DarkGray"
                             Style="{StaticResource DF_Button_Border}"
                             Margin="0"/>
-                    <Button Style="{StaticResource DF_Button_Border}"
+                    <Button x:Name="button_Delete"
                             Content="Delete"
-                            FontSize="20"
-                            Background="DarkRed"
-                            Foreground="Red"                 
-                            x:Name="button_Delete"
-                            Margin="0"/>
+                            FontSize="20"  
+                            Margin="0"
+                            Style="{StaticResource DF_Button_Red_Border}"/>
                 </Grid>
             </StackPanel>
         </StackPanel>

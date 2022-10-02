@@ -37,7 +37,6 @@ namespace DesktopFox.Base
             {
                 return 1001;
             }
-            
         }
 
         public void Add(PictureSet pictureSet)
@@ -54,7 +53,18 @@ namespace DesktopFox.Base
             _shadow.Remove(pictureSet.SetName);
         }
 
-
+        public void Rename(String pictureset, String newName)
+        {
+            if (_shadow.ContainsKey(pictureset))
+            {
+                int tmpKey = _shadow[pictureset];
+                _pictureSetList[tmpKey].SetName = newName;
+                _shadow.Remove(pictureset);
+                _shadow.Add(newName, tmpKey);
+                return;
+            }
+            Debug.WriteLine("Pictureset ist nicht vorhanden");
+        }
 
         private int GetNewKey()
         {

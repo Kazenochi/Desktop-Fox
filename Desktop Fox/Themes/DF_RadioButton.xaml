@@ -4,14 +4,14 @@
            TargetType="{x:Type RadioButton}"
            x:Key="DF_RadioButton">
         <Style.Setters>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontFamily" Value="/Assets/#Nunito"/>
+            <Setter Property="FontFamily" Value="{StaticResource Default}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
-                        <Border Background="#FF4C77D7"
+                        <Border Background="{StaticResource ControlBrush}"
                                 Height="40" Width="100"
                                 CornerRadius="20">
                             <Border.Clip>
@@ -34,11 +34,11 @@
         </Style.Setters>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="AliceBlue"/>
+                <Setter Property="Background" Value="{StaticResource HighlightBrush}"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Foreground" Value="Aqua"/>
-                <Setter Property="Background" Value="#FF161558"/>
+                <Setter Property="Background" Value="{StaticResource ControlPressedBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -47,17 +47,17 @@
            TargetType="{x:Type RadioButton}"
            x:Key="DF_RadioButton_Border">
         <Style.Setters>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontFamily" Value="/Assets/#Nunito"/>
+            <Setter Property="FontFamily" Value="{StaticResource Default}"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
                         <Grid>
 
-                            <Border Background="#FF4C77D7"
+                            <Border Background="{StaticResource ControlBrush}"
                                     Height="40" Width="100"
                                     CornerRadius="20">
                                 <Border.Clip>
@@ -85,11 +85,14 @@
         </Style.Setters>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="#FFC6F2FC"/>
+                <Setter Property="BorderBrush" Value="{StaticResource HighlightBrush}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource ControlPressedBrush}"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Foreground" Value="Aqua"/>
-                <Setter Property="Background" Value="#FF161558"/>
+                <Setter Property="Foreground" Value="{StaticResource ControlPressedTextBrush}"/>
+                <Setter Property="Background" Value="{StaticResource ControlPressedBrush}"/>
                 <Setter Property="BorderBrush" Value="Transparent"/>
             </Trigger>
         </Style.Triggers>

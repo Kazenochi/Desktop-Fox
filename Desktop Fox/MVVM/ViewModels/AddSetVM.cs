@@ -29,7 +29,7 @@ namespace DesktopFox.MVVM.ViewModels
                 AddSetModel = new AddSetModel(NewName());         
         }
 
-        public new void ContentChange(PictureViewVM pictureViewVM)
+        public new void ContentChange(PictureVM pictureViewVM)
         {
             AddSetModel.PictureSetName = pictureViewVM.pictureSet.SetName;
         }

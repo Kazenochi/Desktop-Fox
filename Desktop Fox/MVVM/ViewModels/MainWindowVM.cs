@@ -8,6 +8,7 @@ using System.Diagnostics;
 using DesktopFox.MVVM.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace DesktopFox
 {
@@ -18,6 +19,8 @@ namespace DesktopFox
         public ContextPopupView ContextPopupView = new ContextPopupView();
         public PreviewView PreviewView = new PreviewView();
         private MainWindow _mainWindow;
+        private Storyboard _previewFader;
+
 
         public MainWindowVM()
         {
@@ -40,7 +43,10 @@ namespace DesktopFox
 
         public PictureVM SelectedVM { get { return _selectedVM; } set { _selectedVM = value; RaisePropertyChanged(nameof(SelectedVM)); } }
         private PictureVM _selectedVM;
-     
+
+        public int SelectedMonitor { get { return _selectedMonitor; } set { _selectedMonitor = value; RaisePropertyChanged(nameof(SelectedMonitor)); } }
+        private int _selectedMonitor = 1;
+
         public PictureView SelectedItem { get { return _selectedItem; } 
             set 
             { 
@@ -56,7 +62,7 @@ namespace DesktopFox
         }
         private PictureView _selectedItem;
 
-
+        public ICommand ActivateSetCommand { get { return new DF_Command.DelegateCommand(o => ActivateSet()); } }
         public ICommand AddSetViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(AddSetView)); } }
         public ICommand SettingsMainViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(Settings_MainView)); } }
         public ICommand ContextPopupViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(ContextPopupView)); } }
@@ -65,9 +71,41 @@ namespace DesktopFox
         public ICommand MinimizeCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.WindowState = WindowState.Minimized); } }
         public ICommand MaximizeCommand { get { return new DF_Command.DelegateCommand(o => MaximizeWindow()); } }
         
+        private void ActivateSet()
+        {
+            switch (SelectedMonitor)
+            {
+                case 1:
+                    foreach (PictureVM i in MainWindowModel._pictureViewVMs)
+                    {
+                        if (i.pictureSet.SetName == SelectedVM.pictureSet.SetName)
+                            i.pictureSet.IsActive1 = true;
+                        else
+                            i.pictureSet.IsActive1 = false;
+                    }
+                    break;
+                case 2:
+                    foreach (PictureVM i in MainWindowModel._pictureViewVMs)
+                    {
+                        if (i.pictureSet.SetName == SelectedVM.pictureSet.SetName)
+                            i.pictureSet.IsActive2 = true;
+                        else
+                            i.pictureSet.IsActive2 = false;
+                    }
+                    break;
+                case 3:
+                    foreach (PictureVM i in MainWindowModel._pictureViewVMs)
+                    {
+                        if (i.pictureSet.SetName == SelectedVM.pictureSet.SetName)
+                            i.pictureSet.IsActive3 = true;
+                        else
+                            i.pictureSet.IsActive3 = false;
+                    }
+                    break;
+            }
+        }
 
-
-        public void MaximizeWindow()
+        private void MaximizeWindow()
         {
             if(_mainWindow.WindowState == WindowState.Normal)
                 _mainWindow.WindowState = WindowState.Maximized;
@@ -75,7 +113,7 @@ namespace DesktopFox
                 _mainWindow.WindowState = WindowState.Normal;
         }
 
-        public void SChange(PictureVM selectedVM)
+        private void SChange(PictureVM selectedVM)
         {
             SelectedVM = selectedVM;
             foreach(var i in MainWindowModel._pictureViewVMs)
@@ -90,7 +128,7 @@ namespace DesktopFox
                 ((AddSetVM)AddSetView.DataContext).ContentChange(SelectedVM);
         }
 
-        public void SwitchViews(UserControl newView)
+        private void SwitchViews(UserControl newView)
         {
             if (newView != null && (newView != CurrentView || newView == ContextPopupView))
                 CurrentView = newView;

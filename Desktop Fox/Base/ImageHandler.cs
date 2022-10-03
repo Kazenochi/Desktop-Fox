@@ -44,6 +44,7 @@ namespace DesktopFox
             bitmapImage.BeginInit();
             bitmapImage.UriSource = new Uri("F:\\DesktopFoxTestPicture\\Normal\\1.jpg");
             bitmapImage.EndInit();
+            bitmapImage.Freeze();
             return bitmapImage;
         }
 

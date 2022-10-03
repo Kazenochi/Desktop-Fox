@@ -31,6 +31,7 @@ namespace DesktopFox
         private AddSetVM addSetVM;
         private SettingsVM settingsVM;
         private GalleryShadow shadow;
+        private Shuffler shuffler;
         /// <summary>
         /// Konstruktor
         /// </summary>
@@ -46,11 +47,13 @@ namespace DesktopFox
 
             GM = new GalleryManager(gallery, shadow, mainWindowVM);
             SM = new SettingsManager(settings);
-
+            
             addSetVM = new AddSetVM(mainWindowVM, GM);
             settingsVM = new SettingsVM(settings);
             contextPopupVM = new ContextPopupVM(mainWindowVM, GM);
             previewVM = new PreviewVM();
+
+            shuffler = new Shuffler(mainWindowVM, GM, SM, previewVM);
 
             readyPictureVMs();
         }
@@ -100,6 +103,7 @@ namespace DesktopFox
             if(MW == null) 
             { 
                 MW ??= new MainWindow();
+                shuffler.mWinHandler(MW);
                 //MW.Closing += MW_Closed;
                 MW.DataContext = mainWindowVM;
                 MW.lbPictures.ItemsSource = mainWindowVM.MainWindowModel._pictureViews;
@@ -120,6 +124,7 @@ namespace DesktopFox
                 mainWindowVM.PreviewView.DataContext = previewVM;
             }
             mainWindowVM.SetCurrentMain(MW);
+            shuffler.startPreviewShuffleTimer();
             MW.Show();
         }
 

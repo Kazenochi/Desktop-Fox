@@ -178,7 +178,125 @@ namespace DesktopFox
                 return null;
 
             return _gallery.PictureSetList[_shadow.GetKey(_gallery.activeSetsList[choice - 1])];
+        }
 
+        /// <summary>
+        /// Gibt das Set zurück das aktuell als Preview angezeigt wird
+        /// </summary>
+        /// <returns></returns>
+        public PictureSet getPreviewSet()
+        {
+            if (MWVM.SelectedVM == null) return null;
+
+            return MWVM.SelectedVM.pictureSet;
+        }
+
+        /// <summary>
+        /// Gibt die Anzahl der Aktiven Sets zurück
+        /// </summary>
+        /// <returns></returns>
+        public int getActiveSetCount()
+        {
+            int tmpCount = 0;
+            foreach(var i in _gallery.activeSetsList)
+            {
+                if (i != "Empty")
+                    tmpCount++;
+            }
+            return tmpCount;
+        }
+
+        /// <summary>
+        /// Setzt das angegebene aktive Pictureset das neu auf dem Desktop angezeigt wird
+        /// </summary>
+        /// <param name="pictureSet"></param>
+        /// <param name="choice">1 = Erstes Set, 2 = Zweites Set, ...</param>
+        public void setActiveSet(String pictureSet, int choice = 1)
+        {
+            String tmpName;
+            if (pictureSet == null)
+            {
+                tmpName = "Empty";
+            }
+            else
+            {
+                tmpName = pictureSet;
+            }
+
+            _gallery.activeSetsList[choice - 1] = tmpName;
+
+     
+        
+        }
+
+        /// <summary>
+        /// Checked ob es Aktive Sets gibt anhand vom Status des ersten Sets
+        /// </summary>
+        /// <returns></returns>
+        public Boolean areSetsActive(int number = 0)
+        {
+            switch (number)
+            {
+                case 0:
+                    Boolean result = false;
+                    foreach (String i in _gallery.activeSetsList)
+                    {
+                        if (i != "Empty")
+                            result = true;
+                    }
+                    return result;
+                    break;
+                case 1:
+                    if (_gallery.activeSetsList[0] != "Empty")
+                        return true;
+                    break;
+                case 2:
+                    if (_gallery.activeSetsList[1] != "Empty")
+                        return true;
+                    break;
+                case 3:
+                    if (_gallery.activeSetsList[2] != "Empty")
+                        return true;
+                    break;
+                default:
+                    return false;
+                    break;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Gibt das nächste Set in der Liste zurück. Nach dem Letzten Element wird wieder das erste zurückgegeben
+        /// Wenn es nicht mehr als ein Set gibt wird des übergebene Set wieder zurück gegeben
+        /// </summary>
+        /// <param name="pictureSet"></param>
+        /// <returns></returns>
+        public String getNextSet(String pictureSet)
+        {
+            if (_gallery.PictureSetList.Count > 1)
+            {
+                List<String> tmpList = new List<string>();
+                int tmpCount = 0;
+                int match = 0;
+
+                foreach (PictureSet i in _gallery.PictureSetList.Values)
+                {
+                    tmpList.Add(i.SetName);
+                    if (pictureSet == i.SetName)
+                        match = tmpCount;
+                    else
+                        tmpCount++;
+                }
+
+                if ((match + 1) >= tmpList.Count)
+                    return tmpList.ElementAt(0);
+                else
+                    return tmpList.ElementAt(match + 1);
+            }
+            else
+            {
+                return pictureSet;
+            }
         }
     }
 }

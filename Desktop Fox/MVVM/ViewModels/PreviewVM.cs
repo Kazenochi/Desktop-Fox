@@ -17,10 +17,19 @@ namespace DesktopFox.MVVM.ViewModels
 
         public PreviewVM()
         {
+
         }
 
-        public ICommand PictureForwardCommand { get { return new DF_Command.DelegateCommand(o => dummy()); } }
+        public ICommand PictureForwardCommand { get { return new DF_Command.DelegateCommand(o => PreviewTransition()); } }
         public ICommand PictureBackwardCommand { get { return new DF_Command.DelegateCommand(o => dummy()); } }
+        public ICommand FaderFinishCommand { get { return new DF_Command.DelegateCommand(o => dummy()); } }
+
+
+
+        public void PreviewTransition()
+        {
+            PreviewModel.AnimationStart = true;
+        }
 
         public void dummy() { }
     }

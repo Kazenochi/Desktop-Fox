@@ -1,9 +1,12 @@
 ﻿using DesktopFox;
+using DesktopFox.MVVM.Model;
+using DesktopFox.MVVM.ViewModels;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using Timer = System.Timers.Timer;
 
 namespace DesktopFox
@@ -11,6 +14,8 @@ namespace DesktopFox
     public class Shuffler
     {
         private MainWindow mWindow;
+        private MainWindowVM MWVM;
+        private PreviewVM previewVM;
         private Virtual_Desktop vDesk;
         private GalleryManager GM;
         private SettingsManager SM;
@@ -27,6 +32,19 @@ namespace DesktopFox
         private TimeSpan PreviewShuffleTime = TimeSpan.FromSeconds(10);
         private int[] lockList = new int[3];
         private Random random = new Random();
+
+        public Shuffler(MainWindowVM mainWindowVM, GalleryManager galleryManager, SettingsManager settingsManager, PreviewVM previewVM)
+        {
+            MWVM = mainWindowVM;
+            GM = galleryManager;
+            SM = settingsManager;
+            this.previewVM = previewVM;
+            daytimeTimerStart();
+        }
+        public void mWinHandler(MainWindow mainWindow)
+        {
+            mWindow = mainWindow;
+        }
 
         /// <summary>
         /// Klasseninitialisierung
@@ -90,7 +108,7 @@ namespace DesktopFox
             if (_settings == null)
                 return;
 
-            if (SM.getDesktopMode() == "Single" && GM.getActiveSet() == null)
+            if (SM.getDesktopMode() && GM.getActiveSet() == null)
                 return;
             else if (GM.getActiveSet(any: true) == null)
                 return;
@@ -102,9 +120,9 @@ namespace DesktopFox
             {
                 stopDesktopTimer();
                 if (isDay)
-                    winPicShuffle(GM.getDayCollection(GM.getActiveSet()).folderDirectory);
+                    winPicShuffle(GM.getDayCollection(GM.getActiveSet().SetName).folderDirectory);
                 else
-                    winPicShuffle(GM.getNightCollection(GM.getActiveSet()).folderDirectory);
+                    winPicShuffle(GM.getNightCollection(GM.getActiveSet().SetName).folderDirectory);
             }
             else 
             { 
@@ -112,7 +130,7 @@ namespace DesktopFox
                 stopWinDesktop();
 
                 //Einmaliges Anstoßen der Desktopfunktion beim Ändern der Einstellungen
-                desktopTimer_Trigger(null, null);
+                //desktopTimer_Trigger(null, null);
             }
             SM.setRunning(true);
         }
@@ -187,11 +205,12 @@ namespace DesktopFox
         {
             //Wird Benötigt damit der Timer Thread nicht mit dem Thread der Grafischen Oberfläche Kollidiert.
             //Der UI Thread belegt die Oberflächenelemente Dauerhaft
-
+          
             mWindow.Dispatcher.Invoke((Action)(() =>
             {
                 this.previewShuffle();
             }));
+     
         }
 
         /// <summary>
@@ -201,25 +220,22 @@ namespace DesktopFox
         {
             Debug.WriteLine("Preview Shuffle ausgelöst");
             var tmpPreviewSet = GM.getPreviewSet();
+            PreviewModel tmpPreviewModel = previewVM.PreviewModel;
 
             if (tmpPreviewSet == null)
             {
-                mWindow.image_PreviewBig_Fade.Source = ImageHandler.dummy();
+                tmpPreviewModel.ForegroundImage = ImageHandler.dummy();
             }
             else
             {
-                if (previewDay)
+                if (tmpPreviewModel.Day)
                 {
-                    if (previewCount >= 0 && previewCount < GM.getDayCollection(tmpPreviewSet).singlePics.Count)
+                    if (previewCount >= 0 && previewCount < GM.getDayCollection(tmpPreviewSet.SetName).singlePics.Count)
                     {
-                        try
-                        {
-                            mWindow.image_PreviewBig_Fade.Source = ImageHandler.load(GM.getDayCollection(tmpPreviewSet).singlePics.ElementAt(previewCount).Key);
-                        }
-                        catch
-                        {
-                            mWindow.image_PreviewBig_Fade.Source = ImageHandler.dummy();
-                        }
+                        tmpPreviewModel.ForegroundImage.Freeze();
+                        Debug.WriteLine("PreImage Change");
+                        tmpPreviewModel.ForegroundImage = ImageHandler.load(GM.getDayCollection(tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key);
+                        Debug.WriteLine("After Image Change");
                         previewCount++;
                     }
                     else
@@ -228,25 +244,25 @@ namespace DesktopFox
                         previewCount = 1;
                         try
                         {
-                            mWindow.image_PreviewBig_Fade.Source = ImageHandler.load(GM.getDayCollection(tmpPreviewSet).singlePics.ElementAt(0).Key);
+                            tmpPreviewModel.ForegroundImage = ImageHandler.load(GM.getDayCollection(tmpPreviewSet.SetName).singlePics.ElementAt(0).Key);
                         }
                         catch
                         {
-                            mWindow.image_PreviewBig_Fade.Source = ImageHandler.dummy();
+                            tmpPreviewModel.ForegroundImage = ImageHandler.dummy();
                         }
                     }
                 }
                 else
                 {
-                    if (previewCount >= 0 && previewCount < mWindow.GM.getNightCollection(tmpPreviewSet).singlePics.Count)
+                    if (previewCount >= 0 && previewCount < GM.getNightCollection(tmpPreviewSet.SetName).singlePics.Count)
                     {
                         try
                         {
-                            mWindow.image_PreviewBig_Fade.Source = ImageHandler.load(GM.getNightCollection(tmpPreviewSet).singlePics.ElementAt(previewCount).Key);
+                            tmpPreviewModel.ForegroundImage = ImageHandler.load(GM.getNightCollection(tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key);
                         }
                         catch
                         {
-                            mWindow.image_PreviewBig_Fade.Source = ImageHandler.dummy();
+                            tmpPreviewModel.ForegroundImage = ImageHandler.dummy();
                         }
                         previewCount++;
                     }
@@ -255,17 +271,18 @@ namespace DesktopFox
                         previewCount = 1;
                         try
                         {
-                            mWindow.image_PreviewBig_Fade.Source = ImageHandler.load(GM.getNightCollection(tmpPreviewSet).singlePics.ElementAt(0).Key);
+                            tmpPreviewModel.ForegroundImage = ImageHandler.load(GM.getNightCollection(tmpPreviewSet.SetName).singlePics.ElementAt(0).Key);
                         }
                         catch
                         {
-                            mWindow.image_PreviewBig_Fade.Source = ImageHandler.dummy();
+                            tmpPreviewModel.ForegroundImage = ImageHandler.dummy();
                         }
                     }
                 }
             }
             //Start des Fade Übergangs
-            mWindow.fader.Begin();
+
+            previewVM.PreviewTransition();
         }
 
         /// <summary>
@@ -273,11 +290,11 @@ namespace DesktopFox
         /// </summary>
         public void previewForward()
         {
-            if (mWindow.faderLocked == false && GM.getPreviewSet() != null)
+            if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
             {
                 previewTimerReset();
                 previewShuffle();
-                mWindow.faderLocked = true;
+                previewVM.PreviewModel.FaderLock = true;
             }
         }
 
@@ -286,12 +303,12 @@ namespace DesktopFox
         /// </summary>
         public void previewRefresh()
         {
-            if (mWindow.faderLocked == false)
+            if (previewVM.PreviewModel.FaderLock == false)
             {
                 previewTimerReset();
                 previewCount--;
                 previewShuffle();
-                mWindow.faderLocked = true;
+                previewVM.PreviewModel.FaderLock = true;
             }
             else
             {
@@ -305,7 +322,7 @@ namespace DesktopFox
         /// </summary>
         public void previewBackward()
         {
-            if (mWindow.faderLocked == false && GM.getPreviewSet() != null)
+            if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
             {
                 previewTimerReset();
                 previewCount = previewCount - 2;
@@ -313,17 +330,18 @@ namespace DesktopFox
                 {
                     if (previewDay)
                     {
-                        previewCount = mWindow.GM.getDayCollection(GM.getPreviewSet()).singlePics.Count - 1;
+                        previewCount = GM.getDayCollection(GM.getPreviewSet().SetName).singlePics.Count - 1;
                     }
                     else
                     {
-                        previewCount = mWindow.GM.getNightCollection(GM.getPreviewSet()).singlePics.Count - 1;
+                        previewCount = GM.getNightCollection(GM.getPreviewSet().SetName).singlePics.Count - 1;
                     }
                 }
                 previewShuffle();
-                mWindow.faderLocked = true;
+                previewVM.PreviewModel.FaderLock = true;
             }
         }
+       
 
         /// <summary>
         /// Cleanupfunktion des Shufflers. Stoppen und Disposen aller Timer
@@ -332,7 +350,7 @@ namespace DesktopFox
         {
             //Stoppen aller Timer und anhalten der Automatischen Windows Slideshow
             //Note: evtl. mit einem Marker festellen ob der Desktop wegen dieser Application shuffelt oder standartmäßig
-            mWindow.fader.Stop();
+            //mWindow.fader.Stop();
             if (daytimeTimer != null)
             {
                 daytimeTimer.Stop();
@@ -353,6 +371,7 @@ namespace DesktopFox
 
             //SM.setRunning(false);
         }
+
 
         /// <summary>
         /// Startet den Timer für den Desktop Shuffler
@@ -408,6 +427,7 @@ namespace DesktopFox
             Debug.WriteLine("Die Windows Desktop Shuffle Funktion ist deaktiviert worden");
         }
 
+
         /// <summary>
         /// Berechnet die Zeit bis zum nächsten Tageszeitenwechsel und Startet den Timer falls diese noch nicht vorhanden ist.
         /// Falls ein Tageswechsel erfolgt ist wird auserdem das aktive Set weitergeschoben falls diese option aktiv ist
@@ -455,11 +475,20 @@ namespace DesktopFox
                 //
                 if (SM.getAutoSetChange())
                 {
-                    for (int i = 1; i <= GM.getActiveSetCount(); i++)
+                    for (int i = 1; i <= 3; i++)
                     {
                         if (GM.getActiveSet(i) != null)
-                            GM.setActiveSet(GM.getNextSet(GM.getActiveSet(i)), i);
+                            GM.setActiveSet(GM.getNextSet(GM.getActiveSet(i).SetName), i);
                     }
+
+                    //Note: Schlechter Code. Muss noch überarbeitet werden. Position ist unbefriedigend
+                    //Prüfen ob es noch ein Aktives Set gibt und welcher modus aktiv ist, ansonsten Stoppen des Timers
+                    if (GM.areSetsActive() && SM.getDesktopMode() == false)
+                        return;
+                    else if (GM.areSetsActive(number: 1) && SM.getDesktopMode() == true)
+                        return;
+                    else
+                        stopDesktopTimer();
                 }
 
                 SM.setNextDaySwitch(DateTime.Now.Subtract(DateTime.Now.TimeOfDay).Add(TimeSpan.FromDays(1).Add(SM.getDayStart())));
@@ -475,6 +504,7 @@ namespace DesktopFox
             //DateTime newDaySwitch = DateTime.Now.Subtract(DateTime.Now.TimeOfDay).Add(TimeSpan.FromDays(1).Add(SM.getDayStart()));
 
         }
+       
 
         /// <summary>
         /// Trigger Event für den Wechsel der Tageszeit wärend der Laufzeit
@@ -489,7 +519,7 @@ namespace DesktopFox
                 Task.Run(() => picShuffleStart());
             Debug.WriteLine("Tageszeittrigger wurde ausgelöst. isDay = " + isDay);
         }
-
+         
         /// <summary>
         /// Trigger Event des Desktop Timers. Überprüft die Anzahl der Monitore und gibt die Informationen an den Shuffler weiter.
         /// </summary>
@@ -510,40 +540,40 @@ namespace DesktopFox
             {
                 if (GM.getActiveSet(2) == null)
                 {
-                    tmpCol2 = GM.getDayCollection(GM.getActiveSet(any: true));
+                    tmpCol2 = GM.getDayCollection(GM.getActiveSet(any: true).SetName);
                 }
                 else
                 {
-                    tmpCol2 = GM.getDayCollection(GM.getActiveSet(2, any: true));
+                    tmpCol2 = GM.getDayCollection(GM.getActiveSet(2, any: true).SetName);
                 }
 
                 if (GM.getActiveSet(3) == null)
                 {
-                    tmpCol3 = GM.getDayCollection(GM.getActiveSet(any: true));
+                    tmpCol3 = GM.getDayCollection(GM.getActiveSet(any: true).SetName);
                 }
                 else
                 {
-                    tmpCol3 = GM.getDayCollection(GM.getActiveSet(3, any: true));
+                    tmpCol3 = GM.getDayCollection(GM.getActiveSet(3, any: true).SetName);
                 }
             }
             else
             {
                 if (GM.getActiveSet(2) == null)
                 {
-                    tmpCol2 = GM.getNightCollection(GM.getActiveSet(any: true));
+                    tmpCol2 = GM.getNightCollection(GM.getActiveSet(any: true).SetName);
                 }
                 else
                 {
-                    tmpCol2 = GM.getNightCollection(GM.getActiveSet(2, any: true));
+                    tmpCol2 = GM.getNightCollection(GM.getActiveSet(2, any: true).SetName);
                 }
 
                 if (GM.getActiveSet(3) == null)
                 {
-                    tmpCol3 = GM.getNightCollection(GM.getActiveSet(any: true));
+                    tmpCol3 = GM.getNightCollection(GM.getActiveSet(any: true).SetName);
                 }
                 else
                 {
-                    tmpCol3 = GM.getNightCollection(GM.getActiveSet(3, any: true));
+                    tmpCol3 = GM.getNightCollection(GM.getActiveSet(3, any: true).SetName);
                 }
             }
 
@@ -555,32 +585,32 @@ namespace DesktopFox
             {
                 case 1:
                     if (isDay)
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getDayCollection(GM.getActiveSet(any: true)), 1);
+                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getDayCollection(GM.getActiveSet(any: true).SetName), 1);
                     else
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getNightCollection(GM.getActiveSet(any: true)), 1);
+                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getNightCollection(GM.getActiveSet(any: true).SetName), 1);
                     break;
                 case 2:
                     if (isDay)
                     {
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getDayCollection(GM.getActiveSet(any: true)), 1);
+                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getDayCollection(GM.getActiveSet(any: true).SetName), 1);
                         df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
                     }
                     else
                     {
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getNightCollection(GM.getActiveSet(any: true)), 1);
+                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getNightCollection(GM.getActiveSet(any: true).SetName), 1);
                         df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
                     }
                     break;
                 case 3:
                     if (isDay)
                     {
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getDayCollection(GM.getActiveSet(any: true)), 1);
+                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getDayCollection(GM.getActiveSet(any: true).SetName), 1);
                         df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
                         df_PicShuffle(vDesk.getThirdMonitor.ID, tmpCol3, 3);
                     }
                     else
                     {
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getNightCollection(GM.getActiveSet(any: true)), 1);
+                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getNightCollection(GM.getActiveSet(any: true).SetName), 1);
                         df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
                         df_PicShuffle(vDesk.getThirdMonitor.ID, tmpCol3, 3);
                     }
@@ -700,5 +730,6 @@ namespace DesktopFox
             previewTimerReset();
             previewShuffle();
         }
+     
     }
 }

@@ -22,5 +22,12 @@ namespace DesktopFox.MVVM.Model
 
         public bool Day { get { return _day; } set { _day = value; RaisePropertyChanged(nameof(Day)); } }
         private bool _day = true;
+
+        public bool FaderLock { get { return _faderLock; } set { _faderLock = value; RaisePropertyChanged(nameof(FaderLock)); } }
+        private bool _faderLock = true;
+
+        public bool AnimationStart { get { return _animationStart; } set { _animationStart = value; RaisePropertyChanged(nameof(AnimationStart)); } }
+        private bool _animationStart = false;
+
     }
 }

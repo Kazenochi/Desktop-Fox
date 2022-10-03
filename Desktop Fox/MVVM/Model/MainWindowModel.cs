@@ -22,7 +22,6 @@ namespace DesktopFox
             _pictureViews = new ObservableCollection<PictureView>();
             this._pictureViews.CollectionChanged += new NotifyCollectionChangedEventHandler(PictureViewChanged);
             _pictureViewVMs = new List<PictureVM>();
-
         }
 
         /// <summary>

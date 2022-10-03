@@ -51,7 +51,7 @@ namespace DesktopFox
                 addCollection(pictureSet, nwCollection, day);
                 _shadow.Add(pictureSet);
 
-                PictureViewVM newVM = new PictureViewVM(pictureSet);
+                PictureVM newVM = new PictureVM(pictureSet);
                 PictureView newView = new PictureView();
                 newView.DataContext = newVM;
 
@@ -110,14 +110,14 @@ namespace DesktopFox
                 _shadow.Remove(pictureSet);
                 MWVM.SelectedVM = null;
                 PictureView? tmpDeleteViews = null;
-                PictureViewVM? tmpDeleteVM = null;
+                PictureVM? tmpDeleteVM = null;
                 
                 foreach(PictureView i in MWVM.MainWindowModel._pictureViews)
                 {
                     if (i.pLabel.Content == pictureSet)
                     {
                         tmpDeleteViews = i;
-                        tmpDeleteVM = (PictureViewVM)i.DataContext;
+                        tmpDeleteVM = (PictureVM)i.DataContext;
                     }  
                 }
                 if (tmpDeleteViews != null && tmpDeleteVM != null)
@@ -136,38 +136,49 @@ namespace DesktopFox
         }
 
         /// <summary>
-        /// Überprüft ob es das Selbe Bild schon in der Collection gibt und Entfernt diese dann um keine Duplicate zu haben.
-        /// Die Bereinigte Liste wird anschließend zurückgegeben
+        /// Gibt die Tag Collection vom Set zurück
         /// </summary>
-        /// <param name="files"></param>
-        /// <param name="picCol"></param>
+        /// <param name="pictureSet"></param>
         /// <returns></returns>
-        private List<String> duplicateFileCheck(List<String> files, Collection picCol)
+        public Collection getDayCollection(String pictureSet)
         {
-            //Entkopplung der Liste um mit foreach die Elemente mit Treffern zu entfernen
-            List<String> tmpList = new List<String>();
+            return _gallery.PictureSetList[_shadow.GetKey(pictureSet)].DayCol;
+        }
 
-            foreach (String i in files)
+        /// <summary>
+        /// Gibt die Nacht Collection vom Set zurück
+        /// </summary>
+        /// <param name="pictureSet"></param>
+        /// <returns></returns>
+        public Collection getNightCollection(String pictureSet)
+        {
+            return _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol;
+        }
+
+        /// <summary>
+        /// Gibt das angegebene aktive Pictureset zurück das aktuell auf dem Desktop angezeigt wird.
+        /// </summary>
+        /// <param name="choice">1 = Erstes Set, 2 = Zweites Set, ...</param>
+        /// <returns></returns>
+        public PictureSet getActiveSet(int choice = 1, Boolean any = false)
+        {
+            if (choice > _gallery.PictureSetList.Count)
+                choice = 1;
+
+            if (any && _gallery.activeSetsList[choice - 1] == "Empty")
             {
-                try
+                for (int i = 0; i < _gallery.activeSetsList.Count; i++)
                 {
-                    if (i == picCol.singlePics.Where(j => j.Value.Path == i).FirstOrDefault().Value.Path)
-                    {
-                        tmpList.Add(i);
-                    }
-                }
-                catch (System.NullReferenceException)
-                {
-                    Console.WriteLine("Kein Duplikat Gefunden");
+                    if (_gallery.activeSetsList[i] != "Empty")
+                        return _gallery.PictureSetList[_shadow.GetKey(_gallery.activeSetsList[i])];
                 }
             }
 
-            foreach (var i in tmpList)
-            {
-                files.Remove(i);
-            }
-            Console.WriteLine("Beim Einlesen wurden Doppelte Dateien Gefunden. " + files.Count + " Bilder wurden nicht eingelesen");
-            return files;
+            if (_gallery.activeSetsList[choice - 1] == "Empty")
+                return null;
+
+            return _gallery.PictureSetList[_shadow.GetKey(_gallery.activeSetsList[choice - 1])];
+
         }
     }
 }

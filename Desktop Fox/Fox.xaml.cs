@@ -25,8 +25,9 @@ namespace DesktopFox
         private MainWindow MW;
         private MainWindowVM mainWindowVM;
         private PictureSet pictureSet;
-        private PictureViewVM pictureViewVM;
+        private PictureVM pictureViewVM;
         private ContextPopupVM contextPopupVM;
+        private PreviewVM previewVM;
         private AddSetVM addSetVM;
         private SettingsVM settingsVM;
         private GalleryShadow shadow;
@@ -49,8 +50,11 @@ namespace DesktopFox
             addSetVM = new AddSetVM(mainWindowVM, GM);
             settingsVM = new SettingsVM(settings);
             contextPopupVM = new ContextPopupVM(mainWindowVM, GM);
+            previewVM = new PreviewVM();
+
             readyPictureVMs();
         }
+
 
         public MainWindow GetMainWindow()
         {
@@ -68,7 +72,7 @@ namespace DesktopFox
         {
             foreach (var i in gallery.PictureSetList.Values)
             {
-                mainWindowVM.MainWindowModel._pictureViewVMs.Add(new PictureViewVM(i));
+                mainWindowVM.MainWindowModel._pictureViewVMs.Add(new PictureVM(i));
             }
         }
 
@@ -112,7 +116,8 @@ namespace DesktopFox
 
                 mainWindowVM.AddSetView.DataContext = addSetVM;
                 mainWindowVM.Settings_MainView.DataContext = settingsVM;
-                mainWindowVM.ContextPopupView.DataContext = contextPopupVM; 
+                mainWindowVM.ContextPopupView.DataContext = contextPopupVM;
+                mainWindowVM.PreviewView.DataContext = previewVM;
             }
             mainWindowVM.SetCurrentMain(MW);
             MW.Show();

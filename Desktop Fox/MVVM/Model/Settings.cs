@@ -22,7 +22,7 @@ namespace DesktopFox
         /// <summary>
         /// Zeit Intervall in dem das Hintergrundbild gewechsel wird.
         /// </summary>   
-        public TimeSpan ShufflerTime { get { return _shuffleTime; } set { _shuffleTime = value; RaisePropertyChanged(nameof(ShufflerTime)); } }
+        public TimeSpan ShuffleTime { get { return _shuffleTime; } set { _shuffleTime = value; RaisePropertyChanged(nameof(ShuffleTime)); } }
         private TimeSpan _shuffleTime = new TimeSpan(0, 5, 0);
 
 

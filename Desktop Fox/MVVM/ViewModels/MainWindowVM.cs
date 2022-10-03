@@ -16,11 +16,13 @@ namespace DesktopFox
         public AddSetView AddSetView = new AddSetView();
         public Settings_MainView Settings_MainView = new Settings_MainView();
         public ContextPopupView ContextPopupView = new ContextPopupView();
+        public PreviewView PreviewView = new PreviewView();
         private MainWindow _mainWindow;
 
         public MainWindowVM()
         {
             MainWindowModel = new MainWindowModel();
+            Preview = PreviewView;
         }
 
         public void SetCurrentMain(MainWindow mainWindow)
@@ -30,28 +32,30 @@ namespace DesktopFox
 
         public MainWindowModel MainWindowModel { get; set; }
 
-        private UserControl _currentView;
         public UserControl CurrentView { get { return _currentView; } set { _currentView = value; RaisePropertyChanged(nameof(CurrentView)); } }
-        
+        private UserControl _currentView;
 
-        private PictureViewVM _selectedVM;
-        public PictureViewVM SelectedVM { get { return _selectedVM; } set { _selectedVM = value; RaisePropertyChanged(nameof(SelectedVM)); } }
+        public UserControl Preview { get { return _preview; } set { _preview = value; RaisePropertyChanged(nameof(Preview)); } }
+        private UserControl _preview;
 
-        /*
-        private PictureView _selectedItem;
+        public PictureVM SelectedVM { get { return _selectedVM; } set { _selectedVM = value; RaisePropertyChanged(nameof(SelectedVM)); } }
+        private PictureVM _selectedVM;
+     
         public PictureView SelectedItem { get { return _selectedItem; } 
             set 
             { 
                 _selectedItem = value;
                 if (value != null)
-                    SelectedVM = (PictureViewVM)value.DataContext;
+                    SelectedVM = (PictureVM)value.DataContext;
                 else
                     SelectedVM = null;
 
+                SChange(SelectedVM);
                 RaisePropertyChanged(nameof(SelectedItem)); 
             } 
         }
-        */
+        private PictureView _selectedItem;
+
 
         public ICommand AddSetViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(AddSetView)); } }
         public ICommand SettingsMainViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(Settings_MainView)); } }
@@ -71,7 +75,7 @@ namespace DesktopFox
                 _mainWindow.WindowState = WindowState.Normal;
         }
 
-        public void SChange(PictureViewVM selectedVM)
+        public void SChange(PictureVM selectedVM)
         {
             SelectedVM = selectedVM;
             foreach(var i in MainWindowModel._pictureViewVMs)

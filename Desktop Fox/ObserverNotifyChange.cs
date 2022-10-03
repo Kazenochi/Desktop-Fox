@@ -17,6 +17,6 @@ namespace DesktopFox
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void ContentChange(PictureViewVM pictureView) { }
+        public void ContentChange(PictureVM pictureView) { }
     }
 }

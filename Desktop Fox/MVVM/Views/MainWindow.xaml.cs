@@ -22,24 +22,6 @@ namespace DesktopFox
             InitializeComponent();
         }
 
-        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MainWindowVM myVM = (MainWindowVM)this.DataContext;
-            var item = (ListBox)sender;
-            var selected = (PictureView)item.SelectedItem;
-            
-            if(Mouse.RightButton == MouseButtonState.Pressed)
-            {
-                myVM.SwitchViews(myVM.ContextPopupView);
-            }
-
-            if (selected != null)
-            {
-                var logic = (PictureViewVM)selected.DataContext;
-                myVM.SChange(logic);
-            }             
-        }
-
         /// <summary>
         /// Ermöglicht das Bewegen des Fensters wenn die Linke Maustaste gedrückt wurde.
         /// </summary>

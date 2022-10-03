@@ -17,7 +17,6 @@
     <None Remove="Assets\murmel.png" />
     <None Remove="Assets\Nunito-VariableFont_wght.ttf" />
     <None Remove="MVVM\Views\DF_Icon.ico" />
-    <None Remove="MVVM\Views\murmel.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,7 +45,6 @@
     <Content Include="Assets\murmel.png" />
     <Resource Include="Assets\Nunito-VariableFont_wght.ttf" />
     <Resource Include="MVVM\Views\DF_Icon.ico" />
-    <Resource Include="MVVM\Views\murmel.png" />
   </ItemGroup>
 
   <ItemGroup>

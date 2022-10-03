@@ -21,13 +21,9 @@ namespace DesktopFox
             GM = galleryManager;
         }
 
-        /*
-        private Settings _settings;
-        //private Settings_MainView _settingsView;
         private MainWindow _mainWindow;
         private Shuffler _shuffler;
         private Virtual_Desktop _virtualDesktop;
-        private GalleryManager GM;
         Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
         public SettingsManager(MainWindow mainWindow,Shuffler shuffler, Virtual_Desktop virtual_Desktop, GalleryManager galleryManager)
@@ -65,15 +61,6 @@ namespace DesktopFox
           //  DF_Json.saveFile(_settings);
         }
 
-        /// <summary>
-        /// Setzt den Anzeigemodus für die Preview Bilder
-        /// </summary>
-        /// <param name="stretch"></param>
-        public void setPreviewFillMode(Stretch stretch)
-        {
-            _settings.PreviewFillMode = stretch;
-            BigPreview();
-        }
 
         /// <summary>
         /// Setzt den Anzeigemodus für den Desktop 
@@ -81,7 +68,7 @@ namespace DesktopFox
         /// <param name="dPos"></param>
         public void setDesktopFillMode(DPos dPos)
         {
-            _settings.DesktopFillMode = dPos;
+            _settings.DesktopFillMode = (int)dPos;
             _virtualDesktop.getWrapper.SetPosition(dPos);
         }
 
@@ -91,18 +78,7 @@ namespace DesktopFox
         /// <returns></returns>
         public DPos getDesktopFillMode()
         {
-            return _settings.DesktopFillMode;
-        }
-
-        /// <summary>
-        /// Setzt ob der Desktop geshuffelt werden soll
-        /// </summary>
-        /// <param name="state"></param>
-        public void setShuffle(bool state)
-        {
-            _settings.Shuffle = state;
-            if (_settings.isRunning) ;
-              //  _mainWindow.shuffler.picShuffleStart();
+            return (DPos)_settings.DesktopFillMode;
         }
 
         /// <summary>
@@ -114,6 +90,7 @@ namespace DesktopFox
             return _settings.Shuffle;
 
         }
+
 
         /// <summary>
         /// Setzt die Zeit des Shuffel Intervalls für den Desktop
@@ -142,7 +119,7 @@ namespace DesktopFox
             #endregion
 
             _settings.ShuffleTime = nwShuffleTime;
-            if (_settings.isRunning == true)
+            if (_settings.IsRunning == true)
                 _shuffler.picShuffleStart();
         }
 
@@ -161,7 +138,7 @@ namespace DesktopFox
         /// <param name="state"></param>
         public void setRunning(bool state)
         {
-            _settings.isRunning = state;
+            _settings.IsRunning = state;
         }
 
         /// <summary>
@@ -170,7 +147,7 @@ namespace DesktopFox
         /// <returns></returns>
         public bool isRunning()
         {
-            return _settings.isRunning;
+            return _settings.IsRunning;
         }
 
         /// <summary>
@@ -182,28 +159,6 @@ namespace DesktopFox
         {
             _settings = nwSettings;
             BigPreview();
-        }
-
-        /// <summary>
-        /// Setzt den Wert, wann der Tag beginnen soll
-        /// </summary>
-        /// <param name="nwDayStart"></param>
-        public void setDayStart(TimeSpan nwDayStart, bool wait = false)
-        {
-            _settings.DayStart = nwDayStart;
-            if (wait == false)
-                _shuffler.daytimeTimerStart();
-        }
-
-        /// <summary>
-        /// Setzt den Wert, wann die Nacht beginnen soll
-        /// </summary>
-        /// <param name="nwNightStart"></param>
-        public void setNightStart(TimeSpan nwNightStart, bool wait = false)
-        {
-            _settings.NightStart = nwNightStart;
-            if (wait == false)
-                _shuffler.daytimeTimerStart();
         }
 
         /// <summary>
@@ -227,52 +182,18 @@ namespace DesktopFox
         /// <summary>
         /// Gibt den eingestellten Modus des Desktops zurück. Windows Shuffler <-> DF Shuffler
         /// </summary>
-        /// <returns></returns>
-        public String getDesktopMode()
+        /// <returns>WinShuffle = true, DFShuffle = false</returns>
+        public bool getDesktopMode()
         {
-            return _settings.DesktopMode;
+            return _settings.DesktopModeSingle;
         }
      
         /// <summary>
         /// Setzt den Desktop Modus. 
-        /// Gültige Werte: "Single" "Multi"
         /// </summary>
         /// <param name="nwMode"></param>
-        public void setDesktopMode(String nwMode)
+        public void setDesktopMode(bool nwMode)
         {
-            /*
-         _settings.DesktopMode = nwMode;
-         if (nwMode == "Single")
-         {
-             if (_settings.isRunning && GM.getActiveSet() == null && GM.getActiveSet(any: true) != null)
-             {
-                 GM.setActiveSet(GM.getActiveSet(any: true));
-             }
-
-             foreach (PictureView i in _mainWindow.listBoxPreview.Items)
-             {
-                 i.pActiveMarker2.Visibility = System.Windows.Visibility.Collapsed;
-                 i.pActiveMarker3.Visibility = System.Windows.Visibility.Collapsed;
-             }
-             _mainWindow.button_ActiveSet.Visibility = System.Windows.Visibility.Collapsed;
-         }
-         else if (nwMode == "Multi")
-         {
-             foreach (PictureView i in _mainWindow.listBoxPreview.Items)
-             {
-                 i.MarkerCheck();
-                 _mainWindow.button_ActiveSet.Visibility = System.Windows.Visibility.Visible;
-             }
-             if (GM.getActiveSet(any: true) != null)
-             {
-                 _shuffler.picShuffleStart();
-             }
-         }
-         else
-         {
-             Debug.WriteLine("Fehler bei der Zuweisung des DesktopModus in: " + nameof(setDesktopMode));
-         }
-
 
          //if(_shuffler.isRunningDesktopTimer())
          if (isRunning())
@@ -317,7 +238,7 @@ namespace DesktopFox
                 regKey.DeleteValue("Desktopfox");
             }
 
-            _settings.autostartOn = state;
+            _settings.AutostartOn = state;
         }
 
         /// <summary>
@@ -326,7 +247,7 @@ namespace DesktopFox
         /// <returns></returns>
         public bool getAutostart()
         {
-            return _settings.autostartOn;
+            return _settings.AutostartOn;
         }
 
         /// <summary>
@@ -335,7 +256,7 @@ namespace DesktopFox
         /// <param name="value">true = Automatischer Wechsel, false = Kein Wechsel</param>
         public void setAutoSetChange(bool value)
         {
-            _settings.autoSetChange = value;
+            _settings.AutoSetChange = value;
             Debug.WriteLine("Auto SetChange wurde geändert, ist jetzt: " + value);
         }
 
@@ -345,10 +266,9 @@ namespace DesktopFox
         /// <returns></returns>
         public bool getAutoSetChange()
         {
-            return _settings.autoSetChange;
+            return _settings.AutoSetChange;
         }
 
-        */
         }
 
     }

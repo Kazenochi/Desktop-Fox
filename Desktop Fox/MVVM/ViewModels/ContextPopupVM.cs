@@ -98,7 +98,7 @@ namespace DesktopFox.MVVM.ViewModels
             GM.RenameSet(MWVM.SelectedVM.pictureSet.SetName, contextModel.PictureSetName);            
         }
 
-        public new void ContentChange(PictureViewVM pictureViewVM)
+        public new void ContentChange(PictureVM pictureViewVM)
         {
             contextModel.PictureSetName = pictureViewVM.pictureSet.SetName;
             DeletionSelect = 0;

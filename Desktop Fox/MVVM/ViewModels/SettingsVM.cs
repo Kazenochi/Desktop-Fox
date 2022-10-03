@@ -43,7 +43,7 @@ namespace DesktopFox.MVVM.ViewModels
         private void UpdateNumbers()
         {
             DaytimeModel.SetDaySwitch(settings.DayStart, settings.NightStart);
-            ShuffleModel.SetShuffle(settings.ShufflerTime);
+            ShuffleModel.SetShuffle(settings.ShuffleTime);
         }
 
         private void SaveDaytimeValues()
@@ -55,7 +55,7 @@ namespace DesktopFox.MVVM.ViewModels
 
         private void SaveShuffleTimeValue()
         {
-            settings.ShufflerTime = TimeSpan.FromMinutes(ShuffleModel.ShuffleTime);
+            settings.ShuffleTime = TimeSpan.FromMinutes(ShuffleModel.ShuffleTime);
         }
 
         public ICommand DaytimeCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _daytimeView); } }

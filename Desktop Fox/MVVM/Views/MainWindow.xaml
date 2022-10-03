@@ -90,15 +90,7 @@
 
             </StackPanel>
 
-            <Border Grid.RowSpan="2"
-                    Grid.Row="1"
-                    Margin="10,0,10,10"
-                    x:Name="previewBorder">
-                <Image x:Name="image_PreviewBig" 
-                       Stretch="UniformToFill"
-                       Grid.RowSpan="2"
-                       Source="Assets/murmel.png"/>
-            </Border>
+
             <Border x:Name="doubleClickPane"
                     Background="Transparent"
                     Opacity="0.5"
@@ -110,15 +102,6 @@
                 <Border.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding HideViewCommand}"/>
                 </Border.InputBindings>
-            </Border>
-            <Border x:Name="previewBorderFade"
-                    Grid.RowSpan="2"
-                    Grid.Row="1"
-                    CornerRadius="20"
-                    Margin="10,0,10,10">
-                <Border.Background>
-                    <ImageBrush ImageSource="/MVVM/Views/murmel.png" Stretch="{Binding }"/>
-                </Border.Background>
             </Border>
 
             <ListBox x:Name="lbPictures" 
@@ -135,19 +118,29 @@
                      Grid.Row="1"         
                      BorderBrush="Transparent" 
                      Background="Transparent"
-                     SelectionChanged="SelectionChanged"
+                     SelectedItem="{Binding SelectedItem}"
                      Panel.ZIndex="3">
+                <d:ListBoxItem>
+                    <view:PictureView/>
+                </d:ListBoxItem>
+                <d:ListBoxItem>
+                    <view:PictureView/>
+                </d:ListBoxItem>
+                <d:ListBoxItem>
+                    <view:PictureView/>
+                </d:ListBoxItem>
+                <d:ListBoxItem>
+                    <view:PictureView/>
+                </d:ListBoxItem>
             </ListBox>
             <Grid x:Name="multiView"
                   Grid.RowSpan="2"
                   Grid.Row="1"
                   Panel.ZIndex="3">
 
-                <view:Preview_ControlView x:Name="previewControlView"
-                                          HorizontalAlignment="Stretch" 
-                                          VerticalAlignment="Stretch" 
-                                          Grid.RowSpan="2"
-                                          Grid.Row="1"/>
+                <ContentControl Margin="20,0,20,20"
+                                Content="{Binding Preview}" 
+                                d:Content="{view:PreviewView}"/>
                 <ContentControl HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
                                 Margin="0,0,30,30"

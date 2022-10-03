@@ -14,14 +14,14 @@ namespace DesktopFox
     public class MainWindowModel : ObserverNotifyChange
     {
         public ObservableCollection<PictureView> _pictureViews;
-        public List<PictureViewVM> _pictureViewVMs;
+        public List<PictureVM> _pictureViewVMs;
         
 
         public MainWindowModel()
         {
             _pictureViews = new ObservableCollection<PictureView>();
             this._pictureViews.CollectionChanged += new NotifyCollectionChangedEventHandler(PictureViewChanged);
-            _pictureViewVMs = new List<PictureViewVM>();
+            _pictureViewVMs = new List<PictureVM>();
 
         }
 

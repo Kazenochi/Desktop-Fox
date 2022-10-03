@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:DesktopFox.MVVM.Views"
              xmlns:local="clr-namespace:DesktopFox"
-             xmlns:Desktop_Fox="clr-namespace:DesktopFox"
+             xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=ViewModels:PictureVM}"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="360">
 
@@ -40,7 +42,7 @@
                        Stretch="UniformToFill" d:Source="/Assets/よぞら - 夜空 .png"/>
             </Border>
             <Label x:Name="pLabel" Content="{Binding pictureSet.SetName}" d:Content="Pictureset great"
-                   FontSize="22" FontFamily="/Assets/#Nunito" FontWeight="Bold"
+                   FontSize="22" FontFamily="{StaticResource Default}" FontWeight="Bold"
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Bottom" 
                    Width="414" Height="30" 
@@ -77,7 +79,7 @@
                            Content="1"
                            Margin="0,-6"
                            HorizontalContentAlignment="Center"
-                           FontFamily="/Assets/#Nunito"
+                           FontFamily="{StaticResource Default}"
                            FontSize="20" FontWeight="Bold"/>
                 </Grid>
 
@@ -96,9 +98,8 @@
                            Content="2"
                            Margin="0,-6"
                            HorizontalContentAlignment="Center"
-                           FontFamily="/Assets/#Nunito"
-                           FontSize="20" FontWeight="Bold" 
-                        />
+                           FontFamily="{StaticResource Default}"
+                           FontSize="20" FontWeight="Bold"/>
                 </Grid>
 
                 <Grid x:Name="pActiveMarker3"
@@ -116,7 +117,7 @@
                            Content="3"
                            Margin="2,-6"
                            HorizontalContentAlignment="Center"
-                           FontFamily="/Assets/#Nunito"
+                           FontFamily="{StaticResource Default}"
                            FontSize="20" FontWeight="Bold" 
                         />
                 </Grid>

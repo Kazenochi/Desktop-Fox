@@ -205,18 +205,23 @@ namespace DesktopFox
         {
             //Wird Benötigt damit der Timer Thread nicht mit dem Thread der Grafischen Oberfläche Kollidiert.
             //Der UI Thread belegt die Oberflächenelemente Dauerhaft
-          
+
+            //Fire and Forget. Es muss nicht auf das Laden und wechseln der Bilder gewartet werden.
+            previewShuffleAsync();
+
+
+            /*
             mWindow.Dispatcher.Invoke((Action)(() =>
             {
                 this.previewShuffle();
             }));
-     
+            */
         }
 
         /// <summary>
         /// Funktion die das Große Preview Bild shuffelt
         /// </summary>
-        public void previewShuffle()
+        public async Task previewShuffleAsync()
         {
             Debug.WriteLine("Preview Shuffle ausgelöst");
             var tmpPreviewSet = GM.getPreviewSet();
@@ -224,7 +229,7 @@ namespace DesktopFox
 
             if (tmpPreviewSet == null)
             {
-                tmpPreviewModel.ForegroundImage = ImageHandler.dummy();
+                tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.dummy());
             }
             else
             {
@@ -232,10 +237,7 @@ namespace DesktopFox
                 {
                     if (previewCount >= 0 && previewCount < GM.getDayCollection(tmpPreviewSet.SetName).singlePics.Count)
                     {
-                        tmpPreviewModel.ForegroundImage.Freeze();
-                        Debug.WriteLine("PreImage Change");
-                        tmpPreviewModel.ForegroundImage = ImageHandler.load(GM.getDayCollection(tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key);
-                        Debug.WriteLine("After Image Change");
+                        tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.getDayCollection(tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key)) ;
                         previewCount++;
                     }
                     else
@@ -244,11 +246,11 @@ namespace DesktopFox
                         previewCount = 1;
                         try
                         {
-                            tmpPreviewModel.ForegroundImage = ImageHandler.load(GM.getDayCollection(tmpPreviewSet.SetName).singlePics.ElementAt(0).Key);
+                            tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.getDayCollection(tmpPreviewSet.SetName).singlePics.ElementAt(0).Key));
                         }
                         catch
                         {
-                            tmpPreviewModel.ForegroundImage = ImageHandler.dummy();
+                            tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.dummy());
                         }
                     }
                 }
@@ -258,11 +260,11 @@ namespace DesktopFox
                     {
                         try
                         {
-                            tmpPreviewModel.ForegroundImage = ImageHandler.load(GM.getNightCollection(tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key);
+                            tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.getNightCollection(tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key));
                         }
                         catch
                         {
-                            tmpPreviewModel.ForegroundImage = ImageHandler.dummy();
+                            tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.dummy());
                         }
                         previewCount++;
                     }
@@ -271,11 +273,11 @@ namespace DesktopFox
                         previewCount = 1;
                         try
                         {
-                            tmpPreviewModel.ForegroundImage = ImageHandler.load(GM.getNightCollection(tmpPreviewSet.SetName).singlePics.ElementAt(0).Key);
+                            tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.getNightCollection(tmpPreviewSet.SetName).singlePics.ElementAt(0).Key));
                         }
                         catch
                         {
-                            tmpPreviewModel.ForegroundImage = ImageHandler.dummy();
+                            tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.dummy());
                         }
                     }
                 }
@@ -290,10 +292,10 @@ namespace DesktopFox
         /// </summary>
         public void previewForward()
         {
-            if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
+            if (/*previewVM.PreviewModel.FaderLock == false &&*/ GM.getPreviewSet() != null)
             {
                 previewTimerReset();
-                previewShuffle();
+                previewShuffleAsync();
                 previewVM.PreviewModel.FaderLock = true;
             }
         }
@@ -303,11 +305,11 @@ namespace DesktopFox
         /// </summary>
         public void previewRefresh()
         {
-            if (previewVM.PreviewModel.FaderLock == false)
+            if (true/*previewVM.PreviewModel.FaderLock == false &&*/)
             {
                 previewTimerReset();
                 previewCount--;
-                previewShuffle();
+                previewShuffleAsync();
                 previewVM.PreviewModel.FaderLock = true;
             }
             else
@@ -322,7 +324,7 @@ namespace DesktopFox
         /// </summary>
         public void previewBackward()
         {
-            if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
+            if (/*previewVM.PreviewModel.FaderLock == false &&*/ GM.getPreviewSet() != null)
             {
                 previewTimerReset();
                 previewCount = previewCount - 2;
@@ -337,7 +339,7 @@ namespace DesktopFox
                         previewCount = GM.getNightCollection(GM.getPreviewSet().SetName).singlePics.Count - 1;
                     }
                 }
-                previewShuffle();
+                previewShuffleAsync();
                 previewVM.PreviewModel.FaderLock = true;
             }
         }
@@ -728,7 +730,7 @@ namespace DesktopFox
         {
             previewDay = value;
             previewTimerReset();
-            previewShuffle();
+            previewShuffleAsync();
         }
      
     }

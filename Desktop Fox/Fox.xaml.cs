@@ -31,7 +31,7 @@ namespace DesktopFox
         private AddSetVM addSetVM;
         private SettingsVM settingsVM;
         private GalleryShadow shadow;
-        private Shuffler shuffler;
+        public Shuffler shuffler;
         /// <summary>
         /// Konstruktor
         /// </summary>
@@ -51,7 +51,7 @@ namespace DesktopFox
             addSetVM = new AddSetVM(mainWindowVM, GM);
             settingsVM = new SettingsVM(settings);
             contextPopupVM = new ContextPopupVM(mainWindowVM, GM);
-            previewVM = new PreviewVM();
+            previewVM = new PreviewVM(this);
 
             shuffler = new Shuffler(mainWindowVM, GM, SM, previewVM);
 

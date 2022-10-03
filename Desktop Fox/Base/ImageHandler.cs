@@ -20,6 +20,7 @@ namespace DesktopFox
             bitmapImage.BeginInit();
             bitmapImage.UriSource = new Uri(Path);
             bitmapImage.EndInit();
+            bitmapImage.Freeze();
             return bitmapImage;
         }
         public static BitmapImage load(String Path, double Height)

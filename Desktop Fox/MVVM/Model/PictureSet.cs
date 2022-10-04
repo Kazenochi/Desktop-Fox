@@ -13,23 +13,40 @@ namespace DesktopFox
     
     public class PictureSet : ObserverNotifyChange
     {
-        private String _setName;
+        /// <summary>
+        /// Name des Bilder Sets
+        /// </summary>
         public String SetName { get { return _setName; } set { _setName = value; RaisePropertyChanged(nameof(SetName)); } }
-
-        private bool _isSelectedDF = false;
+        private String _setName;
+        
+        /// <summary>
+        /// Gibt an ob das Bilder Set aktuell ausgewählt ist. Bindepunkt für Markierung
+        /// </summary>        
         public bool IsSelectedDF { get { return _isSelectedDF; } set { _isSelectedDF = value; RaisePropertyChanged(nameof(IsSelectedDF)); } }
-
-        private bool _isActive1 = false;
+        private bool _isSelectedDF = false;
+        
+        /// <summary>
+        /// Gibt an ob das Bilder Set aktuell auf Monitor 1 aktiv ist. Bindepunkt für Markierung
+        /// </summary>
         public bool IsActive1 { get { return _isActive1; } set { _isActive1 = value; RaisePropertyChanged(nameof(IsActive1)); } }
-
-        private bool _isActive2 = false;
+        private bool _isActive1 = false;
+        
+        /// <summary>
+        /// Gibt an ob das Bilder Set aktuell auf Monitor 2 aktiv ist. Bindepunkt für Markierung
+        /// </summary>
         public bool IsActive2 { get { return _isActive2; } set { _isActive2 = value; RaisePropertyChanged(nameof(IsActive2)); } }
-
-        private bool _isActive3 = false;
+        private bool _isActive2 = false;
+        
+        /// <summary>
+        /// Gibt an ob das Bilder Set aktuell auf Monitor 3 aktiv ist. Bindepunkt für Markierung
+        /// </summary>
         public bool IsActive3 { get { return _isActive3; } set { _isActive3 = value; RaisePropertyChanged(nameof(IsActive3)); } }
+        private bool _isActive3 = false;
 
 
-        private BitmapImage _dayImage;
+        /// <summary>
+        /// Erstes Bild in der Tag Collection. Bindepunkt für SetVorschau in der Listbox
+        /// </summary>
         [JsonIgnore]
         public BitmapImage DayImage { 
             get { return DayCol.getPreview(); }
@@ -39,7 +56,11 @@ namespace DesktopFox
                 RaisePropertyChanged(nameof(DayImage));
             } 
         }
-        private BitmapImage _nightImage;
+        private BitmapImage _dayImage;
+
+        /// <summary>
+        /// Erstes Bild in der Nacht Collection. Bindepunkt für SetVorschau in der Listbox
+        /// </summary>
         [JsonIgnore]
         public BitmapImage NightImage {
             get { return NightCol.getPreview(); }
@@ -49,11 +70,11 @@ namespace DesktopFox
                 RaisePropertyChanged(nameof(NightImage));
             } 
         }
-
+        private BitmapImage _nightImage;
+        
         /// <summary>
         /// Sammlung von Bilder die wärend des Tages angezeigt werden
         /// </summary>
-        private Collection _dayCol;
         public Collection DayCol { get { return _dayCol ?? _nightCol; } 
             set 
             { 
@@ -62,11 +83,11 @@ namespace DesktopFox
                 RaisePropertyChanged(nameof(DayCol)); 
             } 
         }
+        private Collection _dayCol;
 
         /// <summary>
         /// Sammlung von Bilder die wärend der Nacht angezeigt werden
         /// </summary>
-        private Collection _nightCol;
         public Collection NightCol { get { return _nightCol ?? _dayCol; } 
             set 
             { 
@@ -75,6 +96,7 @@ namespace DesktopFox
                 RaisePropertyChanged(nameof(NightCol)); 
             } 
         }
+        private Collection _nightCol;
 
         /// <summary>
         /// Gibt zurück welche Collections in dem Pictureset vorhanden sind.

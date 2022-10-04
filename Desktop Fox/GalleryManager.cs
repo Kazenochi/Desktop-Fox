@@ -94,13 +94,9 @@ namespace DesktopFox
         public void addCollection(PictureSet pictureSet, Collection nwCollection, bool day)
         {
             if (day)
-            {
                 pictureSet.DayCol = nwCollection;
-            }
             else
-            {
                 pictureSet.NightCol = nwCollection;
-            }
         }
 
         public void removeCollection(String pictureSet, bool day, bool all=false)

@@ -186,13 +186,9 @@ namespace DesktopFox
         public Boolean isRunningPreviewTimer()
         {
             if (previewTimer == null)
-            {
                 return false;
-            }
             else
-            {
                 return true;
-            }
         }
 
         ///<summary>
@@ -331,13 +327,9 @@ namespace DesktopFox
                 if (previewCount < 0)
                 {
                     if (previewDay)
-                    {
                         previewCount = GM.getDayCollection(GM.getPreviewSet().SetName).singlePics.Count - 1;
-                    }
                     else
-                    {
                         previewCount = GM.getNightCollection(GM.getPreviewSet().SetName).singlePics.Count - 1;
-                    }
                 }
                 previewShuffleAsync();
                 previewVM.PreviewModel.FaderLock = true;
@@ -541,42 +533,26 @@ namespace DesktopFox
             if (isDay)
             {
                 if (GM.getActiveSet(2) == null)
-                {
                     tmpCol2 = GM.getDayCollection(GM.getActiveSet(any: true).SetName);
-                }
                 else
-                {
                     tmpCol2 = GM.getDayCollection(GM.getActiveSet(2, any: true).SetName);
-                }
 
                 if (GM.getActiveSet(3) == null)
-                {
                     tmpCol3 = GM.getDayCollection(GM.getActiveSet(any: true).SetName);
-                }
                 else
-                {
                     tmpCol3 = GM.getDayCollection(GM.getActiveSet(3, any: true).SetName);
-                }
             }
             else
             {
                 if (GM.getActiveSet(2) == null)
-                {
                     tmpCol2 = GM.getNightCollection(GM.getActiveSet(any: true).SetName);
-                }
                 else
-                {
                     tmpCol2 = GM.getNightCollection(GM.getActiveSet(2, any: true).SetName);
-                }
 
                 if (GM.getActiveSet(3) == null)
-                {
                     tmpCol3 = GM.getNightCollection(GM.getActiveSet(any: true).SetName);
-                }
                 else
-                {
                     tmpCol3 = GM.getNightCollection(GM.getActiveSet(3, any: true).SetName);
-                }
             }
 
 
@@ -632,15 +608,9 @@ namespace DesktopFox
             int tmpCount = 0;
             switch (monitor)
             {
-                case 1:
-                    tmpCount = picCount1;
-                    break;
-                case 2:
-                    tmpCount = picCount2;
-                    break;
-                case 3:
-                    tmpCount = picCount3;
-                    break;
+                case 1: tmpCount = picCount1; break;
+                case 2: tmpCount = picCount2; break;
+                case 3: tmpCount = picCount3; break;
             }
 
             //Überprüft ob sich die Einstellung geändert hat und passt diese ggf. an
@@ -668,10 +638,8 @@ namespace DesktopFox
                     {
                         if (item == tmpCount) { match = true; break; }
                     }
-                    if (match == false)
-                    {
-                        continue;
-                    }
+
+                    if (match == false) continue;
                 }
                 vDesk.getWrapper.SetWallpaper(monitorID, activeCol.singlePics.ElementAt(tmpCount).Key);
             }
@@ -679,27 +647,18 @@ namespace DesktopFox
             {
                 //Lineare Anzeige aller Bilder im Set
                 if (tmpCount < activeCol.singlePics.Count - 1)
-                {
                     tmpCount++;
-                }
                 else
-                {
                     tmpCount = 0;
-                }
+                
                 vDesk.getWrapper.SetWallpaper(monitorID, activeCol.singlePics.ElementAt(tmpCount).Key);
             }
 
             switch (monitor)
             {
-                case 1:
-                    picCount1 = tmpCount;
-                    break;
-                case 2:
-                    picCount2 = tmpCount;
-                    break;
-                case 3:
-                    picCount3 = tmpCount;
-                    break;
+                case 1: picCount1 = tmpCount; break;
+                case 2: picCount2 = tmpCount; break;
+                case 3: picCount3 = tmpCount; break;
             }
         }
 

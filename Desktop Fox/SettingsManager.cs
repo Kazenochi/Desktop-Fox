@@ -1,5 +1,6 @@
 ﻿using DesktopFox;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -23,18 +24,16 @@ namespace DesktopFox
 
         private MainWindow _mainWindow;
         private Shuffler _shuffler;
-        private Virtual_Desktop _virtualDesktop;
+        private VirtualDesktop _virtualDesktop;
         Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
-        public SettingsManager(MainWindow mainWindow,Shuffler shuffler, Virtual_Desktop virtual_Desktop, GalleryManager galleryManager)
+        public SettingsManager(MainWindow mainWindow,Shuffler shuffler, VirtualDesktop virtual_Desktop, GalleryManager galleryManager)
         {
             _mainWindow = mainWindow;
             _shuffler = shuffler;
             _virtualDesktop = virtual_Desktop;
             GM = galleryManager;
         }
-
-       
 
         /// <summary>
         /// Gibt das Einstellungsobject zurück
@@ -138,7 +137,7 @@ namespace DesktopFox
         /// <param name="state"></param>
         public void setRunning(bool state)
         {
-            _settings.IsRunning = state;
+            _settings._isRunning = state;
         }
 
         /// <summary>

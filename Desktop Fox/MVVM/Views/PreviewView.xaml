@@ -9,8 +9,7 @@
              xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels" 
              d:DataContext="{d:DesignInstance Type=ViewModels:PreviewVM}"
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="800">
-
+             d:DesignHeight="650" d:DesignWidth="1000">
     <Border CornerRadius="20">
         <Border.Clip>
             <MultiBinding Converter="{StaticResource BorderClipConverter}">
@@ -38,6 +37,7 @@
                     <Border.Background>
                         <ImageBrush ImageSource="{Binding PreviewModel.BackgroundImage}" 
                                     Stretch="{Binding PreviewModel.ImageStretch}"
+                                    d:Stretch="UniformToFill"
                                     d:ImageSource="/Assets/murmel.png"/>
                     </Border.Background>
                 </Border>

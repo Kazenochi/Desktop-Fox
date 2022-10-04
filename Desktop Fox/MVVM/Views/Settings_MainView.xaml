@@ -16,10 +16,19 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <Border Background="{StaticResource BackgroundBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="0.5"
+                    Grid.Row="1"
+                    CornerRadius="20"
+                    >
+                <ContentControl Grid.Row="1"
+                            Content="{Binding CurrentView}"/>
+            </Border>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Center"
-                        Margin="0,0,0,-0.1">
+                        Margin="0,0,0,-0.6">
                 <RadioButton x:Name="settings_radio_Preview" 
                              Content="Preview"
                              IsChecked="True"
@@ -28,7 +37,7 @@
                 <RadioButton x:Name="settings_radio_Shuffle"
                              Content="Shuffle"
                              Style="{StaticResource DF_FolderRadioButton}"
-                             Command="{Binding ShuffleCommand}"/>
+                             Command="{Binding ShuffleCommand}" IsChecked="False"/>
                 <RadioButton x:Name="settings_radio_Daytime"
                              Content="Daytime"
                              Style="{StaticResource DF_FolderRadioButton}" 
@@ -42,8 +51,7 @@
                              Style="{StaticResource DF_FolderRadioButton}" 
                              Command="{Binding DModeCommand}"/>
             </StackPanel>
-            <ContentControl Grid.Row="1"
-                            Content="{Binding CurrentView}"/>
+  
         </Grid>     
     </Border>
 </UserControl>

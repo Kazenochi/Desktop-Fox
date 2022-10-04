@@ -31,7 +31,9 @@ namespace DesktopFox
         private AddSetVM addSetVM;
         private SettingsVM settingsVM;
         private GalleryShadow shadow;
+        private VirtualDesktop vDesk;
         public Shuffler shuffler;
+
         /// <summary>
         /// Konstruktor
         /// </summary>
@@ -43,7 +45,8 @@ namespace DesktopFox
 
             loadFiles();
             shadow = new GalleryShadow(gallery);
-            mainWindowVM = new MainWindowVM();
+            mainWindowVM = new MainWindowVM(this);
+            vDesk = new VirtualDesktop();
 
             GM = new GalleryManager(gallery, shadow, mainWindowVM);
             SM = new SettingsManager(settings);
@@ -53,7 +56,7 @@ namespace DesktopFox
             contextPopupVM = new ContextPopupVM(mainWindowVM, GM);
             previewVM = new PreviewVM(this);
 
-            shuffler = new Shuffler(mainWindowVM, GM, SM, previewVM);
+            shuffler = new Shuffler(mainWindowVM, GM, SM, previewVM, vDesk);
 
             readyPictureVMs();
         }
@@ -66,9 +69,9 @@ namespace DesktopFox
             return null;
         }
 
-        public Gallery GetGallery()
+        public GalleryManager GetGalleryManager()
         {
-            return gallery;
+            return GM;
         }
 
         public void readyPictureVMs()
@@ -77,6 +80,14 @@ namespace DesktopFox
             {
                 mainWindowVM.MainWindowModel._pictureViewVMs.Add(new PictureVM(i));
             }
+        }
+
+        public void ActivateSet(String pictureSet)
+        {
+            if (!settings.IsRunning)
+                settings.IsRunning = true;
+
+
         }
 
         /// <summary>

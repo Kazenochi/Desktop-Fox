@@ -23,6 +23,7 @@ namespace DesktopFox
         private GalleryShadow _shadow;
         private SettingsManager SM;
         private MainWindowVM MWVM;
+        private Settings _settings;
         public GalleryManager(Gallery gallery, GalleryShadow shadow, MainWindowVM MainWindowViewModel)
         {
             _gallery = gallery;
@@ -213,20 +214,21 @@ namespace DesktopFox
         /// <param name="choice">1 = Erstes Set, 2 = Zweites Set, ...</param>
         public void setActiveSet(String pictureSet, int choice = 1)
         {
-            String tmpName;
-            if (pictureSet == null)
-            {
-                tmpName = "Empty";
-            }
-            else
-            {
-                tmpName = pictureSet;
-            }
+            _gallery.activeSetsList[choice - 1] = pictureSet;
+        }
 
-            _gallery.activeSetsList[choice - 1] = tmpName;
+        public bool stopActiveSet(String pictureSet, int choice = 1)
+        {
+            bool isEmpty = true;
+            for(int i = 0; i < _gallery.activeSetsList.Count; i++)
+            {
+                if (_gallery.activeSetsList[i] == pictureSet)
+                    _gallery.activeSetsList[i] = "Empty";
 
-     
-        
+                if (_gallery.activeSetsList[i] != "Empty");
+                    isEmpty = false;
+            }
+            return isEmpty;
         }
 
         /// <summary>

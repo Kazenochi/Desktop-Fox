@@ -22,6 +22,9 @@
             CornerRadius="10"
             Name="MainBorder"
             ClipToBounds="True">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" ShadowDepth="5"/>
+        </Border.Effect>
         <Border.Clip>
             <MultiBinding Converter="{StaticResource BorderClipConverter}">
                 <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
@@ -49,19 +52,21 @@
                             HorizontalAlignment="Center"
                             Margin="-10,0,10,0">
                     <Grid>
-                        <Button x:Name="button_ActivateSet" 
-                                Content="Activate" 
-                                FontSize="20"
-                                Grid.Column="0" 
-                                Margin="10,0,0,0"
-                                Command="{Binding ActivateSetCommand}"
-                                Style="{StaticResource DF_Button_Border}"/>
                         <Button x:Name="button_StopSet" 
                                 Content="Stop" 
                                 FontSize="20"
                                 Grid.Column="0" 
                                 Margin="10,0,0,0"
-                                Visibility="Hidden"
+                                IsEnabled="{Binding CanActivate, Converter={StaticResource BoolInverter}}"
+                                Command="{Binding StopSetCommand}"
+                                Style="{StaticResource DF_Button_Border}"/>
+                        <Button x:Name="button_ActivateSet" 
+                                Content="Activate" 
+                                FontSize="20"
+                                Grid.Column="0" 
+                                Margin="10,0,0,0"
+                                Visibility="{Binding CanActivate, Converter={StaticResource BoolConverter}}"
+                                Command="{Binding ActivateSetCommand}"
                                 Style="{StaticResource DF_Button_Border}"/>
                     </Grid>
                     <Button x:Name="button_ActiveSet" 
@@ -139,7 +144,7 @@
                   Grid.Row="1"
                   Panel.ZIndex="3">
 
-                <ContentControl Margin="20,0,20,20"
+                <ContentControl Margin="10,0,10,10"
                                 Content="{Binding Preview}" 
                                 d:Content="{view:PreviewView}"/>
                 <ContentControl HorizontalAlignment="Right"

@@ -16,7 +16,7 @@ namespace DesktopFox
         private MainWindow mWindow;
         private MainWindowVM MWVM;
         private PreviewVM previewVM;
-        private Virtual_Desktop vDesk;
+        private VirtualDesktop vDesk;
         private GalleryManager GM;
         private SettingsManager SM;
         public Boolean isDay;
@@ -33,14 +33,31 @@ namespace DesktopFox
         private int[] lockList = new int[3];
         private Random random = new Random();
 
-        public Shuffler(MainWindowVM mainWindowVM, GalleryManager galleryManager, SettingsManager settingsManager, PreviewVM previewVM)
+        public Shuffler(MainWindowVM mainWindowVM, GalleryManager galleryManager, SettingsManager settingsManager, PreviewVM previewVM, VirtualDesktop virtualDesktop)
         {
             MWVM = mainWindowVM;
             GM = galleryManager;
             SM = settingsManager;
             this.previewVM = previewVM;
+            vDesk = virtualDesktop;
+            SM.getSettings().PropertyChanged += Shuffler_IsRunning_PropertyChanged;
             daytimeTimerStart();
         }
+
+        private void Shuffler_IsRunning_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != "IsRunning") return;
+
+            if(SM.getSettings().IsRunning)
+            {           
+                picShuffleStart();
+            }
+            if (!SM.getSettings().IsRunning)
+            {
+                picShuffleStop();
+            }
+        }
+
         public void mWinHandler(MainWindow mainWindow)
         {
             mWindow = mainWindow;
@@ -55,7 +72,7 @@ namespace DesktopFox
         /// <param name="settings"></param>
         /// <param name="galManager"></param>
         /// <param name="settingsManager"></param>
-        public async Task ShufflerInit(MainWindow mWin, Virtual_Desktop vDesk, Gallery gal, Settings settings, GalleryManager galleryManager, SettingsManager settingsManager)
+        public async Task ShufflerInit(MainWindow mWin, VirtualDesktop vDesk, Gallery gal, Settings settings, GalleryManager galleryManager, SettingsManager settingsManager)
         {
             this.mWindow = mWin;
             this.vDesk = vDesk;
@@ -105,8 +122,6 @@ namespace DesktopFox
         /// </summary>
         public void picShuffleStart()
         {
-            if (_settings == null)
-                return;
 
             if (SM.getDesktopMode() && GM.getActiveSet() == null)
                 return;
@@ -132,7 +147,17 @@ namespace DesktopFox
                 //Einmaliges Anstoßen der Desktopfunktion beim Ändern der Einstellungen
                 //desktopTimer_Trigger(null, null);
             }
-            SM.setRunning(true);
+            
+        }
+
+        public void picShuffleStop()
+        {
+            if (desktopShuffleTimer != null)
+            {
+                desktopShuffleTimer.Stop();
+                desktopShuffleTimer.Dispose();
+            }
+            stopWinDesktop();
         }
 
         /// <summary>
@@ -344,7 +369,6 @@ namespace DesktopFox
             }
         }
        
-
         /// <summary>
         /// Cleanupfunktion des Shufflers. Stoppen und Disposen aller Timer
         /// </summary>
@@ -373,7 +397,6 @@ namespace DesktopFox
 
             //SM.setRunning(false);
         }
-
 
         /// <summary>
         /// Startet den Timer für den Desktop Shuffler
@@ -409,7 +432,6 @@ namespace DesktopFox
                 desktopShuffleTimer.Stop();
                 Debug.WriteLine("DF Shuffle Timer hat gestoppt");
             }
-            SM.setRunning(false);
         }
 
         /// <summary>
@@ -424,11 +446,9 @@ namespace DesktopFox
                 vDesk.getWrapper.SetWallpaper(i.Value.ID, vDesk.getWrapper.GetWallpaper(i.Value.ID));
             }
             //Im falles letzten Aufrufs, diese Zusweisung nicht machen um den State von dem Programm abzuspeichern.
-            if (Shutdown == false)
-                SM.setRunning(false);
+
             Debug.WriteLine("Die Windows Desktop Shuffle Funktion ist deaktiviert worden");
         }
-
 
         /// <summary>
         /// Berechnet die Zeit bis zum nächsten Tageszeitenwechsel und Startet den Timer falls diese noch nicht vorhanden ist.
@@ -507,7 +527,6 @@ namespace DesktopFox
 
         }
        
-
         /// <summary>
         /// Trigger Event für den Wechsel der Tageszeit wärend der Laufzeit
         /// </summary>

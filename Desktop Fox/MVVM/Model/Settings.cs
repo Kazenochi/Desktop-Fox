@@ -63,7 +63,7 @@ namespace DesktopFox
         /// Marker ob das Programm aktuell den Desktop Managed. Wird beim Start abgefragt um die nötigen Timer zu starten
         /// </summary>
         public bool IsRunning { get { return _isRunning; } set { _isRunning = value; RaisePropertyChanged(nameof(IsRunning)); } }
-        private bool _isRunning = false;
+        public bool _isRunning = false;
 
         /// <summary>
         /// Flag ob das Programm im Autostart ausgeführt wird

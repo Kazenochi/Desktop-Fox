@@ -7,14 +7,14 @@ using System.Linq;
 
 namespace DesktopFox
 {
-    public class Virtual_Desktop
+    public class VirtualDesktop
     {
         private DesktopWallpaper wrapper = new DesktopWallpaper();
         private IDictionary<String, Monitor> monitorDict = new Dictionary<String, Monitor>();
         private int monitorCount;
         //private Collection activeCollection;
         private int[] boundary;
-        public Virtual_Desktop()
+        public VirtualDesktop()
         {
 
             String[] test = wrapper.GetAllMonitorIDs();

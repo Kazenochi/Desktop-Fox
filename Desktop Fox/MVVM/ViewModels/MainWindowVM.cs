@@ -20,10 +20,12 @@ namespace DesktopFox
         public PreviewView PreviewView = new PreviewView();
         private MainWindow _mainWindow;
         private Storyboard _previewFader;
+        private Fox DF;
+        private GalleryManager GM;
 
-
-        public MainWindowVM()
+        public MainWindowVM(Fox desktopFox)
         {
+            DF = desktopFox;        
             MainWindowModel = new MainWindowModel();
             Preview = PreviewView;
         }
@@ -47,6 +49,9 @@ namespace DesktopFox
         public int SelectedMonitor { get { return _selectedMonitor; } set { _selectedMonitor = value; RaisePropertyChanged(nameof(SelectedMonitor)); } }
         private int _selectedMonitor = 1;
 
+        public bool CanActivate { get { return _canActivate; } set { _canActivate = value; RaisePropertyChanged(nameof(CanActivate)); } }
+        private bool _canActivate = true;
+
         public PictureView SelectedItem { get { return _selectedItem; } 
             set 
             { 
@@ -63,6 +68,7 @@ namespace DesktopFox
         private PictureView _selectedItem;
 
         public ICommand ActivateSetCommand { get { return new DF_Command.DelegateCommand(o => ActivateSet()); } }
+        public ICommand StopSetCommand { get { return new DF_Command.DelegateCommand(o => StopSet()); } }
         public ICommand AddSetViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(AddSetView)); } }
         public ICommand SettingsMainViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(Settings_MainView)); } }
         public ICommand ContextPopupViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(ContextPopupView)); } }
@@ -71,8 +77,32 @@ namespace DesktopFox
         public ICommand MinimizeCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.WindowState = WindowState.Minimized); } }
         public ICommand MaximizeCommand { get { return new DF_Command.DelegateCommand(o => MaximizeWindow()); } }
         
+        private void CanActivateCheck()
+        {
+            if (SelectedVM == null) { CanActivate = true; return; }
+
+            if(SelectedVM.pictureSet.IsActive1 == false) { CanActivate = true; return; } else { CanActivate = false; return; } 
+        }
+
+        private void StopSet()
+        {
+            switch (SelectedMonitor)
+            {
+                case 1: SelectedVM.pictureSet.IsActive1 = false; break;
+                case 2: SelectedVM.pictureSet.IsActive2 = false; break;
+                case 3: SelectedVM.pictureSet.IsActive3 = false; break;
+            }
+            if(GM.stopActiveSet(SelectedVM.pictureSet.SetName, SelectedMonitor))
+                ((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = false;
+
+            CanActivate = true;       
+        }
+
         private void ActivateSet()
         {
+            if (SelectedVM == null) return;
+            if(GM == null) GM = DF.GetGalleryManager();
+
             switch (SelectedMonitor)
             {
                 case 1:
@@ -103,6 +133,9 @@ namespace DesktopFox
                     }
                     break;
             }
+            GM.setActiveSet(SelectedVM.pictureSet.SetName, SelectedMonitor);
+            CanActivate = false;
+            ((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = true;
         }
 
         private void MaximizeWindow()

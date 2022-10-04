@@ -15,11 +15,10 @@ namespace DesktopFox.MVVM.Model
             PictureSetName = Name;
         }
 
-        private string _pictureSetName;
         public String PictureSetName { get { return _pictureSetName; } set { _pictureSetName = value; RaisePropertyChanged(nameof(PictureSetName)); } }
-
-        private string _folderPath;
+        private string _pictureSetName;
+        
         public String FolderPath { get { return _folderPath; } set { _folderPath = value; RaisePropertyChanged(nameof(FolderPath)); } }
-
+        private string _folderPath;
     }
 }

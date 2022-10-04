@@ -23,6 +23,7 @@ namespace DesktopFox
             bitmapImage.Freeze();
             return bitmapImage;
         }
+        
         public static BitmapImage load(String Path, double Height)
         {
             BitmapImage bitmapImage = new BitmapImage();

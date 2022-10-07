@@ -40,7 +40,7 @@ namespace DesktopFox
             SM = settingsManager;
             this.previewVM = previewVM;
             vDesk = virtualDesktop;
-            SM.getSettings().PropertyChanged += Shuffler_IsRunning_PropertyChanged;
+            SM.Settings.PropertyChanged += Shuffler_IsRunning_PropertyChanged;
             mainWindowVM.PropertyChanged += MainWindowVM_PropertyChanged;
             daytimeTimerStart();
         }
@@ -56,11 +56,11 @@ namespace DesktopFox
         {
             if (e.PropertyName != "IsRunning") return;
 
-            if(SM.getSettings().IsRunning)
+            if(SM.Settings.IsRunning)
             {           
                 picShuffleStart();
             }
-            if (!SM.getSettings().IsRunning)
+            if (!SM.Settings.IsRunning)
             {
                 picShuffleStop();
             }

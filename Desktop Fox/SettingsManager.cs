@@ -38,10 +38,8 @@ namespace DesktopFox
         /// <summary>
         /// Gibt das Einstellungsobject zurück
         /// </summary>
-        public Settings getSettings()
-        {
-            return _settings;
-        }
+        public Settings Settings { get { return _settings; } }
+
 
         /// <summary>
         /// Legt den Anzeigemodus für die Großen Preview Bilder fest

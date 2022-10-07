@@ -88,7 +88,7 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
-                      Visibility="{Binding Path=pictureSet.IsActive3, Mode=TwoWay, 
+                      Visibility="{Binding Path=pictureSet.IsActive2, Mode=TwoWay, 
                                     Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FF41A6FF"

@@ -16,6 +16,7 @@ namespace DesktopFox
         public Animation ControlPopOutAnimation { get; set; } = Animation.PopOutAnimation;
 
         public double AnimationTime { get; set; } = 0.5;
+        public double Amplitude { get; set; } = 0.3;
 
         public AnimatedBaseView()
         {
@@ -35,6 +36,7 @@ namespace DesktopFox
 
             BackEase quadraticEase = new BackEase();
             quadraticEase.EasingMode = EasingMode.EaseOut;
+            quadraticEase.Amplitude = Amplitude;
             popinAnimationX.EasingFunction = quadraticEase;
 
             scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, popinAnimationX);
@@ -55,6 +57,7 @@ namespace DesktopFox
 
             BackEase quadraticEase = new BackEase();
             quadraticEase.EasingMode = EasingMode.EaseIn;
+            quadraticEase.Amplitude = Amplitude;
             popinAnimationX.EasingFunction = quadraticEase;
                     
             scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, popinAnimationX);

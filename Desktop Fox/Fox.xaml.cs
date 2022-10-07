@@ -46,11 +46,11 @@ namespace DesktopFox
 
             loadFiles();
             shadow = new GalleryShadow(gallery);
-            mainWindowVM = new MainWindowVM(this);
+            
             vDesk = new VirtualDesktop();
-
-            GM = new GalleryManager(gallery, shadow, mainWindowVM);
             SM = new SettingsManager(settings);
+            mainWindowVM = new MainWindowVM(this);
+            GM = new GalleryManager(gallery, shadow, mainWindowVM);         
             
             addSetVM = new AddSetVM(mainWindowVM, GM);
             settingsVM = new SettingsVM(settings);
@@ -62,6 +62,8 @@ namespace DesktopFox
             readyPictureVMs();
         }
 
+        public SettingsManager SettingsManager { get { return SM; } }
+        public GalleryManager GalleryManager { get { return GM; } }
 
         public MainWindow GetMainWindow()
         {

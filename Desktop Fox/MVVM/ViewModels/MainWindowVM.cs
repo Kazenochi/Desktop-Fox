@@ -1,16 +1,11 @@
 ﻿using System.Windows.Input;
-using System;
-using System.ComponentModel;
 using DesktopFox.MVVM.Views;
-using DesktopFox;
-using WinRT;
-using System.Diagnostics;
 using DesktopFox.MVVM.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Threading.Tasks;
-using System.Threading;
+using System.Linq;
 
 namespace DesktopFox
 {
@@ -29,6 +24,15 @@ namespace DesktopFox
             DF = desktopFox;        
             MainWindowModel = new MainWindowModel();
             Preview = PreviewView;
+            DF.SettingsManager.Settings.PropertyChanged += Settings_PropertyChanged;
+        }
+
+        private void Settings_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.ToString() != nameof(DF.SettingsManager.Settings.DesktopModeSingle)) return;
+            
+            Task.Run(() => CheckMultiMonitor());
+            return;
         }
 
         public void SetCurrentMain(MainWindow mainWindow)
@@ -56,6 +60,12 @@ namespace DesktopFox
         public int SelectedMonitor { get { return _selectedMonitor; } set { _selectedMonitor = value; RaisePropertyChanged(nameof(SelectedMonitor)); } }
         private int _selectedMonitor = 1;
 
+        public bool MultiMonitor { get { return _multiMonitor; } set { _multiMonitor = value; RaisePropertyChanged(nameof(MultiMonitor)); } }
+        private bool _multiMonitor;
+
+        public string MultiMonitorContent { get { return _multiMonitorContent; } set { _multiMonitorContent = value; RaisePropertyChanged(nameof(MultiMonitorContent)); } }
+        private string _multiMonitorContent;
+
         public bool CanActivate { get { return _canActivate; } set { _canActivate = value; RaisePropertyChanged(nameof(CanActivate)); } }
         private bool _canActivate = true;
 
@@ -68,7 +78,7 @@ namespace DesktopFox
                 else
                     SelectedVM = null;
 
-                SChange(SelectedVM);
+                SChange();
                 RaisePropertyChanged(nameof(SelectedItem)); 
             } 
         }
@@ -79,16 +89,54 @@ namespace DesktopFox
         public ICommand AddSetViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(AddSetView)); } }
         public ICommand SettingsMainViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(Settings_MainView)); } }
         public ICommand ContextPopupViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(ContextPopupView)); } }
+        public ICommand NextMonitorCommand { get { return new DF_Command.DelegateCommand(o => NextMonitor()) ; } }
         public ICommand HideViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(null)); } }
         public ICommand CloseCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.Hide()); } }
         public ICommand MinimizeCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.WindowState = WindowState.Minimized); } }
         public ICommand MaximizeCommand { get { return new DF_Command.DelegateCommand(o => MaximizeWindow()); } }
-        
+
+        private void NextMonitor()
+        {
+            if(SelectedMonitor < 3)
+                SelectedMonitor++;
+            else
+                SelectedMonitor = 1;
+
+            MultiMonitorContent = "Mon. " + SelectedMonitor.ToString();
+            SChange();
+        }
         private void CanActivateCheck()
         {
             if (SelectedVM == null) { CanActivate = true; return; }
 
             if(SelectedVM.pictureSet.IsActive1 == false) { CanActivate = true; return; } else { CanActivate = false; return; } 
+        }
+        private async Task CheckMultiMonitor()
+        {
+            
+            if (DF.SettingsManager.Settings.DesktopModeSingle)
+            {
+                MultiMonitor = false;
+                SelectedMonitor = 1;
+                foreach(var i in MainWindowModel._pictureViewVMs)
+                {
+                    i.pictureSet.IsActive2 = false;
+                    i.pictureSet.IsActive3 = false;
+                }
+                return;
+            }
+            else
+            {
+                MultiMonitor = true;
+                MultiMonitorContent = "Mon. " + SelectedMonitor.ToString();
+                foreach(var i in MainWindowModel._pictureViewVMs)
+                {
+                    if (i.pictureSet.SetName == DF.GalleryManager.Gallery.activeSetsList.ElementAt(1))
+                        i.pictureSet.IsActive2 = true;
+                    if (i.pictureSet.SetName == DF.GalleryManager.Gallery.activeSetsList.ElementAt(2))
+                        i.pictureSet.IsActive3 = true;
+                }
+            }           
         }
 
         private void StopSet()
@@ -153,9 +201,31 @@ namespace DesktopFox
                 _mainWindow.WindowState = WindowState.Normal;
         }
 
-        private void SChange(PictureVM selectedVM)
+        private void SChange()
         {
-            SelectedVM = selectedVM;
+            switch (SelectedMonitor)
+            {
+                case 1:
+                    if (DF.GalleryManager.Gallery.activeSetsList.ElementAt(0) == SelectedVM.pictureSet.SetName)
+                        CanActivate = false;
+                    else
+                        CanActivate = true;
+                    break;
+                case 2:
+                    if (DF.GalleryManager.Gallery.activeSetsList.ElementAt(1) == SelectedVM.pictureSet.SetName)
+                        CanActivate = false;
+                    else
+                        CanActivate = true;
+                    break;
+                case 3:
+                    if (DF.GalleryManager.Gallery.activeSetsList.ElementAt(2) == SelectedVM.pictureSet.SetName)
+                        CanActivate = false;
+                    else
+                        CanActivate = true;
+                    break;
+            }
+        
+
             foreach(var i in MainWindowModel._pictureViewVMs)
             {
                 i.pictureSet.IsSelectedDF = false;                

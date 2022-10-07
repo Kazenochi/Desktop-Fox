@@ -31,6 +31,7 @@ namespace DesktopFox
             MWVM = MainWindowViewModel;
         }
 
+        public Gallery Gallery { get { return _gallery; } }
 
         /// <summary>
         /// Fügt ein Neues Set in der Gallery hinzu

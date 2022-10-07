@@ -70,11 +70,12 @@
                                 Style="{StaticResource DF_Button_Border}"/>
                     </Grid>
                     <Button x:Name="button_ActiveSet" 
-                            Content="Mon. 1"
+                            Content="{Binding MultiMonitorContent}"
                             FontSize="20"
                             Grid.Column="0" 
                             Margin="10,0,0,0"
-                            Visibility="Collapsed"
+                            Command="{Binding NextMonitorCommand}"
+                            Visibility="{Binding MultiMonitor, Converter={StaticResource BoolConverter}}"
                             Style="{StaticResource DF_Button_Border}"/>
                     <Button x:Name="button_Add" 
                             Content="Add"

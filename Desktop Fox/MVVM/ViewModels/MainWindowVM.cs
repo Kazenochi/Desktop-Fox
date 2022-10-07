@@ -9,6 +9,8 @@ using DesktopFox.MVVM.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace DesktopFox
 {
@@ -19,7 +21,6 @@ namespace DesktopFox
         public ContextPopupView ContextPopupView = new ContextPopupView();
         public PreviewView PreviewView = new PreviewView();
         private MainWindow _mainWindow;
-        private Storyboard _previewFader;
         private Fox DF;
         private GalleryManager GM;
 
@@ -37,8 +38,14 @@ namespace DesktopFox
 
         public MainWindowModel MainWindowModel { get; set; }
 
-        public UserControl CurrentView { get { return _currentView; } set { _currentView = value; RaisePropertyChanged(nameof(CurrentView)); } }
-        private UserControl _currentView;
+        public AnimatedBaseView CurrentView { get { return _currentView; } 
+            set 
+            {
+                _currentView = value;  
+                RaisePropertyChanged(nameof(CurrentView));                  
+            } 
+        }
+        private AnimatedBaseView _currentView;
 
         public UserControl Preview { get { return _preview; } set { _preview = value; RaisePropertyChanged(nameof(Preview)); } }
         private UserControl _preview;
@@ -161,15 +168,27 @@ namespace DesktopFox
                 ((AddSetVM)AddSetView.DataContext).ContentChange(SelectedVM);
 
             ((PreviewVM)Preview.DataContext).ContentChange(SelectedVM);
+
         }
 
-        private void SwitchViews(UserControl newView)
+        private async Task ContentCleanup(double animationTime)
         {
-            if (newView != null && (newView != CurrentView || newView == ContextPopupView))
-                CurrentView = newView;
-            else
-                CurrentView = null;
+            await Task.Delay((int)animationTime * 1000);
+            _currentView = null;
+        }
 
+        private void SwitchViews(AnimatedBaseView newView)
+        {
+            if (newView != null && newView != CurrentView)
+            {
+                newView.AnimateIn();
+                CurrentView = newView;
+            }
+            else
+            {
+                CurrentView.AnimateOut();
+                Task.Run(() => ContentCleanup(CurrentView.AnimationTime));
+            }         
         }
     }
 

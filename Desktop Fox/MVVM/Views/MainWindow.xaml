@@ -150,7 +150,7 @@
                 <ContentControl HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
                                 Margin="0,0,30,30"
-                                Content="{Binding CurrentView}" 
+                                Content="{Binding CurrentView}"
                                 d:Content="{view:ContextPopupView}"/>
             </Grid>
 

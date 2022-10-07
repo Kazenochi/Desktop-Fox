@@ -12,7 +12,7 @@ namespace DesktopFox.MVVM.Views
     /// <summary>
     /// Interaktionslogik für AddSetView.xaml
     /// </summary>
-    public partial class AddSetView : UserControl
+    public partial class AddSetView : AnimatedBaseView
     {
         public AddSetView()
         {

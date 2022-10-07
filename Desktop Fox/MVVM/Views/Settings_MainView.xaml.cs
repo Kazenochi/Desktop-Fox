@@ -6,7 +6,7 @@ namespace DesktopFox.MVVM.Views
     /// <summary>
     /// Interaktionslogik für Settings_MainView.xaml
     /// </summary>
-    public partial class Settings_MainView : UserControl
+    public partial class Settings_MainView : AnimatedBaseView
     {
 
         public Settings_MainView()

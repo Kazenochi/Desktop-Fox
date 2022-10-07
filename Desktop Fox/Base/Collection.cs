@@ -37,7 +37,7 @@ namespace DesktopFox
         public BitmapImage getPreview()
         {
             if (singlePics.Count > 0)
-                return ImageHandler.load(singlePics.ElementAt(0).Key);
+                return ImageHandler.load(singlePics.ElementAt(0).Key, 200);
             else
                 return ImageHandler.dummy();
         }

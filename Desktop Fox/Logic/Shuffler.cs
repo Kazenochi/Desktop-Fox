@@ -41,7 +41,15 @@ namespace DesktopFox
             this.previewVM = previewVM;
             vDesk = virtualDesktop;
             SM.getSettings().PropertyChanged += Shuffler_IsRunning_PropertyChanged;
+            mainWindowVM.PropertyChanged += MainWindowVM_PropertyChanged;
             daytimeTimerStart();
+        }
+
+        private void MainWindowVM_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != "SelectedItem") return;
+
+
         }
 
         private void Shuffler_IsRunning_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

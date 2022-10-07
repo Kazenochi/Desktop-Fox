@@ -159,6 +159,8 @@ namespace DesktopFox
                 ((ContextPopupVM)ContextPopupView.DataContext).ContentChange(SelectedVM);
             if (CurrentView == AddSetView)
                 ((AddSetVM)AddSetView.DataContext).ContentChange(SelectedVM);
+
+            ((PreviewVM)Preview.DataContext).ContentChange(SelectedVM);
         }
 
         private void SwitchViews(UserControl newView)

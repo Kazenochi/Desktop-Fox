@@ -18,7 +18,10 @@ namespace DesktopFox.MVVM.ViewModels
         public PreviewVM(Fox desktopFox)
         {
             DF = desktopFox;
+            PreviewModel.PropertyChanged += PreviewModel_PropertyChanged;
         }
+
+
 
         public ICommand PictureForwardCommand { get { return new DF_Command.DelegateCommand(o => DF.shuffler.previewForward()); } }
         public ICommand PictureBackwardCommand { get { return new DF_Command.DelegateCommand(o => DF.shuffler.previewBackward()); } }
@@ -31,6 +34,17 @@ namespace DesktopFox.MVVM.ViewModels
             PreviewModel.AnimationStart = true;
         }
 
+        public new void ContentChange(PictureVM pictureVM) 
+        {
+            DF.shuffler.previewRefresh();
+        }
         public void dummy() { }
+
+        private void PreviewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.ToString() != "Day") return;
+
+            DF.shuffler.previewRefresh();
+        }
     }
 }

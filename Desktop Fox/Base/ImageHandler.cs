@@ -30,7 +30,7 @@ namespace DesktopFox
             bitmapImage.BeginInit();
             bitmapImage.UriSource = new Uri(Path);
             bitmapImage.DecodePixelHeight = (int)Height;
-            //bitmapImage.DecodePixelWidth = (int)Width;
+            bitmapImage.DecodePixelWidth = 360;
             bitmapImage.EndInit();
 
             return bitmapImage;

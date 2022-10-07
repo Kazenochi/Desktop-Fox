@@ -9,6 +9,7 @@ using DesktopFox.MVVM.ViewModels;
 using DesktopFox.Base;
 using System.ComponentModel;
 using System;
+using System.Linq;
 
 namespace DesktopFox
 {
@@ -136,6 +137,9 @@ namespace DesktopFox
             }
             mainWindowVM.SetCurrentMain(MW);
             shuffler.startPreviewShuffleTimer();
+            if(mainWindowVM.MainWindowModel._pictureViews.Count > 0)
+                mainWindowVM.SelectedItem = mainWindowVM.MainWindowModel._pictureViews.ElementAt(0);
+
             MW.Show();
         }
 

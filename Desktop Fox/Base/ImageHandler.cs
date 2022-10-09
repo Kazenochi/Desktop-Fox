@@ -18,9 +18,17 @@ namespace DesktopFox
         {
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri(Path);
-            bitmapImage.EndInit();
-            bitmapImage.Freeze();
+            try
+            {
+                bitmapImage.UriSource = new Uri(Path);
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+            }
+            catch
+            {
+                bitmapImage.EndInit();
+                bitmapImage = dummy();
+            }
             return bitmapImage;
         }
         
@@ -28,11 +36,18 @@ namespace DesktopFox
         {
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri(Path);
-            bitmapImage.DecodePixelHeight = (int)Height;
-            bitmapImage.DecodePixelWidth = 360;
-            bitmapImage.EndInit();
-
+            try
+            {           
+                bitmapImage.UriSource = new Uri(Path);
+                bitmapImage.DecodePixelHeight = (int)Height;
+                bitmapImage.DecodePixelWidth = 360;
+                bitmapImage.EndInit();
+            }
+            catch
+            {
+                bitmapImage.EndInit();
+                bitmapImage = dummy();                
+            }           
             return bitmapImage;
         }
 
@@ -44,7 +59,7 @@ namespace DesktopFox
         {
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri("F:\\DesktopFoxTestPicture\\Normal\\1.jpg");
+            bitmapImage.UriSource = new Uri("pack://application:,,,/Assets/dummy.jpg");
             bitmapImage.EndInit();
             bitmapImage.Freeze();
             return bitmapImage;

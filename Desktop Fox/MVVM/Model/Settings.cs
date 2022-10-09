@@ -84,5 +84,10 @@ namespace DesktopFox
         /// </summary>
         public bool DesktopModeSingle { get { return _desktopModeSingle; } set { _desktopModeSingle = value; RaisePropertyChanged(nameof(DesktopModeSingle)); } }
         private bool _desktopModeSingle = true;
+
+        public void OverrideShuffleTime(TimeSpan newTime)
+        {
+            _shuffleTime = newTime;
+        }
     }
 }

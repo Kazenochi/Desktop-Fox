@@ -105,12 +105,7 @@ namespace DesktopFox
             MultiMonitorContent = "Mon. " + SelectedMonitor.ToString();
             SChange();
         }
-        private void CanActivateCheck()
-        {
-            if (SelectedVM == null) { CanActivate = true; return; }
 
-            if(SelectedVM.pictureSet.IsActive1 == false) { CanActivate = true; return; } else { CanActivate = false; return; } 
-        }
         private async Task CheckMultiMonitor()
         {
             
@@ -123,6 +118,9 @@ namespace DesktopFox
                     i.pictureSet.IsActive2 = false;
                     i.pictureSet.IsActive3 = false;
                 }
+
+                //DF.GalleryManager.DesktopSwitchCheck(true);
+                
                 return;
             }
             else

@@ -98,8 +98,8 @@
             </StackPanel>
 
 
-            <Border x:Name="doubleClickPane"
-                    Background="Transparent"
+            <Border x:Name="hideClickPane"
+                    Background="Green"
                     Opacity="0.5"
                     Grid.Row="1"
                     Margin="5"
@@ -140,20 +140,21 @@
                     <view:PictureView/>
                 </d:ListBoxItem>
             </ListBox>
-            <Grid x:Name="multiView"
-                  Grid.RowSpan="2"
-                  Grid.Row="1"
-                  Panel.ZIndex="3">
-
-                <ContentControl Margin="10,0,10,10"
+            <ContentControl Margin="10,0,10,10"
+                                Grid.RowSpan="2"
+                                Grid.Row="1"
                                 Content="{Binding Preview}" 
-                                d:Content="{view:PreviewView}"/>
-                <ContentControl HorizontalAlignment="Right"
+                                d:Content="{view:PreviewView}"
+                            Panel.ZIndex="1"/>
+
+            <ContentControl HorizontalAlignment="Right"
+                                Grid.RowSpan="2"
+                                Grid.Row="1"
                                 VerticalAlignment="Bottom"
                                 Margin="0,0,30,30"
                                 Content="{Binding CurrentView}"
-                                d:Content="{view:ContextPopupView}"/>
-            </Grid>
+                                d:Content="{view:ContextPopupView}"
+                            Panel.ZIndex="2"/>
 
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Stretch"

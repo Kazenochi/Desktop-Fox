@@ -58,7 +58,8 @@
                     Grid.Column="0"
                     Grid.RowSpan="3"
                     Command="{Binding PictureBackwardCommand}"
-                    Style="{StaticResource DF_ArrowButton}"/>
+                    Style="{StaticResource DF_ArrowButton}"
+                    Panel.ZIndex="3"/>
 
             <Button x:Name="button_Forward"
                     VerticalAlignment="Center"

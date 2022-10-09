@@ -25,8 +25,6 @@ namespace DesktopFox
         private NotifyIcon notifyIcon;
         private MainWindow MW;
         private MainWindowVM mainWindowVM;
-        private PictureSet pictureSet;
-        private PictureVM pictureViewVM;
         private ContextPopupVM contextPopupVM;
         private PreviewVM previewVM;
         private AddSetVM addSetVM;
@@ -48,7 +46,7 @@ namespace DesktopFox
             shadow = new GalleryShadow(gallery);
             
             vDesk = new VirtualDesktop();
-            SM = new SettingsManager(settings);
+            SM = new SettingsManager(settings, vDesk);
             mainWindowVM = new MainWindowVM(this);
             GM = new GalleryManager(gallery, shadow, mainWindowVM);         
             

@@ -79,6 +79,19 @@ namespace DesktopFox
             _shadow.Rename(pictureSet, newName);
         }
 
+        public void DesktopSwitchCheck(bool single)
+        {
+            if (!single) return;
+
+            if (_gallery.activeSetsList.ElementAt(0) == "Empty")
+            {
+                if(getActiveSetCount() > 0)
+                {
+                    _gallery.activeSetsList[0] = getActiveSet(any: true).SetName;
+                }
+            }
+        }
+
         public static Collection makeCollection(List<String> pictures, String path)
         {
             Collection collection = new Collection();

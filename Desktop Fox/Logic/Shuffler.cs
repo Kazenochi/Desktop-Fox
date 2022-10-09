@@ -33,6 +33,14 @@ namespace DesktopFox
         private int[] lockList = new int[3];
         private Random random = new Random();
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="mainWindowVM"></param>
+        /// <param name="galleryManager"></param>
+        /// <param name="settingsManager"></param>
+        /// <param name="previewVM"></param>
+        /// <param name="virtualDesktop"></param>
         public Shuffler(MainWindowVM mainWindowVM, GalleryManager galleryManager, SettingsManager settingsManager, PreviewVM previewVM, VirtualDesktop virtualDesktop)
         {
             MWVM = mainWindowVM;
@@ -672,17 +680,6 @@ namespace DesktopFox
                 Task.Run(() => picShuffleStart());
 
             Debug.WriteLine("Tageszeit wurde überprüft. Aktuell ist isDay: " + isDay);
-        }
-
-        /// <summary>
-        /// Setzt den Flag, ob in der Preview die Tag oder Nachtbilder angezeigt werden sollen
-        /// </summary>
-        public void setPreviewDay(Boolean value)
-        {
-            previewDay = value;
-            previewTimerReset();
-            previewShuffleAsync();
-        }
-     
+        }     
     }
 }

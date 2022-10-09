@@ -5,8 +5,12 @@ using System.Windows.Media;
 
 namespace DesktopFox
 {
+    /// <summary>
+    /// Basisobjekt für die Bilder Sets und Model für die <see cref="MVVM.ViewModels.SettingsVM"/> Klasse
+    /// </summary>
     public class Settings : ObserverNotifyChange
     {
+        #region Binding Variablen
         /// <summary>
         /// Tageszeitpunkt an dem der Tag beginnt. Zeit wird als Zeitspanne ab 00:00 Uhr angegeben.
         /// </summary>        
@@ -84,7 +88,12 @@ namespace DesktopFox
         /// </summary>
         public bool DesktopModeSingle { get { return _desktopModeSingle; } set { _desktopModeSingle = value; RaisePropertyChanged(nameof(DesktopModeSingle)); } }
         private bool _desktopModeSingle = true;
+        #endregion
 
+        /// <summary>
+        /// Umgeht den Setter und ändert die Variable ohne ein Event auszulösen. Sollte nur vom Settings Manager aufgerufen werden.
+        /// </summary>
+        /// <param name="newTime"></param>
         public void OverrideShuffleTime(TimeSpan newTime)
         {
             _shuffleTime = newTime;

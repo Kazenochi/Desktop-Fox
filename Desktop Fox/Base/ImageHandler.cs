@@ -31,7 +31,13 @@ namespace DesktopFox
             }
             return bitmapImage;
         }
-        
+
+        /// <summary>
+        /// Läd eine Bilddatei und Skaliert diese für die Vorschaubilder herunter.
+        /// </summary>
+        /// <param name="Path"></param>
+        /// <param name="Height"></param>
+        /// <returns></returns>
         public static BitmapImage load(String Path, double Height)
         {
             BitmapImage bitmapImage = new BitmapImage();

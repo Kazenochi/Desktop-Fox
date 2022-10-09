@@ -60,7 +60,14 @@ namespace DesktopFox
             readyPictureVMs();
         }
 
+        /// <summary>
+        /// Gibt die Instanz des Settings Manager zurück
+        /// </summary>
         public SettingsManager SettingsManager { get { return SM; } }
+
+        /// <summary>
+        /// Gibt die Instanz des Gallery Managers zurück
+        /// </summary>
         public GalleryManager GalleryManager { get { return GM; } }
 
         public MainWindow GetMainWindow()
@@ -70,25 +77,15 @@ namespace DesktopFox
             return null;
         }
 
-        public GalleryManager GetGalleryManager()
-        {
-            return GM;
-        }
-
+        /// <summary>
+        /// Erstmalige Initialisierung der View Models für die Einträge in der Galerie und Model zuweisung der PictureSets
+        /// </summary>
         public void readyPictureVMs()
         {
             foreach (var i in gallery.PictureSetList.Values)
             {
                 mainWindowVM.MainWindowModel._pictureViewVMs.Add(new PictureVM(i));
             }
-        }
-
-        public void ActivateSet(String pictureSet)
-        {
-            if (!settings.IsRunning)
-                settings.IsRunning = true;
-
-
         }
 
         /// <summary>
@@ -109,7 +106,9 @@ namespace DesktopFox
                 settings = tmpSet;
         }
 
-
+        /// <summary>
+        /// Erstellt das Hauptfenster neu oder Ruft diese auf.
+        /// </summary>
         public void makeMainWindow()
         {
             if(MW == null) 

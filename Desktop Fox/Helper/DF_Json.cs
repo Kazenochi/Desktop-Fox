@@ -8,7 +8,9 @@ namespace DesktopFox
 {
     internal class DF_Json
     {
-
+        /// <summary>
+        /// Basisverzeichnis in dem sich die Dateien der Applikation befinden.
+        /// </summary>
         public static string BaseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
         /// <summary>

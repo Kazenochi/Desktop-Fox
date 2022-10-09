@@ -10,6 +10,12 @@ namespace DesktopFox
         public String Name;
         public int Height;
         public int Width;
+
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="monID">ID des Monitors</param>
+        /// <param name="monName">Name unter dem der Monitor gespeichert werden soll</param>
         public Monitor(String monID, String monName)
         {
             DesktopWallpaper tmpWrapper = new DesktopWallpaper();
@@ -23,6 +29,10 @@ namespace DesktopFox
             Console.WriteLine("Monitor Breite: " + Width);
         }
 
+        /// <summary>
+        /// Gibt die Breite des Monitors zurück
+        /// </summary>
+        /// <returns></returns>
         public int getWidth()
         {
             return this.Width;

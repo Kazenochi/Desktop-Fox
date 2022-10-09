@@ -12,6 +12,9 @@ using System.Windows.Input;
 
 namespace DesktopFox.MVVM.ViewModels
 {
+    /// <summary>
+    /// ViewModel der <see cref="Views.Settings_MainView"/> Klasse
+    /// </summary>
     public class SettingsVM : ObserverNotifyChange
     {
         public Settings settings { get; set; }
@@ -24,6 +27,10 @@ namespace DesktopFox.MVVM.ViewModels
         private Settings_ShuffleView _shuffleView = new Settings_ShuffleView();
         private Settings_StyleView _styleView = new Settings_StyleView();
         
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="settings"></param>
         public SettingsVM(Settings settings)
         {
             this.settings = settings;
@@ -36,16 +43,24 @@ namespace DesktopFox.MVVM.ViewModels
             CurrentView = _previewView; 
         }
 
-
-        private object _currentView;
+        /// <summary>
+        /// Anzeige der aktuellen Settings View in <see cref="Settings.SettingsPage"/>
+        /// </summary>
         public object CurrentView { get { return _currentView; } set { _currentView = value; UpdateNumbers(); RaisePropertyChanged(nameof(CurrentView)); } }
+        private object _currentView;
 
+        /// <summary>
+        /// Aktualisiert die Zahlenwerte in den Einsetllungs Views
+        /// </summary>
         private void UpdateNumbers()
         {
             DaytimeModel.SetDaySwitch(settings.DayStart, settings.NightStart);
             ShuffleModel.SetShuffle(settings.ShuffleTime);
         }
 
+        /// <summary>
+        /// Speichert die Zeitspanne in den Temporären Einstellungs Views, in die Einstellungen
+        /// </summary>
         private void SaveDaytimeValues()
         {
             List<TimeSpan> tmpValues = DaytimeModel.SaveValues();
@@ -53,18 +68,53 @@ namespace DesktopFox.MVVM.ViewModels
             settings.NightStart = tmpValues[1];
         }
 
+        /// <summary>
+        /// Speichert die Zeitspanne in den Temporären Einstellungs Views, in die Einstellungen
+        /// </summary>
         private void SaveShuffleTimeValue()
         {
             settings.ShuffleTime = TimeSpan.FromMinutes(ShuffleModel.ShuffleTime);
         }
 
+        #region Kommandos
+        /// <summary>
+        /// Kommando um die <see cref="Views.Settings_DaytimeView"/> anzuzeigen
+        /// </summary>
         public ICommand DaytimeCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _daytimeView); } }
+
+        /// <summary>
+        /// Kommando um die <see cref="Views.Settings_DModeView"/> anzuzeigen
+        /// </summary>
         public ICommand DModeCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _dmodeView); } }
+
+        /// <summary>
+        /// Kommando um die <see cref="Views.Settings_PreviewView"/> anzuzeigen
+        /// </summary>
         public ICommand PreviewCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _previewView); } }
+
+        /// <summary>
+        /// Kommando um die <see cref="Views.Settings_ShuffleView"/> anzuzeigen
+        /// </summary>
         public ICommand ShuffleCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _shuffleView); } }
+
+        /// <summary>
+        /// Kommando um die <see cref="Views.Settings_StyleView"/> anzuzeigen
+        /// </summary>
         public ICommand StyleCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _styleView); } }
+
+        /// <summary>
+        /// Kommando um die temporären Tageszeitwechsel Einstellungen abzuspeichern
+        /// </summary>
         public ICommand SaveDaytimeCommand { get { return new DF_Command.DelegateCommand(o => SaveDaytimeValues()); } }
+
+        /// <summary>
+        /// Kommando um die temporären Shuffle Zeit Einstellungen abzuspeichern
+        /// </summary>
         public ICommand SaveShuffleTimeCommand { get { return new DF_Command.DelegateCommand(o => SaveShuffleTimeValue()); } }
+
+
         public ICommand DaytimeTextChangedCommand { get { return new DF_Command.DelegateCommand(o => SaveDaytimeValues()); } }
+        #endregion
+
     }
 }

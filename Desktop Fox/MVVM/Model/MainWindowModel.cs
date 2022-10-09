@@ -11,12 +11,17 @@ using Windows.Media.Capture.Frames;
 
 namespace DesktopFox
 {
+    /// <summary>
+    /// Model der <see cref="MainWindowVM"/> Klasse
+    /// </summary>
     public class MainWindowModel : ObserverNotifyChange
     {
         public ObservableCollection<PictureView> _pictureViews;
         public List<PictureVM> _pictureViewVMs;
         
-
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public MainWindowModel()
         {
             _pictureViews = new ObservableCollection<PictureView>();

@@ -24,8 +24,9 @@
                     Grid.Row="1"
                     CornerRadius="20"
                     >
-                <ContentControl Grid.Row="1"
-                            Content="{Binding CurrentView}"/>
+                <ContentControl x:Name="SettingsPage"
+                                Grid.Row="1"
+                                Content="{Binding CurrentView}"/>
             </Border>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom"

@@ -20,12 +20,16 @@ namespace DesktopFox
         private System.Windows.Forms.ToolStripMenuItem AutoSetChangeMenuItem;
 
         private Fox DF;
+
+        /// <summary>
+        /// Konstuktor
+        /// </summary>
+        /// <param name="DesktopFox"></param>
         public NotifyIcon(Fox DesktopFox)
         {
             DF = DesktopFox;
             notifyIcon = new System.Windows.Forms.NotifyIcon();
            
-
             //Bedauerlicherweise ist das erstellen eines Notifyicons in einer WPF Application nicht so einfach umzusetzten wie in einer WinForm
             //Funktion ist jedoch gegeben und erfüllt die nötigen Aufgaben -> Vollständiges Beenden der Application
 

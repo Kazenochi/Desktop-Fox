@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace DesktopFox
 {
+    /// <summary>
+    /// ViewModel der <see cref="MainWindow"/> Klasse
+    /// </summary>
     public class MainWindowVM : ObserverNotifyChange
     {
         public AddSetView AddSetView = new AddSetView();
@@ -19,6 +22,10 @@ namespace DesktopFox
         private Fox DF;
         private GalleryManager GM;
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="desktopFox"></param>
         public MainWindowVM(Fox desktopFox)
         {
             DF = desktopFox;        
@@ -27,6 +34,11 @@ namespace DesktopFox
             DF.SettingsManager.Settings.PropertyChanged += Settings_PropertyChanged;
         }
 
+        /// <summary>
+        /// Listener der auf Änderungen in den Einstellungen reagiert
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Settings_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName.ToString() != nameof(DF.SettingsManager.Settings.DesktopModeSingle)) return;
@@ -35,13 +47,24 @@ namespace DesktopFox
             return;
         }
 
+        /// <summary>
+        /// Aktualisiert die zuweisung des Hauptfensters
+        /// </summary>
+        /// <param name="mainWindow"></param>
         public void SetCurrentMain(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
         }
 
+        /// <summary>
+        /// Gibt das Model dieser Klasse zurück
+        /// </summary>
         public MainWindowModel MainWindowModel { get; set; }
 
+        #region Binding Variablen
+        /// <summary>
+        /// Gibt die View im Hauptfenster an die im Context angezeigt werden soll. <see cref="MainWindow.ContextViews"/> 
+        /// </summary>
         public AnimatedBaseView CurrentView { get { return _currentView; } 
             set 
             {
@@ -51,24 +74,45 @@ namespace DesktopFox
         }
         private AnimatedBaseView _currentView;
 
+        /// <summary>
+        /// Gibt die View im Haupfenster an die die Vorschaubilder beinhaltet. <see cref="MainWindow.PreviewContext"/>
+        /// </summary>
         public UserControl Preview { get { return _preview; } set { _preview = value; RaisePropertyChanged(nameof(Preview)); } }
         private UserControl _preview;
 
+        /// <summary>
+        /// Enthält das Objekt das Aktuell in der Listbox des Hauptfensters angezeigt wird. <see cref="MainWindow.lbPictures"/>
+        /// </summary>
         public PictureVM SelectedVM { get { return _selectedVM; } set { _selectedVM = value; RaisePropertyChanged(nameof(SelectedVM)); } }
         private PictureVM _selectedVM;
 
+        /// <summary>
+        /// Gibt an für welchen Monitor das ausgewählte Set aktiviert werden soll.
+        /// </summary>
         public int SelectedMonitor { get { return _selectedMonitor; } set { _selectedMonitor = value; RaisePropertyChanged(nameof(SelectedMonitor)); } }
         private int _selectedMonitor = 1;
 
+        /// <summary>
+        /// Flag ob der Button angezeigt werden soll. Wird nur im Multi Modus angezeigt. <see cref="Settings.DesktopModeSingle"/>
+        /// </summary>
         public bool MultiMonitor { get { return _multiMonitor; } set { _multiMonitor = value; RaisePropertyChanged(nameof(MultiMonitor)); } }
         private bool _multiMonitor;
 
+        /// <summary>
+        /// Anzeige für welchen Monitor das ausgewählte Set aktiviert werden soll. <see cref= "MainWindow.button_ActiveSet" />
+        /// </summary>
         public string MultiMonitorContent { get { return _multiMonitorContent; } set { _multiMonitorContent = value; RaisePropertyChanged(nameof(MultiMonitorContent)); } }
         private string _multiMonitorContent;
 
+        /// <summary>
+        /// Flag ob das Set Aktiviert werden kann.
+        /// </summary>
         public bool CanActivate { get { return _canActivate; } set { _canActivate = value; RaisePropertyChanged(nameof(CanActivate)); } }
         private bool _canActivate = true;
 
+        /// <summary>
+        /// Helferklasse die das gespeicherte Viewmodel des ausgewählten Sets aktualisiert und Informiert notwendige Klassen <see cref="SChange"/>
+        /// </summary>
         public PictureView SelectedItem { get { return _selectedItem; } 
             set 
             { 
@@ -83,18 +127,64 @@ namespace DesktopFox
             } 
         }
         private PictureView _selectedItem;
+        #endregion
 
+        #region Kommandos
+        /// <summary>
+        /// Kommando das das ausgewählte Set aktiviert
+        /// </summary>
         public ICommand ActivateSetCommand { get { return new DF_Command.DelegateCommand(o => ActivateSet()); } }
-        public ICommand StopSetCommand { get { return new DF_Command.DelegateCommand(o => StopSet()); } }
-        public ICommand AddSetViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(AddSetView)); } }
-        public ICommand SettingsMainViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(Settings_MainView)); } }
-        public ICommand ContextPopupViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(ContextPopupView)); } }
-        public ICommand NextMonitorCommand { get { return new DF_Command.DelegateCommand(o => NextMonitor()) ; } }
-        public ICommand HideViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(null)); } }
-        public ICommand CloseCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.Hide()); } }
-        public ICommand MinimizeCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.WindowState = WindowState.Minimized); } }
-        public ICommand MaximizeCommand { get { return new DF_Command.DelegateCommand(o => MaximizeWindow()); } }
 
+        /// <summary>
+        /// Kommando das das ausgewählte Set deaktiviert
+        /// </summary>
+        public ICommand StopSetCommand { get { return new DF_Command.DelegateCommand(o => StopSet()); } }
+
+        /// <summary>
+        /// Kommando das die AddSet View aufzeigt <see cref="MVVM.Views.AddSetView"/> 
+        /// </summary>
+        public ICommand AddSetViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(AddSetView)); } }
+
+        /// <summary>
+        /// Kommando das die Settings View aufzeigt <see cref="MVVM.Views.Settings_MainView"/> 
+        /// </summary>
+        public ICommand SettingsMainViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(Settings_MainView)); } }
+
+        /// <summary>
+        /// Kommando das die ContextPopup View aufzeigt <see cref="MVVM.Views.ContextPopupView"/> 
+        /// </summary>
+        public ICommand ContextPopupViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(ContextPopupView)); } }
+
+        /// <summary>
+        /// Kommando das den Nächsten Monitor auswählt
+        /// </summary>
+        public ICommand NextMonitorCommand { get { return new DF_Command.DelegateCommand(o => NextMonitor()) ; } }
+
+        /// <summary>
+        /// Kommando das alle Views versteckt
+        /// </summary>
+        public ICommand HideViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(null)); } }
+
+        /// <summary>
+        /// Kommando das das Hauptfenster schliest
+        /// </summary>
+        public ICommand CloseCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.Hide()); } }
+
+        /// <summary>
+        /// Kommando das das Hauptfenster minimiert
+        /// </summary>
+        public ICommand MinimizeCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.WindowState = WindowState.Minimized); } }
+
+        /// <summary>
+        /// Kommando das das Hauptfenster maximiert
+        /// </summary>
+        public ICommand MaximizeCommand { get { return new DF_Command.DelegateCommand(o => MaximizeWindow()); } }
+        #endregion
+
+        #region Methoden
+        /// <summary>
+        /// Wählt den nächsten monitor aus. Note: nicht richtig. sollte unterscheiden ob es 2 oder 3 monitore gibt
+        /// </summary>
         private void NextMonitor()
         {
             if(SelectedMonitor < 3)
@@ -106,6 +196,10 @@ namespace DesktopFox
             SChange();
         }
 
+        /// <summary>
+        /// Überprüft bei Änderungen des Desktop Modus die Einstellungen und Passt die Anzeige der Bilder Marker an 
+        /// </summary>
+        /// <returns></returns>
         private async Task CheckMultiMonitor()
         {
             
@@ -137,6 +231,9 @@ namespace DesktopFox
             }           
         }
 
+        /// <summary>
+        /// Stoppt das Set für den gewählten Monitor und passt die Bild Marker an
+        /// </summary>
         private void StopSet()
         {
             switch (SelectedMonitor)
@@ -151,10 +248,13 @@ namespace DesktopFox
             CanActivate = true;       
         }
 
+        /// <summary>
+        /// Aktiviert das gewählte Set
+        /// </summary>
         private void ActivateSet()
         {
             if (SelectedVM == null) return;
-            if(GM == null) GM = DF.GetGalleryManager();
+            if(GM == null) GM = DF.GalleryManager;
 
             switch (SelectedMonitor)
             {
@@ -191,6 +291,9 @@ namespace DesktopFox
             ((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = true;
         }
 
+        /// <summary>
+        /// Maximiert das Hauptfenster oder setzt dieses wieder auf Normal zurück, falls es bereits maximiert ist.
+        /// </summary>
         private void MaximizeWindow()
         {
             if(_mainWindow.WindowState == WindowState.Normal)
@@ -199,6 +302,10 @@ namespace DesktopFox
                 _mainWindow.WindowState = WindowState.Normal;
         }
 
+        /// <summary>
+        /// Helferklasse die beim Ändern der Auswahl in der Listbox aufgerufen wird. <see cref="MainWindow.lbPictures"/>
+        /// Überprüft ob das Set Aktiviert werden kann und Benachrichtig alle ViewModels die die <see cref="ObserverNotifyChange"/> implementieren
+        /// </summary>
         private void SChange()
         {
             switch (SelectedMonitor)
@@ -239,12 +346,22 @@ namespace DesktopFox
 
         }
 
+        /// <summary>
+        /// Entfernt die Views beim schließen mit etwas verzögerung.
+        /// Gewährleistet das die Animation abgeschlossen ist, bevor die View geändert wird.
+        /// </summary>
+        /// <param name="animationTime">Dauer der Animation in Sekunden</param>
+        /// <returns></returns>
         private async Task ContentCleanup(double animationTime)
         {
             await Task.Delay((int)animationTime * 1000);
             _currentView = null;
         }
 
+        /// <summary>
+        /// Ändernt die Views im Mainwindow <see cref="MainWindow.ContextViews"/>
+        /// </summary>
+        /// <param name="newView">Neue View die Angezeigt werden soll. null = keine View anzeigen.</param>
         private void SwitchViews(AnimatedBaseView newView)
         {
             if (newView != null && newView != CurrentView)
@@ -258,6 +375,7 @@ namespace DesktopFox
                 Task.Run(() => ContentCleanup(CurrentView.AnimationTime));
             }         
         }
+        #endregion 
     }
 
 }

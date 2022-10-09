@@ -14,6 +14,10 @@ namespace DesktopFox
         private int monitorCount;
         //private Collection activeCollection;
         private int[] boundary;
+
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public VirtualDesktop()
         {
 
@@ -115,11 +119,10 @@ namespace DesktopFox
             get { return wrapper; }
         }
 
-
-        public IDictionary<String, Monitor> getMonitors
-        {
-            get { return monitorDict; }
-        }
+        /// <summary>
+        /// Gibt alle Monitore zurück
+        /// </summary>
+        public IDictionary<String, Monitor> getMonitors { get { return monitorDict; } }
 
         /// <summary>
         /// Gibt den Hauptmonitor des Systems zurück

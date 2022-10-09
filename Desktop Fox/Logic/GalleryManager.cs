@@ -24,6 +24,13 @@ namespace DesktopFox
         private SettingsManager SM;
         private MainWindowVM MWVM;
         private Settings _settings;
+
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="gallery">Instanz der Galerie</param>
+        /// <param name="shadow">Instanz der Galerie Spiegelklasse</param>
+        /// <param name="MainWindowViewModel">Instanz des Hauptfenster Viemodels</param>
         public GalleryManager(Gallery gallery, GalleryShadow shadow, MainWindowVM MainWindowViewModel)
         {
             _gallery = gallery;
@@ -31,6 +38,9 @@ namespace DesktopFox
             MWVM = MainWindowViewModel;
         }
 
+        /// <summary>
+        /// Gibt die Galerie zurück
+        /// </summary>
         public Gallery Gallery { get { return _gallery; } }
 
         /// <summary>
@@ -74,24 +84,22 @@ namespace DesktopFox
             return _gallery.PictureSetList[_shadow.GetKey(pictureSetName)].ContainsCollections();
         }
 
+        /// <summary>
+        /// Brückenmethode: <see cref="GalleryShadow.Rename"/>
+        /// </summary>
+        /// <param name="pictureSet">Alter Name des Bild Sets</param>
+        /// <param name="newName">Neuer Name des Bild Sets</param>
         public void RenameSet(String pictureSet, String newName)
         {
             _shadow.Rename(pictureSet, newName);
         }
 
-        public void DesktopSwitchCheck(bool single)
-        {
-            if (!single) return;
-
-            if (_gallery.activeSetsList.ElementAt(0) == "Empty")
-            {
-                if(getActiveSetCount() > 0)
-                {
-                    _gallery.activeSetsList[0] = getActiveSet(any: true).SetName;
-                }
-            }
-        }
-
+        /// <summary>
+        /// Erzeugt eine neue Collection //Note: Übergabe des Pfades ist nach aktuellem Stand unnötig
+        /// </summary>
+        /// <param name="pictures">Liste mit absoluten Pfaden zu den Bildern</param>
+        /// <param name="path">Pfad zum Bild Ordner in dem sich die die angegeben Bilder befinden</param>
+        /// <returns></returns>
         public static Collection makeCollection(List<String> pictures, String path)
         {
             Collection collection = new Collection();
@@ -106,6 +114,12 @@ namespace DesktopFox
             return collection;
         }
 
+        /// <summary>
+        /// Fügt eine Neue Collection zu einem Bilder Set hinzu
+        /// </summary>
+        /// <param name="pictureSet">Instanz des Bilder Sets</param>
+        /// <param name="nwCollection">Instanz der Collection die hinzugefügt werden soll</param>
+        /// <param name="day">Ob die Collection als TagesCollection hinzugefügt werden soll</param>
         public void addCollection(PictureSet pictureSet, Collection nwCollection, bool day)
         {
             if (day)
@@ -114,6 +128,12 @@ namespace DesktopFox
                 pictureSet.NightCol = nwCollection;
         }
 
+        /// <summary>
+        /// Entfernt eine Collection von einem Bilder Set und entfernt dieses falls es anschließend keine Collection mehr beinhaltet.
+        /// </summary>
+        /// <param name="pictureSet">Name des Bild Sets</param>
+        /// <param name="day">Soll die Tages Collection entfernt werden?</param>
+        /// <param name="all">Soll das komplette Set entfernt werden?</param>
         public void removeCollection(String pictureSet, bool day, bool all=false)
         {
             if (all)
@@ -227,6 +247,12 @@ namespace DesktopFox
             _gallery.activeSetsList[choice - 1] = pictureSet;
         }
 
+        /// <summary>
+        /// Entfernt das angegebene Bild Set aus der Liste der Aktiven Sets
+        /// </summary>
+        /// <param name="pictureSet">Name des Sets das Angehalten werden soll</param>
+        /// <param name="choice"></param>
+        /// <returns></returns>
         public bool stopActiveSet(String pictureSet, int choice = 1)
         {
             bool isEmpty = true;

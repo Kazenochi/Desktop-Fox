@@ -10,6 +10,9 @@ using DPos = IDesktopWallpaperWrapper.Win32.DESKTOP_WALLPAPER_POSITION;
 
 namespace DesktopFox
 {
+    /// <summary>
+    /// Helferklasse für den Zugriff auf spezielle Einstellungen oder Änderungen.
+    /// </summary>
     public class SettingsManager
     {
         private Settings _settings;
@@ -17,6 +20,11 @@ namespace DesktopFox
         private VirtualDesktop vDesk;
         Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="settings">Instanz der Einstellungen</param>
+        /// <param name="virtualDesktop">Instanz des Virtuellen Hintergrundes</param>
         public SettingsManager(Settings settings, VirtualDesktop virtualDesktop)
         {
             _settings = settings;
@@ -24,6 +32,11 @@ namespace DesktopFox
             _settings.PropertyChanged += Settings_PropertyChanged;
         }
 
+        /// <summary>
+        /// Listener für Änderungen in den Einstellungen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)

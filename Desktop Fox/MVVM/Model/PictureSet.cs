@@ -10,9 +10,23 @@ using static System.Windows.Forms.DataFormats;
 
 namespace DesktopFox
 {
-    
+    /// <summary>
+    /// Basisobjekt für die Bilder Sets und Model für die <see cref="MVVM.ViewModels.PictureVM"/> Klasse
+    /// </summary>
     public class PictureSet : ObserverNotifyChange
     {
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="name"></param>
+        public PictureSet(string name)
+        {
+            SetName = name;
+            //DayImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\Normal\\1.jpg");
+            //NightImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\Normal\\2.jpg");
+        }
+
+        #region Binding Variablen
         /// <summary>
         /// Name des Bilder Sets
         /// </summary>
@@ -71,7 +85,8 @@ namespace DesktopFox
             } 
         }
         private BitmapImage _nightImage;
-        
+        #endregion
+
         /// <summary>
         /// Sammlung von Bilder die wärend des Tages angezeigt werden
         /// </summary>
@@ -124,11 +139,5 @@ namespace DesktopFox
             return 0;
         }
 
-        public PictureSet(string name)
-        {
-            SetName = name;
-            //DayImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\Normal\\1.jpg");
-            //NightImage = ImageHandler.load("F:\\DesktopFoxTestPicture\\Normal\\2.jpg");
-        }
     }
 }

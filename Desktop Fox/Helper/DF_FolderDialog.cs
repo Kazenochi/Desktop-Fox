@@ -10,8 +10,15 @@ using System.Windows.Shapes;
 
 namespace DesktopFox
 {
+    /// <summary>
+    /// Klasse für Ordnerdialog aufrufe
+    /// </summary>
     public class DF_FolderDialog
     {
+        /// <summary>
+        /// Öffnet einen neuen Ordnerdialog
+        /// </summary>
+        /// <returns>String Liste mit Dateinamen</returns>
         public static List<String> openFolderDialog()
         {
             FolderBrowserDialog folderDialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -22,6 +29,11 @@ namespace DesktopFox
             return getList(getFileInfo(folderDialog.SelectedPath)); 
         }
 
+        /// <summary>
+        /// Wandelt die Fileinfo Liste in eine Stringliste um
+        /// </summary>
+        /// <param name="fileInfos">Liste von Datei Informationen</param>
+        /// <returns>String Liste mit Dateinamen</returns>
         private static List<String> getList(List<FileInfo> fileInfos)
         {
             List<String> list = new List<String>();
@@ -32,7 +44,11 @@ namespace DesktopFox
             return list;
         }
 
-
+        /// <summary>
+        /// Extrahiert alle Bilddateien aus einem Ordner
+        /// </summary>
+        /// <param name="path">Absoluter Pfad zum Bildordner</param>
+        /// <returns>Liste mit Datei Informationen</returns>
         private static List<FileInfo> getFileInfo(String path)
         {
             DirectoryInfo dir = new DirectoryInfo(path);

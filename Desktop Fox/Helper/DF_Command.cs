@@ -9,6 +9,10 @@ namespace DesktopFox
 {
     internal class DF_Command
     {
+
+        /// <summary>
+        /// Standart Implementierung der Delegationsklasse für Kommando aufrufe der Views/ViewModel
+        /// </summary>
         public class DelegateCommand : ICommand
         {
             private readonly Predicate<object> _canExecute;

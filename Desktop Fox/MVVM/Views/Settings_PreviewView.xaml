@@ -20,7 +20,7 @@
                        FontSize="20"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center">
-                    How should the big picture be displayed
+                    How the preview picture is displayed
             </TextBlock>
             <StackPanel Orientation="Horizontal" 
                         Grid.Row="1"

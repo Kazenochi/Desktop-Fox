@@ -187,7 +187,7 @@ namespace DesktopFox
         /// </summary>
         private void NextMonitor()
         {
-            if(SelectedMonitor < 3)
+            if(SelectedMonitor < DF.VirtualDesktop.getMonitorCount())
                 SelectedMonitor++;
             else
                 SelectedMonitor = 1;
@@ -242,8 +242,7 @@ namespace DesktopFox
                 case 2: SelectedVM.pictureSet.IsActive2 = false; break;
                 case 3: SelectedVM.pictureSet.IsActive3 = false; break;
             }
-            if(GM.stopActiveSet(SelectedVM.pictureSet.SetName, SelectedMonitor))
-                ((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = false;
+            GM.stopActiveSet(monitor: SelectedMonitor);
 
             CanActivate = true;       
         }
@@ -288,6 +287,8 @@ namespace DesktopFox
             }
             GM.setActiveSet(SelectedVM.pictureSet.SetName, SelectedMonitor);
             CanActivate = false;
+
+            ((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = false;
             ((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = true;
         }
 

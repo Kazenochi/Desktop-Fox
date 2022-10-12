@@ -25,7 +25,7 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        TextAlignment="Center">
-                    Linear presentation or shuffle the pictuers
+                    Linear presentation or shuffle the pictures
             </TextBlock>
             <StackPanel Orientation="Horizontal" 
                         Grid.Row="1"
@@ -84,7 +84,7 @@
                         VerticalAlignment="Center"
                         Margin="30,0,0,0"
                         FontSize="20"
-                        Command="{Binding ShuffleCommand}"
+                        Command="{Binding SaveShuffleTimeCommand}"
                         Style="{StaticResource DF_Button_Border}">
                     <Button.Triggers>
                         <EventTrigger RoutedEvent="Button.Click">

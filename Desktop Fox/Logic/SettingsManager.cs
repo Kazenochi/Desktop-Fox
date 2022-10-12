@@ -18,6 +18,7 @@ namespace DesktopFox
         private Settings _settings;
         private GalleryManager GM;
         private VirtualDesktop vDesk;
+        private Fox DF;
         Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
         /// <summary>
@@ -25,8 +26,9 @@ namespace DesktopFox
         /// </summary>
         /// <param name="settings">Instanz der Einstellungen</param>
         /// <param name="virtualDesktop">Instanz des Virtuellen Hintergrundes</param>
-        public SettingsManager(Settings settings, VirtualDesktop virtualDesktop)
+        public SettingsManager(Fox DesktopFox, Settings settings, VirtualDesktop virtualDesktop)
         {
+            DF = DesktopFox;
             _settings = settings;
             vDesk = virtualDesktop;
             _settings.PropertyChanged += Settings_PropertyChanged;
@@ -46,7 +48,7 @@ namespace DesktopFox
                     break;
 
                 case nameof(_settings.ShuffleTime):
-                    switch (_settings.ShuffleTime.Minutes)
+                    switch (_settings.ShuffleTime.TotalMinutes)
                     {
                         case 901:
                             _settings.OverrideShuffleTime(TimeSpan.FromSeconds(1));
@@ -67,12 +69,16 @@ namespace DesktopFox
                             _settings.OverrideShuffleTime(TimeSpan.FromSeconds(30));
                             break;
                     }
+                    //Spezielles Anstoßen aufgrund der Zusatzfunktion 
+                    DF.Shuffler.picShuffleStart();
                     break;
 
                 case nameof(_settings.DesktopModeSingle):
+                    if (GM == null)
+                        GM = DF.GalleryManager;
                     if (_settings.DesktopModeSingle && GM.getActiveSet(1) == null)
                         _settings.IsRunning = false;
-                    else if (!_settings.DesktopModeSingle && GM.getActiveSet(any: true) != null)
+                    else if (!_settings.DesktopModeSingle && GM.areSetsActive())
                         _settings.IsRunning = true;
                     break;
 

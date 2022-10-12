@@ -46,9 +46,9 @@ namespace DesktopFox
             shadow = new GalleryShadow(gallery);
             
             vDesk = new VirtualDesktop();
-            SM = new SettingsManager(settings, vDesk);
+            SM = new SettingsManager(this, settings, vDesk);
             mainWindowVM = new MainWindowVM(this);
-            GM = new GalleryManager(gallery, shadow, mainWindowVM);         
+            GM = new GalleryManager(this, SM, gallery, shadow, mainWindowVM);         
             
             addSetVM = new AddSetVM(mainWindowVM, GM);
             settingsVM = new SettingsVM(settings);
@@ -69,6 +69,16 @@ namespace DesktopFox
         /// Gibt die Instanz des Gallery Managers zurück
         /// </summary>
         public GalleryManager GalleryManager { get { return GM; } }
+
+        /// <summary>
+        /// Gibt die Instanz des Virtuellen Desktops zurück
+        /// </summary>
+        public VirtualDesktop VirtualDesktop { get { return vDesk; } }
+
+        /// <summary>
+        /// Gibt die Instanz des Shufflers zurück
+        /// </summary>
+        public Shuffler Shuffler { get { return shuffler; } }
 
         public MainWindow GetMainWindow()
         {

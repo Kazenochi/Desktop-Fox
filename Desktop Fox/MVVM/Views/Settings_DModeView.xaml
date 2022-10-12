@@ -21,7 +21,7 @@
                            VerticalAlignment="Center"
                            TextAlignment="Center"
                            Margin="0,0,0,10">
-                        Do want to use one picture set<LineBreak/>or use different sets for each monitor
+                        Do you want to use one picture set<LineBreak/>or use different sets for each monitor
                 </TextBlock>
 
                 <StackPanel Orientation="Horizontal" 

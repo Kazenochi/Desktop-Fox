@@ -73,7 +73,10 @@ namespace DesktopFox
                     else
                         picShuffleStop();
                     break;
-
+                case nameof(SM.Settings.DesktopModeSingle):
+                    if (SM.Settings.IsRunning)
+                        picShuffleStart();
+                    break;
                 default: return;
             }
         }
@@ -177,7 +180,7 @@ namespace DesktopFox
             if (desktopShuffleTimer != null)
             {
                 desktopShuffleTimer.Stop();
-                desktopShuffleTimer.Dispose();
+                //desktopShuffleTimer.Dispose();
             }
             stopWinDesktop();
         }
@@ -194,7 +197,6 @@ namespace DesktopFox
                 previewTimer.Interval = PreviewShuffleTime.TotalMilliseconds;
                 previewTimer.Elapsed += new ElapsedEventHandler(dispatcher);
                 previewTimer.Start();
-                dispatcher(null, null);
                 Debug.WriteLine("Timer gestartet");
             }
             else
@@ -262,7 +264,7 @@ namespace DesktopFox
 
             if (tmpPreviewSet == null)
             {
-                tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.dummy());
+                //tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.dummy());
             }
             else
             {
@@ -320,7 +322,9 @@ namespace DesktopFox
             if (true/*previewVM.PreviewModel.FaderLock == false &&*/)
             {
                 previewTimerReset();
-                previewCount--;
+                if(previewCount > 0)
+                    previewCount--;
+
                 previewShuffleAsync();
                 previewVM.PreviewModel.FaderLock = true;
             }
@@ -400,7 +404,9 @@ namespace DesktopFox
                 desktopShuffleTimer.Start();
                 Debug.WriteLine("DF Timer läuft bereits. Zeit wurde zurückgesetzt");
             }
-            SM.Settings.IsRunning = true;
+            desktopTimer_Trigger(null, null);
+            if (!SM.Settings.IsRunning)
+                SM.Settings.IsRunning = true;
         }
 
         /// <summary>

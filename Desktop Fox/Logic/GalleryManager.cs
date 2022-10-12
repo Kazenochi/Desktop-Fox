@@ -23,7 +23,7 @@ namespace DesktopFox
         private GalleryShadow _shadow;
         private SettingsManager SM;
         private MainWindowVM MWVM;
-        private Settings _settings;
+        private Fox DF;
 
         /// <summary>
         /// Konstruktor
@@ -31,8 +31,10 @@ namespace DesktopFox
         /// <param name="gallery">Instanz der Galerie</param>
         /// <param name="shadow">Instanz der Galerie Spiegelklasse</param>
         /// <param name="MainWindowViewModel">Instanz des Hauptfenster Viemodels</param>
-        public GalleryManager(Gallery gallery, GalleryShadow shadow, MainWindowVM MainWindowViewModel)
+        public GalleryManager(Fox DesktopFox, SettingsManager settingsManager, Gallery gallery, GalleryShadow shadow, MainWindowVM MainWindowViewModel)
         {
+            DF = DesktopFox;
+            SM = settingsManager;
             _gallery = gallery;
             _shadow = shadow; 
             MWVM = MainWindowViewModel;
@@ -203,6 +205,7 @@ namespace DesktopFox
                     if (_gallery.activeSetsList[i] != "Empty")
                         return _gallery.PictureSetList[_shadow.GetKey(_gallery.activeSetsList[i])];
                 }
+                return null;
             }
 
             if (_gallery.activeSetsList[choice - 1] == "Empty")
@@ -244,61 +247,54 @@ namespace DesktopFox
         /// <param name="choice">1 = Erstes Set, 2 = Zweites Set, ...</param>
         public void setActiveSet(String pictureSet, int choice = 1)
         {
-            _gallery.activeSetsList[choice - 1] = pictureSet;
+            if(pictureSet != null)
+            {
+                _gallery.activeSetsList[choice - 1] = pictureSet;
+                SM.Settings.IsRunning = true;
+            }
         }
 
         /// <summary>
         /// Entfernt das angegebene Bild Set aus der Liste der Aktiven Sets
+        /// Es wird eine von beiden Übergabeparametern benötigt
         /// </summary>
         /// <param name="pictureSet">Name des Sets das Angehalten werden soll</param>
-        /// <param name="choice"></param>
+        /// <param name="choice">Monitor auf dem das aktive Set gestoppt werden soll</param>
         /// <returns></returns>
-        public bool stopActiveSet(String pictureSet, int choice = 1)
+        public bool stopActiveSet(String pictureSet = null, int monitor = 0)
         {
-            bool isEmpty = true;
-            for(int i = 0; i < _gallery.activeSetsList.Count; i++)
+            if(monitor != 0)
             {
-                if (_gallery.activeSetsList[i] == pictureSet)
-                    _gallery.activeSetsList[i] = "Empty";
-
-                if (_gallery.activeSetsList[i] != "Empty");
-                    isEmpty = false;
+                _gallery.activeSetsList[monitor - 1] = "Empty";
+                if(!areSetsActive())
+                    SM.Settings.IsRunning = false;
+                return true;
+            }else if(pictureSet != null)
+            {
+                for (int i = 0; i < _gallery.activeSetsList.Count; i++)
+                {
+                    if (_gallery.activeSetsList[i] == pictureSet)
+                    {
+                        _gallery.activeSetsList[i] = "Empty";
+                        if (!areSetsActive())
+                            SM.Settings.IsRunning = false;
+                        return true;
+                    }
+                }
             }
-            return isEmpty;
+            return false;
         }
 
         /// <summary>
         /// Checked ob es Aktive Sets gibt anhand vom Status des ersten Sets
         /// </summary>
         /// <returns></returns>
-        public Boolean areSetsActive(int number = 0)
+        public Boolean areSetsActive()
         {
-            switch (number)
+            for(int i = 0; i < DF.VirtualDesktop.getMonitorCount(); i++)
             {
-                case 0:
-                    Boolean result = false;
-                    foreach (String i in _gallery.activeSetsList)
-                    {
-                        if (i != "Empty")
-                            result = true;
-                    }
-                    return result;
-                    break;
-                case 1:
-                    if (_gallery.activeSetsList[0] != "Empty")
-                        return true;
-                    break;
-                case 2:
-                    if (_gallery.activeSetsList[1] != "Empty")
-                        return true;
-                    break;
-                case 3:
-                    if (_gallery.activeSetsList[2] != "Empty")
-                        return true;
-                    break;
-                default:
-                    return false;
-                    break;
+                if(_gallery.activeSetsList[i] != "Empty")
+                    return true;
             }
             return false;
         }

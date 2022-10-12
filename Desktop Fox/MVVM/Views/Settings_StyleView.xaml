@@ -21,7 +21,7 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        TextAlignment="Center">
-                    Do want to use a single picture set<LineBreak/>or use different sets for each monitor
+                    Do you want to use a single picture set<LineBreak/>or use different sets for each monitor
             </TextBlock>
             <StackPanel Orientation="Horizontal" 
                         Grid.Row="1"

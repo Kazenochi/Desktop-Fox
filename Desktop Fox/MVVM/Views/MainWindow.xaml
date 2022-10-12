@@ -99,7 +99,7 @@
 
 
             <Border x:Name="hideClickPane"
-                    Background="Green"
+                    Background="Transparent"
                     Opacity="0.5"
                     Grid.Row="1"
                     Margin="5"

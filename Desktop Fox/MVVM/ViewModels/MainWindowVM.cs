@@ -370,7 +370,7 @@ namespace DesktopFox
                 newView.AnimateIn();
                 CurrentView = newView;
             }
-            else
+            else if(CurrentView != null)
             {
                 CurrentView.AnimateOut();
                 Task.Run(() => ContentCleanup(CurrentView.AnimationTime));

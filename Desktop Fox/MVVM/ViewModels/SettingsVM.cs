@@ -26,6 +26,8 @@ namespace DesktopFox.MVVM.ViewModels
         private Settings_PreviewView _previewView = new Settings_PreviewView();
         private Settings_ShuffleView _shuffleView = new Settings_ShuffleView();
         private Settings_StyleView _styleView = new Settings_StyleView();
+        private Settings_SystemView _systemView = new Settings_SystemView();
+
         
         /// <summary>
         /// Konstruktor
@@ -39,6 +41,7 @@ namespace DesktopFox.MVVM.ViewModels
             _previewView.DataContext = this;
             _shuffleView.DataContext = this;
             _styleView.DataContext = this;
+            _systemView.DataContext = this;
 
             CurrentView = _previewView; 
         }
@@ -103,6 +106,11 @@ namespace DesktopFox.MVVM.ViewModels
         public ICommand StyleCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _styleView); } }
 
         /// <summary>
+        /// Kommando um die <see cref="Views.Settings_SystemView"/> anzuzeigen
+        /// </summary>
+        public ICommand SystemCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _systemView); } }
+
+        /// <summary>
         /// Kommando um die temporären Tageszeitwechsel Einstellungen abzuspeichern
         /// </summary>
         public ICommand SaveDaytimeCommand { get { return new DF_Command.DelegateCommand(o => SaveDaytimeValues()); } }
@@ -111,7 +119,6 @@ namespace DesktopFox.MVVM.ViewModels
         /// Kommando um die temporären Shuffle Zeit Einstellungen abzuspeichern
         /// </summary>
         public ICommand SaveShuffleTimeCommand { get { return new DF_Command.DelegateCommand(o => SaveShuffleTimeValue()); } }
-
 
         public ICommand DaytimeTextChangedCommand { get { return new DF_Command.DelegateCommand(o => SaveDaytimeValues()); } }
         #endregion

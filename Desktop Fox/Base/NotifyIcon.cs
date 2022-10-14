@@ -46,13 +46,11 @@ namespace DesktopFox
             //Erstellen des Context Menüs 
             NotifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip();
             CloseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            AutostartMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            AutoSetChangeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             LanguageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             NotifyIconContextMenu.SuspendLayout();
 
             //NotifyIcon Paras
-            NotifyIconContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { AutoSetChangeMenuItem, AutostartMenuItem, CloseMenuItem });
+            NotifyIconContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { CloseMenuItem });
             NotifyIconContextMenu.Name = "NIContextMenu";
             NotifyIconContextMenu.Size = new System.Drawing.Size(150, 75);
             //NotifyIconContextMenu.BackColor = System.Drawing.Color.FromArgb(Convert.ToInt32("FF2C394A", 16));
@@ -64,18 +62,6 @@ namespace DesktopFox
             CloseMenuItem.Size = new System.Drawing.Size(150, 75);
             CloseMenuItem.Text = "Close the App";
             CloseMenuItem.Click += new EventHandler(CloseMenuItem_Click);
-
-            //Autostart Paras
-            AutostartMenuItem.Name = "Autostart";
-            AutostartMenuItem.Size = new System.Drawing.Size(150, 75);
-            AutostartMenuItem.Text = "Autostart = ";
-            AutostartMenuItem.Click += new EventHandler(AutostartMenuItem_Click);
-
-            //AutoSetChange Paras
-            AutoSetChangeMenuItem.Name = "AutoSetChange";
-            AutoSetChangeMenuItem.Size = new System.Drawing.Size(150, 75);
-            AutoSetChangeMenuItem.Text = "Auto SetChange = ";
-            AutoSetChangeMenuItem.Click += new EventHandler(AutoSetChangeMenuItem_Click);
 
             //Language Paras
             LanguageMenuItem.Name = "Language";
@@ -109,34 +95,6 @@ namespace DesktopFox
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
             DF.makeMainWindow();
-        }
-
-        /// <summary>
-        /// NotifyIcon Menu Autostart Event Handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AutostartMenuItem_Click(object sender, EventArgs e)
-        {
-            if (_settings == null)
-                _settings = DF.SettingsManager.Settings;
-
-            DF.SettingsManager.Settings.AutostartOn = !DF.SettingsManager.Settings.AutostartOn;
-            AutostartMenuItem.Text = "Autostart = " + DF.SettingsManager.Settings.AutostartOn.ToString();
-        }
-
-        /// <summary>
-        /// NotifyIcon Menu Auto SetChange Event Handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AutoSetChangeMenuItem_Click(object sender, EventArgs e)
-        {
-            if (_settings == null)
-                _settings = DF.SettingsManager.Settings;
-
-            DF.SettingsManager.Settings.AutoSetChange = !DF.SettingsManager.Settings.AutoSetChange;
-            AutoSetChangeMenuItem.Text = "Auto SetChange = " + DF.SettingsManager.Settings.AutoSetChange.ToString();
         }
 
         private void LanguageMenuItem_Click(object sender, EventArgs e)

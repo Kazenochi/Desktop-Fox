@@ -125,7 +125,7 @@ namespace DesktopFox
             { 
                 MW ??= new MainWindow();
                 shuffler.mWinHandler(MW);
-                //MW.Closing += MW_Closed;
+                MW.Closing += MW_Closed;
                 MW.DataContext = mainWindowVM;
                 MW.lbPictures.ItemsSource = mainWindowVM.MainWindowModel._pictureViews;
 
@@ -155,17 +155,19 @@ namespace DesktopFox
         private void MW_Closed(object? sender, System.EventArgs e)
         {
             MW.Hide();
-            /*
+            
             foreach (var i in mainWindowVM.MainWindowModel._pictureViews)
             {
                 i.DataContext = null; 
             }
             mainWindowVM.MainWindowModel._pictureViews.Clear();
+            mainWindowVM.SetCurrentMain(null);
+            shuffler.mWinHandler(null);
             MW.DataContext = null;
             MW.Closed -= MW_Closed;
             MW = null;
             GC.Collect();
-            */
+            
         }
 
         /// <summary>

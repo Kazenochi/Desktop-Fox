@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Windows.Markup;
 using Application = System.Windows.Application;
 
 namespace DesktopFox
@@ -18,8 +18,10 @@ namespace DesktopFox
         private System.Windows.Forms.ToolStripMenuItem CloseMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AutostartMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AutoSetChangeMenuItem;
-
+        private System.Windows.Forms.ToolStripMenuItem LanguageMenuItem;
+        private String _language = "en-EN";
         private Fox DF;
+        private Settings _settings;
 
         /// <summary>
         /// Konstuktor
@@ -46,6 +48,7 @@ namespace DesktopFox
             CloseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             AutostartMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             AutoSetChangeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            LanguageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             NotifyIconContextMenu.SuspendLayout();
 
             //NotifyIcon Paras
@@ -65,14 +68,20 @@ namespace DesktopFox
             //Autostart Paras
             AutostartMenuItem.Name = "Autostart";
             AutostartMenuItem.Size = new System.Drawing.Size(150, 75);
-            //AutostartMenuItem.Text = "Autostart = " + SM.getAutostart().ToString();
+            AutostartMenuItem.Text = "Autostart = ";
             AutostartMenuItem.Click += new EventHandler(AutostartMenuItem_Click);
 
             //AutoSetChange Paras
             AutoSetChangeMenuItem.Name = "AutoSetChange";
             AutoSetChangeMenuItem.Size = new System.Drawing.Size(150, 75);
-            //AutoSetChangeMenuItem.Text = "Auto SetChange = " + SM.getAutoSetChange().ToString();
+            AutoSetChangeMenuItem.Text = "Auto SetChange = ";
             AutoSetChangeMenuItem.Click += new EventHandler(AutoSetChangeMenuItem_Click);
+
+            //Language Paras
+            LanguageMenuItem.Name = "Language";
+            LanguageMenuItem.Size = new System.Drawing.Size(150, 75);
+            LanguageMenuItem.Text = "Change Language";
+            LanguageMenuItem.Click += new EventHandler(LanguageMenuItem_Click);
 
             NotifyIconContextMenu.ResumeLayout(false);
             notifyIcon.ContextMenuStrip = NotifyIconContextMenu;
@@ -109,6 +118,11 @@ namespace DesktopFox
         /// <param name="e"></param>
         private void AutostartMenuItem_Click(object sender, EventArgs e)
         {
+            if (_settings == null)
+                _settings = DF.SettingsManager.Settings;
+
+            DF.SettingsManager.Settings.AutostartOn = !DF.SettingsManager.Settings.AutostartOn;
+            AutostartMenuItem.Text = "Autostart = " + DF.SettingsManager.Settings.AutostartOn.ToString();
         }
 
         /// <summary>
@@ -118,8 +132,29 @@ namespace DesktopFox
         /// <param name="e"></param>
         private void AutoSetChangeMenuItem_Click(object sender, EventArgs e)
         {
+            if (_settings == null)
+                _settings = DF.SettingsManager.Settings;
+
+            DF.SettingsManager.Settings.AutoSetChange = !DF.SettingsManager.Settings.AutoSetChange;
+            AutoSetChangeMenuItem.Text = "Auto SetChange = " + DF.SettingsManager.Settings.AutoSetChange.ToString();
         }
 
+        private void LanguageMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            if(_language == "en")
+            {
+                _language = "de-DE";             
+            }
+            else
+            {
+                _language = "en";
+            }
+            var language = XmlLanguage.GetLanguage(_language);
+            Application.Current.MainWindow.Language = language;
+
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(_language);
+        }
 
     }
 }

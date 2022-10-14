@@ -6,6 +6,7 @@
         xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:DesktopFox" 
         xmlns:view="clr-namespace:DesktopFox.MVVM.Views"
+        xmlns:p ="clr-namespace:DesktopFox.Properties"
         d:DataContext="{d:DesignInstance Type=local:MainWindowVM}"
         mc:Ignorable="d"      
         Title="MainWindow" Height="820" Width="1690"

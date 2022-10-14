@@ -6,7 +6,6 @@ using DesktopFox.MVVM.Views;
 using System.Collections.Generic;
 using System.Diagnostics;
 using DesktopFox.MVVM.ViewModels;
-using DesktopFox.Base;
 using System.ComponentModel;
 using System;
 using System.Linq;
@@ -18,6 +17,7 @@ namespace DesktopFox
     /// </summary>
     public partial class Fox : Window
     {
+        private FileChecker fileChecker;
         private Gallery gallery;
         private GalleryManager GM;
         private Settings settings;
@@ -41,10 +41,10 @@ namespace DesktopFox
             InitializeComponent();
             this.Hide();
             notifyIcon = new NotifyIcon(this);
-
+            fileChecker = new FileChecker();
             loadFiles();
             shadow = new GalleryShadow(gallery);
-            
+
             vDesk = new VirtualDesktop();
             SM = new SettingsManager(this, settings, vDesk);
             mainWindowVM = new MainWindowVM(this);
@@ -107,7 +107,7 @@ namespace DesktopFox
             if (tmpGal == null)
                 gallery = new Gallery();
             else
-                gallery = tmpGal;
+                gallery = fileChecker.FullCheck(tmpGal);
 
             var tmpSet = DF_Json.loadSettings();
             if(tmpSet == null)

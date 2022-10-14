@@ -1,5 +1,4 @@
 ﻿using DesktopFox;
-using DesktopFox.Base;
 using DesktopFox.MVVM.ViewModels;
 using DesktopFox.MVVM.Views;
 using System;
@@ -165,6 +164,9 @@ namespace DesktopFox
                 _gallery.PictureSetList[_shadow.GetKey(pictureSet)].DayCol = null;
             else
                 _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol = null;
+
+            if(_gallery.PictureSetList[_shadow.GetKey(pictureSet)].DayCol == null && _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol == null)
+                _shadow.Remove(pictureSet);
 
         }
 
@@ -332,5 +334,6 @@ namespace DesktopFox
                 return pictureSet;
             }
         }
+
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesktopFox.Base
+namespace DesktopFox
 {
     /// <summary>
     /// Spiegel Klasse zur Galerie um eine Auflösung von Setnamen zu Schlüsseln zu erleichtern

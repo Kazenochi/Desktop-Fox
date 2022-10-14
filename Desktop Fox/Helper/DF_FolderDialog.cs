@@ -34,7 +34,7 @@ namespace DesktopFox
         /// </summary>
         /// <param name="fileInfos">Liste von Datei Informationen</param>
         /// <returns>String Liste mit Dateinamen</returns>
-        private static List<String> getList(List<FileInfo> fileInfos)
+        public static List<String> getList(List<FileInfo> fileInfos)
         {
             List<String> list = new List<String>();
             foreach(FileInfo fileInfo in fileInfos)
@@ -49,7 +49,7 @@ namespace DesktopFox
         /// </summary>
         /// <param name="path">Absoluter Pfad zum Bildordner</param>
         /// <returns>Liste mit Datei Informationen</returns>
-        private static List<FileInfo> getFileInfo(String path)
+        public static List<FileInfo> getFileInfo(String path)
         {
             DirectoryInfo dir = new DirectoryInfo(path);
             FileInfo[] filesArray = dir.GetFiles();

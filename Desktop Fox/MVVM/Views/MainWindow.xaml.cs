@@ -29,6 +29,9 @@ namespace DesktopFox
         /// <param name="e"></param>
         private void WindowClickAndDrag(object sender, MouseButtonEventArgs e)
         {
+            if(this.WindowState == WindowState.Maximized)
+                this.WindowState = WindowState.Normal;
+
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }

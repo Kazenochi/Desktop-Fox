@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 
 namespace DesktopFox
 {
@@ -21,14 +23,18 @@ namespace DesktopFox
             try
             {
                 bitmapImage.UriSource = new Uri(Path);
+                bitmapImage.DecodePixelHeight = 1000;
                 bitmapImage.EndInit();
+                RenderOptions.SetBitmapScalingMode(bitmapImage, BitmapScalingMode.LowQuality);
                 bitmapImage.Freeze();
+                
             }
             catch
             {
                 bitmapImage.EndInit();
                 bitmapImage = dummy();
             }
+            
             return bitmapImage;
         }
 
@@ -46,8 +52,8 @@ namespace DesktopFox
             {           
                 bitmapImage.UriSource = new Uri(Path);
                 bitmapImage.DecodePixelHeight = (int)Height;
-                bitmapImage.DecodePixelWidth = 360;
                 bitmapImage.EndInit();
+                RenderOptions.SetBitmapScalingMode(bitmapImage, BitmapScalingMode.LowQuality);
             }
             catch
             {

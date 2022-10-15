@@ -60,7 +60,7 @@ namespace DesktopFox
         /// <returns></returns>
         public BitmapImage getPreview()
         {
-            return ImageHandler.load(singlePics.ElementAt(0).Key, 200);
+            return ImageHandler.load(singlePics.ElementAt(0).Key, 300);
         }
     }
 }

@@ -33,5 +33,6 @@
     <local:BoolInverter x:Key="BoolInverter"/>
     <local:BoolToIntConverter x:Key="BoolToIntConverter"/>
     <local:BorderClipConverter x:Key="BorderClipConverter"/>
-    
+    <local:WindowSizeConverter x:Key="WindowSizeConverter"/>
+
 </ResourceDictionary>

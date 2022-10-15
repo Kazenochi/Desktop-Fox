@@ -3,27 +3,44 @@
     <!--Beispiel stammt von Payload. https://www.youtube.com/watch?v=PzP8mw7JUzI. Code wurde nur leicht verändert-->
     <Style TargetType="{x:Type TextBox}"
        x:Key="DF_TextboxInput">
-        <Setter Property="FontFamily" Value="/Assets/#Nunito"/>
+        <Setter Property="FontFamily" Value="{StaticResource Default}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <TextBox Text="{TemplateBinding Text}"
-                             Foreground="{TemplateBinding Foreground}"
+                    <Border x:Name="DFBorder"
+                            Height="{TemplateBinding Height}"
+                            Width="{TemplateBinding Width}"
+                            CornerRadius="20"
+                            BorderThickness="3"
+                            Background="{TemplateBinding Background}">
+                        <TextBox x:Name="TextBox"
+                             MaxLength="20"
+                             Foreground="{StaticResource TextBrush}"
                              FontSize="20"
                              VerticalAlignment="Center"
                              Background="Transparent"
-                             BorderBrush="Transparent"
+                             BorderThickness="0"
+                             CaretBrush="{StaticResource TextBrush}"
                              TextAlignment="Center"
-                             Margin="10,1,10,1"/>
+                             Margin="5,0,5,0"
+                             Text="{TemplateBinding Text}"/>
+                        
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="#FF68799A"/>
+        <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+        <Setter Property="Border.Height" Value="40"/>
+        <Setter Property="Border.Width" Value="300"/>
+        <Setter Property="Border.CornerRadius" Value="20"/>
         <Style.Triggers>
-            <Trigger Property="IsMouseCaptured" Value="True">
-                <Setter Property="Background" Value="Aqua"/>
-                <Setter Property="Cursor" Value="IBeam"/>
-            </Trigger>
+            <DataTrigger Binding="{Binding ElementName=DFBorder, Path=IsMouseOver}" Value="true">
+                <Setter Property="Border.Background" Value="{StaticResource HighlightBrush}"/>
+                <Setter Property="Border.Cursor" Value="Hand"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=TextBox, Path=IsFocused}" Value="true">
+                <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+            </DataTrigger>
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

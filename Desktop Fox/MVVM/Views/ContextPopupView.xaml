@@ -48,7 +48,6 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                   
                 </Border>
                 <Button x:Name="button_Rename"
                         Style="{StaticResource DF_Button_Border}"

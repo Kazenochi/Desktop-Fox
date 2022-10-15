@@ -6,7 +6,6 @@
         xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:DesktopFox" 
         xmlns:view="clr-namespace:DesktopFox.MVVM.Views"
-        xmlns:p ="clr-namespace:DesktopFox.Properties"
         d:DataContext="{d:DesignInstance Type=local:MainWindowVM}"
         mc:Ignorable="d"      
         Title="MainWindow" Height="820" Width="1690"
@@ -101,7 +100,6 @@
             <!--#region Click Event Border Panes-->
             <Border x:Name="hideClickPane"
                     Background="Transparent"
-                    Opacity="0.5"
                     Grid.Row="1"
                     Margin="170,0,170,0"
                     Grid.RowSpan="3"
@@ -112,7 +110,6 @@
                 </Border.InputBindings>
             </Border>
             <Border Background="Transparent"
-                    Opacity="0.5"
                     Grid.Row="2"
                     Grid.RowSpan="1"
                     Grid.ColumnSpan="2"
@@ -121,8 +118,17 @@
                     <MouseBinding Gesture="LeftClick" Command="{Binding HideViewCommand}"/>
                 </Border.InputBindings>
             </Border>
+            <Border Background="Transparent"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Grid.Column="1"
+                    Panel.ZIndex="2">
+                <Border.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding HideViewCommand}"/>
+                </Border.InputBindings>
+            </Border>
             <!--#endregion-->
-            
+
             <ListBox x:Name="lbPictures" 
                      Margin="10,0,10,10" 
                      IsSynchronizedWithCurrentItem="True" 
@@ -139,6 +145,11 @@
                      Background="Transparent"
                      SelectedItem="{Binding SelectedItem}"
                      Panel.ZIndex="3">
+                <bh:Interaction.Triggers>
+                    <bh:EventTrigger EventName="PreviewMouseRightButtonDown">
+                        <bh:InvokeCommandAction Command="{Binding ContextPopupViewCommand}"/>
+                    </bh:EventTrigger>
+                </bh:Interaction.Triggers>
                 <d:ListBoxItem>
                     <view:PictureView/>
                 </d:ListBoxItem>

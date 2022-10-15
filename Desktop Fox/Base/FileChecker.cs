@@ -87,15 +87,14 @@ namespace DesktopFox
                     if (!i.DayCol.singlePics.ContainsKey(j))
                         i.DayCol.singlePics.Add(j, new Picture(j));
                 }
-                i.DayCol.singlePics = (IDictionary<string, Picture>)(from pic in i.DayCol.singlePics orderby pic.Value ascending select pic);
-
+         
                 tmpFiles = DF_FolderDialog.getList(DF_FolderDialog.getFileInfo(i.NightCol.folderDirectory));
                 foreach (var j in tmpFiles)
                 {
                     if (!i.NightCol.singlePics.ContainsKey(j))
                         i.NightCol.singlePics.Add(j, new Picture(j));
                 }
-                i.NightCol.singlePics = (IDictionary<string, Picture>)(from pic in i.DayCol.singlePics orderby pic.Value ascending select pic);
+                
             }
         }
 

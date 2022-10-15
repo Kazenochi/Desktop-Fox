@@ -118,22 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Activate" xml:space="preserve">
-    <value>Aktivieren</value>
+    <value>Activate</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>Hinzuf.</value>
+    <value>Add</value>
   </data>
   <data name="Both" xml:space="preserve">
-    <value>Beide</value>
+    <value>Both</value>
   </data>
   <data name="D" xml:space="preserve">
-    <value>         T</value>
+    <value>         D</value>
   </data>
   <data name="Day" xml:space="preserve">
-    <value>Tag</value>
+    <value>Day</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Löschen</value>
+    <value>Delete</value>
   </data>
   <data name="Linear" xml:space="preserve">
     <value>Linear</value>
@@ -142,24 +142,24 @@
     <value>         N</value>
   </data>
   <data name="New" xml:space="preserve">
-    <value>Neu</value>
+    <value>New</value>
   </data>
   <data name="Night" xml:space="preserve">
-    <value>Nacht</value>
+    <value>Night</value>
   </data>
   <data name="Rename" xml:space="preserve">
-    <value>Umben.</value>
+    <value>Rename</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Speichern</value>
+    <value>Save</value>
   </data>
   <data name="Select" xml:space="preserve">
-    <value>Auswählen</value>
+    <value>Select</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Einstell.</value>
+    <value>Settings</value>
   </data>
   <data name="Shuffle" xml:space="preserve">
-    <value>Mixen</value>
+    <value>Shuffle</value>
   </data>
 </root>

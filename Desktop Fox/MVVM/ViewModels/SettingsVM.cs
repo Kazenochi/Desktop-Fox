@@ -27,6 +27,7 @@ namespace DesktopFox.MVVM.ViewModels
         private Settings_ShuffleView _shuffleView = new Settings_ShuffleView();
         private Settings_StyleView _styleView = new Settings_StyleView();
         private Settings_SystemView _systemView = new Settings_SystemView();
+        private Settings_LanguageView _languageView = new Settings_LanguageView();
 
         
         /// <summary>
@@ -42,6 +43,7 @@ namespace DesktopFox.MVVM.ViewModels
             _shuffleView.DataContext = this;
             _styleView.DataContext = this;
             _systemView.DataContext = this;
+            _languageView.DataContext = this;
 
             CurrentView = _previewView; 
         }
@@ -51,6 +53,20 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         public object CurrentView { get { return _currentView; } set { _currentView = value; UpdateNumbers(); RaisePropertyChanged(nameof(CurrentView)); } }
         private object _currentView;
+
+        public int Language { get { return _language; } set { _language = value; LanguageChange(); RaisePropertyChanged(nameof(Language)); } }
+        private int _language = 0;
+       
+        private void LanguageChange()
+        {
+            switch (Language)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+            }
+        }
 
         /// <summary>
         /// Aktualisiert die Zahlenwerte in den Einsetllungs Views
@@ -109,6 +125,11 @@ namespace DesktopFox.MVVM.ViewModels
         /// Kommando um die <see cref="Views.Settings_SystemView"/> anzuzeigen
         /// </summary>
         public ICommand SystemCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _systemView); } }
+
+        /// <summary>
+        /// Kommando um die <see cref="Views.Settings_SystemView"/> anzuzeigen
+        /// </summary>
+        public ICommand LanguageCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _systemView); } }
 
         /// <summary>
         /// Kommando um die temporären Tageszeitwechsel Einstellungen abzuspeichern

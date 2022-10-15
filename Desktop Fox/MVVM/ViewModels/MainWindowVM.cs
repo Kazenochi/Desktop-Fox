@@ -153,7 +153,7 @@ namespace DesktopFox
         /// <summary>
         /// Kommando das die ContextPopup View aufzeigt <see cref="MVVM.Views.ContextPopupView"/> 
         /// </summary>
-        public ICommand ContextPopupViewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(ContextPopupView)); } }
+        public ICommand ContextPopupViewCommand { get { return new DF_Command.DelegateCommand(o => ContextSwitch()); } }
 
         /// <summary>
         /// Kommando das den Nächsten Monitor auswählt
@@ -309,6 +309,8 @@ namespace DesktopFox
         /// </summary>
         private void SChange()
         {
+            if (SelectedVM == null) return;
+
             switch (SelectedMonitor)
             {
                 case 1:
@@ -360,10 +362,20 @@ namespace DesktopFox
         }
 
         /// <summary>
+        /// Helfermethode für das Context Menu
+        /// </summary>
+        private void ContextSwitch()
+        {
+            if (CurrentView == ContextPopupView) return;
+
+            SwitchViews(ContextPopupView);
+        }
+
+        /// <summary>
         /// Ändernt die Views im Mainwindow <see cref="MainWindow.ContextViews"/>
         /// </summary>
         /// <param name="newView">Neue View die Angezeigt werden soll. null = keine View anzeigen.</param>
-        private void SwitchViews(AnimatedBaseView newView)
+        public void SwitchViews(AnimatedBaseView newView)
         {
             if (newView != null && newView != CurrentView)
             {

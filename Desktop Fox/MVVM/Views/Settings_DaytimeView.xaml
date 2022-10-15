@@ -40,22 +40,38 @@
                 <StackPanel Orientation="Horizontal">
                         
                     <Border Height="30" Width="70" 
-                            Background="#FF347FE6" 
                             CornerRadius="15"
                             Margin="10,0,10,0"
                             x:Name="border1">
                         <TextBox x:Name="dayHours"
                                  MaxLength="2"
-                                 Foreground="White"
+                                 Foreground="{StaticResource TextBrush}"
+                                 BorderThickness="0"
+                                 CaretBrush="{StaticResource TextBrush}"
                                  FontSize="20"
                                  VerticalAlignment="Center"
                                  Background="Transparent"
-                                 BorderBrush="Transparent"
                                  TextAlignment="Center"
-                                 Margin="10,1,10,1"
+                                 Margin="0,-2,0,0"
+                                 d:Text="8"
                                  TextChanged="TextBox_TextChanged"
                                  Text="{Binding DaytimeModel.DayStartHours}">
                         </TextBox>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+                                <Setter Property="Border.BorderThickness" Value="3"/>
+                                <Style.Triggers>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                                        <Setter Property="Border.Cursor" Value="Hand"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding ElementName=dayHours, Path=IsFocused}" Value="true">
+                                        <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
                     </Border>
                         
                     <TextBlock FontFamily="/Assets/#Nunito"
@@ -64,26 +80,41 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                TextAlignment="Center">
-                            Hour
+                            :
                         </TextBlock>
                         
                     <Border Height="30" Width="70" 
-                            Background="#FF347FE6" 
                             CornerRadius="15"
                             Margin="10,0,10,0"
                             x:Name="border2">
                         <TextBox x:Name="dayMinutes"
                                  MaxLength="2"
-                                 Foreground="White"
+                                 Foreground="{StaticResource TextBrush}"
+                                 BorderThickness="0"
+                                 CaretBrush="{StaticResource TextBrush}"
                                  FontSize="20"
                                  VerticalAlignment="Center"
                                  Background="Transparent"
-                                 BorderBrush="Transparent"
                                  TextAlignment="Center"
-                                 Margin="10,1,10,1"
+                                 Margin="0,-2,0,0"
                                  TextChanged="TextBox_TextChanged"
                                  Text="{Binding DaytimeModel.DayStartMinutes}">
                         </TextBox>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+                                <Setter Property="Border.BorderThickness" Value="3"/>
+                                <Style.Triggers>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                                        <Setter Property="Border.Cursor" Value="Hand"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding ElementName=dayMinutes, Path=IsFocused}" Value="true">
+                                        <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
                     </Border>
                         
                     <TextBlock FontFamily="/Assets/#Nunito"
@@ -92,7 +123,7 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                TextAlignment="Center">
-                            Minute
+                            HH:MM
                     </TextBlock>
                         
                 </StackPanel>
@@ -110,22 +141,37 @@
                 <StackPanel Orientation="Horizontal">
 
                     <Border Height="30" Width="70" 
-                            Background="#FF347FE6" 
                             CornerRadius="15"
                             Margin="10,0,10,0"
                             x:Name="border3">
                         <TextBox x:Name="nightHours"
                                  MaxLength="2"
-                                 Foreground="White"
+                                 Foreground="{StaticResource TextBrush}"
+                                 BorderThickness="0"
+                                 CaretBrush="{StaticResource TextBrush}"
                                  FontSize="20"
                                  VerticalAlignment="Center"
                                  Background="Transparent"
-                                 BorderBrush="Transparent"
                                  TextAlignment="Center"
-                                 Margin="10,1,10,1"
+                                 Margin="0,-2,0,0"
                                  TextChanged="TextBox_TextChanged"
                                  Text="{Binding DaytimeModel.NightStartHours}">
                         </TextBox>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+                                <Setter Property="Border.BorderThickness" Value="3"/>
+                                <Style.Triggers>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                                        <Setter Property="Border.Cursor" Value="Hand"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding ElementName=nightHours, Path=IsFocused}" Value="true">
+                                        <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
                     </Border>
 
                     <TextBlock FontFamily="/Assets/#Nunito"
@@ -134,26 +180,41 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                TextAlignment="Center">
-                            Hour
+                            :
                     </TextBlock>
 
                     <Border Height="30" Width="70" 
-                            Background="#FF347FE6" 
                             CornerRadius="15"
                             Margin="10,0,10,0"
                             x:Name="border4">
                         <TextBox x:Name="nightMinutes"
                                  MaxLength="2"
-                                 Foreground="White"
+                                 Foreground="{StaticResource TextBrush}"
+                                 BorderThickness="0"
+                                 CaretBrush="{StaticResource TextBrush}"
                                  FontSize="20"
                                  VerticalAlignment="Center"
                                  Background="Transparent"
-                                 BorderBrush="Transparent"
                                  TextAlignment="Center"
-                                 Margin="10,1,10,1"
+                                 Margin="0,-2,0,0"
                                  TextChanged="TextBox_TextChanged"
                                  Text="{Binding DaytimeModel.NightStartMinutes}">
                         </TextBox>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+                                <Setter Property="Border.BorderThickness" Value="3"/>
+                                <Style.Triggers>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                                        <Setter Property="Border.Cursor" Value="Hand"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding ElementName=nightMinutes, Path=IsFocused}" Value="true">
+                                        <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
                     </Border>
 
                     <TextBlock FontFamily="/Assets/#Nunito"
@@ -162,7 +223,7 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                TextAlignment="Center">
-                            Minute
+                            HH:MM
                     </TextBlock>
                 </StackPanel>
             </StackPanel>

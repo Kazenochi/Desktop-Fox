@@ -86,6 +86,7 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="{StaticResource ControlPressedBrush}"/>

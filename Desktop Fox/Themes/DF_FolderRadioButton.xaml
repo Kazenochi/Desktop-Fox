@@ -44,6 +44,7 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#FF59C5DD"/>
+                <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Foreground" Value="Aqua"/>

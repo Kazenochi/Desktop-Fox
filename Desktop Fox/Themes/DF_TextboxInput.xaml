@@ -22,6 +22,7 @@
         <Style.Triggers>
             <Trigger Property="IsMouseCaptured" Value="True">
                 <Setter Property="Background" Value="Aqua"/>
+                <Setter Property="Cursor" Value="IBeam"/>
             </Trigger>
         </Style.Triggers>
     </Style>

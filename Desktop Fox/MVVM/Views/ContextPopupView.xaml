@@ -20,19 +20,35 @@
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Center">
                 <Border Height="40" Width="300" 
-                        Background="#FF347FE6" 
                         CornerRadius="20"
                         Margin="10,0,10,0">
                     <TextBox x:Name="pictureSetName"
                              MaxLength="20"
-                             Foreground="White"
+                             Foreground="{StaticResource TextBrush}"
                              FontSize="20"
                              VerticalAlignment="Center"
                              Background="Transparent"
-                             BorderBrush="Transparent"
+                             BorderThickness="0"
+                             CaretBrush="{StaticResource TextBrush}"
                              TextAlignment="Center"
-                             Margin="10,1,10,1"
+                             Margin="5,0,5,0"
                              Text="{Binding contextModel.PictureSetName}"/>
+                    <Border.Style>
+                        <Style>
+                            <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+                            <Setter Property="Border.BorderThickness" Value="3"/>
+                            <Style.Triggers>
+                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                    <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                                    <Setter Property="Border.Cursor" Value="Hand"/>
+                                </Trigger>
+                                <DataTrigger Binding="{Binding ElementName=pictureSetName, Path=IsFocused}" Value="true">
+                                    <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                   
                 </Border>
                 <Button x:Name="button_Rename"
                         Style="{StaticResource DF_Button_Border}"

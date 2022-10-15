@@ -74,6 +74,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#FF406390"/>
                 <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
         </Style.Triggers>
     </Style>

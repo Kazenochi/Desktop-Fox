@@ -59,6 +59,8 @@ namespace DesktopFox
         {
             _mainWindow = mainWindow;
             ((PreviewVM)PreviewView.DataContext).PreviewModel.ImageStretch = (Stretch)DF.SettingsManager.Settings.PreviewFillMode;
+            if(MainWindowModel._pictureViews.Count > 0)
+                SelectedItem = MainWindowModel._pictureViews.ElementAt(0);
         }
 
         /// <summary>
@@ -392,7 +394,12 @@ namespace DesktopFox
             {
                 CurrentView.AnimateOut();
                 Task.Run(() => ContentCleanup(CurrentView.AnimationTime));
-            }         
+            }
+
+            if (CurrentView == ContextPopupView)
+                ((ContextPopupVM)ContextPopupView.DataContext).ContentChange(SelectedVM);
+            if (CurrentView == AddSetView)
+                ((AddSetVM)AddSetView.DataContext).ContentChange(SelectedVM);
         }
         #endregion 
     }

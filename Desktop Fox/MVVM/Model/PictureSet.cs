@@ -63,7 +63,7 @@ namespace DesktopFox
         /// </summary>
         [JsonIgnore]
         public BitmapImage DayImage { 
-            get { return DayCol.getPreview(); }
+            get { return DayCol.getPreview() ?? NightCol.getPreview(); }
             set
             {
                 _dayImage = value;
@@ -77,7 +77,7 @@ namespace DesktopFox
         /// </summary>
         [JsonIgnore]
         public BitmapImage NightImage {
-            get { return NightCol.getPreview(); }
+            get { return NightCol.getPreview() ?? DayCol.getPreview(); }
             set 
             {
                 _nightImage = value;

@@ -82,7 +82,7 @@ namespace DesktopFox.MVVM.ViewModels
         /// Logik für die Radio Buttons. 
         /// Entscheidet anhand der Eigenschaften des Ausgewählten Sets welcher Radio Button auswählbar ist. <see cref="DesktopFox.MainWindowVM.SelectedVM"/>
         /// </summary>
-        private void DeleteValidation()
+        public void DeleteValidation()
         {
             if (MWVM.SelectedVM == null) return;
 

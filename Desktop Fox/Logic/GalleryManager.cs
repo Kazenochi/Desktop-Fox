@@ -161,9 +161,15 @@ namespace DesktopFox
             }
 
             if (day)
+            {             
                 _gallery.PictureSetList[_shadow.GetKey(pictureSet)].DayCol = null;
+                _gallery.PictureSetList[_shadow.GetKey(pictureSet)].DayImage = null;
+            }
             else
+            {              
                 _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol = null;
+                _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightImage = null;
+            }          
 
             if(_gallery.PictureSetList[_shadow.GetKey(pictureSet)].DayCol == null && _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol == null)
                 _shadow.Remove(pictureSet);

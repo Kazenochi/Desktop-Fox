@@ -123,6 +123,34 @@
                 </Grid>
             </StackPanel>
 
+            <Border d:Visibility="Visible">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=pBorder, Path=IsMouseOver}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                <RotateTransform Angle="90" CenterX="0.5" CenterY="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FFFFB800"/>
+                        <GradientStop Color="#FFFFB800" Offset="1"/>
+                        <GradientStop Color="#00000000" Offset="0.1"/>
+                        <GradientStop Color="#00000000" Offset="0.9"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
             <Rectangle x:Name="pSelectedMarker"
                        Width="10" Height="200" 
                        VerticalAlignment="Top"
@@ -137,7 +165,6 @@
                         <GradientStop Color="#FFFFB800" Offset="0.398"/>
                     </LinearGradientBrush>
                 </Rectangle.Fill>
-
             </Rectangle>
         </Grid>
     </Border>

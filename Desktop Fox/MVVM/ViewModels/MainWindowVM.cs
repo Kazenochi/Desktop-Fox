@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Windows.Media;
 
 namespace DesktopFox
 {
@@ -40,9 +41,12 @@ namespace DesktopFox
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Settings_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName.ToString() != nameof(DF.SettingsManager.Settings.DesktopModeSingle)) return;
-            
+        {          
+            if (e.PropertyName == nameof(DF.SettingsManager.Settings.PreviewFillMode))
+                ((PreviewVM)PreviewView.DataContext).PreviewModel.ImageStretch = (Stretch)DF.SettingsManager.Settings.PreviewFillMode;
+
+            if (e.PropertyName != nameof(DF.SettingsManager.Settings.DesktopModeSingle)) return;
+
             Task.Run(() => CheckMultiMonitor());
             return;
         }
@@ -54,6 +58,7 @@ namespace DesktopFox
         public void SetCurrentMain(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
+            ((PreviewVM)PreviewView.DataContext).PreviewModel.ImageStretch = (Stretch)DF.SettingsManager.Settings.PreviewFillMode;
         }
 
         /// <summary>
@@ -127,6 +132,7 @@ namespace DesktopFox
             } 
         }
         private PictureView _selectedItem;
+
         #endregion
 
         #region Kommandos

@@ -123,7 +123,7 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                TextAlignment="Center">
-                            HH:MM
+                            hh : mm
                     </TextBlock>
                         
                 </StackPanel>
@@ -223,7 +223,7 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                TextAlignment="Center">
-                            HH:MM
+                            hh : mm
                     </TextBlock>
                 </StackPanel>
             </StackPanel>

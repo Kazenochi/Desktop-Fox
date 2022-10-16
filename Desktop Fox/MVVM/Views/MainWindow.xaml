@@ -26,9 +26,6 @@
             CornerRadius="10"
             Name="MainBorder"
             ClipToBounds="True">
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="10" ShadowDepth="5"/>
-        </Border.Effect>
         <Border.Clip>
             <MultiBinding Converter="{StaticResource BorderClipConverter}">
                 <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
@@ -98,7 +95,6 @@
                             Style="{StaticResource DF_Button_Border}"
                             Command="{Binding SettingsMainViewCommand}"/>
                 </StackPanel>
-
             </StackPanel>
 
             <!--#region Click Event Border Panes-->
@@ -111,6 +107,7 @@
                     Panel.ZIndex="2">
                 <Border.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding HideViewCommand}"/>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding MaximizeCommand}"/>
                 </Border.InputBindings>
             </Border>
             <Border Background="Transparent"
@@ -120,6 +117,7 @@
                     Panel.ZIndex="2">
                 <Border.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding HideViewCommand}"/>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding MaximizeCommand}"/>
                 </Border.InputBindings>
             </Border>
             <Border Background="Transparent"
@@ -129,6 +127,7 @@
                     Panel.ZIndex="2">
                 <Border.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding HideViewCommand}"/>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding MaximizeCommand}"/>
                 </Border.InputBindings>
             </Border>
             <!--#endregion-->
@@ -149,6 +148,18 @@
                      Background="Transparent"
                      SelectedItem="{Binding SelectedItem}"
                      Panel.ZIndex="3">
+                <!--Deaktivieren des Highlights-->
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <ContentPresenter Margin="0,3,0,3"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <bh:Interaction.Triggers>
                     <bh:EventTrigger EventName="PreviewMouseRightButtonDown">
                         <bh:InvokeCommandAction Command="{Binding ContextPopupViewCommand}"/>

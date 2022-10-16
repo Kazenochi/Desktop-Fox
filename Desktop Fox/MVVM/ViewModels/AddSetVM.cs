@@ -75,6 +75,8 @@ namespace DesktopFox.MVVM.ViewModels
         {
             if (AddSetModel.FolderPath != null && AddSetModel.PictureSetName != "Error")
                 GM.addSet(AddSetModel.PictureSetName, GalleryManager.makeCollection(fileList, AddSetModel.FolderPath), Day);
+
+            ((ContextPopupVM)MWVM.ContextPopupView.DataContext).DeleteValidation();
         }
 
         /// <summary>

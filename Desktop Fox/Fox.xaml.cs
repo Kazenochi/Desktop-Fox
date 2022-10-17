@@ -155,7 +155,8 @@ namespace DesktopFox
         private void MW_Closed(object? sender, System.EventArgs e)
         {
             MW.Hide();
-            
+            Application_Close(null, null);
+
             foreach (var i in mainWindowVM.MainWindowModel._pictureViews)
             {
                 i.DataContext = null; 
@@ -181,9 +182,9 @@ namespace DesktopFox
             //notifyIcon.Dispose();
             //Debugnachrichten werden nicht auf der Konsole ausgegeben
             if (DF_Json.saveFile(gallery) & DF_Json.saveFile(settings))
-                Debug.WriteLine("Programm wurde Beendet. Speichern der Daten war erfolgreich");
+                Debug.WriteLine("App Close. Speichern der Daten war erfolgreich");
             else
-                Debug.WriteLine("Program wurde Beendet. FEHLER. Daten konnten nicht gespeichert werden.");
+                Debug.WriteLine("App Close. FEHLER. Daten konnten nicht gespeichert werden.");
         }
     }
 }

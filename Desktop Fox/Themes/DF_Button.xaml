@@ -65,6 +65,9 @@
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="{StaticResource ControlPressedBrush}"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="DarkGray"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
 

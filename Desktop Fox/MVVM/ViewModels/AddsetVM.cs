@@ -69,6 +69,12 @@ namespace DesktopFox.MVVM.ViewModels
         public ICommand GenerateSetName { get { return new DF_Command.DelegateCommand(o => GetSetName()); } }
 
         /// <summary>
+        /// Flag ob der Hinzufügen Button drückbar ist <see cref="Views.AddSetView.button_AddPictures"/>
+        /// </summary>
+        public bool CanAdd { get { return _canAdd; } set { _canAdd = value; RaisePropertyChanged(nameof(CanAdd)); } }
+        private bool _canAdd = false;
+
+        /// <summary>
         /// Fügt ein neues Set mit den aktuellen Parametern hinzu.
         /// </summary>
         private void AddNS()
@@ -98,8 +104,17 @@ namespace DesktopFox.MVVM.ViewModels
         private void OpenFD()
         {
             fileList = DF_FolderDialog.openFolderDialog();
-            if(fileList != null)
+            if(fileList != null && fileList.Count > 0)
+            {
                 AddSetModel.FolderPath = Path.GetDirectoryName(fileList[0]);
+                CanAdd = true;
+            }
+            else
+            {
+                AddSetModel.FolderPath = "No Pictures Found";
+                CanAdd = false;
+            }
+
         }
 
         /// <summary>

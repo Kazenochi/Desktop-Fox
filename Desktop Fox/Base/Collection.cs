@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Windows.Media.Imaging;
 
 namespace DesktopFox
@@ -61,7 +62,14 @@ namespace DesktopFox
         /// <returns></returns>
         public BitmapImage getPreview()
         {
-            return ImageHandler.load(singlePics.ElementAt(0).Key, 300);
+            try
+            {
+                return ImageHandler.load(singlePics.ElementAt(0).Key, 300);
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                return ImageHandler.dummy();
+            }
         }
     }
 }

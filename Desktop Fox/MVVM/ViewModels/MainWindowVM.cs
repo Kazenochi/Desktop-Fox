@@ -176,7 +176,7 @@ namespace DesktopFox
         /// <summary>
         /// Kommando das das Hauptfenster schliest
         /// </summary>
-        public ICommand CloseCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.Hide()); } }
+        public ICommand CloseCommand { get { return new DF_Command.DelegateCommand(o => _mainWindow.Close()); } }
 
         /// <summary>
         /// Kommando das das Hauptfenster minimiert

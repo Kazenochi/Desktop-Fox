@@ -86,10 +86,10 @@ namespace DesktopFox
                     if (_settings.AutostartOn && regKey.GetValue("Desktopfox") == null)
                     {
                         string appLocation = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-                        Debug.WriteLine("Autostart wurde gesetzt. Rückgabewert der Applocation: " + appLocation);
+                        Debug.WriteLine("Autostart wurde gesetzt. Rückgabewert der App Location: " + appLocation);
                         regKey.SetValue("Desktopfox", appLocation);
                     }
-                    else if (_settings.AutostartOn == false && regKey.GetValue("Desktopfox") != null)
+                    else if (!_settings.AutostartOn && regKey.GetValue("Desktopfox") != null)
                     {
                         Debug.WriteLine("Registryeintrag wurde Entfernt");
                         regKey.DeleteValue("Desktopfox");

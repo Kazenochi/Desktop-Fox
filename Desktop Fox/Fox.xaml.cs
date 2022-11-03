@@ -103,7 +103,7 @@ namespace DesktopFox
         /// </summary>
         public void loadFiles()
         {
-            var tmpGal = DF_Json.loadGallery();
+            Gallery tmpGal = DF_Json.loadGallery();
             if (tmpGal == null)
                 gallery = new Gallery();
             else

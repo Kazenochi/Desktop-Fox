@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Linq;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace DesktopFox
@@ -72,6 +73,15 @@ namespace DesktopFox
                 {
                     String json = reader.ReadToEnd();
                     var gal = JsonConvert.DeserializeObject<Gallery>(json);
+
+                    //Wird benötigt um das Padding der Datei zu entfernen. Note: KP warum es nötig ist. Beim laden der datei sollte er keine extra Elemente in der Liste haben
+                    if (gal.activeSetsList.Count > 3)
+                    {
+                        for(int i = 0; i < 3; i++)
+                        {
+                            gal.activeSetsList.Remove(gal.activeSetsList.ElementAt(0));
+                        }   
+                    }
                     return gal;
                 }
             }

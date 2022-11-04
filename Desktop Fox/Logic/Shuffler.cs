@@ -87,28 +87,6 @@ namespace DesktopFox
         }
 
         /// <summary>
-        /// Klasseninitialisierung
-        /// </summary>
-        /// <param name="mWin"></param>
-        /// <param name="vDesk"></param>
-        /// <param name="gal"></param>
-        /// <param name="settings"></param>
-        /// <param name="galManager"></param>
-        /// <param name="settingsManager"></param>
-        public async Task ShufflerInit(MainWindow mWin, VirtualDesktop vDesk, Gallery gal, Settings settings, GalleryManager galleryManager, SettingsManager settingsManager)
-        {
-            this.mWindow = mWin;
-            this.vDesk = vDesk;
-            //this.gallery = gal;
-            _settings = settings;
-            this.GM = galleryManager;
-            this.SM = settingsManager;
-
-            //isDayCheck();
-            Task.Run(() => daytimeTimerStart());
-        }
-
-        /// <summary>
         /// Shuffle Funktion für den Windows eigenen Shuffel Modus. 
         /// </summary>
         /// <param name="path"></param>

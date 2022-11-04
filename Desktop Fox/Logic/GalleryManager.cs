@@ -252,18 +252,22 @@ namespace DesktopFox
         /// Setzt das angegebene aktive Pictureset das neu auf dem Desktop angezeigt wird
         /// </summary>
         /// <param name="pictureSet"></param>
-        /// <param name="choice">1 = Erstes Set, 2 = Zweites Set, ...</param>
-        public void setActiveSet(String pictureSet, int choice = 1)
+        /// <param name="monitor">1 = Erstes Set, 2 = Zweites Set, ...</param>
+        public void setActiveSet(String pictureSet, int monitor = 1)
         {
             if(pictureSet != null)
             {
-                _gallery.activeSetsList[choice - 1] = pictureSet;
+                _gallery.activeSetsList[monitor - 1] = pictureSet;
                 SM.Settings.IsRunning = true;
+                foreach(var i in MWVM.MainWindowModel._pictureViewVMs)
+                {
+                    i.ActiveSetChanged(pictureSet, monitor);
+                }
             }
         }
 
         /// <summary>
-        /// Entfernt das angegebene Bild Set aus der Liste der Aktiven Sets
+        /// Entfernt das angegebene Bild Set aus der Liste der Aktiven Sets und stoppt die App
         /// Es wird eine von beiden Übergabeparametern benötigt
         /// </summary>
         /// <param name="pictureSet">Name des Sets das Angehalten werden soll</param>
@@ -276,6 +280,11 @@ namespace DesktopFox
                 _gallery.activeSetsList[monitor - 1] = "Empty";
                 if(!areSetsActive())
                     SM.Settings.IsRunning = false;
+
+                foreach (var i in MWVM.MainWindowModel._pictureViewVMs)
+                {
+                    i.ActiveSetChanged(pictureSet, monitor);
+                }
                 return true;
             }else if(pictureSet != null)
             {

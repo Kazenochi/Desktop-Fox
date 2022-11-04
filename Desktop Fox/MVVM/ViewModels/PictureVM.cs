@@ -1,4 +1,8 @@
-﻿namespace DesktopFox.MVVM.ViewModels
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Documents;
+
+namespace DesktopFox.MVVM.ViewModels
 {
     /// <summary>
     /// ViewModel der <see cref="Views.PictureView"/> Klasse
@@ -17,6 +21,33 @@
         public PictureVM(PictureSet picture)
         {
             pictureSet = picture;
+        }
+
+        /// <summary>
+        /// Aktualisiert die Anzeige der BilderSets nach dem ändern des Aktiven Sets
+        /// </summary>
+        /// <param name="activeSet"></param>
+        /// <param name="monitor"></param>
+        public void ActiveSetChanged(String activeSet, int monitor)
+        {
+            if(activeSet == pictureSet.SetName)
+            {
+                switch (monitor)
+                {
+                    case 1: pictureSet.IsActive1 = true; break;
+                    case 2: pictureSet.IsActive2 = true; break;
+                    case 3: pictureSet.IsActive3 = true; break;
+                }
+            }
+            else
+            {
+                switch (monitor)
+                {
+                    case 1: pictureSet.IsActive1 = false; break;
+                    case 2: pictureSet.IsActive2 = false; break;
+                    case 3: pictureSet.IsActive3 = false; break;
+                }
+            }
         }
     }
 }

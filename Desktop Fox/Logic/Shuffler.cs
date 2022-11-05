@@ -24,13 +24,16 @@ namespace DesktopFox
         private int picCount1 = 0;
         private int picCount2 = 0;
         private int picCount3 = 0;
+        private int[] lockList1 = new int[3];
+        private int[] lockList2 = new int[3];
+        private int[] lockList3 = new int[3];
         private Settings _settings;
         private int previewCount = 0;
         private Timer previewTimer;
         private Timer desktopShuffleTimer;
         private Timer daytimeTimer;
         private TimeSpan PreviewShuffleTime = TimeSpan.FromSeconds(10);
-        private int[] lockList = new int[3];
+        
         private Random random = new Random();
 
         /// <summary>
@@ -590,11 +593,13 @@ namespace DesktopFox
         private void df_PicShuffle(String monitorID, Collection activeCol, int monitor)
         {
             int tmpCount = 0;
+            int[] tmpLockList;
             switch (monitor)
             {
-                case 1: tmpCount = picCount1; break;
-                case 2: tmpCount = picCount2; break;
-                case 3: tmpCount = picCount3; break;
+                case 1: tmpCount = picCount1; tmpLockList = lockList1; break;
+                case 2: tmpCount = picCount2; tmpLockList = lockList2; break;
+                case 3: tmpCount = picCount3; tmpLockList = lockList3; break;
+                default: tmpCount = picCount1; tmpLockList = lockList1; break;
             }
 
             //Überprüft ob sich die Einstellung geändert hat und passt diese ggf. an
@@ -607,25 +612,31 @@ namespace DesktopFox
                 //Shuffle Funktion für die Anzeige
 
                 //"Shiften" des Arrays um eine Position um platz für den Neuen Eintrag zu machen
-                var tmpArray = lockList;
-                Array.Copy(tmpArray, 0, lockList, 1, tmpArray.Length - 1);
-                lockList[0] = tmpCount;
+                var tmpArray = tmpLockList;
+                Array.Copy(tmpArray, 0, tmpLockList, 1, tmpArray.Length - 1);
+                tmpLockList[0] = tmpCount;
 
                 //Ermitteln eines neuen Random Wertes der noch nicht in den Letzten 3 Bildern vorgekommen ist.
                 //Versuche sind hierbei auf 50 begrenzt um das System nicht zu sehr zu belasten oder einen Deadlock zu verursachen
 
                 Boolean match = false;
-                for (int i = 1; i < 50; i++)
+                for (int i = 1; i < 100; i++)
                 {
                     tmpCount = random.Next(activeCol.singlePics.Count);
-                    foreach (var item in lockList)
+                    foreach (var item in tmpLockList)
                     {
-                        if (item == tmpCount) { match = true; break; }
+                        if (item == tmpCount) 
+                        { 
+                            Debug.WriteLine("Match für Items: " + item + " = " + tmpCount);
+                            match = true;
+                            break; 
+                        }
                     }
 
-                    if (match == false) continue;
+                    if (match == false) 
+                        break;
                 }
-                vDesk.getWrapper.SetWallpaper(monitorID, activeCol.singlePics.ElementAt(tmpCount).Key);
+                vDesk.getWrapper.SetWallpaper(monitorID, activeCol.singlePics.ElementAt(tmpCount).Key);      
             }
             else
             {
@@ -638,6 +649,13 @@ namespace DesktopFox
                 vDesk.getWrapper.SetWallpaper(monitorID, activeCol.singlePics.ElementAt(tmpCount).Key);
             }
 
+            Debug.Write("Ändern des Hintergrundes. Monitor: " + monitor + ", Zahl: " + tmpCount + ", LockListe: ");
+            foreach(var item in tmpLockList)
+            {
+                Debug.Write(item + ", ");
+            }
+            Debug.WriteLine("");
+            //Note: Wofür... Bestimmt wichtig :)... Rückgabe des Counters 
             switch (monitor)
             {
                 case 1: picCount1 = tmpCount; break;

@@ -33,6 +33,7 @@ namespace DesktopFox
             MainWindowModel = new MainWindowModel();
             Preview = PreviewView;
             DF.SettingsManager.Settings.PropertyChanged += Settings_PropertyChanged;
+            CheckMultiMonitor();
         }
 
         /// <summary>

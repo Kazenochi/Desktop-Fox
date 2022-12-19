@@ -24,7 +24,7 @@
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
-                               TextAlignment="Center"><Run Text="Please select what kind of Collection"/></TextBlock>
+                               TextAlignment="Center"><Run Text="Please select the collection time"/></TextBlock>
                     <StackPanel Orientation="Horizontal" 
                                 Grid.Row="1"
                                 HorizontalAlignment="Center"

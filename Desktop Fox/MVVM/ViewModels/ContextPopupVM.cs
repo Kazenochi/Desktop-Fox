@@ -142,6 +142,14 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         private void RenameSet() 
         {
+            foreach(var i in GM.Gallery.PictureSetList)
+            {
+                if(i.Value.SetName == contextModel.PictureSetName)
+                {
+                    contextModel.PictureSetName = "Error: Already Exists";
+                    return;
+                }
+            }
             GM.RenameSet(MWVM.SelectedVM.pictureSet.SetName, contextModel.PictureSetName);            
         }
 

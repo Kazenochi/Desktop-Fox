@@ -157,6 +157,7 @@ namespace DesktopFox
                     MWVM.MainWindowModel._pictureViews.Remove(tmpDeleteViews);
                     MWVM.MainWindowModel._pictureViewVMs.Remove(tmpDeleteVM);
                 }
+                checkIfActive(pictureSet);
                 return;
             }
 
@@ -172,8 +173,19 @@ namespace DesktopFox
             }          
 
             if(_gallery.PictureSetList[_shadow.GetKey(pictureSet)].DayCol == null && _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol == null)
+            {
                 _shadow.Remove(pictureSet);
+                checkIfActive(pictureSet);
+            }
+        }
 
+        private void checkIfActive(String checkSet)
+        {
+            for (int i = 0; i < _gallery.activeSetsList.Count; i++)
+            {
+                if (_gallery.activeSetsList[i] == checkSet)
+                    stopActiveSet(checkSet);
+            }
         }
 
         /// <summary>

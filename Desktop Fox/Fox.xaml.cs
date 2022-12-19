@@ -155,6 +155,7 @@ namespace DesktopFox
         private void MW_Closed(object? sender, System.EventArgs e)
         {
             MW.Hide();
+            mainWindowVM.CurrentView = null;
             Application_Close(null, null);
 
             foreach (var i in mainWindowVM.MainWindowModel._pictureViews)

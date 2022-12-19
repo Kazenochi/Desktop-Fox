@@ -134,6 +134,7 @@ namespace DesktopFox.MVVM.ViewModels
             }
             DeletionSelect = 0;
             DeleteValidation();
+            MWVM.SwitchViews(null);
         }
 
         /// <summary>
@@ -151,6 +152,7 @@ namespace DesktopFox.MVVM.ViewModels
         /// <param name="pictureViewVM">Aktuell ausgewähltes Objekt</param>
         public new void ContentChange(PictureVM pictureViewVM)
         {
+            if(pictureViewVM == null) return;
             contextModel.PictureSetName = pictureViewVM.pictureSet.SetName;
             DeletionSelect = 0;
             DeleteValidation();

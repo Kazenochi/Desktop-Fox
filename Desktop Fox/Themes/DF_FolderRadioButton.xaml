@@ -5,19 +5,19 @@
            TargetType="{x:Type RadioButton}"
            x:Key="DF_FolderRadioButton">
         <Style.Setters>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontFamily" Value="/Assets/#Nunito"/>
+            <Setter Property="FontFamily" Value="{StaticResource Default}"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
-                        <Border Background="#FF2C394A"
+                        <Border Background="{StaticResource BackgroundBrush}"
                                     Height="41" Width="82"
                                     CornerRadius="21,21,0,0"
                                     Margin="2,0,2,0">
-                            <Border Background="#FF4C77D7"
+                            <Border Background="{StaticResource ControlBrush}"
                                     Height="40" Width="80"
                                     CornerRadius="20,20,0,0"
                                     Margin="0,0,0,-1">
@@ -43,12 +43,23 @@
         </Style.Setters>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FF59C5DD"/>
-                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Background" Value="{StaticResource HighlightBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}"/>
             </Trigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                    <Condition Property="IsChecked" Value="False"/>
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Foreground" Value="Aqua"/>
-                <Setter Property="Background" Value="#FF2C394A"/>
+                <Setter Property="Foreground" Value="{StaticResource ControlPressedTextBrush}"/>
+                <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

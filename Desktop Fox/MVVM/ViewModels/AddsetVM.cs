@@ -44,6 +44,8 @@ namespace DesktopFox.MVVM.ViewModels
         /// <param name="pictureViewVM">Aktuell ausgewähltes Objekt</param>
         public new void ContentChange(PictureVM pictureViewVM)
         {
+            if (pictureViewVM == null) return;
+
             AddSetModel.PictureSetName = pictureViewVM.pictureSet.SetName;
         }
 

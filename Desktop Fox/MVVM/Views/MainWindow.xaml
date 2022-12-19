@@ -21,7 +21,7 @@
         <WindowChrome ResizeBorderThickness="8,2,8,8" CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
     <Border Background="{StaticResource BackgroundBrush}"
-            BorderBrush="DarkGray"
+            BorderBrush="{StaticResource BorderBrush}"
             BorderThickness="0.5"
             CornerRadius="10"
             Name="MainBorder"

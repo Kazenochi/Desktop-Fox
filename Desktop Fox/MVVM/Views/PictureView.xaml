@@ -22,6 +22,15 @@
             </MultiBinding>
         </Border.Clip>
         <Grid>
+            <Grid.Style>
+                <Style TargetType="{x:Type Grid}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
             <Image x:Name="pImageDay" Source="{Binding pictureSet.DayImage}" 
                    Stretch="UniformToFill" d:Source="/Assets/murmel.png"/>
             <Border HorizontalAlignment="Stretch"
@@ -73,7 +82,7 @@
                                     Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FF61EB4E"
-                             Margin="1"/>
+                             Margin="2"/>
                     <Label Background="Transparent"
                            Foreground="#FF0D0037"
                            Content="1"
@@ -92,7 +101,7 @@
                                     Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FF41A6FF"
-                             Margin="1"/>
+                             Margin="2"/>
                     <Label Background="Transparent"
                            Foreground="#FF0D0037"
                            Content="2"
@@ -111,7 +120,7 @@
                                     Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FFFF3C3C"
-                             Margin="1"/>
+                             Margin="2"/>
                     <Label Background="Transparent"
                            Foreground="#FF0D0037"
                            Content="3"

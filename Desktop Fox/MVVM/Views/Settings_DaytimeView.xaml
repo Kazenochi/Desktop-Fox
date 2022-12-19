@@ -27,8 +27,8 @@
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Top"
                         Margin="0,25,0,0">
-                <TextBlock FontFamily="/Assets/#Nunito"
-                           Foreground="White"
+                <TextBlock FontFamily="{StaticResource Default}"
+                           Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -74,8 +74,8 @@
                         </Border.Style>
                     </Border>
                         
-                    <TextBlock FontFamily="/Assets/#Nunito"
-                               Foreground="White"
+                    <TextBlock FontFamily="{StaticResource Default}"
+                               Foreground="{StaticResource TextBrush}"
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
@@ -117,8 +117,8 @@
                         </Border.Style>
                     </Border>
                         
-                    <TextBlock FontFamily="/Assets/#Nunito"
-                               Foreground="White"
+                    <TextBlock FontFamily="{StaticResource Default}"
+                               Foreground="{StaticResource TextBrush}"
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
@@ -128,8 +128,8 @@
                         
                 </StackPanel>
                 
-                <TextBlock FontFamily="/Assets/#Nunito"
-                           Foreground="White"
+                <TextBlock FontFamily="{StaticResource Default}"
+                           Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -174,8 +174,8 @@
                         </Border.Style>
                     </Border>
 
-                    <TextBlock FontFamily="/Assets/#Nunito"
-                               Foreground="White"
+                    <TextBlock FontFamily="{StaticResource Default}"
+                               Foreground="{StaticResource TextBrush}"
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
@@ -217,8 +217,8 @@
                         </Border.Style>
                     </Border>
 
-                    <TextBlock FontFamily="/Assets/#Nunito"
-                               Foreground="White"
+                    <TextBlock FontFamily="{StaticResource Default}"
+                               Foreground="{StaticResource TextBrush}"
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"

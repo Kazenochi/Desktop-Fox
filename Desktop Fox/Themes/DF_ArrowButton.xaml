@@ -4,8 +4,8 @@
     <Style BasedOn="{StaticResource {x:Type Button}}"
            TargetType="{x:Type Button}"
            x:Key="DF_ArrowButton">
-        <Setter Property="Background" Value="#FFC6F2FC"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource HighlightBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -45,7 +45,7 @@
                             
                             <Border Width="55" Height="10"
                                     CornerRadius="5"
-                                    Background="#FF2C394A"
+                                    Background="{StaticResource BackgroundBrush}"
                                     Margin="5,-8,0,0">
                                 <Border.RenderTransform>
                                     <TransformGroup>
@@ -59,7 +59,7 @@
                             <Border Width="55" Height="10"
                                     CornerRadius="5"
                                     Margin="-8,5,0,0"
-                                    Background="#FF2C394A">
+                                    Background="{StaticResource BackgroundBrush}">
                                 <Border.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -74,11 +74,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="FontFamily" Value="/Assets/#Nunito"/>
-        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Default}"/>
+        <Setter Property="Opacity" Value="0.1"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FFD2FAF9"/>
+                <Setter Property="Background" Value="{StaticResource HighlightBrush}"/>
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="Opacity" Value="1"/>
             </Trigger>

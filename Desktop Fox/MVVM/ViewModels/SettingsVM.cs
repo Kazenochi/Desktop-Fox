@@ -28,8 +28,8 @@ namespace DesktopFox.MVVM.ViewModels
         private Settings_StyleView _styleView = new Settings_StyleView();
         private Settings_SystemView _systemView = new Settings_SystemView();
         private Settings_LanguageView _languageView = new Settings_LanguageView();
+        private Settings_Info _info = new Settings_Info();
 
-        
         /// <summary>
         /// Konstruktor
         /// </summary>
@@ -130,6 +130,11 @@ namespace DesktopFox.MVVM.ViewModels
         /// Kommando um die <see cref="Views.Settings_SystemView"/> anzuzeigen
         /// </summary>
         public ICommand LanguageCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _systemView); } }
+
+        /// <summary>
+        /// Kommando um die <see cref="Views.Settings_Info"/> anzuzeigen
+        /// </summary>
+        public ICommand InfoCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _info); } }
 
         /// <summary>
         /// Kommando um die temporären Tageszeitwechsel Einstellungen abzuspeichern

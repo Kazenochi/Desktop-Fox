@@ -23,7 +23,8 @@
                         CornerRadius="20"
                         Margin="10,0,10,0">
                     <TextBox x:Name="pictureSetName"
-                             MaxLength="20"
+                             MaxLength="25"
+                             d:Text="123456789ABCDEFGHIJK12345"
                              Foreground="{StaticResource TextBrush}"
                              FontSize="20"
                              VerticalAlignment="Center"

@@ -5,8 +5,8 @@
     <Style BasedOn="{StaticResource {x:Type Button}}"
            TargetType="{x:Type Button}"
            x:Key="DF_Button">
-        <Setter Property="Background" Value="#FF4C77D7"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource ControlBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Margin" Value="10,10,10,10"/>
         <Setter Property="Template">
@@ -21,10 +21,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="FontFamily" Value="/Assets/#Nunito"/>
+        <Setter Property="FontFamily" Value="{StaticResource Default}"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FF80CCDD"/>
+                <Setter Property="Background" Value="{StaticResource HighlightBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -66,7 +66,7 @@
                 <Setter Property="Background" Value="{StaticResource ControlPressedBrush}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="DarkGray"/>
+                <Setter Property="Background" Value="{StaticResource BorderBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -108,7 +108,7 @@
                 <Setter Property="Background" Value="{StaticResource ControlPressedBrushRed}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="DarkGray"/>
+                <Setter Property="Background" Value="{StaticResource BorderBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

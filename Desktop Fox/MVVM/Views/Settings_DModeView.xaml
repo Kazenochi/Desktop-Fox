@@ -14,7 +14,7 @@
         <Grid>
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-                <TextBlock FontFamily="/Assets/#Nunito"
+                <TextBlock FontFamily="{StaticResource Default}"
                            Foreground="White"
                            FontSize="20"
                            HorizontalAlignment="Center"

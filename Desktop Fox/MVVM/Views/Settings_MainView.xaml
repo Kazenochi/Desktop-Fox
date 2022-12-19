@@ -28,7 +28,7 @@
                 <ContentControl x:Name="SettingsPage"
                                 Grid.Row="1"
                                 Content="{Binding CurrentView}"
-                                d:Content="{views:Settings_DaytimeView}"/>
+                                d:Content="{views:Settings_Info}"/>
             </Border>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom"
@@ -42,7 +42,7 @@
                 <RadioButton x:Name="settings_radio_Shuffle"
                              Content="Shuffle"
                              Style="{StaticResource DF_FolderRadioButton}"
-                             Command="{Binding ShuffleCommand}" IsChecked="False"/>
+                             Command="{Binding ShuffleCommand}"/>
                 <RadioButton x:Name="settings_radio_Daytime"
                              Content="Daytime"
                              Style="{StaticResource DF_FolderRadioButton}" 
@@ -59,12 +59,12 @@
                              Content="System"
                              Style="{StaticResource DF_FolderRadioButton}" 
                              Command="{Binding SystemCommand}"/>
-                <RadioButton x:Name="settings_radio_Language"
-                             Content="Language"
+                <RadioButton x:Name="settings_radio_Info"
+                             Content="Info"
                              Style="{StaticResource DF_FolderRadioButton}" 
-                             Command="{Binding LanguageCommand}"/>
+                             Command="{Binding InfoCommand}"
+                             />
             </StackPanel>
-  
         </Grid>     
     </Border>
 </local:AnimatedBaseView>

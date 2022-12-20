@@ -103,17 +103,17 @@ namespace DesktopFox
         /// </summary>
         public void loadFiles()
         {
-            Gallery tmpGal = DF_Json.loadGallery();
+            var tmpGal = DF_Json.loadFile("gallery");
             if (tmpGal == null)
                 gallery = new Gallery();
             else
-                gallery = fileChecker.FullCheck(tmpGal);
+                gallery = fileChecker.FullCheck((Gallery)tmpGal);
 
-            var tmpSet = DF_Json.loadSettings();
+            var tmpSet = DF_Json.loadFile("settings");
             if(tmpSet == null)
                 settings = new Settings();
             else
-                settings = tmpSet;
+                settings = (Settings)tmpSet;
         }
 
         /// <summary>

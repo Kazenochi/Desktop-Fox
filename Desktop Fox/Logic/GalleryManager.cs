@@ -157,7 +157,7 @@ namespace DesktopFox
                     MWVM.MainWindowModel._pictureViews.Remove(tmpDeleteViews);
                     MWVM.MainWindowModel._pictureViewVMs.Remove(tmpDeleteVM);
                 }
-                checkIfActive(pictureSet);
+                stopActiveSet(pictureSet);
                 return;
             }
 
@@ -175,19 +175,26 @@ namespace DesktopFox
             if(_gallery.PictureSetList[_shadow.GetKey(pictureSet)].DayCol == null && _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol == null)
             {
                 _shadow.Remove(pictureSet);
-                checkIfActive(pictureSet);
+                stopActiveSet(pictureSet);
             }
         }
 
-        private void checkIfActive(String checkSet)
+        /// <summary>
+        /// Gibt die Tag / Nacht Collection des angegebenen Sets zurück
+        /// </summary>
+        /// <param name="getDay">"True" = Tag Collection</param>
+        /// <param name="pictureSet">Name des Sets in dem sich die Collection befindet</param>
+        /// <returns></returns>
+        public Collection GetCollection(bool getDay, String pictureSet)
         {
-            for (int i = 0; i < _gallery.activeSetsList.Count; i++)
-            {
-                if (_gallery.activeSetsList[i] == checkSet)
-                    stopActiveSet(checkSet);
-            }
+            if(getDay)
+                return _gallery.PictureSetList[_shadow.GetKey(pictureSet)].DayCol;
+            else
+                return _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol;
         }
 
+        #region Veralteter Code, wurde von GetCollection vereinfacht und abgelöst Note:
+        /*
         /// <summary>
         /// Gibt die Tag Collection vom Set zurück
         /// </summary>
@@ -207,6 +214,9 @@ namespace DesktopFox
         {
             return _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol;
         }
+        */
+        #endregion
+
 
         /// <summary>
         /// Gibt das angegebene aktive Pictureset zurück das aktuell auf dem Desktop angezeigt wird.

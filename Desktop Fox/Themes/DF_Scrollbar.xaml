@@ -46,6 +46,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
                             <Setter Value="{DynamicResource ButtonSelectBrush}" TargetName="Thumb" Property="Background" />
+                            <Setter Property="Foreground" Value="{StaticResource HighlightBrush}"/>
                         </Trigger>
                         <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
                             <Setter Value="{DynamicResource DarkBrush}" TargetName="Thumb" Property="Background" />

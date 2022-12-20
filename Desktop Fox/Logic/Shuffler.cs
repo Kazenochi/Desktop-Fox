@@ -144,10 +144,7 @@ namespace DesktopFox
             if (SM.Settings.DesktopModeSingle)
             {
                 stopDesktopTimer();
-                if (isDay)
-                    winPicShuffle(GM.getDayCollection(GM.getActiveSet().SetName).folderDirectory);
-                else
-                    winPicShuffle(GM.getNightCollection(GM.getActiveSet().SetName).folderDirectory);
+                winPicShuffle(GM.GetCollection(isDay, GM.getActiveSet().SetName).folderDirectory);
             }
             else 
             { 
@@ -256,32 +253,16 @@ namespace DesktopFox
             }
             else
             {
-                if (tmpPreviewModel.Day)
+                if (previewCount >= 0 && previewCount < GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count)
                 {
-                    if (previewCount >= 0 && previewCount < GM.getDayCollection(tmpPreviewSet.SetName).singlePics.Count)
-                    {
-                        tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.getDayCollection(tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key)) ;
-                        previewCount++;
-                    }
-                    else
-                    {
-                        //Anzeigen des Bildes an Erster Stelle und setzten des Counters um einene gleichmäßige Rotation zu ermöglichen
-                        previewCount = 1;
-                        tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.getDayCollection(tmpPreviewSet.SetName).singlePics.ElementAt(0).Key));
-                    }
+                    tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key)) ;
+                    previewCount++;
                 }
                 else
                 {
-                    if (previewCount >= 0 && previewCount < GM.getNightCollection(tmpPreviewSet.SetName).singlePics.Count)
-                    {
-                        tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.getNightCollection(tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key));
-                        previewCount++;
-                    }
-                    else
-                    {
-                        previewCount = 1;
-                        tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.getNightCollection(tmpPreviewSet.SetName).singlePics.ElementAt(0).Key));
-                    }
+                    //Anzeigen des Bildes an Erster Stelle und setzten des Counters um einene gleichmäßige Rotation zu ermöglichen
+                    previewCount = 1;
+                    tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(0).Key));
                 }
             }
             //Start des Fade Übergangs
@@ -333,10 +314,7 @@ namespace DesktopFox
                 previewCount = previewCount - 2;
                 if (previewCount < 0)
                 {
-                    if (previewDay)
-                        previewCount = GM.getDayCollection(GM.getPreviewSet().SetName).singlePics.Count - 1;
-                    else
-                        previewCount = GM.getNightCollection(GM.getPreviewSet().SetName).singlePics.Count - 1;
+                    previewCount = GM.GetCollection(previewDay, GM.getPreviewSet().SetName).singlePics.Count - 1;
                 }
                 previewShuffleAsync();
                 previewVM.PreviewModel.FaderLock = true;
@@ -524,31 +502,15 @@ namespace DesktopFox
             Collection tmpCol2;
             Collection tmpCol3;
 
-            if (isDay)
-            {
-                if (GM.getActiveSet(2) == null)
-                    tmpCol2 = GM.getDayCollection(GM.getActiveSet(any: true).SetName);
-                else
-                    tmpCol2 = GM.getDayCollection(GM.getActiveSet(2, any: true).SetName);
-
-                if (GM.getActiveSet(3) == null)
-                    tmpCol3 = GM.getDayCollection(GM.getActiveSet(any: true).SetName);
-                else
-                    tmpCol3 = GM.getDayCollection(GM.getActiveSet(3, any: true).SetName);
-            }
+            if (GM.getActiveSet(2) == null)
+                tmpCol2 = GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName);
             else
-            {
-                if (GM.getActiveSet(2) == null)
-                    tmpCol2 = GM.getNightCollection(GM.getActiveSet(any: true).SetName);
-                else
-                    tmpCol2 = GM.getNightCollection(GM.getActiveSet(2, any: true).SetName);
+                tmpCol2 = GM.GetCollection(isDay, GM.getActiveSet(2, any: true).SetName);
 
-                if (GM.getActiveSet(3) == null)
-                    tmpCol3 = GM.getNightCollection(GM.getActiveSet(any: true).SetName);
-                else
-                    tmpCol3 = GM.getNightCollection(GM.getActiveSet(3, any: true).SetName);
-            }
-
+            if (GM.getActiveSet(3) == null)
+                tmpCol3 = GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName);
+            else
+                tmpCol3 = GM.GetCollection(isDay, GM.getActiveSet(3, any: true).SetName);
 
 
             Debug.WriteLine("Start des Desktop Triggers: isDay = " + isDay);
@@ -556,36 +518,21 @@ namespace DesktopFox
             switch (vDesk.getMonitorCount())
             {
                 case 1:
-                    if (isDay)
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getDayCollection(GM.getActiveSet(any: true).SetName), 1);
-                    else
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getNightCollection(GM.getActiveSet(any: true).SetName), 1);
+                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
                     break;
+
                 case 2:
-                    if (isDay)
-                    {
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getDayCollection(GM.getActiveSet(any: true).SetName), 1);
-                        df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
-                    }
-                    else
-                    {
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getNightCollection(GM.getActiveSet(any: true).SetName), 1);
-                        df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
-                    }
+                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
+                    df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
                     break;
+
                 case 3:
-                    if (isDay)
-                    {
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getDayCollection(GM.getActiveSet(any: true).SetName), 1);
-                        df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
-                        df_PicShuffle(vDesk.getThirdMonitor.ID, tmpCol3, 3);
-                    }
-                    else
-                    {
-                        df_PicShuffle(vDesk.getMainMonitor.ID, GM.getNightCollection(GM.getActiveSet(any: true).SetName), 1);
-                        df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
-                        df_PicShuffle(vDesk.getThirdMonitor.ID, tmpCol3, 3);
-                    }
+                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
+                    df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
+                    df_PicShuffle(vDesk.getThirdMonitor.ID, tmpCol3, 3);
+                    break;
+                default:
+                    Debug.WriteLine("Fehler in Shuffler, beim ermitteln der Monitor Anzahl");
                     break;
             }
             tmpCol2 = null;

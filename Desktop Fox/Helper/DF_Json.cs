@@ -116,7 +116,7 @@ namespace DesktopFox
         }
 
 
-        #region Wird nicht mehr benötigt, wurde durch loadFile abelöst
+        #region Wird nicht mehr benötigt, wurde durch loadFile abelöst Note:
         /*
         /// <summary>
         /// Läd die Gallery aus der JSON Datei

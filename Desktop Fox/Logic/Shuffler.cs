@@ -76,10 +76,17 @@ namespace DesktopFox
                     else
                         picShuffleStop();
                     break;
+
                 case nameof(SM.Settings.DesktopModeSingle):
                     if (SM.Settings.IsRunning)
                         picShuffleStart();
                     break;
+
+                //Reagiert auf Night da Beide angestoßen werden und Night der Letzte Wert ist der geändert wird.
+                case nameof(SM.Settings.NightStart):
+                    daytimeTimerStart();
+                    break;
+
                 default: return;
             }
         }
@@ -673,10 +680,28 @@ namespace DesktopFox
             TimeSpan nightStart = SM.Settings.NightStart;
             DateTime timeNow = System.DateTime.Now;
             TimeSpan currentTime = timeNow.TimeOfDay;
-            if (currentTime > dayStart && currentTime < nightStart)
-                isDay = true;
+
+            //Unterscheidung zwischen der Anordnung des Tagesstarts und Festlegen des Default falls die Tag/Nacht Zeit gleich ist.
+            if(dayStart < nightStart)
+            {
+                if (currentTime > dayStart && currentTime < nightStart)
+                    isDay = true;
+                else
+                    isDay = false;
+            }
+            else if(dayStart > nightStart)                                  
+            {
+                if (currentTime > dayStart || currentTime < nightStart)
+                    isDay = true;
+                else
+                    isDay = false;
+            }
             else
-                isDay = false;
+            {
+                isDay = true;
+            }
+
+
 
             if (SM.Settings.IsRunning)
                 Task.Run(() => picShuffleStart());

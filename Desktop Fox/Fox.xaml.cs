@@ -121,6 +121,9 @@ namespace DesktopFox
         /// </summary>
         public void makeMainWindow()
         {
+            //Sicherung falls Fenster Aufgerufen wird bevor der Shuffler initialisiert wurde
+            if (shuffler == null) return;
+
             if(MW == null) 
             { 
                 MW ??= new MainWindow();

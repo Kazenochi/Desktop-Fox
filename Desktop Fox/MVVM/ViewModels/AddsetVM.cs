@@ -85,6 +85,7 @@ namespace DesktopFox.MVVM.ViewModels
                 GM.addSet(AddSetModel.PictureSetName, GalleryManager.makeCollection(fileList, AddSetModel.FolderPath), Day);
 
             ((ContextPopupVM)MWVM.ContextPopupView.DataContext).DeleteValidation();
+            MWVM.SelectedItem = MWVM.MainWindowModel._pictureViews.Last();
         }
 
         /// <summary>

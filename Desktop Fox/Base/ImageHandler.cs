@@ -24,14 +24,16 @@ namespace DesktopFox
             {
                 bitmapImage.UriSource = new Uri(Path);
                 bitmapImage.DecodePixelHeight = 1000;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapImage.EndInit();
-                RenderOptions.SetBitmapScalingMode(bitmapImage, BitmapScalingMode.LowQuality);
+                RenderOptions.SetBitmapScalingMode(bitmapImage, BitmapScalingMode.LowQuality);               
+                bitmapImage = bitmapImage.Clone();
                 bitmapImage.Freeze();
                 
             }
             catch
             {
-                bitmapImage.EndInit();
+                //bitmapImage.EndInit();
                 bitmapImage = dummy();
             }
             
@@ -52,13 +54,15 @@ namespace DesktopFox
             {           
                 bitmapImage.UriSource = new Uri(Path);
                 bitmapImage.DecodePixelHeight = (int)Height;
+                bitmapImage.CacheOption= BitmapCacheOption.OnLoad;
                 bitmapImage.EndInit();
                 RenderOptions.SetBitmapScalingMode(bitmapImage, BitmapScalingMode.LowQuality);
+                bitmapImage.Freeze();
             }
             catch
-            {
-                bitmapImage.EndInit();
-                bitmapImage = dummy();                
+            {               
+                bitmapImage = dummy();
+                //bitmapImage.EndInit();
             }           
             return bitmapImage;
         }

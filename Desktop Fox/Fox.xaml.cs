@@ -152,6 +152,11 @@ namespace DesktopFox
             MW.Show();
         }
 
+        /// <summary>
+        /// Funktion für das schließen des Haupfensters. Nicht benötigte Elemente werden entbunden
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MW_Closed(object? sender, System.EventArgs e)
         {
             MW.Hide();

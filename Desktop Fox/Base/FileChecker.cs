@@ -94,7 +94,7 @@ namespace DesktopFox
                     if (!i.NightCol.singlePics.ContainsKey(j))
                         i.NightCol.singlePics.Add(j, new Picture(j));
                 }
-                
+                tmpFiles.Clear();
             }
         }
 

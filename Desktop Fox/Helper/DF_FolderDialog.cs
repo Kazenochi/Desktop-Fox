@@ -25,7 +25,7 @@ namespace DesktopFox
 
             if (folderDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK) 
                 return null;
-            
+
             return getList(getFileInfo(folderDialog.SelectedPath)); 
         }
 

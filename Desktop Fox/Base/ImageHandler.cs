@@ -29,7 +29,6 @@ namespace DesktopFox
                 RenderOptions.SetBitmapScalingMode(bitmapImage, BitmapScalingMode.LowQuality);               
                 bitmapImage = bitmapImage.Clone();
                 bitmapImage.Freeze();
-                
             }
             catch
             {

@@ -178,6 +178,62 @@
                     <view:PictureView/>
                 </d:ListBoxItem>
             </ListBox>
+            
+            <!--Info für leere Gallerie-->
+            <Border Margin="20,10,20,20"
+                    Grid.RowSpan="2"
+                    Grid.Row="1"
+                    CornerRadius="5">
+                <Border.Clip>
+                    <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                        <Binding Path="CornerRadius" RelativeSource="{RelativeSource Self}"/>
+                    </MultiBinding>
+                </Border.Clip>
+                <Grid Margin="-3">
+                    <Border VerticalAlignment="Top" Height="5" Background="Black">
+                        <Border.Effect>
+                            <BlurEffect Radius="5"/>
+                        </Border.Effect>
+                    </Border>
+                    <Border VerticalAlignment="Bottom" Height="5" Background="Black">
+                        <Border.Effect>
+                            <BlurEffect Radius="5"/>
+                        </Border.Effect>
+                    </Border>
+                    <Border HorizontalAlignment="Left" Width="5" Background="Black">
+                        <Border.Effect>
+                            <BlurEffect Radius="5"/>
+                        </Border.Effect>
+                    </Border>
+                    <Border HorizontalAlignment="Right" Width="5" Background="Black">
+                        <Border.Effect>
+                            <BlurEffect Radius="5"/>
+                        </Border.Effect>
+                    </Border>
+                    <Border VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Height="150"
+                            Width="600"
+                            CornerRadius="10"
+                            Background="{StaticResource TextBrush}">
+                        <Border Margin="5"
+                                CornerRadius="5"
+                                Background="{StaticResource BackgroundBrush}">
+                            <TextBlock FontFamily="{StaticResource Default}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="30"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource TextBrush}"
+                                       TextAlignment="Center">
+                            No pictures found in gallery <LineBreak/> Please add new pictures for a preview
+                            </TextBlock>
+                        </Border>
+                    </Border>
+                </Grid>
+            </Border>
             <ContentControl x:Name="PreviewContext"
                             Margin="10,0,10,10"
                             Grid.RowSpan="2"
@@ -185,7 +241,6 @@
                             Content="{Binding Preview}" 
                             d:Content="{view:PreviewView}"
                             Panel.ZIndex="1"/>
-
             <ContentControl x:Name="ContextViews"
                             HorizontalAlignment="Right"
                             Grid.RowSpan="2"

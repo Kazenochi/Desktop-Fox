@@ -7,6 +7,7 @@ using System.Windows.Media.Animation;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Windows.Media;
+using System.ComponentModel;
 
 namespace DesktopFox
 {
@@ -33,7 +34,12 @@ namespace DesktopFox
             MainWindowModel = new MainWindowModel();
             Preview = PreviewView;
             DF.SettingsManager.Settings.PropertyChanged += Settings_PropertyChanged;
+            MainWindowModel.CollectionChanged += CollectionChanged_Event;  
             Task.Run(() => CheckMultiMonitor());
+            /*
+            if (MainWindowModel._pictureViewVMs.Count > 0)
+                _emptyInfo = false;
+            */
             //ContextPopupView.KeyDown += ContextPopupView_KeyDown;
         }
 
@@ -51,6 +57,41 @@ namespace DesktopFox
 
             Task.Run(() => CheckMultiMonitor());
             return;
+        }
+
+        /// <summary>
+        /// Event das bei einer Leeren Gallerie Den InfoText Anzeigt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CollectionChanged_Event(object sender, CollectionChangeEventArgs e)
+        {
+            if(e.Action == CollectionChangeAction.Add)
+            {
+                if(MainWindowModel._pictureViewVMs.Count == 0)
+                    EmptyInfo = false;
+                else
+                    EmptyInfo = true;
+                return;
+            }
+            if(e.Action == CollectionChangeAction.Remove)
+            {
+                if (MainWindowModel._pictureViewVMs.Count == 1)
+                {
+                    EmptyInfo = true;
+                    //Cleanup der Vorschau beim entfernen des letzten Sets
+                    if (PreviewView != null && PreviewView.DataContext != null)
+                    {
+                        ((PreviewVM)PreviewView.DataContext).PreviewModel.ForegroundImage = null;
+                        ((PreviewVM)PreviewView.DataContext).PreviewModel.BackgroundImage = null;
+                    }
+                }
+                else
+                {
+                    EmptyInfo = false;
+                }
+                return;
+            }
         }
 
         /// <summary>
@@ -118,6 +159,12 @@ namespace DesktopFox
         /// </summary>
         public bool CanActivate { get { return _canActivate; } set { _canActivate = value; RaisePropertyChanged(nameof(CanActivate)); } }
         private bool _canActivate = true;
+
+        /// <summary>
+        /// Marker ob die Info im Hauptfenster angezeigt werden soll.
+        /// </summary>
+        public bool EmptyInfo { get { return _emptyInfo; } set { _emptyInfo = value; RaisePropertyChanged(nameof(EmptyInfo)); } }
+        private bool _emptyInfo = true;
 
         /// <summary>
         /// Helferklasse die das gespeicherte Viewmodel des ausgewählten Sets aktualisiert und Informiert notwendige Klassen <see cref="SChange"/>

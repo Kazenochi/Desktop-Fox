@@ -17,6 +17,11 @@ namespace DesktopFox.MVVM.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Helfer Funktion die auf die Enter Taste Reagiert und den Rename Befehl ausführt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AnimatedBaseView_KeyDown(object sender, KeyEventArgs e)
         {
             //return;

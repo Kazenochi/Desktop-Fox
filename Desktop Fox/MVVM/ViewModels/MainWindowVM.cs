@@ -34,6 +34,7 @@ namespace DesktopFox
             Preview = PreviewView;
             DF.SettingsManager.Settings.PropertyChanged += Settings_PropertyChanged;
             Task.Run(() => CheckMultiMonitor());
+            //ContextPopupView.KeyDown += ContextPopupView_KeyDown;
         }
 
         /// <summary>

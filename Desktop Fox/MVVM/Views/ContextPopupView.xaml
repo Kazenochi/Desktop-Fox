@@ -5,10 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DesktopFox"
              xmlns:views="clr-namespace:DesktopFox.MVVM.Views"
-             xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels" 
+             xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels"
+             xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
              d:DataContext="{d:DesignInstance Type=ViewModels:ContextPopupVM}"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
+             d:DesignHeight="300" d:DesignWidth="400"
+             KeyDown="AnimatedBaseView_KeyDown">
     <Border Background="{StaticResource BackgroundBrush}"
             BorderBrush="{StaticResource BorderBrush}"
             BorderThickness="0.5"
@@ -33,7 +36,8 @@
                              CaretBrush="{StaticResource TextBrush}"
                              TextAlignment="Center"
                              Margin="5,0,5,0"
-                             Text="{Binding contextModel.PictureSetName}"/>
+                             Text="{Binding contextModel.PictureSetName}">
+                    </TextBox>
                     <Border.Style>
                         <Style>
                             <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>

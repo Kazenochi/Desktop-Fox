@@ -82,8 +82,8 @@ namespace DesktopFox
 
         public MainWindow GetMainWindow()
         {
-            if(MW != null)
-                return MW;
+            if(MW != null) return MW;
+            
             return null;
         }
 

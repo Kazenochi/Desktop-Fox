@@ -35,7 +35,15 @@ namespace DesktopFox.MVVM.Model
         /// <summary>
         /// Flag ob in der Vorschau die Tag oder Nachtbilder der Collection angezeigt werden soll
         /// </summary>
-        public bool Day { get { return _day; } set { _day = value; RaisePropertyChanged(nameof(Day)); } }
+        public bool Day { get { return _day; } 
+            set 
+            { 
+                if(_day == value) return;
+
+                _day = value; 
+                RaisePropertyChanged(nameof(Day)); 
+            } 
+        }
         private bool _day = true;
 
         public bool FaderLock { get { return _faderLock; } set { _faderLock = value; RaisePropertyChanged(nameof(FaderLock)); } }

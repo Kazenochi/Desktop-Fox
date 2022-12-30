@@ -3,6 +3,7 @@ using DesktopFox.MVVM.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,14 +42,11 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         public ICommand PictureBackwardCommand { get { return new DF_Command.DelegateCommand(o => DF.shuffler.previewBackward()); } }
 
-        public ICommand FaderFinishCommand { get { return new DF_Command.DelegateCommand(o => dummy()); } }
+        /// <summary>
+        /// Kommando das beim Beenden des Fade Storyboards aufgerufen wird
+        /// </summary>
+        public ICommand FaderFinishCommand { get { return new DF_Command.DelegateCommand(o => FadeAnimationFinished()); } }
         #endregion
-
-
-        public void PreviewTransition()
-        {
-            PreviewModel.AnimationStart = true;
-        }
 
         /// <summary>
         /// Note: Auslagern in den Shuffler evtl. Möglich
@@ -58,7 +56,12 @@ namespace DesktopFox.MVVM.ViewModels
         {
             DF.shuffler.previewRefresh();
         }
-        public void dummy() { }
+
+        public void FadeAnimationFinished() 
+        {
+            PreviewModel.FaderLock = false;
+            PreviewModel.ForegroundImage = PreviewModel.BackgroundImage;
+        }
 
         /// <summary>
         /// Listener der beim Ändern des Anzeigebildes ausgeführt wird. Aktualisiert das Anzeigebild in der Vorschau. 

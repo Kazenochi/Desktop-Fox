@@ -33,7 +33,32 @@
 
             <Grid Grid.RowSpan="3"
                   Grid.ColumnSpan="3">
-                <Border x:Name="BackgroundPreview">
+                <Image x:Name="BackImage" 
+                       Source="{Binding PreviewModel.BackgroundImage, NotifyOnTargetUpdated=True}"
+                       Stretch="{Binding PreviewModel.ImageStretch}">
+                    <Image.Triggers>
+                        <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                            <BeginStoryboard>
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="Completed" SourceObject="{Binding ElementName=FadeOutAnimation}">
+                                        <b:InvokeCommandAction Command="{Binding FaderFinishCommand}"/>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                                <Storyboard x:Name="FadeOutAnimation">
+                                    <DoubleAnimation Storyboard.TargetName="ForeImage" 
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     From="1" To="0" Duration="0:0:0.5"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Image.Triggers>
+                </Image>
+                <Image x:Name="ForeImage" 
+                       Source="{Binding PreviewModel.ForegroundImage}"
+                       Stretch="{Binding PreviewModel.ImageStretch}">
+                </Image>
+                <!--
+                    <Border x:Name="BackgroundPreview">
                     <Border.Background>
                         <ImageBrush ImageSource="{Binding PreviewModel.BackgroundImage}" 
                                     Stretch="{Binding PreviewModel.ImageStretch}"
@@ -48,6 +73,7 @@
                                     Stretch="{Binding PreviewModel.ImageStretch}"/>
                     </Border.Background>
                 </Border>
+                -->
             </Grid>
 
 

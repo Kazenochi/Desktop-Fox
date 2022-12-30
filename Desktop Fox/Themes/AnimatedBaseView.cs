@@ -14,6 +14,8 @@ namespace DesktopFox
     {
         public Animation ControlPopInAnimation { get; set; } = Animation.PopInAnimation;
         public Animation ControlPopOutAnimation { get; set; } = Animation.PopOutAnimation;
+        public Animation ControlFadeInAnimation { get; set; } = Animation.FadeInAnimation;
+        public Animation ControlFadeOutAnimation { get; set; } = Animation.FadeOutAnimation;
 
         public double AnimationTime { get; set; } = 0.5;
         public double Amplitude { get; set; } = 0.3;
@@ -62,6 +64,23 @@ namespace DesktopFox
                     
             scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, popinAnimationX);
             scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, popinAnimationX);
+        }
+
+        public void FadeIn(Border b)
+        {
+            if (this.ControlFadeInAnimation == Animation.None)
+                return;
+
+            var sb = new Storyboard();
+            var fadeinAnimationX = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(this.AnimationTime));
+
+
+        }
+
+        public void FadeOut(Border b)
+        {
+            if (this.ControlFadeOutAnimation == Animation.None)
+                return;
         }
     }
 }

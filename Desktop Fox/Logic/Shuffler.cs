@@ -255,19 +255,17 @@ namespace DesktopFox
             {
                 if (previewCount >= 0 && previewCount < GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count)
                 {
-                    tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key)) ;
+                    tmpPreviewModel.BackgroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key)) ;
                     previewCount++;
                 }
                 else
                 {
                     //Anzeigen des Bildes an Erster Stelle und setzten des Counters um einene gleichmäßige Rotation zu ermöglichen
                     previewCount = 1;
-                    tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(0).Key));
+                    tmpPreviewModel.BackgroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(0).Key));
                 }
             }
-            //Start des Fade Übergangs
-
-            previewVM.PreviewTransition();
+            previewVM.PreviewModel.FaderLock = true;
         }
 
         /// <summary>
@@ -275,11 +273,10 @@ namespace DesktopFox
         /// </summary>
         public void previewForward()
         {
-            if (/*previewVM.PreviewModel.FaderLock == false &&*/ GM.getPreviewSet() != null)
+            if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
             {
                 previewTimerReset();
                 previewShuffleAsync();
-                previewVM.PreviewModel.FaderLock = true;
             }
         }
 
@@ -288,19 +285,11 @@ namespace DesktopFox
         /// </summary>
         public void previewRefresh()
         {
-            if (true/*previewVM.PreviewModel.FaderLock == false &&*/)
-            {
-                previewTimerReset();
-                if(previewCount > 0)
-                    previewCount--;
+            previewTimerReset();
+            if(previewCount > 0)
+                previewCount--;
 
-                previewShuffleAsync();
-                previewVM.PreviewModel.FaderLock = true;
-            }
-            else
-            {
-                Debug.WriteLine("Debug");
-            }
+            previewShuffleAsync();
         }
 
         /// <summary>
@@ -308,7 +297,7 @@ namespace DesktopFox
         /// </summary>
         public void previewBackward()
         {
-            if (/*previewVM.PreviewModel.FaderLock == false &&*/ GM.getPreviewSet() != null)
+            if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
             {
                 previewTimerReset();
                 previewCount = previewCount - 2;
@@ -317,7 +306,6 @@ namespace DesktopFox
                     previewCount = GM.GetCollection(previewDay, GM.getPreviewSet().SetName).singlePics.Count - 1;
                 }
                 previewShuffleAsync();
-                previewVM.PreviewModel.FaderLock = true;
             }
         }
        

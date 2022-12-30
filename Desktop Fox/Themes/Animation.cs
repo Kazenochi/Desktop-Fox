@@ -16,5 +16,15 @@
         /// Fenster verschwindet
         /// </summary>
         PopOutAnimation = 2,
+
+        /// <summary>
+        /// Fenster Deckkraft wird langsam erhöht
+        /// </summary>
+        FadeInAnimation = 3,
+
+        /// <summary>
+        /// FensterDeckkraft wird langsam verringert
+        /// </summary>
+        FadeOutAnimation = 4,
     }
 }

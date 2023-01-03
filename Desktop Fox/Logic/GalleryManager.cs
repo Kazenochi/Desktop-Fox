@@ -5,10 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.TextFormatting;
 
 namespace DesktopFox
 {
@@ -94,6 +97,73 @@ namespace DesktopFox
         {
             _shadow.Rename(pictureSet, newName);
         }
+
+        /// <summary>
+        /// Sortieren der Galerie falls sich die Liste geändert hat (Drag & Drop)
+        /// Bruch des MVVMs, Funktioniert mit Addressierung der VMs jedoch zu inkonsistent. 
+        /// </summary>
+        public void GallerySort()
+        {
+            bool debug = true;
+            if (debug)
+            {
+                Debug.WriteLine("Gallery PicCount Before: " + _gallery.PictureSetList.Count);
+
+                foreach (PictureSet i in _gallery.PictureSetList.Values)
+                {
+                    Debug.WriteLine("SetName: " + i.SetName);
+                }
+
+                for (int i = 0; i < MWVM.MainWindowModel._pictureViewVMs.Count; i++)
+                {
+                    Debug.WriteLine("VMName: " + MWVM.MainWindowModel._pictureViewVMs[i].pictureSet.SetName + " | ViewName: " + MWVM.MainWindowModel._pictureViews[i].pLabel);
+                }
+            }
+
+            for (int i = 0; i < MWVM.MainWindowModel._pictureViews.Count; i++)
+            {
+                try
+                {
+                    if (MWVM.MainWindowModel._pictureViews[i].pLabel.Content.ToString() != _gallery.PictureSetList[i].SetName)
+                    {
+                        IDictionary<int, PictureSet> NewPictureSetList = new Dictionary<int, PictureSet>();
+                        foreach (var set in MWVM.MainWindowModel._pictureViews)
+                        {
+                            if (debug) Debug.WriteLine("---Neu generieren von Set: Shadow: " + _shadow.GetKey(set.pLabel.Content.ToString()) + " - Setname: " + set.pLabel.Content.ToString());
+
+                            try
+                            {
+                                NewPictureSetList.Add(_shadow.GetKey(set.pLabel.Content.ToString()), _gallery.PictureSetList[_shadow.GetKey(set.pLabel.Content.ToString())]);
+                            }
+                            catch (Exception ex) { Debug.WriteLine("---Fehler beim Neu erstellen des Sets nach D&D---"); Debug.WriteLine(ex.ToString()); }
+
+                        }
+                        _gallery.PictureSetList = NewPictureSetList;
+
+                        if (debug)
+                        {
+                            Debug.WriteLine("Gallery PicCount After: " + _gallery.PictureSetList.Count);
+                            foreach (PictureSet j in _gallery.PictureSetList.Values)
+                            {
+                                Debug.WriteLine("SetName: " + j.SetName);
+                            }
+                        }
+
+                        return;
+                    }
+                }
+                catch { Debug.WriteLine("---Fehler bei auswertung von Gallery Sort. VM Count: " + MWVM.MainWindowModel._pictureViews.Count + "Pic Count: " + _gallery.PictureSetList.Count + " ---"); }
+            }
+
+            if (debug) { 
+                Debug.WriteLine("Gallery PicCount After: " + _gallery.PictureSetList.Count);
+                foreach (PictureSet i in _gallery.PictureSetList.Values)
+                {
+                    Debug.WriteLine("SetName: " + i.SetName);
+                }
+            }
+        }
+
 
         /// <summary>
         /// Erzeugt eine neue Collection //Note: Übergabe des Pfades ist nach aktuellem Stand unnötig

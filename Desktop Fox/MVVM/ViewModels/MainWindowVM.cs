@@ -30,11 +30,11 @@ namespace DesktopFox
         /// <param name="desktopFox"></param>
         public MainWindowVM(Fox desktopFox)
         {
-            DF = desktopFox;        
+            DF = desktopFox;
             MainWindowModel = new MainWindowModel();
             Preview = PreviewView;
             DF.SettingsManager.Settings.PropertyChanged += Settings_PropertyChanged;
-            MainWindowModel.CollectionChanged += CollectionChanged_Event;  
+            MainWindowModel.CollectionChangedVM += CollectionChanged_Event_VM;  
             Task.Run(() => CheckMultiMonitor());
             /*
             if (MainWindowModel._pictureViewVMs.Count > 0)
@@ -64,34 +64,21 @@ namespace DesktopFox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CollectionChanged_Event(object sender, CollectionChangeEventArgs e)
+        private void CollectionChanged_Event_VM(object sender, CollectionChangeEventArgs e)
         {
-            if(e.Action == CollectionChangeAction.Add)
+            if (MainWindowModel._pictureViewVMs.Count == 0)
             {
-                if(MainWindowModel._pictureViewVMs.Count == 0)
-                    EmptyInfo = false;
-                else
-                    EmptyInfo = true;
-                return;
-            }
-            if(e.Action == CollectionChangeAction.Remove)
-            {
-                if (MainWindowModel._pictureViewVMs.Count == 1)
+                EmptyInfo = true;
+                //Cleanup der Vorschau beim entfernen des letzten Sets
+                if (PreviewView != null && PreviewView.DataContext != null)
                 {
-                    EmptyInfo = true;
-                    //Cleanup der Vorschau beim entfernen des letzten Sets
-                    if (PreviewView != null && PreviewView.DataContext != null)
-                    {
-                        ((PreviewVM)PreviewView.DataContext).PreviewModel.ForegroundImage = null;
-                        ((PreviewVM)PreviewView.DataContext).PreviewModel.BackgroundImage = null;
-                    }
+                    ((PreviewVM)PreviewView.DataContext).PreviewModel.ForegroundImage = null;
+                    ((PreviewVM)PreviewView.DataContext).PreviewModel.BackgroundImage = null;
                 }
-                else
-                {
-                    EmptyInfo = false;
-                }
-                return;
             }
+            else
+                EmptyInfo = false;
+            return;         
         }
 
         /// <summary>
@@ -364,7 +351,7 @@ namespace DesktopFox
         /// Helferklasse die beim Ändern der Auswahl in der Listbox aufgerufen wird. <see cref="MainWindow.lbPictures"/>
         /// Überprüft ob das Set Aktiviert werden kann und Benachrichtig alle ViewModels die die <see cref="ObserverNotifyChange"/> implementieren
         /// </summary>
-        private void SChange()
+        public void SChange()
         {
             if (SelectedVM == null) return;
 
@@ -450,6 +437,9 @@ namespace DesktopFox
             if (CurrentView == AddSetView)
                 ((AddSetVM)AddSetView.DataContext).ContentChange(SelectedVM);
         }
+
+        public GalleryManager getGalleryManager() { return DF.GalleryManager; }
+
         #endregion 
     }
 

@@ -17,7 +17,7 @@ namespace DesktopFox
     public class MainWindowModel : ObserverNotifyChange
     {
         public ObservableCollection<PictureView> _pictureViews;
-        public List<PictureVM> _pictureViewVMs;
+        public ObservableCollection<PictureVM> _pictureViewVMs;
         
         /// <summary>
         /// Konstruktor
@@ -26,7 +26,14 @@ namespace DesktopFox
         {
             _pictureViews = new ObservableCollection<PictureView>();
             this._pictureViews.CollectionChanged += new NotifyCollectionChangedEventHandler(PictureViewChanged);
-            _pictureViewVMs = new List<PictureVM>();
+            _pictureViewVMs = new ObservableCollection<PictureVM>();
+            this._pictureViewVMs.CollectionChanged += new NotifyCollectionChangedEventHandler(PictureVMChanged);
+
+        }
+
+        private void PictureVMChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            RaiseCollectionChangedVM(nameof(_pictureViewVMs));
         }
 
         /// <summary>
@@ -36,17 +43,27 @@ namespace DesktopFox
         /// <param name="e"></param>
         private void PictureViewChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            RaiseCollectionChanged(nameof(_pictureViews));
+            RaiseCollectionChangedView(nameof(_pictureViews));
         }
 
-        public event CollectionChangeEventHandler? CollectionChanged;
-        public void RaiseCollectionChanged(string propertyName)
+        public event CollectionChangeEventHandler? CollectionChangedView;
+        public void RaiseCollectionChangedView(string propertyName)
         {
-            if (CollectionChanged != null)
+            if (CollectionChangedView != null)
             {
-                CollectionChanged(this, new CollectionChangeEventArgs(CollectionChangeAction.Add, propertyName));
-                CollectionChanged(this, new CollectionChangeEventArgs(CollectionChangeAction.Remove, propertyName));
+                CollectionChangedView(this, new CollectionChangeEventArgs(CollectionChangeAction.Add, propertyName));
+                CollectionChangedView(this, new CollectionChangeEventArgs(CollectionChangeAction.Remove, propertyName));
             }      
+        }
+
+        public event CollectionChangeEventHandler? CollectionChangedVM;
+        public void RaiseCollectionChangedVM(string propertyName)
+        {
+            if(CollectionChangedVM != null)
+            {
+                //CollectionChangedVM(this, new CollectionChangeEventArgs(CollectionChangeAction.Add, propertyName));     Note:
+                CollectionChangedVM(this, new CollectionChangeEventArgs(CollectionChangeAction.Remove, propertyName));
+            }
         }
     }
 

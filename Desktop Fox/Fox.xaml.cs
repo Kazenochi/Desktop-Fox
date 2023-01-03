@@ -187,9 +187,10 @@ namespace DesktopFox
         /// <param name="e"></param>
         private void Application_Close(object sender, CancelEventArgs e)
         {
-            //shuffler.ShufflerStopCleanup();
-            //notifyIcon.Dispose();
-            //Debugnachrichten werden nicht auf der Konsole ausgegeben
+            //Note: Unbedingt vor dem Beenden die Reihenfolge der Galerie Anpassen
+            //Kann nach Drag & Drop von den Views/VM abweichen und muss für einen neustart dementsprechend angepasst werden
+            //PS: Sollte warscheinlich schon vorher gemacht werden (Beim Drag eine Funktion angestoßen werden oder Listener)
+
             if (DF_Json.saveFile(gallery) & DF_Json.saveFile(settings))
                 Debug.WriteLine("App Close. Speichern der Daten war erfolgreich");
             else

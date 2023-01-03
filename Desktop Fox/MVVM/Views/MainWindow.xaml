@@ -147,10 +147,16 @@
                      BorderBrush="Transparent" 
                      Background="Transparent"
                      SelectedItem="{Binding SelectedItem}"
+                     local:DragAndDropExtension.ScrollOnDragDrop="True"
                      Panel.ZIndex="3">
                 <!--Deaktivieren des Highlights-->
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
+                        <!-- Funktioniert aktuell nicht korrekt bei der anzeige der ausgewählten Sets
+                        <Setter Property="AllowDrop" Value="True"/>
+                        <EventSetter Event="PreviewMouseMove" Handler="ListBoxItem_PreviewMouseMove"/>
+                        <EventSetter Event="Drop" Handler="ListBoxItem_ListBoxDrop"/>
+                        -->
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">

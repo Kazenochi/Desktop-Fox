@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,14 +69,27 @@ namespace DesktopFox.MVVM.ViewModels
         private bool _canDelete = false;
 
         /// <summary>
+        /// Flag ob ein Ordner geöffnet werden kann
+        /// </summary>
+        public bool CanOpenFolder { get { return _canOpenFolder; } set { _canOpenFolder = value; RaisePropertyChanged(nameof(CanOpenFolder)); } }
+        private bool _canOpenFolder = false;
+        
+
+        /// <summary>
         /// Funktion die den Löschen Button Sperrt oder Freigibt <see cref="CanDelete"/>
         /// </summary>
         private void DeleteLock()
         {
             if (_deletionSelect != 0)
+            {
                 CanDelete = true;
+                CanOpenFolder = true;
+            }  
             else
+            {
                 CanDelete = false;
+                CanOpenFolder= false;
+            }             
         }
 
         /// <summary>
@@ -118,6 +132,11 @@ namespace DesktopFox.MVVM.ViewModels
         public ICommand RemoveCommand { get { return new DF_Command.DelegateCommand(o => RemoveValue()); } }
 
         /// <summary>
+        /// Kommando das den Ordner des Ausgewählten Sets in Windows öffnet
+        /// </summary>
+        public ICommand OpenFolderCommand { get { return new DF_Command.DelegateCommand(o => OpenFolder()); } }
+
+        /// <summary>
         /// Entfernt Anhand der Einstellungen eine Collection von dem gewählten Set oder das komplette Set von der Galerie
         /// </summary>
         private void RemoveValue()
@@ -151,6 +170,29 @@ namespace DesktopFox.MVVM.ViewModels
                 }
             }
             GM.RenameSet(MWVM.SelectedVM.pictureSet.SetName, contextModel.PictureSetName);            
+        }
+
+        /// <summary>
+        /// Öffnet den File Explorer zum ausgewählten Collection Ordner
+        /// </summary>
+        private void OpenFolder() 
+        {
+            switch (DeletionSelect)
+            {
+                case 1: //Day
+                    Process.Start("explorer.exe", MWVM.SelectedVM.pictureSet.DayCol.folderDirectory);
+                    break;
+                case 2: //Night
+                    Process.Start("explorer.exe", MWVM.SelectedVM.pictureSet.NightCol.folderDirectory);
+                    break;
+                case 3: //Both
+                    Process.Start("explorer.exe", MWVM.SelectedVM.pictureSet.DayCol.folderDirectory);
+                    Process.Start("explorer.exe", MWVM.SelectedVM.pictureSet.NightCol.folderDirectory);
+                    break;
+                default:
+                    break;
+            }
+        
         }
 
         /// <summary>

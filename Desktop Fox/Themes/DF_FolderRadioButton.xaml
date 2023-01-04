@@ -13,14 +13,14 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
-                        <Border Background="{StaticResource BackgroundBrush}"
-                                    Height="41" Width="82"
-                                    CornerRadius="21,21,0,0"
-                                    Margin="2,0,2,0">
+                        <Border Background="{StaticResource BorderBrush}"
+                                Height="41" Width="82"
+                                CornerRadius="21,21,0,0"
+                                Margin="2,0,2,0.11">
                             <Border Background="{StaticResource ControlBrush}"
                                     Height="40" Width="80"
                                     CornerRadius="20,20,0,0"
-                                    Margin="0,0,0,-1">
+                                    Margin="0,0,0,-1.1">
                                 <Border.Clip>
                                     <RectangleGeometry RadiusX="20"
                                                        RadiusY="20"

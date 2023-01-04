@@ -16,7 +16,7 @@
             BorderBrush="{StaticResource BorderBrush}"
             BorderThickness="0.5"
             CornerRadius="20"
-            Height="270"
+            Height="290"
             Width="350">
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
@@ -93,6 +93,15 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
+                <Button FontSize="19"
+                        IsEnabled="{Binding CanOpenFolder}"
+                        Command="{Binding OpenFolderCommand}"
+                        Style="{StaticResource DF_Button_Border}">
+                    <TextBlock Text="Open&#xD;&#xA;Folder"
+                               LineStackingStrategy="BlockLineHeight"
+                               LineHeight="25"
+                               TextAlignment="Center"/>
+                </Button>
                 <Grid>
                     <Button Content="Delete"
                             FontSize="20"

@@ -100,7 +100,6 @@ namespace DesktopFox
 
         /// <summary>
         /// Sortieren der Galerie falls sich die Liste geändert hat (Drag & Drop)
-        /// Note: Bruch des MVVMs, Funktioniert mit Addressierung der VMs jedoch zu inkonsistent. 
         /// </summary>
         public void GallerySort()
         {
@@ -120,6 +119,43 @@ namespace DesktopFox
                 }
             }
 
+            for (int i = 0; i < MWVM.MainWindowModel._pictureViewVMs.Count; i++)
+            {
+                try
+                {
+                    if (MWVM.MainWindowModel._pictureViewVMs[i].pictureSet.SetName != _gallery.PictureSetList[i].SetName)
+                    {
+                        IDictionary<int, PictureSet> NewPictureSetList = new Dictionary<int, PictureSet>();
+                        foreach (var set in MWVM.MainWindowModel._pictureViewVMs)
+                        {
+                            if (debug) Debug.WriteLine("---Neu generieren von Set: Shadow: " + _shadow.GetKey(set.pictureSet.SetName) + " - Setname: " + set.pictureSet.SetName);
+
+                            try
+                            {
+                                NewPictureSetList.Add(_shadow.GetKey(set.pictureSet.SetName), _gallery.PictureSetList[_shadow.GetKey(set.pictureSet.SetName)]);
+                            }
+                            catch (Exception ex) { Debug.WriteLine("---Fehler beim Neu erstellen des Sets nach D&D---"); Debug.WriteLine(ex.ToString()); }
+
+                        }
+                        _gallery.PictureSetList = NewPictureSetList;
+
+                        if (debug)
+                        {
+                            Debug.WriteLine("Gallery PicCount After: " + _gallery.PictureSetList.Count);
+                            foreach (PictureSet j in _gallery.PictureSetList.Values)
+                            {
+                                Debug.WriteLine("SetName: " + j.SetName);
+                            }
+                        }
+
+                        return;
+                    }
+                }
+                catch { Debug.WriteLine("---Fehler bei auswertung von Gallery Sort. VM Count: " + MWVM.MainWindowModel._pictureViewVMs.Count + "Pic Count: " + _gallery.PictureSetList.Count + " ---"); }
+            }
+
+            #region Ausgabe mit View Komponenten. Alter Code nicht nach MVVM
+            /*  
             for (int i = 0; i < MWVM.MainWindowModel._pictureViews.Count; i++)
             {
                 try
@@ -154,6 +190,8 @@ namespace DesktopFox
                 }
                 catch { Debug.WriteLine("---Fehler bei auswertung von Gallery Sort. VM Count: " + MWVM.MainWindowModel._pictureViews.Count + "Pic Count: " + _gallery.PictureSetList.Count + " ---"); }
             }
+            */
+            #endregion
 
             if (debug) { 
                 Debug.WriteLine("Gallery PicCount After: " + _gallery.PictureSetList.Count);
@@ -163,7 +201,6 @@ namespace DesktopFox
                 }
             }
         }
-
 
         /// <summary>
         /// Erzeugt eine neue Collection //Note: Übergabe des Pfades ist nach aktuellem Stand unnötig

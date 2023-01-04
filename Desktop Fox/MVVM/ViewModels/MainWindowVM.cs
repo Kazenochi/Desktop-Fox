@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Windows.Media;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace DesktopFox
 {
@@ -438,7 +439,133 @@ namespace DesktopFox
                 ((AddSetVM)AddSetView.DataContext).ContentChange(SelectedVM);
         }
 
-        public GalleryManager getGalleryManager() { return DF.GalleryManager; }
+        public void DropItemEvent(PictureView pv, PictureVM pvm, int targetIndex, int removedIndex)
+        {
+            bool debug = false;
+
+            if (removedIndex < targetIndex)
+            {
+                if (debug) Debug.WriteLine("Action Runter Schieben -> Entfernt: " + removedIndex + " | Ziel: " + (targetIndex + 1));
+
+                MainWindowModel._pictureViews.Insert(targetIndex + 1, pv);
+                MainWindowModel._pictureViewVMs.Insert(targetIndex + 1, pvm);
+
+                #region Debug Ausgabe
+                if (debug) Debug.WriteLine("Insert in " + targetIndex + " von View: " + pv.pLabel.Content.ToString());
+                if (debug) Debug.WriteLine("Insert in " + targetIndex + " von VM: " + pvm.pictureSet.SetName);
+                if (debug)
+                {
+                    Debug.WriteLine("Inhalt der VMS vor Remove");
+                    Debug.Write("View Names: ");
+                    foreach (var item in MainWindowModel._pictureViews)
+                    {
+                        Debug.Write(item.pLabel.Content.ToString() + ", ");
+                    }
+                    Debug.WriteLine("");
+                    Debug.Write("VM Names: ");
+                    foreach (var item in MainWindowModel._pictureViewVMs)
+                    {
+                        Debug.Write(item.pictureSet.SetName + ", ");
+                    }
+                    Debug.WriteLine("");
+                }
+                #endregion
+
+                MainWindowModel._pictureViews.RemoveAt(removedIndex);
+                MainWindowModel._pictureViewVMs.RemoveAt(removedIndex);
+
+                #region Debug Ausgabe
+                if (debug) Debug.WriteLine("Remove from " + (removedIndex + 1) + " von View: " + MainWindowModel._pictureViews[removedIndex].pLabel.Content.ToString());
+                if (debug) Debug.WriteLine("Remove from " + (removedIndex + 1) + " von VM: " + MainWindowModel._pictureViewVMs[removedIndex].pictureSet.SetName);
+                if (debug)
+                {
+                    Debug.WriteLine("Inhalt der VMS nach Remove");
+                    Debug.Write("View Names: ");
+                    foreach (var item in MainWindowModel._pictureViews)
+                    {
+                        Debug.Write(item.pLabel.Content.ToString() + ", ");
+                    }
+                    Debug.WriteLine("");
+                    Debug.Write("VM Names: ");
+                    foreach (var item in MainWindowModel._pictureViewVMs)
+                    {
+                        Debug.Write(item.pictureSet.SetName + ", ");
+                    }
+                    Debug.WriteLine("");
+                }
+                #endregion
+
+            }
+            else
+            {
+
+                removedIndex = removedIndex + 1;
+                if (debug) Debug.WriteLine("Action Hoch Schieben -> Entfernt: " + removedIndex + " | Ziel: " + targetIndex);
+
+                if (MainWindowModel._pictureViews.Count + 1 > removedIndex)
+                {
+                    MainWindowModel._pictureViews.Insert(targetIndex, pv);
+                    MainWindowModel._pictureViewVMs.Insert(targetIndex, pvm);
+
+                    #region Debug Ausgabe
+                    if (debug) Debug.WriteLine("Insert in " + targetIndex + " von View: " + pv.pLabel.Content.ToString());
+                    if (debug) Debug.WriteLine("Insert in " + targetIndex + " von VM: " + pvm.pictureSet.SetName);
+                    if (debug)
+                    {
+                        Debug.WriteLine("Inhalt der VMS vor Remove");
+                        Debug.Write("View Names: ");
+                        foreach (var item in MainWindowModel._pictureViews)
+                        {
+                            Debug.Write(item.pLabel.Content.ToString() + ", ");
+                        }
+                        Debug.WriteLine("");
+                        Debug.Write("VM Names: ");
+                        foreach (var item in MainWindowModel._pictureViewVMs)
+                        {
+                            Debug.Write(item.pictureSet.SetName + ", ");
+                        }
+                        Debug.WriteLine("");
+                    }
+                    #endregion
+
+                    MainWindowModel._pictureViews.RemoveAt(removedIndex);
+                    MainWindowModel._pictureViewVMs.RemoveAt(removedIndex);
+
+                    #region Debug Ausgabe
+                    if (debug) Debug.WriteLine("Remove from " + (removedIndex) + " von View: " + MainWindowModel._pictureViews[removedIndex - 1].pLabel.Content.ToString());
+                    if (debug) Debug.WriteLine("Remove from " + (removedIndex) + " von VM: " + MainWindowModel._pictureViewVMs[removedIndex - 1].pictureSet.SetName);
+                    if (debug)
+                    {
+                        Debug.WriteLine("Inhalt der VMS nach Remove");
+                        Debug.Write("View Names: ");
+                        foreach (var item in MainWindowModel._pictureViews)
+                        {
+                            Debug.Write(item.pLabel.Content.ToString() + ", ");
+                        }
+                        Debug.WriteLine("VM Names: ");
+                        foreach (var item in MainWindowModel._pictureViewVMs)
+                        {
+                            Debug.Write(item.pictureSet.SetName + ", ");
+                        }
+                        Debug.WriteLine("");
+                    }
+                    #endregion
+
+                }
+            }
+
+            #region Debug Ausgabe
+            if (debug)
+            {
+                Debug.WriteLine(" After: Anzahl von Views: " + MainWindowModel._pictureViews.Count);
+                Debug.WriteLine(" After: Anzahl von VMs: " + MainWindowModel._pictureViewVMs.Count);
+
+
+            }
+            #endregion
+
+            DF.GalleryManager.GallerySort();
+        }
 
         #endregion 
     }

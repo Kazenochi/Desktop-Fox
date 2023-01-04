@@ -21,51 +21,13 @@ namespace DesktopFox
         /// <returns></returns>
         public static BitmapImage load(String Path)
         {
-            #region Orientierung der Metadaten berücksichtigen, um diese in der Vorschau korrekt anzuzeigen 
-
-            Rotation rotation = Rotation.Rotate0;
-            using (FileStream fileStream = new FileStream(Path, FileMode.Open, FileAccess.Read))
-            {
-                BitmapFrame bitmapFrame = BitmapFrame.Create(fileStream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
-                BitmapMetadata bitmapMetadata = bitmapFrame.Metadata as BitmapMetadata;
-
-                if ((bitmapMetadata != null) && (bitmapMetadata.ContainsQuery(_orientationQuery)))
-                {
-                    object o = bitmapMetadata.GetQuery(_orientationQuery);
-
-                    if (o != null)
-                    {
-                        switch ((ushort)o)
-                        {
-                            case 6:
-                                {
-                                    rotation = Rotation.Rotate90;
-                                }
-                                break;
-                            case 3:
-                                {
-                                    rotation = Rotation.Rotate180;
-                                }
-                                break;
-                            case 8:
-                                {
-                                    rotation = Rotation.Rotate270;
-                                }
-                                break;
-                        }
-                    }
-                }
-            }
-
-            #endregion
-
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
             try
             {
                 bitmapImage.UriSource = new Uri(Path);
                 bitmapImage.DecodePixelHeight = 1000;
-                bitmapImage.Rotation = rotation;
+                bitmapImage.Rotation = getRotation(Path);
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapImage.EndInit();
                 RenderOptions.SetBitmapScalingMode(bitmapImage, BitmapScalingMode.LowQuality);               
@@ -95,6 +57,7 @@ namespace DesktopFox
             {           
                 bitmapImage.UriSource = new Uri(Path);
                 bitmapImage.DecodePixelHeight = (int)Height;
+                bitmapImage.Rotation = getRotation(Path);
                 bitmapImage.CacheOption= BitmapCacheOption.OnLoad;
                 bitmapImage.EndInit();
                 RenderOptions.SetBitmapScalingMode(bitmapImage, BitmapScalingMode.LowQuality);
@@ -130,5 +93,63 @@ namespace DesktopFox
         {
             return new Icon(BaseDir + "\\Assets\\DF_Icon.ico");
         }
+
+        /// <summary>
+        /// Gibt die Rotation des Bildes zurück, welche in den Metadaten steht.
+        /// </summary>
+        /// <param name="path">Vollständiger Pfad zur Bilddatei</param>
+        /// <returns></returns>
+        private static Rotation getRotation(String path)
+        {
+            Rotation rotation = Rotation.Rotate0;
+            using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                BitmapFrame bitmapFrame = BitmapFrame.Create(fileStream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
+                BitmapMetadata bitmapMetadata = bitmapFrame.Metadata as BitmapMetadata;
+
+                if ((bitmapMetadata != null) && (bitmapMetadata.ContainsQuery(_orientationQuery)))
+                {
+                    object metaObject = bitmapMetadata.GetQuery(_orientationQuery);
+
+                    #region Diagramm zu EXIF Orientierung
+                    /* EXIF Orientierung
+                     * -----> Row
+                     * |
+                     * |
+                     * | Column
+                     * V
+                     *        Row       Column      Rotation            Spiegel 
+                     * 1    = Top       Left        
+                     * 2 *  = Top       Right                           Y-Achse Gespiegelt
+                     * 3    = Bottom    Right       180° Gedreht
+                     * 4 *  = Bottom    Left        180° Gedreht        Y-Achse Gespiegelt 
+                     * 5 *  = Left      Top          90° Gedreht        X-Achse Gespiegelt
+                     * 6    = Right     Top         -90° Gedreht
+                     * 7 *  = Right     Bottom      -90° Gedreht        X-Achse Gespiegelt
+                     * 8    = Left      Bottom       90° Gedreht
+                     */
+                    #endregion
+
+                    //Auslesen der Rotation aus dem EXIF und vorbereiten der Variable zum bearbeiten der Bitmap
+                    if (metaObject != null)
+                    {
+                        switch ((ushort)metaObject)
+                        {
+                            case 6:
+                                rotation = Rotation.Rotate90;
+                                break;
+                            case 3:
+                                rotation = Rotation.Rotate180;
+                                break;
+                            case 8:
+                                rotation = Rotation.Rotate270;
+                                break;
+                        }
+                    }
+                }
+            }
+            return rotation;
+        }
+
     }
 }

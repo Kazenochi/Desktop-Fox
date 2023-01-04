@@ -100,7 +100,7 @@ namespace DesktopFox
 
         /// <summary>
         /// Sortieren der Galerie falls sich die Liste geändert hat (Drag & Drop)
-        /// Bruch des MVVMs, Funktioniert mit Addressierung der VMs jedoch zu inkonsistent. 
+        /// Note: Bruch des MVVMs, Funktioniert mit Addressierung der VMs jedoch zu inkonsistent. 
         /// </summary>
         public void GallerySort()
         {

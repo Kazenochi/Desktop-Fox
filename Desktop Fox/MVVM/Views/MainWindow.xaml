@@ -152,11 +152,11 @@
                 <!--Deaktivieren des Highlights-->
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
-                        <!-- Funktioniert aktuell nicht korrekt bei der anzeige der ausgewählten Sets
+                        <!--Funktioniert aktuell nicht korrekt bei der anzeige der ausgewählten Sets-->
                         <Setter Property="AllowDrop" Value="True"/>
                         <EventSetter Event="PreviewMouseMove" Handler="ListBoxItem_PreviewMouseMove"/>
                         <EventSetter Event="Drop" Handler="ListBoxItem_ListBoxDrop"/>
-                        -->
+                        
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">

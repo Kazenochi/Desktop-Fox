@@ -243,7 +243,7 @@ namespace DesktopFox
         /// </summary>
         public async Task previewShuffleAsync()
         {
-            Debug.WriteLine("Preview Shuffle ausgelöst");
+            //Debug.WriteLine("Preview Shuffle ausgelöst");
             var tmpPreviewSet = GM.getPreviewSet();
             PreviewModel tmpPreviewModel = previewVM.PreviewModel;
 

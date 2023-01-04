@@ -22,6 +22,8 @@ namespace DesktopFox
     public partial class MainWindow : Window
     {
         private int firecount = 0;
+        private Point mousePoint;
+        private bool mouseDown = false;
 
         public MainWindow()
         {
@@ -42,7 +44,7 @@ namespace DesktopFox
                 this.DragMove();
         }
 
-        #region Sehr Wackeliges Drag & Drop Verhalten. Funktioniert, Anzeige der Selected Sets ist jedoch oft falsch
+        #region Drag & Drop Funktion. Note: Nicht langzeitgetestet aber scheint ohne logikfehler zu laufen
 
         /// <summary>
         /// Drag Funktionalität für Items in der Listbox
@@ -53,28 +55,33 @@ namespace DesktopFox
         {
             ListBoxItem draggedItem;
             PictureView draggedView;
-            bool dragged = false;
+            Point mouselocation;
 
+            //Debug.WriteLine("Mouse Move Event Fire");
+            //Spezifizieren, wann es sich um einen Drag handelt und wann nur ein klick erfolgt
+            //Verhindert unnötiges aktivieren des Drag&Drops und fehler bei der Auswahl
             if (sender is ListBoxItem && e.LeftButton == MouseButtonState.Pressed)
             {
-                draggedItem = sender as ListBoxItem;
-                DragDrop.DoDragDrop(draggedItem, draggedItem.DataContext, DragDropEffects.Move);
-                draggedItem.IsSelected = true;
-                dragged = true;
+                if (!mouseDown)
+                {
+                    mouselocation = e.GetPosition(MainBorder);
+                    mouseDown = true;
+                }
+                if(mouselocation != e.GetPosition(MainBorder))
+                {
+                    draggedItem = sender as ListBoxItem;
+                    DragDrop.DoDragDrop(draggedItem, draggedItem.DataContext, DragDropEffects.Move);
+                    draggedItem.IsSelected = true;
+                }    
                 //((MainWindowVM)this.DataContext).SChange();
-            }
-
-            if(dragged && sender is PictureView && e.LeftButton == MouseButtonState.Released)
+            }else if(e.LeftButton == MouseButtonState.Released)
             {
-                draggedView = sender as PictureView;
-                //draggedItem.Focus();
-                ((MainWindowVM)this.DataContext).SelectedItem = draggedView;
-                dragged = false;
-            } 
+                mouseDown = false;
+            }
         }
 
         /// <summary>
-        /// Drop Logik um die Views neu anzuordnen. Ordnet nur wärend der Laufzeit neu an, Note: Beim Speichern muss die Galerie angepasst werden
+        /// Drop Logik um die Views neu anzuordnen. Ordnet nur während der Laufzeit neu an.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -90,21 +97,68 @@ namespace DesktopFox
             int removedIndex = lbPictures.Items.IndexOf(droppedData);
             int targetIndex = lbPictures.Items.IndexOf(target);
 
+            #region Debug Ausgabe
             if (debug)
             {
                 Debug.WriteLine(" Before: Anzahl von Views: " + ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews.Count);
                 Debug.WriteLine(" Before: Anzahl von VMs: " + ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs.Count);
+                Debug.WriteLine("DropInfo: ");
+                Debug.WriteLine("Dropped Data Type: " + droppedData.GetType().ToString());
+                Debug.WriteLine("Dropped Data Context: " + droppedData.DataContext);
+                Debug.WriteLine("Dropped Data Context Name Test: " + ((PictureVM)droppedData.DataContext).pictureSet.SetName);
+                Debug.WriteLine("Target Type: " + target.GetType().ToString());
+                Debug.WriteLine("Target Data Context Name Test: " + ((PictureVM)target.DataContext).pictureSet.SetName);
             }
+            #endregion
 
             if (removedIndex < targetIndex)
             {
-                if (debug) Debug.WriteLine("Action Runter Schieben -> Entfernt: " + removedIndex + " | Ziel: " + targetIndex);
+                if (debug) Debug.WriteLine("Action Runter Schieben -> Entfernt: " + removedIndex + " | Ziel: " + (targetIndex + 1));
 
                 ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews.Insert(targetIndex + 1, droppedData);
-                ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs.Insert(targetIndex + 1, (PictureVM)((MainWindowVM)this.DataContext).MainWindowModel._pictureViews[targetIndex].DataContext);
-                
+                ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs.Insert(targetIndex + 1, (PictureVM)droppedData.DataContext);
+                #region Debug Ausgabe
+                if (debug) Debug.WriteLine("Insert in " + targetIndex + " von View: " + ((PictureView)droppedData).pLabel.Content.ToString());
+                if (debug) Debug.WriteLine("Insert in " + targetIndex + " von VM: " + ((PictureVM)droppedData.DataContext).pictureSet.SetName);
+                if (debug)
+                {
+                    Debug.WriteLine("Inhalt der VMS vor Remove");
+                    Debug.Write("View Names: ");
+                    foreach (var item in ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews)
+                    {
+                        Debug.Write(item.pLabel.Content.ToString() + ", ");
+                    }
+                    Debug.WriteLine("");
+                    Debug.Write("VM Names: ");
+                    foreach (var item in ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs)
+                    {
+                        Debug.Write(item.pictureSet.SetName + ", ");
+                    }
+                    Debug.WriteLine("");
+                }
+                #endregion
                 ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews.RemoveAt(removedIndex);
-                ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs.RemoveAt(targetIndex);
+                ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs.RemoveAt(removedIndex);
+                #region Debug Ausgabe
+                if (debug) Debug.WriteLine("Remove from " + (removedIndex + 1) + " von View: " + ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews[removedIndex].pLabel.Content.ToString());
+                if (debug) Debug.WriteLine("Remove from " + (removedIndex + 1) + " von VM: " + ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs[removedIndex].pictureSet.SetName);
+                if (debug)
+                {
+                    Debug.WriteLine("Inhalt der VMS nach Remove");
+                    Debug.Write("View Names: ");
+                    foreach(var item in ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews)
+                    {
+                        Debug.Write(item.pLabel.Content.ToString() + ", ");
+                    }
+                    Debug.WriteLine("");
+                    Debug.Write("VM Names: ");
+                    foreach(var item in ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs)
+                    {
+                        Debug.Write(item.pictureSet.SetName + ", ");
+                    }
+                    Debug.WriteLine("");
+                }
+                #endregion
             }
             else
             {
@@ -115,18 +169,60 @@ namespace DesktopFox
                 if (((MainWindowVM)this.DataContext).MainWindowModel._pictureViews.Count + 1 > removedIndex)
                 {
                     ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews.Insert(targetIndex, droppedData);
-                    ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs.Insert(targetIndex, (PictureVM)((MainWindowVM)this.DataContext).MainWindowModel._pictureViews[targetIndex].DataContext);
-                    
+                    ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs.Insert(targetIndex, (PictureVM)droppedData.DataContext);
+                    #region Debug Ausgabe
+                    if (debug) Debug.WriteLine("Insert in " + targetIndex + " von View: " + ((PictureView)droppedData).pLabel.Content.ToString());
+                    if (debug) Debug.WriteLine("Insert in " + targetIndex + " von VM: " + ((PictureVM)droppedData.DataContext).pictureSet.SetName);
+                    if (debug)
+                    {
+                        Debug.WriteLine("Inhalt der VMS vor Remove");
+                        Debug.Write("View Names: ");
+                        foreach (var item in ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews)
+                        {
+                            Debug.Write(item.pLabel.Content.ToString() + ", ");
+                        }
+                        Debug.WriteLine("");
+                        Debug.Write("VM Names: ");
+                        foreach (var item in ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs)
+                        {
+                            Debug.Write(item.pictureSet.SetName + ", ");
+                        }
+                        Debug.WriteLine("");
+                    }
+                    #endregion
                     ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews.RemoveAt(removedIndex);
                     ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs.RemoveAt(removedIndex);
+                    #region Debug Ausgabe
+                    if (debug) Debug.WriteLine("Remove from " + (removedIndex) + " von View: " + ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews[removedIndex-1].pLabel.Content.ToString());
+                    if (debug) Debug.WriteLine("Remove from " + (removedIndex) + " von VM: " + ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs[removedIndex-1].pictureSet.SetName);
+                    if (debug)
+                    {
+                        Debug.WriteLine("Inhalt der VMS nach Remove");
+                        Debug.Write("View Names: ");
+                        foreach (var item in ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews)
+                        {
+                            Debug.Write(item.pLabel.Content.ToString() + ", ");
+                        }
+                        Debug.WriteLine("VM Names: ");
+                        foreach (var item in ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs)
+                        {
+                            Debug.Write(item.pictureSet.SetName + ", ");
+                        }
+                        Debug.WriteLine("");
+                    }
+                    #endregion
                 }
             }
 
+            #region Debug Ausgabe
             if (debug)
             {
                 Debug.WriteLine(" After: Anzahl von Views: " + ((MainWindowVM)this.DataContext).MainWindowModel._pictureViews.Count);
                 Debug.WriteLine(" After: Anzahl von VMs: " + ((MainWindowVM)this.DataContext).MainWindowModel._pictureViewVMs.Count);
+
+
             }
+            #endregion
 
             ((MainWindowVM)this.DataContext).getGalleryManager().GallerySort();
         }

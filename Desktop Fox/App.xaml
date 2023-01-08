@@ -52,6 +52,9 @@
             <DataTemplate DataType="{x:Type views:Settings_SystemView}">
                 <views:Settings_SystemView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type views:MessageView}">
+                <views:MessageView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 

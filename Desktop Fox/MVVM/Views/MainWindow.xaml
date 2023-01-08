@@ -313,6 +313,15 @@
                         Style="{StaticResource DF_ButtonTitleBarExit}"
                         Command="{Binding CloseCommand}"/>
             </StackPanel>
+            <!--
+            <ContentControl x:Name="DF_Messages"
+                            Grid.Row="1"
+                            Content="{Binding }"
+                            d:Content="{view:MessageView}"
+                            Panel.ZIndex="2">
+                
+            </ContentControl>
+            -->
         </Grid>
     </Border>
 </Window>

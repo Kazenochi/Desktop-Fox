@@ -22,6 +22,9 @@ namespace DesktopFox
         /// <returns></returns>
         public static bool saveFile(object obj)
         {
+            if (!Directory.Exists(BaseDir + "\\Saves"))
+                Directory.CreateDirectory(BaseDir + "\\Saves");
+
             var option = Formatting.Indented;
             String saveFolder = BaseDir + "\\Saves\\";
             var json = JsonConvert.SerializeObject(obj, option);
@@ -65,9 +68,8 @@ namespace DesktopFox
         /// <returns>"Null" falls ein Fehler beim laden der Dateien stattfindet</returns>
         public static object loadFile(String FileType)
         {
-            if (!Directory.Exists(BaseDir + "\\Saves"))
-                Directory.CreateDirectory(BaseDir + "\\Saves");
-
+            if (!Directory.Exists(BaseDir + "\\Saves")) return null;
+                
             FileType = FileType.ToLower();
 
             try

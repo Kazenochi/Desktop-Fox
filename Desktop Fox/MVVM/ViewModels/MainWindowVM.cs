@@ -154,6 +154,8 @@ namespace DesktopFox
         public bool EmptyInfo { get { return _emptyInfo; } set { _emptyInfo = value; RaisePropertyChanged(nameof(EmptyInfo)); } }
         private bool _emptyInfo = true;
 
+        
+
         /// <summary>
         /// Helferklasse die das gespeicherte Viewmodel des ausgewählten Sets aktualisiert und Informiert notwendige Klassen <see cref="SChange"/>
         /// </summary>

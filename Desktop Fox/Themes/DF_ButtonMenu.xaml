@@ -10,8 +10,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border
-                    Background="{TemplateBinding Background}">
+                    <Border Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
                                         HorizontalAlignment="Center"/>
                     </Border>
@@ -36,8 +35,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border
-                    Background="{TemplateBinding Background}">
+                    <Border Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
                                         HorizontalAlignment="Center"/>
                     </Border>
@@ -63,8 +61,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border
-                    Background="{TemplateBinding Background}">
+                    <Border Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
                                         HorizontalAlignment="Center"/>
                     </Border>

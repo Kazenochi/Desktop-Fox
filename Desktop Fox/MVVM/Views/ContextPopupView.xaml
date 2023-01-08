@@ -16,7 +16,7 @@
             BorderBrush="{StaticResource BorderBrush}"
             BorderThickness="0.5"
             CornerRadius="20"
-            Height="290"
+            Height="300"
             Width="350">
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">

@@ -20,7 +20,7 @@
                 <StackPanel HorizontalAlignment="Center"
                             VerticalAlignment="Center">
                     <TextBlock FontFamily="{StaticResource Default}"
-                               Foreground="White"
+                               Foreground="{StaticResource TextBrush}"
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
@@ -44,7 +44,7 @@
                                      IsChecked="{Binding Day, Converter={StaticResource BoolInverter}}"/>
                     </StackPanel>
                 </StackPanel>
-                <Border Background="DarkGray"
+                <Border Background="{StaticResource BorderBrush}"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         Height="2"
@@ -55,7 +55,7 @@
                             Grid.Row="1"
                             Margin="20,0,20,0">
                     <TextBlock FontFamily="{StaticResource Default}"
-                               Foreground="White"
+                               Foreground="{StaticResource TextBrush}"
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
@@ -67,7 +67,7 @@
                         </Grid.ColumnDefinitions>
                         <Label x:Name="label_ActiveSet"
                                FontFamily="{StaticResource Default}"
-                               Foreground="White"
+                               Foreground="{StaticResource TextBrush}"
                                FontSize="15"
                                MaxWidth="200"
                                HorizontalAlignment="Left"
@@ -87,7 +87,7 @@
                         </StackPanel>
                     </Grid>
                 </StackPanel>
-                <Border Background="DarkGray"
+                <Border Background="{StaticResource BorderBrush}"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         Height="2"
@@ -98,7 +98,7 @@
                             Grid.Row="2"
                             Margin="20,0,20,0">
                     <TextBlock FontFamily="{StaticResource Default}"
-                               Foreground="White"
+                               Foreground="{StaticResource TextBrush}"
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
@@ -110,7 +110,7 @@
                         </Grid.ColumnDefinitions>
                         <Label x:Name="label_SelectedFolder"
                                FontFamily="{StaticResource Default}"
-                               Foreground="White"
+                               Foreground="{StaticResource TextBrush}"
                                FontSize="15"
                                MaxWidth="300"
                                HorizontalAlignment="Left"
@@ -126,7 +126,7 @@
                                 Command="{Binding OpenFolderDialog}"/>
                     </Grid>
                 </StackPanel>
-                <Border Background="DarkGray"
+                <Border Background="{StaticResource BorderBrush}"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         Height="2"

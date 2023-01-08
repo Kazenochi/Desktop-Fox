@@ -1,0 +1,52 @@
+﻿<local:AnimatedBaseView  x:Class="DesktopFox.MVVM.Views.MessageView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                         xmlns:local="clr-namespace:DesktopFox"
+                         xmlns:views="clr-namespace:DesktopFox.MVVM.Views"
+                         xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels"
+                         mc:Ignorable="d"
+                         d:DataContext="{d:DesignInstance Type=ViewModels:MessageVM}"
+                         d:DesignHeight="450" d:DesignWidth="800">
+    <Border Background="{StaticResource BackgroundBrush}"
+            BorderThickness="2"
+            BorderBrush="{StaticResource BorderBrush}"
+            CornerRadius="20"
+            Height="150"
+            Width="250">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <TextBlock FontFamily="{StaticResource Default}"
+                       Foreground="{StaticResource TextBrush}"
+                       FontSize="15"
+                       Margin="10"
+                       TextAlignment="Center"
+                       Text="Do you want to delete&#xD;&#xA;the selected Set ?">
+            </TextBlock>
+            <Border Background="{StaticResource BorderBrush}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom"
+                    Height="2"
+                    Margin="10,0,10,0"
+                    CornerRadius="1"/>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="1"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Button Content="Yes"
+                    FontSize="20"
+                    Style="{StaticResource DF_Button_Border}"/>
+                <Button Content="No"
+                    FontSize="20"
+                    Style="{StaticResource DF_Button_Border}"/>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+
+</local:AnimatedBaseView>

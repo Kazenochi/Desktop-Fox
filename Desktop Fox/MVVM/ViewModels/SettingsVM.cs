@@ -20,6 +20,7 @@ namespace DesktopFox.MVVM.ViewModels
         public Settings settings { get; set; }
         public Settings_DaytimeModel DaytimeModel { get; set; } = new Settings_DaytimeModel();
         public Settings_ShuffleModel ShuffleModel { get; set; } = new Settings_ShuffleModel();
+        public Settings_InfoModel InfoModel { get; set; } = new Settings_InfoModel();
 
         private Settings_DaytimeView _daytimeView = new Settings_DaytimeView();
         private Settings_DModeView _dmodeView = new Settings_DModeView();
@@ -44,6 +45,7 @@ namespace DesktopFox.MVVM.ViewModels
             _styleView.DataContext = this;
             _systemView.DataContext = this;
             _languageView.DataContext = this;
+            _info.DataContext = this;
 
             CurrentView = _previewView; 
         }

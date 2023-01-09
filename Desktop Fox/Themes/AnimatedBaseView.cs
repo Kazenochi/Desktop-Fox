@@ -66,18 +66,29 @@ namespace DesktopFox
             scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, popinAnimationX);
         }
 
-        public void FadeIn(Border b)
+        public void FadeIn()
         {
             if (this.ControlFadeInAnimation == Animation.None)
                 return;
 
+            this.Opacity = 0;
+            this.Visibility = Visibility.Visible;
+
             var sb = new Storyboard();
             var fadeinAnimationX = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(this.AnimationTime));
-
+            sb.Children.Add(fadeinAnimationX);
+            Storyboard.SetTarget(sb, this);
+            Storyboard.SetTargetProperty(sb, new PropertyPath(Control.OpacityProperty));
+       
+            sb.Begin();
+            sb.Completed += delegate(object sender, EventArgs e) 
+            {
+                this.Visibility = Visibility.Collapsed;
+            };
 
         }
 
-        public void FadeOut(Border b)
+        public void FadeOut()
         {
             if (this.ControlFadeOutAnimation == Animation.None)
                 return;

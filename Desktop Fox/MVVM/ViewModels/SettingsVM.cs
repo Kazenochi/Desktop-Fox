@@ -71,7 +71,7 @@ namespace DesktopFox.MVVM.ViewModels
         }
 
         /// <summary>
-        /// Aktualisiert die Zahlenwerte in den Einsetllungs Views
+        /// Aktualisiert die Zahlenwerte in den Einstellungs Views
         /// </summary>
         private void UpdateNumbers()
         {
@@ -101,42 +101,42 @@ namespace DesktopFox.MVVM.ViewModels
         /// <summary>
         /// Kommando um die <see cref="Views.Settings_DaytimeView"/> anzuzeigen
         /// </summary>
-        public ICommand DaytimeCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _daytimeView); } }
+        public ICommand DaytimeCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(_daytimeView)); } }
 
         /// <summary>
         /// Kommando um die <see cref="Views.Settings_DModeView"/> anzuzeigen
         /// </summary>
-        public ICommand DModeCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _dmodeView); } }
+        public ICommand DModeCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(_dmodeView)); } }
 
         /// <summary>
         /// Kommando um die <see cref="Views.Settings_PreviewView"/> anzuzeigen
         /// </summary>
-        public ICommand PreviewCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _previewView); } }
+        public ICommand PreviewCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(_previewView)); } }
 
         /// <summary>
         /// Kommando um die <see cref="Views.Settings_ShuffleView"/> anzuzeigen
         /// </summary>
-        public ICommand ShuffleCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _shuffleView); } }
+        public ICommand ShuffleCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(_shuffleView)); } }
 
         /// <summary>
         /// Kommando um die <see cref="Views.Settings_StyleView"/> anzuzeigen
         /// </summary>
-        public ICommand StyleCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _styleView); } }
+        public ICommand StyleCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(_styleView)); } }
 
         /// <summary>
         /// Kommando um die <see cref="Views.Settings_SystemView"/> anzuzeigen
         /// </summary>
-        public ICommand SystemCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _systemView); } }
+        public ICommand SystemCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(_systemView)); } }
 
         /// <summary>
         /// Kommando um die <see cref="Views.Settings_SystemView"/> anzuzeigen
         /// </summary>
-        public ICommand LanguageCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _systemView); } }
+        public ICommand LanguageCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(_systemView)); } }
 
         /// <summary>
         /// Kommando um die <see cref="Views.Settings_Info"/> anzuzeigen
         /// </summary>
-        public ICommand InfoCommand { get { return new DF_Command.DelegateCommand(o => CurrentView = _info); } }
+        public ICommand InfoCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(_info)); } }
 
         /// <summary>
         /// Kommando um die temporären Tageszeitwechsel Einstellungen abzuspeichern
@@ -150,6 +150,19 @@ namespace DesktopFox.MVVM.ViewModels
 
         public ICommand DaytimeTextChangedCommand { get { return new DF_Command.DelegateCommand(o => SaveDaytimeValues()); } }
         #endregion
+
+        /// <summary>
+        /// Ändernt die Views im Mainwindow <see cref="MainWindow.ContextViews"/>
+        /// </summary>
+        /// <param name="newView">Neue View die Angezeigt werden soll. null = keine View anzeigen.</param>
+        public void SwitchViews(AnimatedBaseView newView)
+        {
+            if (newView != null && newView != CurrentView)
+            {
+                newView.FadeIn();
+                CurrentView = newView;
+            }
+        }
 
     }
 }

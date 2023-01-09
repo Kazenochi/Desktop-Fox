@@ -11,7 +11,7 @@ namespace DesktopFox.MVVM.Views
     /// <summary>
     /// Interaktionslogik für Settings_DaytimeView.xaml
     /// </summary>
-    public partial class Settings_DaytimeView : UserControl
+    public partial class Settings_DaytimeView : AnimatedBaseView
     {
 
         public Settings_DaytimeView()

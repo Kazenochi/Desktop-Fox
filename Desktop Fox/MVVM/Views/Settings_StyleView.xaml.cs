@@ -8,7 +8,7 @@ namespace DesktopFox.MVVM.Views
     /// <summary>
     /// Interaktionslogik für Settings_StyleView.xaml
     /// </summary>
-    public partial class Settings_StyleView : UserControl
+    public partial class Settings_StyleView : AnimatedBaseView
     {
 
         public Settings_StyleView()

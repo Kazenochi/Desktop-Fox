@@ -18,7 +18,7 @@ namespace DesktopFox.MVVM.Views
     /// <summary>
     /// Interaktionslogik für Settings_Info.xaml
     /// </summary>
-    public partial class Settings_Info : UserControl
+    public partial class Settings_Info : AnimatedBaseView
     {
         public Settings_Info()
         {

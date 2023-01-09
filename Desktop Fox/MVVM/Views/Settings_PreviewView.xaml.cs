@@ -8,7 +8,7 @@ namespace DesktopFox.MVVM.Views
     /// <summary>
     /// Interaktionslogik für Settings_PreviewView.xaml
     /// </summary>
-    public partial class Settings_PreviewView : UserControl
+    public partial class Settings_PreviewView : AnimatedBaseView
     {
 
         public Settings_PreviewView()

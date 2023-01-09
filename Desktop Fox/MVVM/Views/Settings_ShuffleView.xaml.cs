@@ -12,7 +12,7 @@ namespace DesktopFox.MVVM.Views
     /// <summary>
     /// Interaktionslogik für Settings_ShuffleView.xaml
     /// </summary>
-    public partial class Settings_ShuffleView : UserControl
+    public partial class Settings_ShuffleView : AnimatedBaseView
     {
 
         public Settings_ShuffleView()

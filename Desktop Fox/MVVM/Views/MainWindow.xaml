@@ -146,7 +146,7 @@
                      Grid.Row="1"         
                      BorderBrush="Transparent" 
                      Background="Transparent"
-                     SelectedItem="{Binding SelectedItem}"
+                     SelectedItem="{Binding SelectedItem}"                  
                      local:DragAndDropExtension.ScrollOnDragDrop="True"
                      Panel.ZIndex="3">
                 <!--Deaktivieren des Highlights-->

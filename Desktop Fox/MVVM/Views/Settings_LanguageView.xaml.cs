@@ -18,7 +18,7 @@ namespace DesktopFox.MVVM.Views
     /// <summary>
     /// Interaktionslogik für Settings_LanguageView.xaml
     /// </summary>
-    public partial class Settings_LanguageView : UserControl
+    public partial class Settings_LanguageView : AnimatedBaseView
     {
         public Settings_LanguageView()
         {

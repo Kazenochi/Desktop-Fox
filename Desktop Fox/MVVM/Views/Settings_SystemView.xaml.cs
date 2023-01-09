@@ -18,7 +18,7 @@ namespace DesktopFox.MVVM.Views
     /// <summary>
     /// Interaktionslogik für Settings_SystemView.xaml
     /// </summary>
-    public partial class Settings_SystemView : UserControl
+    public partial class Settings_SystemView : AnimatedBaseView
     {
         public Settings_SystemView()
         {

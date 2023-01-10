@@ -9,6 +9,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>DesktopFox.App</StartupObject>
     <ApplicationIcon>Assets\DF_Icon.ico</ApplicationIcon>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -44,6 +45,13 @@
 
   <ItemGroup>
     <Folder Include="Saves\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\AniNote\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

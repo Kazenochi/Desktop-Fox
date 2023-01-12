@@ -239,7 +239,7 @@ namespace DesktopFox
             else
                 SelectedMonitor = 1;
 
-            MultiMonitorContent = "Mon. " + SelectedMonitor.ToString();
+            MultiMonitorContent = SelectedMonitor.ToString();
             SChange();
         }
 
@@ -267,7 +267,7 @@ namespace DesktopFox
             else
             {
                 MultiMonitor = true;
-                MultiMonitorContent = "Mon. " + SelectedMonitor.ToString();
+                MultiMonitorContent = SelectedMonitor.ToString();
                 foreach(var i in MainWindowModel._pictureViewVMs)
                 {
                     if (i.pictureSet.SetName == DF.GalleryManager.Gallery.activeSetsList.ElementAt(1))

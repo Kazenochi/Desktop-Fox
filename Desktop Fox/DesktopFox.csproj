@@ -17,6 +17,12 @@
     <None Remove="Assets\Dummy.jpg" />
     <None Remove="Assets\murmel.png" />
     <None Remove="Assets\Nunito-VariableFont_wght.ttf" />
+    <None Remove="Icons\Icons_Minus.png" />
+    <None Remove="Icons\Icons_Monitor.png" />
+    <None Remove="Icons\Icons_Pause.png" />
+    <None Remove="Icons\Icons_Play.png" />
+    <None Remove="Icons\Icons_Plus.png" />
+    <None Remove="Icons\Icons_Settings.png" />
     <None Remove="MVVM\Views\DF_Icon.ico" />
   </ItemGroup>
 
@@ -40,6 +46,24 @@
     </Content>
     <Content Include="Assets\murmel.png" />
     <Resource Include="Assets\Nunito-VariableFont_wght.ttf" />
+    <Resource Include="Icons\Icons_Minus.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Icons_Monitor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Icons_Pause.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Icons_Play.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Icons_Plus.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Icons_Settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="MVVM\Views\DF_Icon.ico" />
   </ItemGroup>
 

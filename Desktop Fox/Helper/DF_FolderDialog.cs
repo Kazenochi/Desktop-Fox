@@ -29,6 +29,23 @@ namespace DesktopFox
             return getList(getFileInfo(folderDialog.SelectedPath)); 
         }
 
+        public static string openSingleFileDialog()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Video files (*.mp4)|*.mp4;*.mkv;*.gif";
+            openFileDialog.Multiselect = false;
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.CheckPathExists = true;
+
+            string filePath; 
+            if(openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filePath = openFileDialog.FileName;
+                return filePath;
+            }
+            return null;
+        }
+
         /// <summary>
         /// Wandelt die Fileinfo Liste in eine Stringliste um
         /// </summary>

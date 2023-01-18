@@ -21,7 +21,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock FontFamily="{StaticResource Default}"
-                       Foreground="{StaticResource Text_Brush}"
+                       Foreground="{StaticResource TextBrush}"
                        FontSize="20"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
@@ -50,7 +50,7 @@
                         Grid.Row="3"
                         HorizontalAlignment="Center" Margin="0,0,0,10">
                 <TextBlock FontFamily="{StaticResource Default}"
-                           Foreground="{StaticResource Text_Brush}"
+                           Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            VerticalAlignment="Center">
                     Intervall time
@@ -63,7 +63,7 @@
                         Margin="10,0,10,0">
                     <TextBox x:Name="shuffleTime"
                              MaxLength="3"
-                             Foreground="{StaticResource Text_Brush}"
+                             Foreground="{StaticResource TextBrush}"
                              FontSize="20"
                              VerticalAlignment="Center"
                              Background="Transparent"
@@ -75,7 +75,7 @@
                 </Border>
 
                 <TextBlock FontFamily="{StaticResource Default}"
-                           Foreground="{StaticResource Text_Brush}"
+                           Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            VerticalAlignment="Center">
                     Min

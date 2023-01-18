@@ -10,21 +10,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="Set_DaytimeView">
-    <d:Border Background="{StaticResource BackgroundBrush}"
-            CornerRadius="20">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="150"/>
-            </Grid.ColumnDefinitions>
-            
-            <StackPanel HorizontalAlignment="Center"
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Top"
                         Margin="0,25,0,0">
-                <TextBlock FontFamily="{StaticResource Default}"
+            <TextBlock FontFamily="{StaticResource Default}"
                            Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            HorizontalAlignment="Center"
@@ -32,15 +31,15 @@
                            TextAlignment="Center"
                            Margin="0,0,0,5">
                     When should the day start
-                </TextBlock>
+            </TextBlock>
 
-                <StackPanel Orientation="Horizontal">
-                        
-                    <Border Height="30" Width="70" 
+            <StackPanel Orientation="Horizontal">
+
+                <Border Height="30" Width="70" 
                             CornerRadius="15"
                             Margin="10,0,10,0"
                             x:Name="border1">
-                        <TextBox x:Name="dayHours"
+                    <TextBox x:Name="dayHours"
                                  MaxLength="2"
                                  Foreground="{StaticResource TextBrush}"
                                  BorderThickness="0"
@@ -53,38 +52,38 @@
                                  d:Text="8"
                                  TextChanged="TextBox_TextChanged"
                                  Text="{Binding DaytimeModel.DayStartHours}">
-                        </TextBox>
-                        <Border.Style>
-                            <Style>
-                                <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
-                                <Setter Property="Border.BorderThickness" Value="3"/>
-                                <Style.Triggers>
-                                    <Trigger Property="Border.IsMouseOver" Value="True">
-                                        <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
-                                        <Setter Property="Border.Cursor" Value="Hand"/>
-                                    </Trigger>
-                                    <DataTrigger Binding="{Binding ElementName=dayHours, Path=IsFocused}" Value="true">
-                                        <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                    </Border>
-                        
-                    <TextBlock FontFamily="{StaticResource Default}"
+                    </TextBox>
+                    <Border.Style>
+                        <Style>
+                            <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+                            <Setter Property="Border.BorderThickness" Value="3"/>
+                            <Style.Triggers>
+                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                    <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                                    <Setter Property="Border.Cursor" Value="Hand"/>
+                                </Trigger>
+                                <DataTrigger Binding="{Binding ElementName=dayHours, Path=IsFocused}" Value="true">
+                                    <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+
+                <TextBlock FontFamily="{StaticResource Default}"
                                Foreground="{StaticResource TextBrush}"
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                TextAlignment="Center">
                             :
-                        </TextBlock>
-                        
-                    <Border Height="30" Width="70" 
+                </TextBlock>
+
+                <Border Height="30" Width="70" 
                             CornerRadius="15"
                             Margin="10,0,10,0"
                             x:Name="border2">
-                        <TextBox x:Name="dayMinutes"
+                    <TextBox x:Name="dayMinutes"
                                  MaxLength="2"
                                  Foreground="{StaticResource TextBrush}"
                                  BorderThickness="0"
@@ -96,36 +95,36 @@
                                  Margin="0,-2,0,0"
                                  TextChanged="TextBox_TextChanged"
                                  Text="{Binding DaytimeModel.DayStartMinutes}">
-                        </TextBox>
-                        <Border.Style>
-                            <Style>
-                                <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
-                                <Setter Property="Border.BorderThickness" Value="3"/>
-                                <Style.Triggers>
-                                    <Trigger Property="Border.IsMouseOver" Value="True">
-                                        <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
-                                        <Setter Property="Border.Cursor" Value="Hand"/>
-                                    </Trigger>
-                                    <DataTrigger Binding="{Binding ElementName=dayMinutes, Path=IsFocused}" Value="true">
-                                        <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                    </Border>
-                        
-                    <TextBlock FontFamily="{StaticResource Default}"
+                    </TextBox>
+                    <Border.Style>
+                        <Style>
+                            <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+                            <Setter Property="Border.BorderThickness" Value="3"/>
+                            <Style.Triggers>
+                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                    <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                                    <Setter Property="Border.Cursor" Value="Hand"/>
+                                </Trigger>
+                                <DataTrigger Binding="{Binding ElementName=dayMinutes, Path=IsFocused}" Value="true">
+                                    <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+
+                <TextBlock FontFamily="{StaticResource Default}"
                                Foreground="{StaticResource TextBrush}"
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                TextAlignment="Center">
                             hh : mm
-                    </TextBlock>
-                        
-                </StackPanel>
-                
-                <TextBlock FontFamily="{StaticResource Default}"
+                </TextBlock>
+
+            </StackPanel>
+
+            <TextBlock FontFamily="{StaticResource Default}"
                            Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            HorizontalAlignment="Center"
@@ -133,15 +132,15 @@
                            TextAlignment="Center"
                            Margin="0,30,0,5">
                     When should the night start
-                </TextBlock>
+            </TextBlock>
 
-                <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
 
-                    <Border Height="30" Width="70" 
+                <Border Height="30" Width="70" 
                             CornerRadius="15"
                             Margin="10,0,10,0"
                             x:Name="border3">
-                        <TextBox x:Name="nightHours"
+                    <TextBox x:Name="nightHours"
                                  MaxLength="2"
                                  Foreground="{StaticResource TextBrush}"
                                  BorderThickness="0"
@@ -153,38 +152,38 @@
                                  Margin="0,-2,0,0"
                                  TextChanged="TextBox_TextChanged"
                                  Text="{Binding DaytimeModel.NightStartHours}">
-                        </TextBox>
-                        <Border.Style>
-                            <Style>
-                                <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
-                                <Setter Property="Border.BorderThickness" Value="3"/>
-                                <Style.Triggers>
-                                    <Trigger Property="Border.IsMouseOver" Value="True">
-                                        <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
-                                        <Setter Property="Border.Cursor" Value="Hand"/>
-                                    </Trigger>
-                                    <DataTrigger Binding="{Binding ElementName=nightHours, Path=IsFocused}" Value="true">
-                                        <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                    </Border>
+                    </TextBox>
+                    <Border.Style>
+                        <Style>
+                            <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+                            <Setter Property="Border.BorderThickness" Value="3"/>
+                            <Style.Triggers>
+                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                    <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                                    <Setter Property="Border.Cursor" Value="Hand"/>
+                                </Trigger>
+                                <DataTrigger Binding="{Binding ElementName=nightHours, Path=IsFocused}" Value="true">
+                                    <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
 
-                    <TextBlock FontFamily="{StaticResource Default}"
+                <TextBlock FontFamily="{StaticResource Default}"
                                Foreground="{StaticResource TextBrush}"
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                TextAlignment="Center">
                             :
-                    </TextBlock>
+                </TextBlock>
 
-                    <Border Height="30" Width="70" 
+                <Border Height="30" Width="70" 
                             CornerRadius="15"
                             Margin="10,0,10,0"
                             x:Name="border4">
-                        <TextBox x:Name="nightMinutes"
+                    <TextBox x:Name="nightMinutes"
                                  MaxLength="2"
                                  Foreground="{StaticResource TextBrush}"
                                  BorderThickness="0"
@@ -196,75 +195,74 @@
                                  Margin="0,-2,0,0"
                                  TextChanged="TextBox_TextChanged"
                                  Text="{Binding DaytimeModel.NightStartMinutes}">
-                        </TextBox>
-                        <Border.Style>
-                            <Style>
-                                <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
-                                <Setter Property="Border.BorderThickness" Value="3"/>
-                                <Style.Triggers>
-                                    <Trigger Property="Border.IsMouseOver" Value="True">
-                                        <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
-                                        <Setter Property="Border.Cursor" Value="Hand"/>
-                                    </Trigger>
-                                    <DataTrigger Binding="{Binding ElementName=nightMinutes, Path=IsFocused}" Value="true">
-                                        <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                    </Border>
+                    </TextBox>
+                    <Border.Style>
+                        <Style>
+                            <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+                            <Setter Property="Border.BorderThickness" Value="3"/>
+                            <Style.Triggers>
+                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                    <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                                    <Setter Property="Border.Cursor" Value="Hand"/>
+                                </Trigger>
+                                <DataTrigger Binding="{Binding ElementName=nightMinutes, Path=IsFocused}" Value="true">
+                                    <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
 
-                    <TextBlock FontFamily="{StaticResource Default}"
+                <TextBlock FontFamily="{StaticResource Default}"
                                Foreground="{StaticResource TextBrush}"
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                TextAlignment="Center">
                             hh : mm
-                    </TextBlock>
-                </StackPanel>
+                </TextBlock>
             </StackPanel>
+        </StackPanel>
 
-            <Button Content="Save"
+        <Button Content="Save"
                     Grid.Column="1"
                     VerticalAlignment="Top"
                     Margin="0,80,0,0"
                     FontSize="20"
                     Command="{Binding SaveDaytimeCommand}"
                     Style="{StaticResource DF_Button_Border}">
-                <Button.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation To="LightGreen" 
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="LightGreen" 
                                                 Storyboard.TargetProperty="(Border.Background).Color" 
                                                 Storyboard.TargetName="border1"
                                                 From="{StaticResource Color_Control}"
                                                 AutoReverse="True"
                                                 Duration="0:0:0.5"/>
-                                <ColorAnimation To="LightGreen" 
+                            <ColorAnimation To="LightGreen" 
                                                 Storyboard.TargetProperty="(Border.Background).Color" 
                                                 Storyboard.TargetName="border2"
                                                 From="{StaticResource Color_Control}"
                                                 AutoReverse="True"
                                                 Duration="0:0:0.5"/>
-                                <ColorAnimation To="LightGreen" 
+                            <ColorAnimation To="LightGreen" 
                                                 Storyboard.TargetProperty="(Border.Background).Color" 
                                                 Storyboard.TargetName="border3"
                                                 From="{StaticResource Color_Control}"
                                                 AutoReverse="True"
                                                 Duration="0:0:0.5"/>
-                                <ColorAnimation To="LightGreen" 
+                            <ColorAnimation To="LightGreen" 
                                                 Storyboard.TargetProperty="(Border.Background).Color" 
                                                 Storyboard.TargetName="border4"
                                                 From="{StaticResource Color_Control}"
                                                 AutoReverse="True"
                                                 Duration="0:0:0.5"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Button.Triggers>
-            </Button>
-        </Grid>
-    </d:Border>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+    </Grid>
 </local:AnimatedBaseView>

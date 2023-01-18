@@ -148,6 +148,7 @@
                     Panel.ZIndex="2">
                 <Border.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding HideViewCommand}"/>
+                    <MouseBinding Gesture="RightClick" Command="{Binding HideViewCommand}"/>
                     <MouseBinding Gesture="LeftDoubleClick" Command="{Binding MaximizeCommand}"/>
                 </Border.InputBindings>
             </Border>

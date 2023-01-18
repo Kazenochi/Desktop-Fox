@@ -60,11 +60,16 @@
                         </RectangleGeometry.Transform>
                     </RectangleGeometry>
                 </Border.Clip>
-                <Image x:Name="pImageNight" Source="{Binding pictureSet.NightImage}" 
-                       Stretch="UniformToFill" d:Source="/Assets/よぞら - 夜空 .png"/>
+                <Image x:Name="pImageNight" 
+                       Source="{Binding pictureSet.NightImage}" 
+                       Stretch="UniformToFill" 
+                       d:Source="/Assets/よぞら - 夜空 .png"/>
             </Border>
-            <Label x:Name="pLabel" Content="{Binding pictureSet.SetName}" d:Content="Pictureset great"
-                   FontSize="22" FontFamily="{StaticResource Default}" FontWeight="Bold"
+            <Label x:Name="pLabel" 
+                   Content="{Binding pictureSet.SetName}" 
+                   d:Content="Pictureset great"
+                   FontSize="22" FontFamily="{StaticResource Default}" 
+                   FontWeight="Bold"
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Bottom" 
                    Width="414" Height="30" 
@@ -85,7 +90,7 @@
                     </LinearGradientBrush>
                 </Label.Background>
             </Label>
-            <StackPanel Margin="10">
+            <StackPanel Margin="10" Panel.ZIndex="2">
                 <Grid x:Name="pActiveMarker"
                       Width="25" Height="25" 
                       VerticalAlignment="Top"

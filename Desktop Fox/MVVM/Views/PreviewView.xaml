@@ -53,27 +53,12 @@
                         </EventTrigger>
                     </Image.Triggers>
                 </Image>
-                <Image x:Name="ForeImage" 
+                <Image x:Name="ForeImage"
                        Source="{Binding PreviewModel.ForegroundImage}"
-                       Stretch="{Binding PreviewModel.ImageStretch}">
+                       Stretch="{Binding PreviewModel.ImageStretch}"
+                       d:Source="/Assets/murmel.png"
+                       d:Stretch="UniformToFill">
                 </Image>
-                <!--
-                    <Border x:Name="BackgroundPreview">
-                    <Border.Background>
-                        <ImageBrush ImageSource="{Binding PreviewModel.BackgroundImage}" 
-                                    Stretch="{Binding PreviewModel.ImageStretch}"
-                                    d:Stretch="UniformToFill"
-                                    d:ImageSource="/Assets/murmel.png"/>
-                    </Border.Background>
-                </Border>
-
-                <Border x:Name="ForegroundPreview">
-                    <Border.Background>
-                        <ImageBrush ImageSource="{Binding PreviewModel.ForegroundImage}" 
-                                    Stretch="{Binding PreviewModel.ImageStretch}"/>
-                    </Border.Background>
-                </Border>
-                -->
             </Grid>
 
 

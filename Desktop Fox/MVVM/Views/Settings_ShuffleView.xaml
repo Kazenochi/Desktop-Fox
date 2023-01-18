@@ -12,16 +12,16 @@
     <UserControl.Resources>
 
     </UserControl.Resources>
-    <Border Background="#FF2C394A"
-            CornerRadius="20">
+    <Border CornerRadius="20"
+            d:Background="{StaticResource BackgroundBrush}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock FontFamily="/Assets/#Nunito"
-                       Foreground="White"
+            <TextBlock FontFamily="{StaticResource Default}"
+                       Foreground="{StaticResource TextBrush}"
                        FontSize="20"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
@@ -49,8 +49,8 @@
             <StackPanel Orientation="Horizontal" 
                         Grid.Row="3"
                         HorizontalAlignment="Center" Margin="0,0,0,10">
-                <TextBlock FontFamily="/Assets/#Nunito"
-                           Foreground="White"
+                <TextBlock FontFamily="{StaticResource Default}"
+                           Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            VerticalAlignment="Center">
                     Intervall time
@@ -58,12 +58,12 @@
 
                 <Border x:Name="border1"
                         Height="30" Width="70" 
-                        Background="#FF347FE6" 
+                        Background="{StaticResource ControlBrush}" 
                         CornerRadius="15"
                         Margin="10,0,10,0">
                     <TextBox x:Name="shuffleTime"
                              MaxLength="3"
-                             Foreground="White"
+                             Foreground="{StaticResource TextBrush}"
                              FontSize="20"
                              VerticalAlignment="Center"
                              Background="Transparent"
@@ -74,8 +74,8 @@
                              Text="{Binding ShuffleModel.ShuffleTime}"/>
                 </Border>
 
-                <TextBlock FontFamily="/Assets/#Nunito"
-                           Foreground="White"
+                <TextBlock FontFamily="{StaticResource Default}"
+                           Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            VerticalAlignment="Center">
                     Min

@@ -10,8 +10,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Border Background="{StaticResource BackgroundBrush}"
-            CornerRadius="20">
+    <d:Border Background="{StaticResource BackgroundBrush}"
+              CornerRadius="20">
         <Grid>
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center">
@@ -57,6 +57,6 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-    </Border>
+    </d:Border>
 
 </local:AnimatedBaseView>

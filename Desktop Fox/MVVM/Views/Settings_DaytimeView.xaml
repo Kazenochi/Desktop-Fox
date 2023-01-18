@@ -10,10 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="Set_DaytimeView">
-    <UserControl.Resources>
- 
-    </UserControl.Resources>
-    <Border Background="{StaticResource BackgroundBrush}"
+    <d:Border Background="{StaticResource BackgroundBrush}"
             CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
@@ -269,5 +266,5 @@
                 </Button.Triggers>
             </Button>
         </Grid>
-    </Border>
+    </d:Border>
 </local:AnimatedBaseView>

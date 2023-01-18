@@ -63,7 +63,7 @@
                             <Border Margin="5">
                                 <Grid>
                                     <Image Source="\Icons\Icons_Pause.png" 
-                                       Stretch="Uniform" Margin="5"/>
+                                           Stretch="Uniform" Margin="5"/>
                                 </Grid>
                             </Border>
                         </Button>

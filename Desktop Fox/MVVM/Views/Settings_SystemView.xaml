@@ -16,7 +16,7 @@
                         VerticalAlignment="Center"
                         Width="280">
                 <TextBlock FontFamily="{StaticResource Default}"
-                           Foreground="White"
+                           Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -40,7 +40,7 @@
                                  IsChecked="{Binding settings.AutoSetChange, Converter={StaticResource BoolInverter}}"/>
                 </StackPanel>
             </StackPanel>
-            <Border Background="DarkGray"
+            <Border Background="{StaticResource BorderBrush}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Stretch"
                             Width="2"
@@ -50,7 +50,7 @@
                         VerticalAlignment="Center"
                         Width="280">
                 <TextBlock FontFamily="{StaticResource Default}"
-                           Foreground="White"
+                           Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"

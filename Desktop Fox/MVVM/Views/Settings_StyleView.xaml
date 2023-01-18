@@ -9,7 +9,7 @@
              d:DataContext="{d:DesignInstance Type=viewModels:SettingsVM}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="{StaticResource BackgroundBrush}"
+    <d:Border Background="{StaticResource BackgroundBrush}"
             CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
@@ -43,5 +43,5 @@
                              Style="{StaticResource DF_RadioButton_Border}"/>
             </StackPanel>
         </Grid>
-    </Border>
+    </d:Border>
 </local:AnimatedBaseView>

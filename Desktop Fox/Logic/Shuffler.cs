@@ -96,6 +96,53 @@ namespace DesktopFox
             mWindow = mainWindow;
         }
 
+        #region Preview Steuerelemente
+
+        /// <summary>
+        /// Zeigt im Preview Fenster das nächste Bild an
+        /// </summary>
+        public void previewForward()
+        {
+            if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
+            {
+                previewTimerReset();
+                previewShuffleAsync();
+            }
+        }
+
+        /// <summary>
+        /// Aktualisiert das Bilder im Preview Fenster
+        /// </summary>
+        public void previewRefresh()
+        {
+            previewTimerReset();
+            if(previewCount > 0)
+                previewCount--;
+
+            previewShuffleAsync();
+        }
+
+        /// <summary>
+        /// Zeigt im Preview Fenster das vorherige Bild an
+        /// </summary>
+        public void previewBackward()
+        {
+            if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
+            {
+                previewTimerReset();
+                previewCount = previewCount - 2;
+                if (previewCount < 0)
+                {
+                    previewCount = GM.GetCollection(previewDay, GM.getPreviewSet().SetName).singlePics.Count - 1;
+                }
+                previewShuffleAsync();
+            }
+        }
+
+        #endregion
+
+        #region Shuffler & Logik
+
         /// <summary>
         /// Shuffle Funktion für den Windows eigenen Shuffel Modus. 
         /// </summary>
@@ -146,15 +193,15 @@ namespace DesktopFox
                 stopDesktopTimer();
                 winPicShuffle(GM.GetCollection(isDay, GM.getActiveSet().SetName).folderDirectory);
             }
-            else 
-            { 
+            else
+            {
                 startDesktopTimer();
                 stopWinDesktop();
 
                 //Einmaliges Anstoßen der Desktopfunktion beim Ändern der Einstellungen
                 //desktopTimer_Trigger(null, null);
             }
-            
+
         }
 
         /// <summary>
@@ -171,71 +218,82 @@ namespace DesktopFox
         }
 
         /// <summary>
-        /// Start des Preview Timers
+        /// Eigener Shuffler. Shuffelt/Rotiert die Bilder der Collection und setzt sie als Hintergundbild des Monitors. 
         /// </summary>
-        public void startPreviewShuffleTimer()
+        /// <param name="monitorID"></param>
+        /// <param name="activeCol"></param>
+        private void df_PicShuffle(String monitorID, Collection activeCol, int monitor)
         {
-            if (previewTimer == null)
+            int tmpCount = 0;
+            int[] tmpLockList;
+            switch (monitor)
             {
-                previewTimer = new Timer();
-                //timer.Tick += new EventHandler(previewShuffle);
-                previewTimer.Interval = PreviewShuffleTime.TotalMilliseconds;
-                previewTimer.Elapsed += new ElapsedEventHandler(dispatcher);
-                previewTimer.Start();
-                Debug.WriteLine("Timer gestartet");
+                case 1: tmpCount = picCount1; tmpLockList = lockList1; break;
+                case 2: tmpCount = picCount2; tmpLockList = lockList2; break;
+                case 3: tmpCount = picCount3; tmpLockList = lockList3; break;
+                default: tmpCount = picCount1; tmpLockList = lockList1; break;
+            }
+
+            //Überprüft ob sich die Einstellung geändert hat und passt diese ggf. an
+            if (vDesk.getWrapper.GetPosition() != SM.getDesktopFillMode())
+                vDesk.getWrapper.SetPosition(SM.getDesktopFillMode());
+
+            //Sollte die Collection weniger als 4 Bilder besitzten, macht es keinen Sinn den Aufwendigeren Shuffler zu benutzen.
+            if (SM.Settings.Shuffle && activeCol.singlePics.Count > 4)
+            {
+                //Shuffle Funktion für die Anzeige
+
+                //"Shiften" des Arrays um eine Position um platz für den Neuen Eintrag zu machen
+                var tmpArray = tmpLockList;
+                Array.Copy(tmpArray, 0, tmpLockList, 1, tmpArray.Length - 1);
+                tmpLockList[0] = tmpCount;
+
+                //Ermitteln eines neuen Random Wertes der noch nicht in den Letzten 3 Bildern vorgekommen ist.
+                //Versuche sind hierbei auf 50 begrenzt um das System nicht zu sehr zu belasten oder einen Deadlock zu verursachen
+
+                Boolean match = false;
+                for (int i = 1; i < 100; i++)
+                {
+                    tmpCount = random.Next(activeCol.singlePics.Count);
+                    foreach (var item in tmpLockList)
+                    {
+                        if (item == tmpCount)
+                        {
+                            Debug.WriteLine("Match für Items: " + item + " = " + tmpCount);
+                            match = true;
+                            break;
+                        }
+                    }
+
+                    if (match == false)
+                        break;
+                }
+                vDesk.getWrapper.SetWallpaper(monitorID, activeCol.singlePics.ElementAt(tmpCount).Key);
             }
             else
             {
-                previewTimer.Stop();
-                previewTimer.Start();
+                //Lineare Anzeige aller Bilder im Set
+                if (tmpCount < activeCol.singlePics.Count - 1)
+                    tmpCount++;
+                else
+                    tmpCount = 0;
+
+                vDesk.getWrapper.SetWallpaper(monitorID, activeCol.singlePics.ElementAt(tmpCount).Key);
             }
-            //Einmaliger Aufruf um Bild in der Vorschau zu aktualisieren
-            dispatcher(null, null);
-        }
 
-        /// <summary>
-        /// Stoppt den Preview Shuffle Timer
-        /// </summary>
-        public void stopPreviewShuffleTimer()
-        {
-            if (previewTimer != null)
-                previewTimer.Stop();
-        }
-
-        /// <summary>
-        /// Setzt die vergangene Zeit des Preview Timers auf 0 zurück
-        /// </summary>
-        public void previewTimerReset()
-        {
-            if (previewTimer != null)
+            Debug.Write("Ändern des Hintergrundes. Monitor: " + monitor + ", Zahl: " + tmpCount + ", LockListe: ");
+            foreach (var item in tmpLockList)
             {
-                this.previewTimer.Stop();
-                this.previewTimer.Start();
+                Debug.Write(item + ", ");
             }
-        }
-
-        /// <summary>
-        /// Gibt den Status des Preview Timers zurück
-        /// </summary>
-        /// <returns></returns>
-        public Boolean isRunningPreviewTimer()
-        {
-            if (previewTimer == null)
-                return false;
-            else
-                return true;
-        }
-
-        ///<summary>
-        /// Auslagerungs Methode um die Kollision mit dem UI Thread zu verhindern.
-        /// Das Ändern der Bilder wird von diesem Thread an den UI Thread weitergegeben.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void dispatcher(object sender, ElapsedEventArgs e)
-        {
-            //Fire and Forget. Es muss nicht auf das Laden und wechseln der Bilder gewartet werden.
-            previewShuffleAsync();
+            Debug.WriteLine("");
+            //Note: Wofür... Bestimmt wichtig :)... Rückgabe des Counters 
+            switch (monitor)
+            {
+                case 1: picCount1 = tmpCount; break;
+                case 2: picCount2 = tmpCount; break;
+                case 3: picCount3 = tmpCount; break;
+            }
         }
 
         /// <summary>
@@ -255,7 +313,7 @@ namespace DesktopFox
             {
                 if (previewCount >= 0 && previewCount < GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count)
                 {
-                    tmpPreviewModel.BackgroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key)) ;
+                    tmpPreviewModel.BackgroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key));
                     previewCount++;
                 }
                 else
@@ -269,74 +327,48 @@ namespace DesktopFox
         }
 
         /// <summary>
-        /// Zeigt im Preview Fenster das nächste Bild an
+        /// Überprüft was aktuell für eine Tageszeit ist und setzt das lokale Flag dafür
         /// </summary>
-        public void previewForward()
+        private async Task isDayCheck()
         {
-            if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
+            TimeSpan dayStart = SM.Settings.DayStart;
+            TimeSpan nightStart = SM.Settings.NightStart;
+            DateTime timeNow = System.DateTime.Now;
+            TimeSpan currentTime = timeNow.TimeOfDay;
+
+            //Unterscheidung zwischen der Anordnung des Tagesstarts und Festlegen des Default falls die Tag/Nacht Zeit gleich ist.
+            if (dayStart < nightStart)
             {
-                previewTimerReset();
-                previewShuffleAsync();
+                if (currentTime > dayStart && currentTime < nightStart)
+                    isDay = true;
+                else
+                    isDay = false;
             }
+            else if (dayStart > nightStart)
+            {
+                if (currentTime > dayStart || currentTime < nightStart)
+                    isDay = true;
+                else
+                    isDay = false;
+            }
+            else
+            {
+                isDay = true;
+            }
+
+
+
+            if (SM.Settings.IsRunning)
+                Task.Run(() => picShuffleStart());
+
+            Debug.WriteLine("Tageszeit wurde überprüft. Aktuell ist isDay: " + isDay);
         }
 
-        /// <summary>
-        /// Aktualisiert das Bilder im Preview Fenster
-        /// </summary>
-        public void previewRefresh()
-        {
-            previewTimerReset();
-            if(previewCount > 0)
-                previewCount--;
+        #endregion
 
-            previewShuffleAsync();
-        }
+        #region Timer & Trigger
 
-        /// <summary>
-        /// Zeigt im Preview Fenster das vorherige Bild an
-        /// </summary>
-        public void previewBackward()
-        {
-            if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
-            {
-                previewTimerReset();
-                previewCount = previewCount - 2;
-                if (previewCount < 0)
-                {
-                    previewCount = GM.GetCollection(previewDay, GM.getPreviewSet().SetName).singlePics.Count - 1;
-                }
-                previewShuffleAsync();
-            }
-        }
-       
-        /// <summary>
-        /// Cleanupfunktion des Shufflers. Stoppen und Disposen aller Timer
-        /// </summary>
-        public void ShufflerStopCleanup()
-        {
-            //Stoppen aller Timer und anhalten der Automatischen Windows Slideshow
-            //Note: evtl. mit einem Marker festellen ob der Desktop wegen dieser Application shuffelt oder standartmäßig
-            //mWindow.fader.Stop();
-            if (daytimeTimer != null)
-            {
-                daytimeTimer.Stop();
-                daytimeTimer.Dispose();
-            }
-            if (desktopShuffleTimer != null)
-            {
-                desktopShuffleTimer.Stop();
-                desktopShuffleTimer.Dispose();
-            }
-            if (previewTimer != null)
-            {
-                previewTimer.Stop();
-                previewTimer.Dispose();
-            }
-
-            stopWinDesktop();
-
-            //SM.setRunning(false);
-        }
+        #region Desktop
 
         /// <summary>
         /// Startet den Timer für den Desktop Shuffler
@@ -390,6 +422,134 @@ namespace DesktopFox
             //Im falles letzten Aufrufs, diese Zusweisung nicht machen um den State von dem Programm abzuspeichern.
 
             Debug.WriteLine("Die Windows Desktop Shuffle Funktion ist deaktiviert worden");
+        }
+
+        /// <summary>
+        /// Trigger Event des Desktop Timers. Überprüft die Anzahl der Monitore und gibt die Informationen an den Shuffler weiter.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void desktopTimer_Trigger(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            //Überprüft wieviele Monitore angesprochen werden müssen und gibt diese
+            //Information an den eigenen Shuffler weiter.
+            //Aktueller Stand und Bilder werden von Ihm abgefragt und neu belegt bzw. an den         
+
+
+            //Sicherheitsabfrage falls der benutzer kein aktives Set ausgewählt hat. Für die Anderen Monitore wird dann das erste Set genommen
+            Collection tmpCol2;
+            Collection tmpCol3;
+
+            if (GM.getActiveSet(2) == null)
+                tmpCol2 = GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName);
+            else
+                tmpCol2 = GM.GetCollection(isDay, GM.getActiveSet(2, any: true).SetName);
+
+            if (GM.getActiveSet(3) == null)
+                tmpCol3 = GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName);
+            else
+                tmpCol3 = GM.GetCollection(isDay, GM.getActiveSet(3, any: true).SetName);
+
+
+            Debug.WriteLine("Start des Desktop Triggers: isDay = " + isDay);
+            //Note: Kann noch mit und zusammenfassung verbessert werdenforeach verbessert/erweitert werden....
+            switch (vDesk.getMonitorCount())
+            {
+                case 1:
+                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
+                    break;
+
+                case 2:
+                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
+                    df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
+                    break;
+
+                case 3:
+                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
+                    df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
+                    df_PicShuffle(vDesk.getThirdMonitor.ID, tmpCol3, 3);
+                    break;
+                default:
+                    Debug.WriteLine("Fehler in Shuffler, beim ermitteln der Monitor Anzahl");
+                    break;
+            }
+            tmpCol2 = null;
+            tmpCol3 = null;
+        }
+
+        #endregion
+
+        #region Preview
+
+        /// <summary>
+        /// Start des Preview Timers
+        /// </summary>
+        public void startPreviewShuffleTimer()
+        {
+            if (previewTimer == null)
+            {
+                previewTimer = new Timer();
+                //timer.Tick += new EventHandler(previewShuffle);
+                previewTimer.Interval = PreviewShuffleTime.TotalMilliseconds;
+                previewTimer.Elapsed += new ElapsedEventHandler(dispatcher);
+                previewTimer.Start();
+                Debug.WriteLine("Timer gestartet");
+            }
+            else
+            {
+                previewTimer.Stop();
+                previewTimer.Start();
+            }
+            //Einmaliger Aufruf um Bild in der Vorschau zu aktualisieren
+            dispatcher(null, null);
+        }
+
+        /// <summary>
+        /// Stoppt den Preview Shuffle Timer
+        /// </summary>
+        public void stopPreviewShuffleTimer()
+        {
+            if (previewTimer != null)
+                previewTimer.Stop();
+        }
+
+        ///<summary>
+        /// Auslagerungs Methode um die Kollision mit dem UI Thread zu verhindern.
+        /// Das Ändern der Bilder wird von diesem Thread an den UI Thread weitergegeben.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void dispatcher(object sender, ElapsedEventArgs e)
+        {
+            //Fire and Forget. Es muss nicht auf das Laden und wechseln der Bilder gewartet werden.
+            previewShuffleAsync();
+        }
+
+        #endregion
+
+
+        /// <summary>
+        /// Setzt die vergangene Zeit des Preview Timers auf 0 zurück
+        /// </summary>
+        public void previewTimerReset()
+        {
+            if (previewTimer != null)
+            {
+                this.previewTimer.Stop();
+                this.previewTimer.Start();
+            }
+        }
+
+        /// <summary>
+        /// Gibt den Status des Preview Timers zurück
+        /// </summary>
+        /// <returns></returns>
+        public Boolean isRunningPreviewTimer()
+        {
+            if (previewTimer == null)
+                return false;
+            else
+                return true;
         }
 
         /// <summary>
@@ -459,7 +619,7 @@ namespace DesktopFox
             //DateTime newDaySwitch = DateTime.Now.Subtract(DateTime.Now.TimeOfDay).Add(TimeSpan.FromDays(1).Add(SM.getDayStart()));
 
         }
-       
+
         /// <summary>
         /// Trigger Event für den Wechsel der Tageszeit wärend der Laufzeit
         /// </summary>
@@ -473,175 +633,37 @@ namespace DesktopFox
                 Task.Run(() => picShuffleStart());
             Debug.WriteLine("Tageszeittrigger wurde ausgelöst. isDay = " + isDay);
         }
-         
+
         /// <summary>
-        /// Trigger Event des Desktop Timers. Überprüft die Anzahl der Monitore und gibt die Informationen an den Shuffler weiter.
+        /// Cleanupfunktion des Shufflers. Stoppen und Disposen aller Timer
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void desktopTimer_Trigger(object sender, System.Timers.ElapsedEventArgs e)
+        public void ShufflerStopCleanup()
         {
-            //Überprüft wieviele Monitore angesprochen werden müssen und gibt diese
-            //Information an den eigenen Shuffler weiter.
-            //Aktueller Stand und Bilder werden von Ihm abgefragt und neu belegt bzw. an den         
-
-
-            //Sicherheitsabfrage falls der benutzer kein aktives Set ausgewählt hat. Für die Anderen Monitore wird dann das erste Set genommen
-            Collection tmpCol2;
-            Collection tmpCol3;
-
-            if (GM.getActiveSet(2) == null)
-                tmpCol2 = GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName);
-            else
-                tmpCol2 = GM.GetCollection(isDay, GM.getActiveSet(2, any: true).SetName);
-
-            if (GM.getActiveSet(3) == null)
-                tmpCol3 = GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName);
-            else
-                tmpCol3 = GM.GetCollection(isDay, GM.getActiveSet(3, any: true).SetName);
-
-
-            Debug.WriteLine("Start des Desktop Triggers: isDay = " + isDay);
-            //Note: Kann noch mit und zusammenfassung verbessert werdenforeach verbessert/erweitert werden....
-            switch (vDesk.getMonitorCount())
+            //Stoppen aller Timer und anhalten der Automatischen Windows Slideshow
+            //Note: evtl. mit einem Marker festellen ob der Desktop wegen dieser Application shuffelt oder standartmäßig
+            //mWindow.fader.Stop();
+            if (daytimeTimer != null)
             {
-                case 1:
-                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
-                    break;
-
-                case 2:
-                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
-                    df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
-                    break;
-
-                case 3:
-                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
-                    df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
-                    df_PicShuffle(vDesk.getThirdMonitor.ID, tmpCol3, 3);
-                    break;
-                default:
-                    Debug.WriteLine("Fehler in Shuffler, beim ermitteln der Monitor Anzahl");
-                    break;
+                daytimeTimer.Stop();
+                daytimeTimer.Dispose();
             }
-            tmpCol2 = null;
-            tmpCol3 = null;
+            if (desktopShuffleTimer != null)
+            {
+                desktopShuffleTimer.Stop();
+                desktopShuffleTimer.Dispose();
+            }
+            if (previewTimer != null)
+            {
+                previewTimer.Stop();
+                previewTimer.Dispose();
+            }
+
+            stopWinDesktop();
+
+            //SM.setRunning(false);
         }
 
-        /// <summary>
-        /// Eigener Shuffler. Shuffelt/Rotiert die Bilder der Collection und setzt sie als Hintergundbild des Monitors. 
-        /// </summary>
-        /// <param name="monitorID"></param>
-        /// <param name="activeCol"></param>
-        private void df_PicShuffle(String monitorID, Collection activeCol, int monitor)
-        {
-            int tmpCount = 0;
-            int[] tmpLockList;
-            switch (monitor)
-            {
-                case 1: tmpCount = picCount1; tmpLockList = lockList1; break;
-                case 2: tmpCount = picCount2; tmpLockList = lockList2; break;
-                case 3: tmpCount = picCount3; tmpLockList = lockList3; break;
-                default: tmpCount = picCount1; tmpLockList = lockList1; break;
-            }
 
-            //Überprüft ob sich die Einstellung geändert hat und passt diese ggf. an
-            if (vDesk.getWrapper.GetPosition() != SM.getDesktopFillMode())
-                vDesk.getWrapper.SetPosition(SM.getDesktopFillMode());
-
-            //Sollte die Collection weniger als 4 Bilder besitzten, macht es keinen Sinn den Aufwendigeren Shuffler zu benutzen.
-            if (SM.Settings.Shuffle && activeCol.singlePics.Count > 4)
-            {
-                //Shuffle Funktion für die Anzeige
-
-                //"Shiften" des Arrays um eine Position um platz für den Neuen Eintrag zu machen
-                var tmpArray = tmpLockList;
-                Array.Copy(tmpArray, 0, tmpLockList, 1, tmpArray.Length - 1);
-                tmpLockList[0] = tmpCount;
-
-                //Ermitteln eines neuen Random Wertes der noch nicht in den Letzten 3 Bildern vorgekommen ist.
-                //Versuche sind hierbei auf 50 begrenzt um das System nicht zu sehr zu belasten oder einen Deadlock zu verursachen
-
-                Boolean match = false;
-                for (int i = 1; i < 100; i++)
-                {
-                    tmpCount = random.Next(activeCol.singlePics.Count);
-                    foreach (var item in tmpLockList)
-                    {
-                        if (item == tmpCount) 
-                        { 
-                            Debug.WriteLine("Match für Items: " + item + " = " + tmpCount);
-                            match = true;
-                            break; 
-                        }
-                    }
-
-                    if (match == false) 
-                        break;
-                }
-                vDesk.getWrapper.SetWallpaper(monitorID, activeCol.singlePics.ElementAt(tmpCount).Key);      
-            }
-            else
-            {
-                //Lineare Anzeige aller Bilder im Set
-                if (tmpCount < activeCol.singlePics.Count - 1)
-                    tmpCount++;
-                else
-                    tmpCount = 0;
-                
-                vDesk.getWrapper.SetWallpaper(monitorID, activeCol.singlePics.ElementAt(tmpCount).Key);
-            }
-
-            Debug.Write("Ändern des Hintergrundes. Monitor: " + monitor + ", Zahl: " + tmpCount + ", LockListe: ");
-            foreach(var item in tmpLockList)
-            {
-                Debug.Write(item + ", ");
-            }
-            Debug.WriteLine("");
-            //Note: Wofür... Bestimmt wichtig :)... Rückgabe des Counters 
-            switch (monitor)
-            {
-                case 1: picCount1 = tmpCount; break;
-                case 2: picCount2 = tmpCount; break;
-                case 3: picCount3 = tmpCount; break;
-            }
-        }
-
-        /// <summary>
-        /// Überprüft was aktuell für eine Tageszeit ist und setzt das lokale Flag dafür
-        /// </summary>
-        private async Task isDayCheck()
-        {
-            TimeSpan dayStart = SM.Settings.DayStart;
-            TimeSpan nightStart = SM.Settings.NightStart;
-            DateTime timeNow = System.DateTime.Now;
-            TimeSpan currentTime = timeNow.TimeOfDay;
-
-            //Unterscheidung zwischen der Anordnung des Tagesstarts und Festlegen des Default falls die Tag/Nacht Zeit gleich ist.
-            if(dayStart < nightStart)
-            {
-                if (currentTime > dayStart && currentTime < nightStart)
-                    isDay = true;
-                else
-                    isDay = false;
-            }
-            else if(dayStart > nightStart)                                  
-            {
-                if (currentTime > dayStart || currentTime < nightStart)
-                    isDay = true;
-                else
-                    isDay = false;
-            }
-            else
-            {
-                isDay = true;
-            }
-
-
-
-            if (SM.Settings.IsRunning)
-                Task.Run(() => picShuffleStart());
-
-            Debug.WriteLine("Tageszeit wurde überprüft. Aktuell ist isDay: " + isDay);
-        }     
+        #endregion
     }
 }

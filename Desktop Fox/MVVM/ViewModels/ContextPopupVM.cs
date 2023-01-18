@@ -35,6 +35,8 @@ namespace DesktopFox.MVVM.ViewModels
             DeleteLock();
         }
 
+        #region Binding Variablen
+
         /// <summary>
         /// Integer Wert für die Auswahl welches Set entfernt werden soll. 
         /// 1 = Tag <see cref="Views.ContextPopupView.radio_Day"/>
@@ -73,7 +75,29 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         public bool CanOpenFolder { get { return _canOpenFolder; } set { _canOpenFolder = value; RaisePropertyChanged(nameof(CanOpenFolder)); } }
         private bool _canOpenFolder = false;
-        
+
+        #endregion
+
+        #region Commands
+
+        /// <summary>
+        /// Kommando das das Set Umbenennt
+        /// </summary>
+        public ICommand RenameSetCommand { get { return new DF_Command.DelegateCommand(o => RenameSet()); } }
+
+        /// <summary>
+        /// Kommando das die gewählte Komponente des Sets entfernt
+        /// </summary>
+        public ICommand RemoveCommand { get { return new DF_Command.DelegateCommand(o => RemoveValue()); } }
+
+        /// <summary>
+        /// Kommando das den Ordner des Ausgewählten Sets in Windows öffnet
+        /// </summary>
+        public ICommand OpenFolderCommand { get { return new DF_Command.DelegateCommand(o => OpenFolder()); } }
+
+        #endregion
+
+        #region Methoden
 
         /// <summary>
         /// Funktion die den Löschen Button Sperrt oder Freigibt <see cref="CanDelete"/>
@@ -120,21 +144,6 @@ namespace DesktopFox.MVVM.ViewModels
                     break;
             }
         }
-
-        /// <summary>
-        /// Kommando das das Set Umbenennt
-        /// </summary>
-        public ICommand RenameSetCommand { get { return new DF_Command.DelegateCommand(o => RenameSet()); } }
-
-        /// <summary>
-        /// Kommando das die gewählte Komponente des Sets entfernt
-        /// </summary>
-        public ICommand RemoveCommand { get { return new DF_Command.DelegateCommand(o => RemoveValue()); } }
-
-        /// <summary>
-        /// Kommando das den Ordner des Ausgewählten Sets in Windows öffnet
-        /// </summary>
-        public ICommand OpenFolderCommand { get { return new DF_Command.DelegateCommand(o => OpenFolder()); } }
 
         /// <summary>
         /// Entfernt Anhand der Einstellungen eine Collection von dem gewählten Set oder das komplette Set von der Galerie
@@ -207,6 +216,8 @@ namespace DesktopFox.MVVM.ViewModels
             DeletionSelect = 0;
             DeleteValidation();
         }
+
+        #endregion
 
     }
 }

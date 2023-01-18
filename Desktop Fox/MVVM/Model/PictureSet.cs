@@ -27,6 +27,7 @@ namespace DesktopFox
         }
 
         #region Binding Variablen
+
         /// <summary>
         /// Name des Bilder Sets
         /// </summary>
@@ -57,6 +58,9 @@ namespace DesktopFox
         public bool IsActive3 { get { return _isActive3; } set { _isActive3 = value; RaisePropertyChanged(nameof(IsActive3)); } }
         private bool _isActive3 = false;
 
+        #endregion
+
+        #region Binding Images
 
         /// <summary>
         /// Erstes Bild in der Tag Collection. Bindepunkt für SetVorschau in der Listbox
@@ -85,7 +89,10 @@ namespace DesktopFox
             } 
         }
         private BitmapImage _nightImage;
+
         #endregion
+
+        #region Binding Collections
 
         /// <summary>
         /// Sammlung von Bilder die wärend des Tages angezeigt werden
@@ -112,6 +119,8 @@ namespace DesktopFox
             } 
         }
         private Collection _nightCol;
+
+        #endregion
 
         /// <summary>
         /// Gibt zurück welche Collections in dem Pictureset vorhanden sind.

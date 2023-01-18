@@ -50,54 +50,18 @@ namespace DesktopFox.MVVM.ViewModels
             CurrentView = _previewView; 
         }
 
+        #region Binding Variablen
+
         /// <summary>
         /// Anzeige der aktuellen Settings View in <see cref="Settings.SettingsPage"/>
         /// </summary>
         public object CurrentView { get { return _currentView; } set { _currentView = value; UpdateNumbers(); RaisePropertyChanged(nameof(CurrentView)); } }
         private object _currentView;
 
-        public int Language { get { return _language; } set { _language = value; LanguageChange(); RaisePropertyChanged(nameof(Language)); } }
-        private int _language = 0;
-       
-        private void LanguageChange()
-        {
-            switch (Language)
-            {
-                case 0:
-                    break;
-                case 1:
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Aktualisiert die Zahlenwerte in den Einstellungs Views
-        /// </summary>
-        private void UpdateNumbers()
-        {
-            DaytimeModel.SetDaySwitch(settings.DayStart, settings.NightStart);
-            ShuffleModel.SetShuffle(settings.ShuffleTime);
-        }
-
-        /// <summary>
-        /// Speichert die Zeitspanne in den Temporären Einstellungs Views, in die Einstellungen
-        /// </summary>
-        private void SaveDaytimeValues()
-        {
-            List<TimeSpan> tmpValues = DaytimeModel.SaveValues();
-            settings.DayStart = tmpValues[0];
-            settings.NightStart = tmpValues[1];
-        }
-
-        /// <summary>
-        /// Speichert die Zeitspanne in den Temporären Einstellungs Views, in die Einstellungen
-        /// </summary>
-        private void SaveShuffleTimeValue()
-        {
-            settings.ShuffleTime = TimeSpan.FromMinutes(ShuffleModel.ShuffleTime);
-        }
+        #endregion
 
         #region Kommandos
+
         /// <summary>
         /// Kommando um die <see cref="Views.Settings_DaytimeView"/> anzuzeigen
         /// </summary>
@@ -148,8 +112,16 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         public ICommand SaveShuffleTimeCommand { get { return new DF_Command.DelegateCommand(o => SaveShuffleTimeValue()); } }
 
+        /* Note: Sehr warscheinliche alter verlassener Code
+        /// <summary>
+        /// Kommando um die temporären Shuffle Zeit Einstellungen abzuspeichern
+        /// </summary>
         public ICommand DaytimeTextChangedCommand { get { return new DF_Command.DelegateCommand(o => SaveDaytimeValues()); } }
+        */
+
         #endregion
+
+        #region Methoden
 
         /// <summary>
         /// Ändernt die Views im Mainwindow <see cref="MainWindow.ContextViews"/>
@@ -164,5 +136,33 @@ namespace DesktopFox.MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Aktualisiert die Zahlenwerte in den Einstellungs Views
+        /// </summary>
+        private void UpdateNumbers()
+        {
+            DaytimeModel.SetDaySwitch(settings.DayStart, settings.NightStart);
+            ShuffleModel.SetShuffle(settings.ShuffleTime);
+        }
+
+        /// <summary>
+        /// Speichert die Zeitspanne in den Temporären Einstellungs Views, in die Einstellungen
+        /// </summary>
+        private void SaveDaytimeValues()
+        {
+            List<TimeSpan> tmpValues = DaytimeModel.SaveValues();
+            settings.DayStart = tmpValues[0];
+            settings.NightStart = tmpValues[1];
+        }
+
+        /// <summary>
+        /// Speichert die Zeitspanne in den Temporären Einstellungs Views, in die Einstellungen
+        /// </summary>
+        private void SaveShuffleTimeValue()
+        {
+            settings.ShuffleTime = TimeSpan.FromMinutes(ShuffleModel.ShuffleTime);
+        }
+
+        #endregion
     }
 }

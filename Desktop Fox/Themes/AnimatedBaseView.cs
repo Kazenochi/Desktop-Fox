@@ -24,6 +24,9 @@ namespace DesktopFox
         {
         }
 
+        /// <summary>
+        /// Easing Effekt für PopOut des Elements in der angegebenen Zeit <see cref="AnimationTime"/>
+        /// </summary>
         public void AnimateIn()
         {
             if (this.ControlPopInAnimation == Animation.None)
@@ -45,6 +48,9 @@ namespace DesktopFox
             scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, popinAnimationX);
         }
 
+        /// <summary>
+        /// Easing Effekt für PopIn des des Elements in der angegebenen Zeit <see cref="AnimationTime"/>
+        /// </summary>
         public void AnimateOut()
         {
             if (this.ControlPopOutAnimation == Animation.None)
@@ -66,11 +72,14 @@ namespace DesktopFox
             scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, popinAnimationX);
         }
 
+        /// <summary>
+        /// Erhöht die Deckkraft des Elements in der angegebenen Zeit <see cref="AnimationTime"/>
+        /// </summary>
         public void FadeIn()
         {
             if (this.ControlFadeInAnimation == Animation.None)
                 return;
-
+         
             this.Opacity = 0;
             this.Visibility = Visibility.Visible;
 
@@ -88,6 +97,9 @@ namespace DesktopFox
 
         }
 
+        /// <summary>
+        /// Verringert die Deckkraft des Elements in der angegebenen Zeit <see cref="AnimationTime"/>
+        /// </summary>
         public void FadeOut()
         {
             if (this.ControlFadeOutAnimation == Animation.None)

@@ -48,57 +48,6 @@ namespace DesktopFox
         public Gallery Gallery { get { return _gallery; } }
 
         /// <summary>
-        /// Fügt ein Neues Set in der Gallery hinzu
-        /// </summary>
-        /// <param name="nwPictureSet"></param>
-        /// <returns></returns>
-        public void addSet(String SetName, Collection nwCollection, bool day = true)
-        {
-            if(nwCollection == null) return;
-            
-            PictureSet pictureSet = new PictureSet(SetName);
-
-            if (_gallery.PictureSetList.ContainsKey(_shadow.GetKey(pictureSet.SetName)))
-            {
-                addCollection(_gallery.PictureSetList[_shadow.GetKey(pictureSet.SetName)], nwCollection, day);
-            }
-            else
-            {
-                addCollection(pictureSet, nwCollection, day);
-                _shadow.Add(pictureSet);
-
-                PictureVM newVM = new PictureVM(pictureSet);
-                PictureView newView = new PictureView();
-                newView.DataContext = newVM;
-
-                MWVM.MainWindowModel._pictureViewVMs.Add(newVM);
-                MWVM.MainWindowModel._pictureViews.Add(newView);
-
-            }
-            return;
-        }
-
-        /// <summary>
-        /// Erfrägt welche Collections im Pictureset vorhanden sind <see cref="PictureSet.ContainsCollections"/>
-        /// </summary>
-        /// <param name="pictureSetName"></param>
-        /// <returns>1=Day, 2=Night, 3=Both, 4=Twins</returns>
-        public int ContainsCollections(String pictureSetName)
-        {
-            return _gallery.PictureSetList[_shadow.GetKey(pictureSetName)].ContainsCollections();
-        }
-
-        /// <summary>
-        /// Brückenmethode: <see cref="GalleryShadow.Rename"/>
-        /// </summary>
-        /// <param name="pictureSet">Alter Name des Bild Sets</param>
-        /// <param name="newName">Neuer Name des Bild Sets</param>
-        public void RenameSet(String pictureSet, String newName)
-        {
-            _shadow.Rename(pictureSet, newName);
-        }
-
-        /// <summary>
         /// Sortieren der Galerie falls sich die Liste geändert hat (Drag & Drop)
         /// </summary>
         public void GallerySort()
@@ -193,7 +142,8 @@ namespace DesktopFox
             */
             #endregion
 
-            if (debug) { 
+            if (debug)
+            {
                 Debug.WriteLine("Gallery PicCount After: " + _gallery.PictureSetList.Count);
                 foreach (PictureSet i in _gallery.PictureSetList.Values)
                 {
@@ -201,6 +151,8 @@ namespace DesktopFox
                 }
             }
         }
+
+        #region Collection Methoden
 
         /// <summary>
         /// Erzeugt eine neue Collection //Note: Übergabe des Pfades ist nach aktuellem Stand unnötig
@@ -300,30 +252,60 @@ namespace DesktopFox
                 return _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol;
         }
 
-        #region Veralteter Code, wurde von GetCollection vereinfacht und abgelöst Note:
-        /*
         /// <summary>
-        /// Gibt die Tag Collection vom Set zurück
+        /// Erfrägt welche Collections im Pictureset vorhanden sind <see cref="PictureSet.ContainsCollections"/>
         /// </summary>
-        /// <param name="pictureSet"></param>
-        /// <returns></returns>
-        public Collection getDayCollection(String pictureSet)
+        /// <param name="pictureSetName"></param>
+        /// <returns>1=Day, 2=Night, 3=Both, 4=Twins</returns>
+        public int ContainsCollections(String pictureSetName)
         {
-            return _gallery.PictureSetList[_shadow.GetKey(pictureSet)].DayCol;
+            return _gallery.PictureSetList[_shadow.GetKey(pictureSetName)].ContainsCollections();
         }
 
-        /// <summary>
-        /// Gibt die Nacht Collection vom Set zurück
-        /// </summary>
-        /// <param name="pictureSet"></param>
-        /// <returns></returns>
-        public Collection getNightCollection(String pictureSet)
-        {
-            return _gallery.PictureSetList[_shadow.GetKey(pictureSet)].NightCol;
-        }
-        */
         #endregion
 
+        #region Set Methoden
+
+        /// <summary>
+        /// Fügt ein Neues Set in der Gallery hinzu
+        /// </summary>
+        /// <param name="nwPictureSet"></param>
+        /// <returns></returns>
+        public void addSet(String SetName, Collection nwCollection, bool day = true)
+        {
+            if (nwCollection == null) return;
+
+            PictureSet pictureSet = new PictureSet(SetName);
+
+            if (_gallery.PictureSetList.ContainsKey(_shadow.GetKey(pictureSet.SetName)))
+            {
+                addCollection(_gallery.PictureSetList[_shadow.GetKey(pictureSet.SetName)], nwCollection, day);
+            }
+            else
+            {
+                addCollection(pictureSet, nwCollection, day);
+                _shadow.Add(pictureSet);
+
+                PictureVM newVM = new PictureVM(pictureSet);
+                PictureView newView = new PictureView();
+                newView.DataContext = newVM;
+
+                MWVM.MainWindowModel._pictureViewVMs.Add(newVM);
+                MWVM.MainWindowModel._pictureViews.Add(newView);
+
+            }
+            return;
+        }
+
+        /// <summary>
+        /// Brückenmethode: <see cref="GalleryShadow.Rename"/>
+        /// </summary>
+        /// <param name="pictureSet">Alter Name des Bild Sets</param>
+        /// <param name="newName">Neuer Name des Bild Sets</param>
+        public void RenameSet(String pictureSet, String newName)
+        {
+            _shadow.Rename(pictureSet, newName);
+        }
 
         /// <summary>
         /// Gibt das angegebene aktive Pictureset zurück das aktuell auf dem Desktop angezeigt wird.
@@ -479,5 +461,6 @@ namespace DesktopFox
             }
         }
 
+        #endregion
     }
 }

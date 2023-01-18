@@ -8,6 +8,9 @@ using System.Windows.Data;
 
 namespace DesktopFox
 {
+    /// <summary>
+    /// Konverter für die Fenstergröße. Parameter gibt Skalierungsfaktor an
+    /// </summary>
     internal class WindowSizeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

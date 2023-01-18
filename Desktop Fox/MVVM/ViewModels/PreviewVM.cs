@@ -32,6 +32,7 @@ namespace DesktopFox.MVVM.ViewModels
 
 
         #region Kommandos
+
         /// <summary>
         /// Kommando das das nächste Bild in der Vorschau anzeigt
         /// </summary>
@@ -46,7 +47,10 @@ namespace DesktopFox.MVVM.ViewModels
         /// Kommando das beim Beenden des Fade Storyboards aufgerufen wird
         /// </summary>
         public ICommand FaderFinishCommand { get { return new DF_Command.DelegateCommand(o => FadeAnimationFinished()); } }
+
         #endregion
+
+        #region Methoden 
 
         /// <summary>
         /// Note: Auslagern in den Shuffler evtl. Möglich
@@ -57,6 +61,9 @@ namespace DesktopFox.MVVM.ViewModels
             DF.shuffler.previewRefresh();
         }
 
+        /// <summary>
+        /// Tauscht die Bilder in der Preview nach dem Fadeübergang
+        /// </summary>
         public void FadeAnimationFinished() 
         {
             PreviewModel.FaderLock = false;
@@ -75,5 +82,7 @@ namespace DesktopFox.MVVM.ViewModels
 
             DF.shuffler.previewRefresh();
         }
+
+        #endregion
     }
 }

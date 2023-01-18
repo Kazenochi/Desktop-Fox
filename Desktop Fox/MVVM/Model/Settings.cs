@@ -11,6 +11,7 @@ namespace DesktopFox
     public class Settings : ObserverNotifyChange
     {
         #region Binding Variablen
+
         /// <summary>
         /// Tageszeitpunkt an dem der Tag beginnt. Zeit wird als Zeitspanne ab 00:00 Uhr angegeben.
         /// </summary>        
@@ -88,6 +89,7 @@ namespace DesktopFox
         /// </summary>
         public bool DesktopModeSingle { get { return _desktopModeSingle; } set { _desktopModeSingle = value; RaisePropertyChanged(nameof(DesktopModeSingle)); } }
         private bool _desktopModeSingle = true;
+
         #endregion
 
         /// <summary>

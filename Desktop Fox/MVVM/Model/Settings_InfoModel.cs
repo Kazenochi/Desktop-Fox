@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DesktopFox.MVVM.Model
 {
+    /// <summary>
+    /// Model das die Programinformationen beinhaltet
+    /// </summary>
     public class Settings_InfoModel :ObserverNotifyChange
     {
         public string AppName { get { return _appName; } set { _appName = value; RaisePropertyChanged(nameof(AppName)); } } 

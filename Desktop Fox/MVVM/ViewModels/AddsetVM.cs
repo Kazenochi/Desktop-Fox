@@ -49,11 +49,23 @@ namespace DesktopFox.MVVM.ViewModels
             AddSetModel.PictureSetName = pictureViewVM.pictureSet.SetName;
         }
 
+        #region Binding Variablen 
+
         /// <summary>
         /// Flag ob die Bilder als Tages oder als Nacht Collection hinzugefügt werden sollen.
         /// </summary>
         public bool Day { get { return _day; } set { _day = value; RaisePropertyChanged(nameof(Day)); } }
         private bool _day;
+
+        /// <summary>
+        /// Flag ob der Hinzufügen Button drückbar ist <see cref="Views.AddSetView.button_AddPictures"/>
+        /// </summary>
+        public bool CanAdd { get { return _canAdd; } set { _canAdd = value; RaisePropertyChanged(nameof(CanAdd)); } }
+        private bool _canAdd = false;
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Kommando für das öffnen des Ordner Dialogs <see cref="DF_FolderDialog.openFolderDialog"/>
@@ -70,11 +82,9 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         public ICommand GenerateSetName { get { return new DF_Command.DelegateCommand(o => GetSetName()); } }
 
-        /// <summary>
-        /// Flag ob der Hinzufügen Button drückbar ist <see cref="Views.AddSetView.button_AddPictures"/>
-        /// </summary>
-        public bool CanAdd { get { return _canAdd; } set { _canAdd = value; RaisePropertyChanged(nameof(CanAdd)); } }
-        private bool _canAdd = false;
+        #endregion
+
+        #region Methoden
 
         /// <summary>
         /// Fügt ein neues Set mit den aktuellen Parametern hinzu.
@@ -147,5 +157,7 @@ namespace DesktopFox.MVVM.ViewModels
             Debug.WriteLine("Maximaler Anzahl von NewSets erreicht. New Name = " + newName);
             return newName;
         }
+
+        #endregion
     }
 }

@@ -14,6 +14,7 @@ namespace DesktopFox.MVVM.Model
     public class PreviewModel : ObserverNotifyChange
     {
         #region Binding Variablen
+
         /// <summary>
         /// Bild das im Vordergrund der Vorschau angezeigt werden soll <see cref="Views.PreviewView.ForegroundPreview"/>
         /// </summary>
@@ -53,6 +54,7 @@ namespace DesktopFox.MVVM.Model
 
         public bool AnimationStart { get { return _animationStart; } set { _animationStart = value; RaisePropertyChanged(nameof(AnimationStart)); } }
         private bool _animationStart = false;
+
         #endregion
     }
 }

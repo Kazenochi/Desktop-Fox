@@ -45,56 +45,6 @@ namespace DesktopFox
         }
 
         /// <summary>
-        /// Listener der auf Änderungen in den Einstellungen reagiert
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Settings_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {          
-            if (e.PropertyName == nameof(DF.SettingsManager.Settings.PreviewFillMode))
-                ((PreviewVM)PreviewView.DataContext).PreviewModel.ImageStretch = (Stretch)DF.SettingsManager.Settings.PreviewFillMode;
-
-            if (e.PropertyName != nameof(DF.SettingsManager.Settings.DesktopModeSingle)) return;
-
-            Task.Run(() => CheckMultiMonitor());
-            return;
-        }
-
-        /// <summary>
-        /// Event das bei einer Leeren Gallerie Den InfoText Anzeigt
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CollectionChanged_Event_VM(object sender, CollectionChangeEventArgs e)
-        {
-            if (MainWindowModel._pictureViewVMs.Count == 0)
-            {
-                EmptyInfo = true;
-                //Cleanup der Vorschau beim entfernen des letzten Sets
-                if (PreviewView != null && PreviewView.DataContext != null)
-                {
-                    ((PreviewVM)PreviewView.DataContext).PreviewModel.ForegroundImage = null;
-                    ((PreviewVM)PreviewView.DataContext).PreviewModel.BackgroundImage = null;
-                }
-            }
-            else
-                EmptyInfo = false;
-            return;         
-        }
-
-        /// <summary>
-        /// Aktualisiert die zuweisung des Hauptfensters
-        /// </summary>
-        /// <param name="mainWindow"></param>
-        public void SetCurrentMain(MainWindow mainWindow)
-        {
-            _mainWindow = mainWindow;
-            ((PreviewVM)PreviewView.DataContext).PreviewModel.ImageStretch = (Stretch)DF.SettingsManager.Settings.PreviewFillMode;
-            if(MainWindowModel._pictureViews.Count > 0)
-                SelectedItem = MainWindowModel._pictureViews.ElementAt(0);
-        }
-
-        /// <summary>
         /// Gibt das Model dieser Klasse zurück
         /// </summary>
         public MainWindowModel MainWindowModel { get; set; }
@@ -229,6 +179,57 @@ namespace DesktopFox
         #endregion
 
         #region Methoden
+
+        /// <summary>
+        /// Listener der auf Änderungen in den Einstellungen reagiert
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Settings_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(DF.SettingsManager.Settings.PreviewFillMode))
+                ((PreviewVM)PreviewView.DataContext).PreviewModel.ImageStretch = (Stretch)DF.SettingsManager.Settings.PreviewFillMode;
+
+            if (e.PropertyName != nameof(DF.SettingsManager.Settings.DesktopModeSingle)) return;
+
+            Task.Run(() => CheckMultiMonitor());
+            return;
+        }
+
+        /// <summary>
+        /// Event das bei einer Leeren Gallerie Den InfoText Anzeigt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CollectionChanged_Event_VM(object sender, CollectionChangeEventArgs e)
+        {
+            if (MainWindowModel._pictureViewVMs.Count == 0)
+            {
+                EmptyInfo = true;
+                //Cleanup der Vorschau beim entfernen des letzten Sets
+                if (PreviewView != null && PreviewView.DataContext != null)
+                {
+                    ((PreviewVM)PreviewView.DataContext).PreviewModel.ForegroundImage = null;
+                    ((PreviewVM)PreviewView.DataContext).PreviewModel.BackgroundImage = null;
+                }
+            }
+            else
+                EmptyInfo = false;
+            return;
+        }
+
+        /// <summary>
+        /// Aktualisiert die zuweisung des Hauptfensters
+        /// </summary>
+        /// <param name="mainWindow"></param>
+        public void SetCurrentMain(MainWindow mainWindow)
+        {
+            _mainWindow = mainWindow;
+            ((PreviewVM)PreviewView.DataContext).PreviewModel.ImageStretch = (Stretch)DF.SettingsManager.Settings.PreviewFillMode;
+            if (MainWindowModel._pictureViews.Count > 0)
+                SelectedItem = MainWindowModel._pictureViews.ElementAt(0);
+        }
+
         /// <summary>
         /// Wählt den nächsten monitor aus. Note: nicht richtig. sollte unterscheiden ob es 2 oder 3 monitore gibt
         /// </summary>

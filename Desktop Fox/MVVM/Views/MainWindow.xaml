@@ -13,12 +13,16 @@
         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource WindowSizeConverter}, ConverterParameter='0.8'}"
         MinHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource WindowSizeConverter}, ConverterParameter='0.5'}"
         MinWidth="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource WindowSizeConverter}, ConverterParameter='0.5'}"
-        WindowStyle="None"
+        WindowStyle="None"  
         AllowsTransparency="True"
         Background="Transparent"
         MouseDown="WindowClickAndDrag">
     <WindowChrome.WindowChrome>
-        <WindowChrome ResizeBorderThickness="8,2,8,8" CaptionHeight="0"/>
+        <WindowChrome ResizeBorderThickness="8,2,8,8" CaptionHeight="0" />
+        <!--Zusätzliche Window Chrome Settings falls Performance zu Schlecht ist: 
+        CornerRadius="18" GlassFrameThickness="0"     
+        Auserdem Deaktivieren von Window Transparency
+        -->
     </WindowChrome.WindowChrome>
     <Border Background="{StaticResource BackgroundBrush}"
             BorderBrush="{StaticResource BorderBrush}"
@@ -44,98 +48,97 @@
                 <ColumnDefinition Width="410"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Vertical"
+            <StackPanel Orientation="Horizontal"
                         Grid.Row="2"
                         Grid.Column= "1"
                         VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
                         Panel.ZIndex="3">
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Margin="-10,0,10,0">
-                    <Grid>
-                        <Button x:Name="button_StopSet"     
-                                FontSize="20"
-                                Grid.Column="0" 
-                                Margin="10,0,0,0"
-                                IsEnabled="{Binding CanActivate, Converter={StaticResource BoolInverter}}"
-                                Command="{Binding StopSetCommand}"
-                                Style="{StaticResource DF_Button_Border}">
-                            <Border Margin="5">
-                                <Grid>
-                                    <Image Source="\Icons\Icons_Pause.png" 
-                                           Stretch="Uniform" Margin="5"/>
-                                </Grid>
-                            </Border>
-                        </Button>
-                        <Button x:Name="button_ActivateSet" 
-                                FontSize="20"
-                                Grid.Column="0" 
-                                Margin="10,0,0,0"
-                                Visibility="{Binding CanActivate, Converter={StaticResource BoolConverter}}"
-                                Command="{Binding ActivateSetCommand}"
-                                Style="{StaticResource DF_Button_Border}">
-                            <Border Margin="2,5,0,5">
-                                <Grid>
-                                    <Image Source="\Icons\Icons_Play.png" 
-                                           Stretch="Uniform"
-                                           Margin="5"/>
-                                </Grid>
-                            </Border>
-                        </Button>
-                    </Grid>
-
-                    <Button x:Name="button_ActiveSet" 
-                                Grid.Column="0" 
-                                Margin="10,0,0,0" 
-                                FontSize="20"
-                                Padding="0,-5,0,0"
-                                Command="{Binding NextMonitorCommand}"
-                                Visibility="{Binding MultiMonitor, Converter={StaticResource BoolConverter}}"
-                                Style="{StaticResource DF_Button_Border}">
-                        <Border>
-                            <Grid Margin="5">
-                                <Image Source="\Icons\Icons_Monitor.png" 
-                                       Stretch="Uniform" Margin="0,2,0,0"/>
-                                <Label Content="{Binding MultiMonitorContent}"
-                                       FontFamily="{StaticResource Default}"
-                                       Foreground="{StaticResource TextBrush}"
-                                       VerticalContentAlignment="Center"
-                                       HorizontalContentAlignment="Center"
-                                       Margin="0,-8,0,0"
-                                       d:Content="1"
-                                       />
-                            </Grid>
-                        </Border>
-                    </Button>
-
-
-                    <Button x:Name="button_Add"        
+                <Grid>
+                    <Button x:Name="button_StopSet"     
                             FontSize="20"
                             Grid.Column="0" 
-                            Margin="10,0,0,0"
-                            Style="{StaticResource DF_Button_Border}"
-                            Command="{Binding AddSetViewCommand}">
+                            IsEnabled="{Binding CanActivate, Converter={StaticResource BoolInverter}}"
+                            Command="{Binding StopSetCommand}"
+                            Style="{StaticResource DF_Button_Border}">
                         <Border Margin="5">
                             <Grid>
-                                <Image Source="\Icons\Icons_Plus.png" 
-                                       Stretch="Uniform" Margin="5"/>
+                                <Image Source="\Icons\Icons_Pause.png" 
+                                        Stretch="Uniform" Margin="5"/>
                             </Grid>
                         </Border>
                     </Button>
-                    <Button x:Name="button_Settings" 
+                    <Button x:Name="button_ActivateSet" 
                             FontSize="20"
-                            Grid.Column="1" 
-                            Margin="10,0,0,0"
-                            Style="{StaticResource DF_Button_Border}"
-                            Command="{Binding SettingsMainViewCommand}">
-                        <Border Margin="5">
-                            <Grid>
-                                <Image Source="\Icons\Icons_Settings.png" 
-                                       Stretch="Uniform" Margin="5"/>
-                            </Grid>
+                            Grid.Column="0" 
+                            Visibility="{Binding CanActivate, Converter={StaticResource BoolConverter}}"
+                            Command="{Binding ActivateSetCommand}"
+                            Style="{StaticResource DF_Button_Border}">
+                        <Border Margin="8,5,0,5">
+                            <Image Source="\Icons\Icons_Play.png" 
+                                        Stretch="Uniform"
+                                        Margin="5"/>
                         </Border>
                     </Button>
-                </StackPanel>
+                </Grid>
+
+                <Button x:Name="button_ActiveSet" 
+                            Grid.Column="0" 
+                            FontSize="20"
+                            Command="{Binding NextMonitorCommand}"
+                            Visibility="{Binding MultiMonitor, Converter={StaticResource BoolConverter}}"
+                            Style="{StaticResource DF_Button_Border}">
+                    <Border>
+                        <Grid Margin="10">
+                            <Image Source="\Icons\Icons_Monitor.png" 
+                                    Stretch="Uniform" Margin="0,2,0,0"/>
+                            <Label Content="{Binding MultiMonitorContent}"
+                                    FontFamily="{StaticResource Default}"
+                                    Foreground="{StaticResource TextBrush}"
+                                    VerticalContentAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    Margin="0,-8,0,0"
+                                    d:Content="1"/>
+                        </Grid>
+                    </Border>
+                </Button>
+
+                <Button x:Name="button_Animation"        
+                        FontSize="20"
+                        Grid.Column="0" 
+                        Content="Mov"
+                        Style="{StaticResource DF_Button_Border}"
+                        Command="{Binding AnimatedToggleCommand}">
+                    <!--
+                    <Border Margin="5">
+                        <Grid>
+                            <Image Source="\Icons\Icons_Plus.png" 
+                                   Stretch="Uniform" Margin="5"/>
+                        </Grid>
+                    </Border>
+                    -->
+                </Button>
+
+                <Button x:Name="button_Add"          
+                        Grid.Column="0" 
+                        Style="{StaticResource DF_Button_Border}"
+                        Command="{Binding AddSetViewCommand}">
+                    <Border Margin="10">
+                        <Image Name="AddImage"
+                                    Source="\Icons\Icons_Plus.png" 
+                                    Stretch="Uniform"/>
+                    </Border>
+                </Button>
+                <Button x:Name="button_Settings" 
+                        FontSize="20"
+                        Grid.Column="1" 
+                        Style="{StaticResource DF_Button_Border}"
+                        Command="{Binding SettingsMainViewCommand}">
+                    <Border Margin="5">
+                        <Image Source="\Icons\Icons_Settings.png" 
+                                    Stretch="Uniform" Margin="5"/>
+                    </Border>
+                </Button>
             </StackPanel>
 
             <!--#region Click Event Border Panes-->
@@ -293,14 +296,23 @@
                 </Grid>
             </Border>
             <!--#endregion-->
-            
+
+
             <ContentControl x:Name="PreviewContext"
                             Margin="10,0,10,10"
                             Grid.RowSpan="2"
                             Grid.Row="1"
                             Content="{Binding Preview}" 
-                            
                             Panel.ZIndex="1"/>
+
+            <ContentControl Margin="10,0,10,10"
+                            Grid.RowSpan="2"
+                            Grid.Row="1"
+                            Visibility="{Binding AnimatedToggle, Converter={StaticResource BoolConverter}}"
+                            d:Content="{view:AnimatedWallpaperConfigView}"
+                            Content="{Binding AnimatedWallpaperConfig}" 
+                            Panel.ZIndex="2"/>
+
             <ContentControl x:Name="ContextViews"
                             HorizontalAlignment="Right"
                             Grid.RowSpan="2"

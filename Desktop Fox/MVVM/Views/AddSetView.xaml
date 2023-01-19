@@ -30,18 +30,84 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Top"
                                 Margin="0,10,0,0">
+                        
                         <RadioButton x:Name="radio_Day"
-                                     Content="Day" 
                                      FontSize="20"          
-                                     Margin="5,5,5,5"
-                                     Style="{StaticResource DF_RadioButton_Border}" 
-                                     IsChecked="{Binding Day}"/>
+                                     Margin="20,5"
+                                     Style="{StaticResource DF_RadioButton_Border_Round}" 
+                                     IsChecked="{Binding Day}">
+                            <Grid>
+                                <Border>
+                                    <Image Source="\Icons\Icons_Day.png" 
+                                        Stretch="Uniform"
+                                        Margin="10"/>
+                                </Border>
+
+                                <Border Margin="10">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                               Mode=FindAncestor, 
+                                                                               AncestorType={x:Type RadioButton}}, 
+                                                                               Path=IsChecked}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                               Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                        <Rectangle.Fill>
+                                            <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                        </Rectangle.Fill>
+                                        <Rectangle.OpacityMask>
+                                            <ImageBrush ImageSource="\Icons\Icons_Day.png"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Border>
+                            </Grid>
+                        </RadioButton>
+                        
                         <RadioButton x:Name="radio_Night"
-                                     Content="Night" 
-                                     FontSize="20"
-                                     Margin="5,5,5,5"
-                                     Style="{StaticResource DF_RadioButton_Border}"
-                                     IsChecked="{Binding Day, Converter={StaticResource BoolInverter}}"/>
+                                     Margin="20,5"
+                                     Style="{StaticResource DF_RadioButton_Border_Round}"
+                                     IsChecked="{Binding Day, Converter={StaticResource BoolInverter}}">
+                            <Grid Margin="0,0,4,0">
+                                <Border>
+                                    <Image Source="\Icons\Icons_Night.png" 
+                                        Stretch="Uniform"
+                                        Margin="10"/>
+                                </Border>
+
+                                <Border Margin="10">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                               Mode=FindAncestor, 
+                                                                               AncestorType={x:Type RadioButton}}, 
+                                                                               Path=IsChecked}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                               Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                        <Rectangle.Fill>
+                                            <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                        </Rectangle.Fill>
+                                        <Rectangle.OpacityMask>
+                                            <ImageBrush ImageSource="\Icons\Icons_Night.png"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Border>
+                            </Grid>
+                        </RadioButton>
+                        
                     </StackPanel>
                 </StackPanel>
                 <Border Background="{StaticResource BorderBrush}"
@@ -134,12 +200,15 @@
                         Margin="10"/>
                 <Grid>
                     <Button x:Name="button_AddPictures"
-                            Content="Add"
-                            FontSize="20"
                             IsEnabled="{Binding CanAdd}"
                             Style="{StaticResource DF_Button_Border}"
                             Grid.Row="3"
-                            Command="{Binding AddNewSet}"/>
+                            Command="{Binding AddNewSet}">
+                        <Border Margin="10">
+                            <Image Source="\Icons\Icons_Plus.png" 
+                                        Stretch="Uniform"/>
+                        </Border>
+                    </Button>
                 </Grid>
             </StackPanel>
         </Grid>

@@ -81,10 +81,15 @@
                                 <Grid VerticalAlignment="Stretch"
                                       HorizontalAlignment="Stretch"
                                       Background="{TemplateBinding Background}">
+                                    
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                    
                                     <TextBlock Text="{TemplateBinding Property=Content}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                TextAlignment="Center"/>
+                                    
                                 </Grid>
                             </Border>
                             <Border Height="43" Width="103"
@@ -128,6 +133,86 @@
                 <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
             </Trigger>
             
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+           TargetType="{x:Type RadioButton}"
+           x:Key="DF_RadioButton_Border_Round">
+        <Style.Setters>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="{StaticResource Default}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+
+                            <Border Background="{StaticResource ControlBrush}"
+                                    Height="60" Width="60"
+                                    CornerRadius="30">
+                                <Border.Clip>
+                                    <RectangleGeometry RadiusX="30"
+                                                       RadiusY="30"
+                                                       Rect="0,0,60,60"/>
+                                </Border.Clip>
+                                <Grid VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Stretch"
+                                      Background="{TemplateBinding Background}">
+
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                                    <TextBlock Text="{TemplateBinding Property=Content}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               TextAlignment="Center"/>
+
+                                </Grid>
+                            </Border>
+                            <Border Height="63" Width="63"
+                                    BorderThickness="3"
+                                    CornerRadius="30"
+                                    BorderBrush="{TemplateBinding BorderBrush}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}"/>
+            </Trigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                    <Condition Property="IsChecked" Value="False"/>
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource ControlPressedBrush}"/>
+            </Trigger>
+
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource ControlPressedTextBrush}"/>
+                <Setter Property="Background" Value="{StaticResource ControlPressedBrush}"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{StaticResource BorderBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            </Trigger>
+
         </Style.Triggers>
     </Style>
 

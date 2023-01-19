@@ -55,6 +55,9 @@
             <DataTemplate DataType="{x:Type views:MessageView}">
                 <views:MessageView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type views:AnimatedWallpaperConfigView}">
+                <views:AnimatedWallpaperConfigView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 

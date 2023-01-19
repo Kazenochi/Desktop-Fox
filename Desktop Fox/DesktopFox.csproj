@@ -17,11 +17,17 @@
     <None Remove="Assets\Dummy.jpg" />
     <None Remove="Assets\murmel.png" />
     <None Remove="Assets\Nunito-VariableFont_wght.ttf" />
+    <None Remove="Icons\Icons_Day.png" />
+    <None Remove="Icons\Icons_DayNight.png" />
+    <None Remove="Icons\Icons_Delete.png" />
+    <None Remove="Icons\Icons_Folder.png" />
     <None Remove="Icons\Icons_Minus.png" />
     <None Remove="Icons\Icons_Monitor.png" />
+    <None Remove="Icons\Icons_Night.png" />
     <None Remove="Icons\Icons_Pause.png" />
     <None Remove="Icons\Icons_Play.png" />
     <None Remove="Icons\Icons_Plus.png" />
+    <None Remove="Icons\Icons_Save.png" />
     <None Remove="Icons\Icons_Settings.png" />
     <None Remove="MVVM\Views\DF_Icon.ico" />
   </ItemGroup>
@@ -46,10 +52,25 @@
     </Content>
     <Content Include="Assets\murmel.png" />
     <Resource Include="Assets\Nunito-VariableFont_wght.ttf" />
+    <Resource Include="Icons\Icons_Day.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Icons_DayNight.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Icons_Delete.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Icons_Folder.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Icons\Icons_Minus.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Icons_Monitor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Icons_Night.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Icons_Pause.png">
@@ -59,6 +80,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Icons_Plus.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Icons_Save.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Icons_Settings.png">

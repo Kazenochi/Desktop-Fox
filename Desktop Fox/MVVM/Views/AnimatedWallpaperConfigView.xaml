@@ -1,0 +1,43 @@
+﻿<local:AnimatedBaseView x:Class="DesktopFox.MVVM.Views.AnimatedWallpaperConfigView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:DesktopFox.MVVM.Views"
+             xmlns:local="clr-namespace:DesktopFox"
+             xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=ViewModels:AnimatedWallpaperConfigVM}"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="1200">
+    <Grid Background="{StaticResource BackgroundBrush}"
+          Margin="20">
+        <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+            <ToggleButton IsChecked="{Binding animatedWallpaperConfigModel.Monitor1}"
+                          Visibility="{Binding animatedWallpaperConfigModel.Monitor1_Visible}"  
+                          Style="{StaticResource DF_ToggleButton_Border}"
+                          d:IsChecked="True">
+                <Grid>
+                    <MediaElement x:Name="WallpaperMediaMonitor1"
+                                  RenderOptions.CachingHint="Cache"
+                                  RenderOptions.BitmapScalingMode="LowQuality"
+                                  LoadedBehavior="Play"
+                                  Stretch="UniformToFill"
+                                  IsMuted="True"
+                                  Source="{Binding animatedWallpaperConfigModel.SourceUri}"
+                                  d:Source="\Assets\shenheXganyu.mp4"
+                                  d:LoadedBehavior="Play">
+                    </MediaElement>
+
+                </Grid>
+            </ToggleButton>
+            <ToggleButton IsChecked="{Binding animatedWallpaperConfigModel.Monitor2}"
+                          Visibility="{Binding animatedWallpaperConfigModel.Monitor2_Visible}"
+                          Style="{StaticResource DF_ToggleButton_Border}"/>
+            <ToggleButton IsChecked="{Binding animatedWallpaperConfigModel.Monitor3}"
+                          Visibility="{Binding animatedWallpaperConfigModel.Monitor3_Visible}"
+                          Style="{StaticResource DF_ToggleButton_Border}"/>
+        </StackPanel>
+    </Grid>
+</local:AnimatedBaseView>

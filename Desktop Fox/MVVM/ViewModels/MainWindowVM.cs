@@ -34,6 +34,7 @@ namespace DesktopFox
             DF = desktopFox;
             MainWindowModel = new MainWindowModel();
             Preview = PreviewView;
+
             DF.SettingsManager.Settings.PropertyChanged += Settings_PropertyChanged;
             MainWindowModel.CollectionChangedVM += CollectionChanged_Event_VM;  
             Task.Run(() => CheckMultiMonitor());
@@ -43,6 +44,14 @@ namespace DesktopFox
             */
             //ContextPopupView.KeyDown += ContextPopupView_KeyDown;
         }
+
+        private bool _animatedToggle = false;
+        public bool AnimatedToggle { get { return _animatedToggle; } set { _animatedToggle = value; RaisePropertyChanged(nameof(AnimatedToggle)); } }
+        public ICommand AnimatedToggleCommand { get { return new DF_Command.DelegateCommand(o => AnimatedToggle = !AnimatedToggle); } }
+        public AnimatedBaseView AnimatedWPConfig { get { return _animatedWPConfig; } set { _animatedWPConfig = value; RaisePropertyChanged(nameof(AnimatedWPConfig)); } }
+        private AnimatedBaseView _animatedWPConfig;
+
+
 
         /// <summary>
         /// Gibt das Model dieser Klasse zurück

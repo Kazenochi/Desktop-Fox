@@ -51,8 +51,9 @@
             <StackPanel Orientation="Horizontal"
                         Grid.Row="2"
                         Grid.Column= "1"
-                        VerticalAlignment="Center"
+                        VerticalAlignment="Bottom"
                         HorizontalAlignment="Center"
+                        Margin="15"
                         Panel.ZIndex="3">
                 <Grid>
                     <Button x:Name="button_StopSet"     
@@ -61,12 +62,8 @@
                             IsEnabled="{Binding CanActivate, Converter={StaticResource BoolInverter}}"
                             Command="{Binding StopSetCommand}"
                             Style="{StaticResource DF_Button_Border}">
-                        <Border Margin="5">
-                            <Grid>
-                                <Image Source="\Icons\Icons_Pause.png" 
-                                        Stretch="Uniform" Margin="5"/>
-                            </Grid>
-                        </Border>
+                        <Image Source="\Icons\Icons_Pause.png" 
+                                        Stretch="Uniform" Margin="10"/>
                     </Button>
                     <Button x:Name="button_ActivateSet" 
                             FontSize="20"
@@ -88,19 +85,17 @@
                             Command="{Binding NextMonitorCommand}"
                             Visibility="{Binding MultiMonitor, Converter={StaticResource BoolConverter}}"
                             Style="{StaticResource DF_Button_Border}">
-                    <Border>
-                        <Grid Margin="10">
-                            <Image Source="\Icons\Icons_Monitor.png" 
+                    <Grid Margin="10">
+                        <Image Source="\Icons\Icons_Monitor.png" 
                                     Stretch="Uniform" Margin="0,2,0,0"/>
-                            <Label Content="{Binding MultiMonitorContent}"
+                        <Label Content="{Binding MultiMonitorContent}"
                                     FontFamily="{StaticResource Default}"
                                     Foreground="{StaticResource TextBrush}"
                                     VerticalContentAlignment="Center"
                                     HorizontalContentAlignment="Center"
                                     Margin="0,-8,0,0"
                                     d:Content="1"/>
-                        </Grid>
-                    </Border>
+                    </Grid>
                 </Button>
 
                 <Button x:Name="button_Animation"        
@@ -123,31 +118,27 @@
                         Grid.Column="0" 
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding AddSetViewCommand}">
-                    <Border Margin="10">
-                        <Image Name="AddImage"
+                    <Image Name="AddImage"
                                     Source="\Icons\Icons_Plus.png" 
-                                    Stretch="Uniform"/>
-                    </Border>
+                                    Stretch="Uniform" Margin="10"/>
                 </Button>
                 <Button x:Name="button_Settings" 
                         FontSize="20"
                         Grid.Column="1" 
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding SettingsMainViewCommand}">
-                    <Border Margin="5">
-                        <Image Source="\Icons\Icons_Settings.png" 
-                                    Stretch="Uniform" Margin="5"/>
-                    </Border>
+                    <Image Source="\Icons\Icons_Settings.png" 
+                                    Stretch="Uniform" Margin="10"/>
                 </Button>
             </StackPanel>
 
             <!--#region Click Event Border Panes-->
             <Border x:Name="hideClickPane"
                     Background="Transparent"
-                    Grid.Row="1"
-                    Margin="170,0,170,0"
+                    Grid.Row="1"   
                     Grid.RowSpan="3"
                     Grid.ColumnSpan="1"
+                    Visibility="{Binding ClickPaneVisible, Converter={StaticResource BoolConverter}}"
                     Panel.ZIndex="2">
                 <Border.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding HideViewCommand}"/>
@@ -157,18 +148,9 @@
             </Border>
             <Border Background="Transparent"
                     Grid.Row="2"
-                    Grid.RowSpan="1"
-                    Grid.ColumnSpan="2"
-                    Panel.ZIndex="2">
-                <Border.InputBindings>
-                    <MouseBinding Gesture="LeftClick" Command="{Binding HideViewCommand}"/>
-                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding MaximizeCommand}"/>
-                </Border.InputBindings>
-            </Border>
-            <Border Background="Transparent"
-                    Grid.Row="1"
-                    Grid.RowSpan="2"
                     Grid.Column="1"
+                    Grid.RowSpan="1"
+                    Grid.ColumnSpan="1"
                     Panel.ZIndex="2">
                 <Border.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding HideViewCommand}"/>
@@ -298,20 +280,13 @@
             <!--#endregion-->
 
 
-            <ContentControl x:Name="PreviewContext"
+            <ContentControl x:Name="MainPanelContext"
                             Margin="10,0,10,10"
                             Grid.RowSpan="2"
                             Grid.Row="1"
-                            Content="{Binding Preview}" 
-                            Panel.ZIndex="1"/>
-
-            <ContentControl Margin="10,0,10,10"
-                            Grid.RowSpan="2"
-                            Grid.Row="1"
-                            Visibility="{Binding AnimatedToggle, Converter={StaticResource BoolConverter}}"
+                            Content="{Binding MainPanel}" 
                             d:Content="{view:AnimatedWallpaperConfigView}"
-                            Content="{Binding AnimatedWallpaperConfig}" 
-                            Panel.ZIndex="2"/>
+                            Panel.ZIndex="1"/>
 
             <ContentControl x:Name="ContextViews"
                             HorizontalAlignment="Right"

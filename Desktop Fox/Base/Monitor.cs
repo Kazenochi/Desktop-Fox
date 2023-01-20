@@ -1,5 +1,6 @@
 ﻿using IDesktopWallpaperWrapper;
 using System;
+using System.Security.RightsManagement;
 
 namespace DesktopFox
 {
@@ -10,6 +11,7 @@ namespace DesktopFox
         public String Name;
         public int Height;
         public int Width;
+        public int Number; 
 
         /// <summary>
         /// Konstruktor
@@ -21,8 +23,17 @@ namespace DesktopFox
             DesktopWallpaper tmpWrapper = new DesktopWallpaper();
             this.ID = monID;
             this.Name = monName;
+
             this.Height = tmpWrapper.GetMonitorRECT(monID).Height;
             this.Width = tmpWrapper.GetMonitorRECT(monID).Width;
+
+            if(monName == "Main")
+                this.Number = 1;
+            else if(monName == "Second")
+                this.Number = 2;
+            else
+                this.Number = 3;
+
             //var me = Screen.PrimaryScreen.DeviceFriendlyName();
             Console.WriteLine(Name);
             Console.WriteLine("Monitor Höhe: " + Height);
@@ -37,5 +48,6 @@ namespace DesktopFox
         {
             return this.Width;
         }
+
     }
 }

@@ -31,5 +31,10 @@ namespace DesktopFox.MVVM.Views
             ((MediaElement)sender).Stop();
             ((MediaElement)sender).Play();
         }
+
+        public void Play()
+        {
+            this.WallpaperMedia.Play();
+        }
     }
 }

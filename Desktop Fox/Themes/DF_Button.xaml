@@ -123,7 +123,7 @@
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Margin" Value="10,0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -133,8 +133,9 @@
                                 CornerRadius="10"
                                 Background="{TemplateBinding Background}">
                             <ContentPresenter VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"/>
+                                          HorizontalAlignment="Center"/>
                         </Border>
+
                         <Border Width="303" Height="203"
                                 CornerRadius="10"
                                 BorderThickness="3"

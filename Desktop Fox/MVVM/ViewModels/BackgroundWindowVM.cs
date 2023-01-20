@@ -1,4 +1,5 @@
 ﻿using DesktopFox.MVVM.Model;
+using DesktopFox.MVVM.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DesktopFox.MVVM.ViewModels
 {
-    class BackgroundWindowVM
+    public class BackgroundWindowVM
     {
-        public BackgroundWindowModel BackgroundModel = new BackgroundWindowModel();
+        public BackgroundWindowModel BackgroundModel { get; set; } = new ();
 
         /// <summary>
         /// 
@@ -17,11 +18,8 @@ namespace DesktopFox.MVVM.ViewModels
         /// <param name="monitor">Auf Welchem Monitor dieses Fenster Angezeigt wird</param>
         /// <param name="monitorHeight"></param>
         /// <param name="monitorWidth"></param>
-        public BackgroundWindowVM(int monitor, int monitorHeight, int monitorWidth)
+        public BackgroundWindowVM()
         {
-            BackgroundModel.Height = monitorHeight;
-            BackgroundModel.Width = monitorWidth;
-            BackgroundModel.Monitor = monitor;
         }
     }
 }

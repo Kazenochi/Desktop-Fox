@@ -27,6 +27,7 @@ namespace DesktopFox
         private MainWindowVM mainWindowVM;
         private ContextPopupVM contextPopupVM;
         private PreviewVM previewVM;
+        private AnimatedWallpaperConfigVM animatedWPConfigVM;
         private AddSetVM addSetVM;
         private SettingsVM settingsVM;
         private GalleryShadow shadow;
@@ -54,6 +55,7 @@ namespace DesktopFox
             settingsVM = new SettingsVM(settings);
             contextPopupVM = new ContextPopupVM(mainWindowVM, GM);
             previewVM = new PreviewVM(this);
+            animatedWPConfigVM = new AnimatedWallpaperConfigVM(vDesk);
 
             shuffler = new Shuffler(mainWindowVM, GM, SM, previewVM, vDesk);
 
@@ -146,6 +148,7 @@ namespace DesktopFox
                 mainWindowVM.Settings_MainView.DataContext = settingsVM;
                 mainWindowVM.ContextPopupView.DataContext = contextPopupVM;
                 mainWindowVM.PreviewView.DataContext = previewVM;
+                mainWindowVM.AnimatedWPConfigView.DataContext = animatedWPConfigVM;
             }
             mainWindowVM.SetCurrentMain(MW);
             shuffler.startPreviewShuffleTimer();

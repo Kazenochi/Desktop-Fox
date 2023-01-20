@@ -12,32 +12,112 @@
     <Grid Background="{StaticResource BackgroundBrush}"
           Margin="20">
         <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-            <ToggleButton IsChecked="{Binding animatedWallpaperConfigModel.Monitor1}"
-                          Visibility="{Binding animatedWallpaperConfigModel.Monitor1_Visible}"  
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <ToggleButton x:Name="Monitor1_ToggleButton"
+                          IsChecked="{Binding animatedWallpaperConfigModel.Monitor1}"
+                          Visibility="{Binding animatedWallpaperConfigModel.Monitor1_Visible,Converter={StaticResource BoolConverter}}"  
                           Style="{StaticResource DF_ToggleButton_Border}"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center"
                           d:IsChecked="True">
                 <Grid>
                     <MediaElement x:Name="WallpaperMediaMonitor1"
-                                  RenderOptions.CachingHint="Cache"
-                                  RenderOptions.BitmapScalingMode="LowQuality"
-                                  LoadedBehavior="Play"
-                                  Stretch="UniformToFill"
-                                  IsMuted="True"
-                                  Source="{Binding animatedWallpaperConfigModel.SourceUri}"
-                                  d:Source="\Assets\shenheXganyu.mp4"
-                                  d:LoadedBehavior="Play">
+                              RenderOptions.CachingHint="Cache"
+                              RenderOptions.BitmapScalingMode="LowQuality"
+                              LoadedBehavior="Manual"
+                              Stretch="UniformToFill"
+                              IsMuted="True"
+                              Visibility="{Binding ElementName=Monitor1_ToggleButton, Path=IsChecked, Converter={StaticResource BoolConverter}}"
+                              Source="{Binding animatedWallpaperConfigModel.SourceUri, NotifyOnTargetUpdated=True}"
+                              Binding.TargetUpdated="Video1TargetUpdated"
+                              d:Source="\Assets\shenheXganyu.mp4"
+                              d:LoadedBehavior="Manual">
                     </MediaElement>
-
+                    <Label Content="1"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           Margin="10,0"
+                           FontFamily="{StaticResource Default}"
+                           FontSize="40"
+                           Foreground="{StaticResource TextBrush}"/>
                 </Grid>
             </ToggleButton>
-            <ToggleButton IsChecked="{Binding animatedWallpaperConfigModel.Monitor2}"
-                          Visibility="{Binding animatedWallpaperConfigModel.Monitor2_Visible}"
-                          Style="{StaticResource DF_ToggleButton_Border}"/>
-            <ToggleButton IsChecked="{Binding animatedWallpaperConfigModel.Monitor3}"
-                          Visibility="{Binding animatedWallpaperConfigModel.Monitor3_Visible}"
-                          Style="{StaticResource DF_ToggleButton_Border}"/>
+
+            <ToggleButton x:Name="Monitor2_ToggleButton"
+                          VerticalContentAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch"
+                          IsChecked="{Binding animatedWallpaperConfigModel.Monitor2}"
+                          Visibility="{Binding animatedWallpaperConfigModel.Monitor2_Visible,Converter={StaticResource BoolConverter}}"
+                          Style="{StaticResource DF_ToggleButton_Border}">
+                <Grid>
+                    <MediaElement x:Name="WallpaperMediaMonitor2"
+                              RenderOptions.CachingHint="Cache"
+                              RenderOptions.BitmapScalingMode="LowQuality"
+                              LoadedBehavior="Manual"
+                              Stretch="UniformToFill"
+                              IsMuted="True"
+                              Visibility="{Binding ElementName=Monitor2_ToggleButton, Path=IsChecked, Converter={StaticResource BoolConverter}}"
+                              Source="{Binding animatedWallpaperConfigModel.SourceUri, NotifyOnTargetUpdated=True}"
+                              Binding.TargetUpdated="Video2TargetUpdated"
+                              d:Source="\Assets\shenheXganyu.mp4"
+                              d:LoadedBehavior="Manual">
+                    </MediaElement>
+                    <Label Content="2"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           Margin="10,0"
+                           FontFamily="{StaticResource Default}"
+                           FontSize="40"
+                           Foreground="{StaticResource TextBrush}"/>
+                </Grid>
+            </ToggleButton>
+            <ToggleButton x:Name="Monitor3_ToggleButton"
+                          IsChecked="{Binding animatedWallpaperConfigModel.Monitor3}"
+                          Visibility="{Binding animatedWallpaperConfigModel.Monitor3_Visible,Converter={StaticResource BoolConverter}}"
+                          Style="{StaticResource DF_ToggleButton_Border}">
+                <Grid>
+                    <MediaElement x:Name="WallpaperMediaMonitor3"
+                              RenderOptions.CachingHint="Cache"
+                              RenderOptions.BitmapScalingMode="LowQuality"
+                              LoadedBehavior="Manual"
+                              Stretch="UniformToFill"
+                              IsMuted="True"
+                              Visibility="{Binding ElementName=Monitor3_ToggleButton, Path=IsChecked, Converter={StaticResource BoolConverter}}"
+                              Source="{Binding animatedWallpaperConfigModel.SourceUri, NotifyOnTargetUpdated=True}"
+                              Binding.TargetUpdated="Video3TargetUpdated"
+                              d:Source="\Assets\shenheXganyu.mp4"
+                              d:LoadedBehavior="Manual">
+                    </MediaElement>
+                    <Label Content="3"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           Margin="10,0"
+                           FontFamily="{StaticResource Default}"
+                           FontSize="40"
+                           Foreground="{StaticResource TextBrush}"/>
+                </Grid>
+            </ToggleButton>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" 
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,50,50">
+            <Button Style="{StaticResource DF_Button_Border}"
+                    Command="{Binding SelectVideoCommand}">
+                <Image Source="\Icons\Icons_Folder.png" 
+                                    Stretch="Uniform" Margin="11,10,6,10"/>
+            </Button>
+            <Button Style="{StaticResource DF_Button_Border}"
+                    Command="{Binding ActivateCommand}">
+                <Image Source="\Icons\Icons_Play.png" 
+                                    Stretch="Uniform" Margin="10,10,5,10"/>
+            </Button>
+            <Button Style="{StaticResource DF_Button_Border}"
+                    Command="{Binding StopCommand}">
+                <Image Source="\Icons\Icons_Pause.png" 
+                                    Stretch="Uniform" Margin="10"/>
+            </Button>
         </StackPanel>
     </Grid>
 </local:AnimatedBaseView>

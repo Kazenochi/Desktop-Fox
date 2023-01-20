@@ -21,6 +21,7 @@ namespace DesktopFox
         public Settings_MainView Settings_MainView = new Settings_MainView();
         public ContextPopupView ContextPopupView = new ContextPopupView();
         public PreviewView PreviewView = new PreviewView();
+
         private MainWindow _mainWindow;
         private Fox DF;
         private GalleryManager GM;
@@ -33,23 +34,36 @@ namespace DesktopFox
         {
             DF = desktopFox;
             MainWindowModel = new MainWindowModel();
-            Preview = PreviewView;
+            MainPanel = PreviewView;
 
             DF.SettingsManager.Settings.PropertyChanged += Settings_PropertyChanged;
             MainWindowModel.CollectionChangedVM += CollectionChanged_Event_VM;  
             Task.Run(() => CheckMultiMonitor());
-            /*
-            if (MainWindowModel._pictureViewVMs.Count > 0)
-                _emptyInfo = false;
-            */
-            //ContextPopupView.KeyDown += ContextPopupView_KeyDown;
         }
 
         private bool _animatedToggle = false;
         public bool AnimatedToggle { get { return _animatedToggle; } set { _animatedToggle = value; RaisePropertyChanged(nameof(AnimatedToggle)); } }
-        public ICommand AnimatedToggleCommand { get { return new DF_Command.DelegateCommand(o => AnimatedToggle = !AnimatedToggle); } }
-        public AnimatedBaseView AnimatedWPConfig { get { return _animatedWPConfig; } set { _animatedWPConfig = value; RaisePropertyChanged(nameof(AnimatedWPConfig)); } }
-        private AnimatedBaseView _animatedWPConfig;
+        public ICommand AnimatedToggleCommand { get { return new DF_Command.DelegateCommand(o => SwitchMainPanel()); } }
+
+        public AnimatedWallpaperConfigView AnimatedWPConfigView = new AnimatedWallpaperConfigView();
+
+        private bool _clickPaneVisible = true;
+        public bool ClickPaneVisible { get { return _clickPaneVisible; } set { _clickPaneVisible = value; RaisePropertyChanged(nameof(ClickPaneVisible)); } }
+        private void SwitchMainPanel()
+        {
+            if(MainPanel == this.PreviewView)
+            {
+                MainPanel = this.AnimatedWPConfigView;
+                ClickPaneVisible = false;
+            }
+            else if(MainPanel == this.AnimatedWPConfigView)
+            {
+                MainPanel = this.PreviewView;
+                ClickPaneVisible = true;
+            }
+                
+        }
+
 
 
 
@@ -72,10 +86,10 @@ namespace DesktopFox
         private AnimatedBaseView _currentView;
 
         /// <summary>
-        /// Gibt die View im Haupfenster an die die Vorschaubilder beinhaltet. <see cref="MainWindow.PreviewContext"/>
+        /// Gibt die View im Haupfenster an die die Vorschaubilder beinhaltet. <see cref="MainWindow.MainPanelContext"/>
         /// </summary>
-        public UserControl Preview { get { return _preview; } set { _preview = value; RaisePropertyChanged(nameof(Preview)); } }
-        private UserControl _preview;
+        public UserControl MainPanel { get { return _mainPanel; } set { _mainPanel = value; RaisePropertyChanged(nameof(MainPanel)); } }
+        private UserControl _mainPanel;
 
         /// <summary>
         /// Enthält das Objekt das Aktuell in der Listbox des Hauptfensters angezeigt wird. <see cref="MainWindow.lbPictures"/>
@@ -402,8 +416,8 @@ namespace DesktopFox
             if (CurrentView == AddSetView)
                 ((AddSetVM)AddSetView.DataContext).ContentChange(SelectedVM);
 
-            ((PreviewVM)Preview.DataContext).ContentChange(SelectedVM);
-
+            ((PreviewVM)PreviewView.DataContext).ContentChange(SelectedVM);
+            
         }
 
         /// <summary>

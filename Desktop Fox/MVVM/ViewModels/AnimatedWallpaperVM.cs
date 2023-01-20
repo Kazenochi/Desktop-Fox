@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace DesktopFox.MVVM.ViewModels
 {
-    class AnimatedWallpaperVM
+    public class AnimatedWallpaperVM
     {
 
-        public AnimatedWallpaperModel AnimatedWallpaperModel = new AnimatedWallpaperModel();
+        public AnimatedWallpaperModel AnimatedWallpaperModel { get; set; } = new();
 
-        public AnimatedWallpaperVM()
+        public AnimatedWallpaperVM(Wallpaper wallpaper)
         {
-
+            this.AnimatedWallpaperModel.SourceUri = wallpaper.MediaUri;
         }
 
     }

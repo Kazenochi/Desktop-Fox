@@ -37,11 +37,9 @@
                                      Style="{StaticResource DF_RadioButton_Border_Round}" 
                                      IsChecked="{Binding Day}">
                             <Grid>
-                                <Border>
-                                    <Image Source="\Icons\Icons_Day.png" 
-                                        Stretch="Uniform"
-                                        Margin="10"/>
-                                </Border>
+                                <Image Source="\Icons\Icons_Day.png" 
+                                    Stretch="Uniform"
+                                    Margin="10"/>
 
                                 <Border Margin="10">
                                     <Border.Style>
@@ -75,11 +73,9 @@
                                      Style="{StaticResource DF_RadioButton_Border_Round}"
                                      IsChecked="{Binding Day, Converter={StaticResource BoolInverter}}">
                             <Grid Margin="0,0,4,0">
-                                <Border>
-                                    <Image Source="\Icons\Icons_Night.png" 
+                                <Image Source="\Icons\Icons_Night.png" 
                                         Stretch="Uniform"
                                         Margin="10"/>
-                                </Border>
 
                                 <Border Margin="10">
                                     <Border.Style>
@@ -184,12 +180,15 @@
                                Content="{Binding Path=AddSetModel.FolderPath}"
                                Grid.ColumnSpan="2"/>
                         <Button x:Name="button_SelectFolder"
-                                Content="Select"
-                                FontSize="20"
                                 Style="{StaticResource DF_Button_Border}"
                                 HorizontalAlignment="Right"
                                 Grid.Column="1"
-                                Command="{Binding OpenFolderDialog}"/>
+                                Command="{Binding OpenFolderDialog}">
+                            <Image Source="\Icons\Icons_Folder.png" 
+                                    Stretch="Uniform"
+                                    Margin="12,10,7,10"/>
+
+                        </Button>
                     </Grid>
                 </StackPanel>
                 <Border Background="{StaticResource BorderBrush}"
@@ -204,10 +203,10 @@
                             Style="{StaticResource DF_Button_Border}"
                             Grid.Row="3"
                             Command="{Binding AddNewSet}">
-                        <Border Margin="10">
-                            <Image Source="\Icons\Icons_Plus.png" 
-                                        Stretch="Uniform"/>
-                        </Border>
+                        <Image Source="\Icons\Icons_Plus.png" 
+                                Stretch="Uniform"
+                                Margin="10"/>
+
                     </Button>
                 </Grid>
             </StackPanel>

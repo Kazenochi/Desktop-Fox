@@ -1,9 +1,14 @@
-﻿using IDesktopWallpaperWrapper;
+﻿using DesktopFox.MVVM.Model;
+using DesktopFox.MVVM.ViewModels;
+using DesktopFox.MVVM.Views;
+using IDesktopWallpaperWrapper;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-
-
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Interop;
 
 namespace DesktopFox
 {
@@ -14,13 +19,16 @@ namespace DesktopFox
         private int monitorCount;
         //private Collection activeCollection;
         private int[] boundary;
+        private List<Wallpaper> wallpapers;
+        private IntPtr progman, workerw;
+        private bool debug = true;
 
         /// <summary>
         /// Konstruktor
         /// </summary>
         public VirtualDesktop()
         {
-
+            workerw = IntPtr.Zero;
             String[] test = wrapper.GetAllMonitorIDs();
             foreach (String testID in test)
             {
@@ -42,7 +50,7 @@ namespace DesktopFox
             for (int i = 0; i < monitor.Length; i++)
             {
                 if (wrapper.GetMonitorRECT(monitor[i]).X == 0)
-                    addNewMonitor("Main", monitor[i]);
+                    addNewMonitor(monitor[i], "Main");
             }
             foreach (var pair in monitorDict)
                 Console.WriteLine($"Monitor: {pair.Key} ----- Name der Adresse: {pair.Value}");
@@ -53,7 +61,7 @@ namespace DesktopFox
                 for (int i = 0; i < monitor.Length; i++)
                 {
                     if (wrapper.GetMonitorRECT(monitor[i]).X == monitorDict.ElementAt(0).Value.Width)
-                        addNewMonitor("Second", monitor[i]);
+                        addNewMonitor(monitor[i], "Second");
                 }
             }
             if (monitor.Length > 2)
@@ -62,7 +70,7 @@ namespace DesktopFox
                 for (int i = 0; i < monitor.Length; i++)
                 {
                     if (wrapper.GetMonitorRECT(monitor[i]).X > monitorDict["Main"].getWidth() + monitorDict["Second"].getWidth() || wrapper.GetMonitorRECT(monitor[i]).X < 0)
-                        addNewMonitor("Third", monitor[i]);
+                        addNewMonitor(monitor[i], "Third");
                 }
             }
             calcBoundary();
@@ -73,7 +81,7 @@ namespace DesktopFox
         /// </summary>
         /// <param name="pos"></param>
         /// <param name="monID"></param>
-        private void addNewMonitor(String pos, String monID)
+        private void addNewMonitor(String monID, String pos)
         {
             Monitor monitor = new Monitor(monID, pos);
             //monitor.Name;
@@ -101,6 +109,149 @@ namespace DesktopFox
             this.boundary = bound;
             //Console.WriteLine("Gesamte Desktop Auflösung Breite:" + width + " Höhe: " + hight);
         }
+
+        #region Fensterfunktionen für Custom / Animierte Hintergründe
+
+        public void newAnimatedWPs(List<int> monitors, string mediaUri)
+        {
+            if(wallpapers == null) 
+                wallpapers = new List<Wallpaper>();
+
+            if (wallpapers.Count != 0)
+                clearWallpapers();
+
+            foreach(int monitor in monitors)
+            {
+                wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitor, mediaUri));
+            }  
+            buildDesktop();
+        }
+
+        /// <summary>
+        /// Fängt den Windows Worker und holt sich die Adresse.
+        /// Thanks to Gerald Degeneve who discovered this Solution
+        /// https://www.codeproject.com/Articles/856020/Draw-Behind-Desktop-Icons-in-Windows-plus
+        /// And rockdanister for providing the Source Code of an implementation of it
+        /// https://github.com/rocksdanister/lively
+        /// </summary>
+        /// <returns></returns>
+        private IntPtr windowCatch()
+        {
+            // Fetch the Progman window
+            progman = NativeMethods.FindWindow("Progman", null);
+
+            IntPtr result = IntPtr.Zero;
+
+            // Send 0x052C to Progman. This message directs Progman to spawn a 
+            // WorkerW behind the desktop icons. If it is already there, nothing 
+            // happens.
+            NativeMethods.SendMessageTimeout(progman,
+                                   0x052C,
+                                   new IntPtr(0xD),
+                                   new IntPtr(0x1),
+                                   NativeMethods.SendMessageTimeoutFlags.SMTO_NORMAL,
+                                   1000,
+                                   out result);
+
+            workerw = IntPtr.Zero;
+
+            NativeMethods.EnumWindows(new NativeMethods.EnumWindowsProc((tophandle, topparamhandle) =>
+            {
+                IntPtr p = NativeMethods.FindWindowEx(tophandle,
+                                            IntPtr.Zero,
+                                            "SHELLDLL_DefView",
+                                            IntPtr.Zero);
+
+                if (p != IntPtr.Zero)
+                {
+                    // Gets the WorkerW Window after the current one.
+                    workerw = NativeMethods.FindWindowEx(IntPtr.Zero,
+                                               tophandle,
+                                               "WorkerW",
+                                               IntPtr.Zero);
+                }
+
+                return true;
+            }), IntPtr.Zero);
+
+            return workerw;
+        }
+
+        private void buildDesktop()
+        {
+            if (wallpapers.Count <= 0) return;
+            if (workerw == IntPtr.Zero) windowCatch();
+
+            double widthFaktor = 1;
+            
+            foreach (Wallpaper wallpaper in wallpapers)
+            {
+                Screen s = Screen.AllScreens[wallpaper.myMonitor.Number-1];
+                BackgroundWindow backgroundWindow = new BackgroundWindow();
+
+                if (wallpaper.myMonitor.Number > 0)
+                {
+                    widthFaktor = (SystemParameters.PrimaryScreenWidth / wallpaper.myMonitor.Width);
+                }
+
+                backgroundWindow.Top = s.Bounds.Top;
+                backgroundWindow.Left = s.Bounds.Left * widthFaktor;
+
+
+
+                backgroundWindow.Width = SystemParameters.PrimaryScreenWidth;
+                backgroundWindow.Height = SystemParameters.PrimaryScreenHeight;
+
+                if (debug)
+                {
+                    Debug.WriteLine("Actual Monitor Height: " + wallpaper.myMonitor.Height);
+                    Debug.WriteLine("Actual Monitor Width: " + wallpaper.myMonitor.Width);
+                    Debug.WriteLine("Wallpaper Monitor " + wallpaper.myMonitor.Number);
+                    Debug.WriteLine("BackWindow Top: " + s.Bounds.Top);
+                    Debug.WriteLine("Backwindow Left: " + s.Bounds.Left);
+                    Debug.WriteLine("Backwindow Width: " + backgroundWindow.Width);
+                    Debug.WriteLine("Backwindow Height: " + backgroundWindow.Height);
+                }
+
+                BackgroundWindowVM backgroundWindowVM = new BackgroundWindowVM();
+                backgroundWindow.DataContext = backgroundWindowVM;
+                backgroundWindow.Show();
+                wallpaper.myHandler = new WindowInteropHelper(backgroundWindow).Handle;
+                NativeMethods.SetParent(wallpaper.myHandler, workerw);
+
+                /*
+                backgroundWindow.Width = wallpaper.myMonitor.Width;
+                backgroundWindow.Height = wallpaper.myMonitor.Height;
+                */
+
+                AnimatedWallpaperVM animatedWPVM = new AnimatedWallpaperVM(wallpaper);
+                AnimatedWallpaperView animatedWPView = new AnimatedWallpaperView();
+                animatedWPView.DataContext = animatedWPVM;
+                wallpaper.myViewModel = animatedWPVM;
+                wallpaper.myModel = animatedWPVM.AnimatedWallpaperModel;
+
+                backgroundWindowVM.BackgroundModel.Wallpaper = animatedWPView;
+
+                //BackgroundWindow tmpWin = (BackgroundWindow)HwndSource.FromHwnd(wallpaper.myHandler).RootVisual;
+                //((BackgroundWindowVM)tmpWin.DataContext).BackgroundModel.Wallpaper.Play();
+
+            }
+        }
+
+        public void clearWallpapers()
+        {
+            if (wallpapers.Count <= 0) return;
+
+            foreach(Wallpaper wallpaper in wallpapers)
+            {
+                //NativeMethods.CloseHandle(wallpaper.myHandler);
+                ((BackgroundWindow)HwndSource.FromHwnd(wallpaper.myHandler).RootVisual).Close();
+                wrapper.SetWallpaper(wallpaper.myMonitor.ID, wrapper.GetWallpaper(wallpaper.myMonitor.ID));
+            }
+            wallpapers.Clear();
+            Debug.WriteLine("Alle WPs wurden geschlossen");
+        }
+        #endregion
 
         /// <summary>
         /// Gibt die Anzahl der Monitore zurück
@@ -147,5 +298,7 @@ namespace DesktopFox
         {
             get { return monitorDict["Third"]; }
         }
+
+        
     }
 }

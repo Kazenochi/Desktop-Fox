@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DesktopFox.MVVM.Model
 {
-    class AnimatedWallpaperConfigModel : ObserverNotifyChange
+    public class AnimatedWallpaperConfigModel : ObserverNotifyChange
     {
-        private string _sourceUri = "D:\\VS\\Projekte\\Desktop Fox\\Desktop Fox\\Assets\\shenheXganyu.mp4";
+        private string _sourceUri = "";
         public string SourceUri { get { return _sourceUri; } set { _sourceUri = value; RaisePropertyChanged(nameof(SourceUri)); } }
 
         private bool _monitor1_Visible = false;

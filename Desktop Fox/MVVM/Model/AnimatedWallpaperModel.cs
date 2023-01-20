@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DesktopFox.MVVM.Model
 {
-    class AnimatedWallpaperModel : ObserverNotifyChange
+    public class AnimatedWallpaperModel : ObserverNotifyChange
     {
-        private string _sourceUri;
+        private string _sourceUri = "";
         public string SourceUri { get { return _sourceUri;} set { _sourceUri = value; RaisePropertyChanged(nameof(SourceUri)); } }
 
         private bool _isMuted = true;

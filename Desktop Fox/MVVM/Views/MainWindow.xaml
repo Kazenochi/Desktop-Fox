@@ -51,9 +51,8 @@
             <StackPanel Orientation="Horizontal"
                         Grid.Row="2"
                         Grid.Column= "1"
-                        VerticalAlignment="Bottom"
+                        VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                        Margin="15"
                         Panel.ZIndex="3">
                 <Grid>
                     <Button x:Name="button_StopSet"     

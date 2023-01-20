@@ -54,11 +54,13 @@ namespace DesktopFox
             if(MainPanel == this.PreviewView)
             {
                 MainPanel = this.AnimatedWPConfigView;
+                MainPanel.AnimateInSoft();
                 ClickPaneVisible = false;
             }
             else if(MainPanel == this.AnimatedWPConfigView)
             {
                 MainPanel = this.PreviewView;
+                MainPanel.AnimateInSoft();            
                 ClickPaneVisible = true;
             }
                 
@@ -88,8 +90,8 @@ namespace DesktopFox
         /// <summary>
         /// Gibt die View im Haupfenster an die die Vorschaubilder beinhaltet. <see cref="MainWindow.MainPanelContext"/>
         /// </summary>
-        public UserControl MainPanel { get { return _mainPanel; } set { _mainPanel = value; RaisePropertyChanged(nameof(MainPanel)); } }
-        private UserControl _mainPanel;
+        public AnimatedBaseView MainPanel { get { return _mainPanel; } set { _mainPanel = value; RaisePropertyChanged(nameof(MainPanel)); } }
+        private AnimatedBaseView _mainPanel;
 
         /// <summary>
         /// Enthält das Objekt das Aktuell in der Listbox des Hauptfensters angezeigt wird. <see cref="MainWindow.lbPictures"/>
@@ -428,7 +430,7 @@ namespace DesktopFox
         /// <returns></returns>
         private async Task ContentCleanup(double animationTime)
         {
-            await Task.Delay((int)animationTime * 1000);
+            //await Task.Delay((int)animationTime * 1000);
             _currentView = null;
         }
 

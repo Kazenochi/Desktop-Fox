@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using DragDropEffects = System.Windows.DragDropEffects;
 using DragEventArgs = System.Windows.DragEventArgs;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
@@ -24,6 +25,7 @@ namespace DesktopFox
         private int firecount = 0;
         private Point mousePoint;
         private bool mouseDown = false;
+        private bool CloseLock = true;
 
         public MainWindow()
         {
@@ -116,5 +118,29 @@ namespace DesktopFox
 
         #endregion
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (CloseLock)
+            {
+                this.Opacity = 1;
+
+                var sb = new Storyboard();
+                var fadeinAnimationX = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.7));
+                sb.Children.Add(fadeinAnimationX);
+                Storyboard.SetTarget(sb, this);
+                Storyboard.SetTargetProperty(sb, new PropertyPath(System.Windows.Controls.Control.OpacityProperty));
+
+                sb.Completed += ClosingStoryboardFinished;
+                sb.Begin();
+
+                e.Cancel = true;
+            }
+        }
+
+        private void ClosingStoryboardFinished(object sender, EventArgs e)
+        {
+            CloseLock = false;
+            this.Close();
+        }
     }
 }

@@ -13,10 +13,26 @@
         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource WindowSizeConverter}, ConverterParameter='0.8'}"
         MinHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource WindowSizeConverter}, ConverterParameter='0.5'}"
         MinWidth="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource WindowSizeConverter}, ConverterParameter='0.5'}"
-        WindowStyle="None"  
+        WindowStyle="None"
+        Closing="Window_Closing"
         AllowsTransparency="True"
         Background="Transparent"
         MouseDown="WindowClickAndDrag">
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                     Duration="0:0:0.7"
+                                     From="0" To="1">
+                        <DoubleAnimation.EasingFunction>
+                            <QuadraticEase EasingMode="EaseIn"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
     <WindowChrome.WindowChrome>
         <WindowChrome ResizeBorderThickness="8,2,8,8" CaptionHeight="0" />
         <!--Zusätzliche Window Chrome Settings falls Performance zu Schlecht ist: 
@@ -137,6 +153,7 @@
                     Grid.Row="1"   
                     Grid.RowSpan="3"
                     Grid.ColumnSpan="1"
+                    Margin="170,0"
                     Visibility="{Binding ClickPaneVisible, Converter={StaticResource BoolConverter}}"
                     Panel.ZIndex="2">
                 <Border.InputBindings>

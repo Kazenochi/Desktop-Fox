@@ -36,7 +36,6 @@ namespace DesktopFox
             this.RenderTransformOrigin = new Point (1,1);
             this.RenderTransform = scaleTransform;
                     
-            var sb = new Storyboard();
             var popinAnimationX = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(this.AnimationTime));
 
             BackEase quadraticEase = new BackEase();
@@ -46,6 +45,7 @@ namespace DesktopFox
 
             scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, popinAnimationX);
             scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, popinAnimationX);
+            
         }
 
         /// <summary>
@@ -60,16 +60,35 @@ namespace DesktopFox
             this.RenderTransformOrigin = new Point(1, 1);
             this.RenderTransform = scaleTransform;
 
-            var sb = new Storyboard();
-            var popinAnimationX = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(this.AnimationTime));
+            var popoutAnimationX = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(this.AnimationTime));
 
             BackEase quadraticEase = new BackEase();
             quadraticEase.EasingMode = EasingMode.EaseIn;
             quadraticEase.Amplitude = Amplitude;
-            popinAnimationX.EasingFunction = quadraticEase;
+            popoutAnimationX.EasingFunction = quadraticEase;
                     
+            scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, popoutAnimationX);
+            scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, popoutAnimationX);
+        }
+
+        public void AnimateInSoft()
+        {
+            if (this.ControlPopInAnimation == Animation.None)
+                return;
+
+                        ScaleTransform scaleTransform = new ScaleTransform();
+            this.RenderTransformOrigin = new Point (1,1);
+            this.RenderTransform = scaleTransform;
+                    
+            var popinAnimationX = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(this.AnimationTime));
+
+            QuinticEase quinticEase = new QuinticEase();
+            quinticEase.EasingMode = EasingMode.EaseOut;
+            popinAnimationX.EasingFunction = quinticEase;
+
             scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, popinAnimationX);
             scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, popinAnimationX);
+
         }
 
         /// <summary>

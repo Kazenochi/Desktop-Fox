@@ -26,5 +26,15 @@
         /// FensterDeckkraft wird langsam verringert
         /// </summary>
         FadeOutAnimation = 4,
+
+        /// <summary>
+        /// Fenster erscheint mit weniger kraft
+        /// </summary>
+        PopInAnimationSoft = 5,
+
+        /// <summary>
+        /// Fenster verschwindet mit weniger kraft
+        /// </summary>
+        PopOutAnimationSoft = 6,
     }
 }

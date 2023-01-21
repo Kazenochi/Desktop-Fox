@@ -9,8 +9,19 @@
                          d:DataContext="{d:DesignInstance Type=ViewModels:AnimatedWallpaperConfigVM}"
                          mc:Ignorable="d" 
                          d:DesignHeight="750" d:DesignWidth="1200">
-    <Grid 
-          Margin="20">
+    <Grid Margin="20">
+        <TextBlock FontFamily="{StaticResource Default}"
+                   Foreground="{StaticResource TextBrush}"
+                   FontSize="25"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+            <Run Text="Please select which Monitor"/><LineBreak/>
+            <Run Text="should display an animated wallpaper"/>
+            <TextBlock.RenderTransform>
+                <TranslateTransform Y="-200"/>
+            </TextBlock.RenderTransform>
+        </TextBlock>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
@@ -34,7 +45,7 @@
                                   Source="{Binding animatedWallpaperConfigModel.SourceUri, NotifyOnTargetUpdated=True}"
                                   Binding.TargetUpdated="Video1TargetUpdated"
                                   d:Source="\Assets\shenheXganyu.mp4"
-                                  d:LoadedBehavior="Manual">
+                                  d:LoadedBehavior="Play">
                     </MediaElement>
                     <Label Content="1"
                            VerticalAlignment="Top"
@@ -106,9 +117,11 @@
             </ToggleButton>
         </StackPanel>
         <StackPanel Orientation="Horizontal" 
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right"
-                    Margin="0,0,50,50">
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <StackPanel.RenderTransform>
+                <TranslateTransform Y="200"/>
+            </StackPanel.RenderTransform>
             <Button Style="{StaticResource DF_Button_Border}"
                     Command="{Binding SelectVideoCommand}">
                 <Image Source="\Icons\Icons_Folder.png" 

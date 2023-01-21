@@ -1,13 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using DesktopFox.MVVM.Model;
+﻿using DesktopFox.MVVM.Model;
 using DesktopFox.MVVM.Views;
-using IDesktopWallpaperWrapper.Win32;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DesktopFox.MVVM.ViewModels
@@ -18,18 +12,18 @@ namespace DesktopFox.MVVM.ViewModels
     public class SettingsVM : ObserverNotifyChange
     {
         public Settings settings { get; set; }
-        public Settings_DaytimeModel DaytimeModel { get; set; } = new Settings_DaytimeModel();
-        public Settings_ShuffleModel ShuffleModel { get; set; } = new Settings_ShuffleModel();
-        public Settings_InfoModel InfoModel { get; set; } = new Settings_InfoModel();
+        public Settings_DaytimeModel DaytimeModel { get; set; } = new();
+        public Settings_ShuffleModel ShuffleModel { get; set; } = new();
+        public Settings_InfoModel InfoModel { get; set; } = new();
 
-        private Settings_DaytimeView _daytimeView = new Settings_DaytimeView();
-        private Settings_DModeView _dmodeView = new Settings_DModeView();
-        private Settings_PreviewView _previewView = new Settings_PreviewView();
-        private Settings_ShuffleView _shuffleView = new Settings_ShuffleView();
-        private Settings_StyleView _styleView = new Settings_StyleView();
-        private Settings_SystemView _systemView = new Settings_SystemView();
-        private Settings_LanguageView _languageView = new Settings_LanguageView();
-        private Settings_Info _info = new Settings_Info();
+        private Settings_DaytimeView _daytimeView = new();
+        private Settings_DModeView _dmodeView = new();
+        private Settings_PreviewView _previewView = new();
+        private Settings_ShuffleView _shuffleView = new();
+        private Settings_StyleView _styleView = new();
+        private Settings_SystemView _systemView = new();
+        private Settings_LanguageView _languageView = new();
+        private Settings_Info _info = new();
 
         /// <summary>
         /// Konstruktor

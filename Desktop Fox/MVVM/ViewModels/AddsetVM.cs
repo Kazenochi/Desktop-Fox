@@ -1,12 +1,9 @@
 ﻿using DesktopFox.MVVM.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using static DesktopFox.DF_Command;
 
@@ -19,7 +16,7 @@ namespace DesktopFox.MVVM.ViewModels
     {
         public AddSetModel AddSetModel { get; set; }
         private MainWindowVM MWVM { get; set; }
-        private GalleryManager GM;
+        private readonly GalleryManager GM;
         private List<String> fileList;
 
         /// <summary>

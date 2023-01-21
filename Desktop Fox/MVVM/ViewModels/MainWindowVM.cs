@@ -2,8 +2,6 @@
 using DesktopFox.MVVM.Views;
 using DesktopFox.MVVM.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Animation;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Windows.Media;
@@ -24,7 +22,7 @@ namespace DesktopFox
         public AnimatedWallpaperConfigView AnimatedWPConfigView = new();
 
         private MainWindow _mainWindow;
-        private Fox DF;
+        private readonly Fox DF;
         private GalleryManager GM;
 
         /// <summary>

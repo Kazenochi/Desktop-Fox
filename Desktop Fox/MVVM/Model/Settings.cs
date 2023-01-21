@@ -1,6 +1,5 @@
 ﻿using IDesktopWallpaperWrapper.Win32;
 using System;
-using System.ComponentModel;
 using System.Windows.Media;
 
 namespace DesktopFox
@@ -29,7 +28,6 @@ namespace DesktopFox
         /// </summary>   
         public TimeSpan ShuffleTime { get { return _shuffleTime; } set { _shuffleTime = value; RaisePropertyChanged(nameof(ShuffleTime)); } }
         private TimeSpan _shuffleTime = new TimeSpan(0, 5, 0);
-
 
         /// <summary>
         /// Gibt den Zeitpunkt an ab dem ein neuer Tag angebrochen ist. 

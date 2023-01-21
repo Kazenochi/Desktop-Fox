@@ -11,10 +11,9 @@ namespace DesktopFox
     /// Spiegel Klasse zur Galerie um eine Auflösung von Setnamen zu Schlüsseln zu erleichtern
     /// </summary>
     public class GalleryShadow
-    {
-        private Gallery _gallery;
+    {    
         private IDictionary<int, PictureSet> _pictureSetList;
-        private Random _random = new Random();
+        private Random _random = new();
 
         private IDictionary<String, int> _shadowList;
 

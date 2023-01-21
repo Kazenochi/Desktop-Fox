@@ -1,13 +1,9 @@
-﻿using DesktopFox;
-using DesktopFox.MVVM.ViewModels;
+﻿using DesktopFox.MVVM.ViewModels;
 using DesktopFox.MVVM.Views;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Windows.Input;
-using Windows.Media.Capture.Frames;
+
 
 namespace DesktopFox
 {
@@ -28,7 +24,6 @@ namespace DesktopFox
             this._pictureViews.CollectionChanged += new NotifyCollectionChangedEventHandler(PictureViewChanged);
             _pictureViewVMs = new ObservableCollection<PictureVM>();
             this._pictureViewVMs.CollectionChanged += new NotifyCollectionChangedEventHandler(PictureVMChanged);
-
         }
 
         private void PictureVMChanged(object? sender, NotifyCollectionChangedEventArgs e)

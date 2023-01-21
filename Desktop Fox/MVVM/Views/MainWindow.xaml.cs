@@ -1,14 +1,9 @@
 ﻿using DesktopFox.MVVM.ViewModels;
 using DesktopFox.MVVM.Views;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using DragDropEffects = System.Windows.DragDropEffects;
@@ -23,9 +18,9 @@ namespace DesktopFox
     public partial class MainWindow : Window
     {
         private int firecount = 0;
-        private Point mousePoint;
         private bool mouseDown = false;
         private bool CloseLock = true;
+        private Point mouselocation;
 
         public MainWindow()
         {
@@ -55,15 +50,14 @@ namespace DesktopFox
         /// <param name="e"></param>
         private void ListBoxItem_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            ListBoxItem draggedItem;
-            PictureView draggedView;
-            Point mouselocation;
-
+                     
             //Debug.WriteLine("Mouse Move Event Fire");
             //Spezifizieren, wann es sich um einen Drag handelt und wann nur ein klick erfolgt
             //Verhindert unnötiges aktivieren des Drag&Drops und fehler bei der Auswahl
             if (sender is ListBoxItem && e.LeftButton == MouseButtonState.Pressed)
             {
+                ListBoxItem draggedItem;
+                
                 if (!mouseDown)
                 {
                     mouselocation = e.GetPosition(MainBorder);

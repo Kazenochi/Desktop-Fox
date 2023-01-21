@@ -16,6 +16,8 @@
                       MediaEnded="WallpaperMedia_MediaEnded"
                       LoadedBehavior="Manual"
                       Stretch="UniformToFill"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
                       IsMuted="{Binding AnimatedWallpaperModel.IsMuted}"
                       Source="{Binding AnimatedWallpaperModel.SourceUri}"
                       d:Source="\Assets\shenheXganyu.mp4"

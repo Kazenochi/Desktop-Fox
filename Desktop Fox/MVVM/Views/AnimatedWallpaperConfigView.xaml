@@ -47,13 +47,23 @@
                                   d:Source="\Assets\shenheXganyu.mp4"
                                   d:LoadedBehavior="Play">
                     </MediaElement>
-                    <Label Content="1"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Left"
-                           Margin="10,0"
+
+                    <Grid Width="50" Height="50" 
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Left" 
+                          Margin="5">
+
+                        <Ellipse Fill="Black"/>
+                        <Ellipse Fill="#FF61EB4E"
+                                 Margin="3"/>
+                        <Label Background="Transparent"
+                           Foreground="#FF0D0037"
+                           Content="1"
+                           Margin="0,-6"
+                           HorizontalContentAlignment="Center"
                            FontFamily="{StaticResource Default}"
-                           FontSize="40"
-                           Foreground="{StaticResource TextBrush}"/>
+                           FontSize="40" FontWeight="Bold"/>
+                    </Grid>
                 </Grid>
             </ToggleButton>
 
@@ -78,13 +88,22 @@
                                   d:Source="\Assets\shenheXganyu.mp4"
                                   d:LoadedBehavior="Manual">
                     </MediaElement>
-                    <Label Content="2"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Left"
-                           Margin="10,0"
+                    <Grid Width="50" Height="50" 
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Left" 
+                          Margin="5">
+
+                        <Ellipse Fill="Black"/>
+                        <Ellipse Fill="#FF41A6FF"
+                                 Margin="3"/>
+                        <Label Background="Transparent"
+                           Foreground="#FF0D0037"
+                           Content="2"
+                           Margin="0,-6"
+                           HorizontalContentAlignment="Center"
                            FontFamily="{StaticResource Default}"
-                           FontSize="40"
-                           Foreground="{StaticResource TextBrush}"/>
+                           FontSize="40" FontWeight="Bold"/>
+                    </Grid>
                 </Grid>
             </ToggleButton>
             <ToggleButton x:Name="Monitor3_ToggleButton"
@@ -106,13 +125,22 @@
                                   d:Source="\Assets\shenheXganyu.mp4"
                                   d:LoadedBehavior="Manual">
                     </MediaElement>
-                    <Label Content="3"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Left"
-                           Margin="10,0"
-                           FontFamily="{StaticResource Default}"
-                           FontSize="40"
-                           Foreground="{StaticResource TextBrush}"/>
+                    <Grid Width="50" Height="50" 
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Left" 
+                          Margin="5">
+
+                        <Ellipse Fill="Black"/>
+                        <Ellipse Fill="#FFFF3C3C"
+                                 Margin="3"/>
+                        <Label Background="Transparent"
+                               Foreground="#FF0D0037"
+                               Content="3"
+                               Margin="0,-6"
+                               HorizontalContentAlignment="Center"
+                               FontFamily="{StaticResource Default}"
+                               FontSize="40" FontWeight="Bold"/>
+                    </Grid>
                 </Grid>
             </ToggleButton>
         </StackPanel>

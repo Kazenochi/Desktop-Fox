@@ -40,7 +40,7 @@ namespace DesktopFox
                 }
                 catch
                 {
-                    Console.WriteLine("Save Error: Gallery");
+                    Debug.WriteLine("Save Error: Gallery");
                     return false;
                 }
             }
@@ -53,7 +53,7 @@ namespace DesktopFox
                 }
                 catch
                 {
-                    Console.WriteLine("Save Error: Settings");
+                    Debug.WriteLine("Save Error: Settings");
                     return false;
                 }
             }
@@ -66,13 +66,13 @@ namespace DesktopFox
                 }
                 catch
                 {
-                    Console.WriteLine("Save Error: Wallpapers");
+                    Debug.WriteLine("Save Error: Wallpapers");
                     return false;
                 }
             }
             else
             {
-                Console.WriteLine("Save Error: Das Angegebene Objekt besitzt keinen gültigen Typ");
+                Debug.WriteLine("Save Error: Das Angegebene Objekt besitzt keinen gültigen Typ");
                 return false;
             }
         }
@@ -105,16 +105,14 @@ namespace DesktopFox
                             }
                             return gal;
                         }
-                        break;
-
+                       
                     case SaveFileType.Settings:
                         using (StreamReader reader = new StreamReader(BaseDir + "\\Saves\\Settings.json"))
                         {
                             String json = reader.ReadToEnd();
                             var settings = JsonConvert.DeserializeObject<Settings>(json);
                             return settings;
-                        }
-                        break;
+                        }             
 
                     case SaveFileType.Wallpaper:
                         using (StreamReader reader = new StreamReader(BaseDir + "\\Saves\\Wallpapers.json"))

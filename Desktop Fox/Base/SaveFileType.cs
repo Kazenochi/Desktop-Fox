@@ -7,7 +7,7 @@ namespace DesktopFox
         /// <summary>
         /// 
         /// </summary>
-        Gallerie = 1,
+        Gallery = 1,
 
         /// <summary>
         /// 

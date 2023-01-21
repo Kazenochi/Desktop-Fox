@@ -34,6 +34,8 @@
             <Grid Grid.RowSpan="3"
                   Grid.ColumnSpan="3">
                 <Image x:Name="BackImage" 
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
                        Source="{Binding PreviewModel.BackgroundImage, NotifyOnTargetUpdated=True}"
                        Stretch="{Binding PreviewModel.ImageStretch}">
                     <Image.Triggers>

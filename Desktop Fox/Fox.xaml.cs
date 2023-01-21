@@ -111,7 +111,7 @@ namespace DesktopFox
         /// </summary>
         public void loadFiles()
         {
-            var tmpGal = DF_Json.loadFile(SaveFileType.Gallerie);
+            var tmpGal = DF_Json.loadFile(SaveFileType.Gallery);
             if (tmpGal == null)
                 gallery = new Gallery();
             else
@@ -203,6 +203,10 @@ namespace DesktopFox
                     Debug.WriteLine("App Close. Animierte Wallpaper gespeichert");
                 else
                     Debug.WriteLine("App Close. Fehler beim Speichern von Animierten Wallpapern");
+            }
+            else
+            {
+                DF_Json.deleteFile(SaveFileType.Wallpaper);
             }
 
             if (DF_Json.saveFile(gallery) & DF_Json.saveFile(settings))

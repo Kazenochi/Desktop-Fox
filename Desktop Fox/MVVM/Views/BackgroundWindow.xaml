@@ -8,6 +8,7 @@
         xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels" 
         mc:Ignorable="d"
         Title="BackgroundWindow"
+        Background="Black"
         d:DataContext="{d:DesignInstance Type=ViewModels:BackgroundWindowVM}"
         WindowStyle="None">
     <WindowChrome.WindowChrome>

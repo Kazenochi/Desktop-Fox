@@ -28,13 +28,9 @@ namespace DesktopFox.MVVM.Views
 
         private void WallpaperMedia_MediaEnded(object sender, RoutedEventArgs e)
         {
-            ((MediaElement)sender).Stop();
+            WallpaperMedia.Position = TimeSpan.FromSeconds(0);
             ((MediaElement)sender).Play();
         }
 
-        public void Play()
-        {
-            this.WallpaperMedia.Play();
-        }
     }
 }

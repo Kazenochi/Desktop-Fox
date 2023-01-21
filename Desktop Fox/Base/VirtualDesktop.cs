@@ -15,7 +15,7 @@ namespace DesktopFox
     public class VirtualDesktop
     {
         private DesktopWallpaper wrapper = new DesktopWallpaper();
-        private IDictionary<String, Monitor> monitorDict = new Dictionary<String, Monitor>();
+        private IDictionary<MonitorEnum, Monitor> monitorDict = new Dictionary<MonitorEnum, Monitor>();
         private int monitorCount;
         //private Collection activeCollection;
         private int[] boundary;
@@ -26,7 +26,7 @@ namespace DesktopFox
         /// <summary>
         /// Konstruktor
         /// </summary>
-        public VirtualDesktop()
+        public VirtualDesktop(WallpaperSaves wallpaperSaves = null)
         {
             workerw = IntPtr.Zero;
             String[] test = wrapper.GetAllMonitorIDs();
@@ -36,6 +36,12 @@ namespace DesktopFox
             }
             convertMonitorID(wrapper.GetActiveMonitorIDs());
             this.monitorCount = monitorDict.Count;
+
+            if(wallpaperSaves != null)
+            {
+                this.wallpapers = wallpaperSaves.wallpapers;
+                buildDesktop();
+            }
         }
 
         /// <summary>
@@ -50,7 +56,7 @@ namespace DesktopFox
             for (int i = 0; i < monitor.Length; i++)
             {
                 if (wrapper.GetMonitorRECT(monitor[i]).X == 0)
-                    addNewMonitor(monitor[i], "Main");
+                    addNewMonitor(monitor[i], MonitorEnum.MainMonitor);
             }
             foreach (var pair in monitorDict)
                 Console.WriteLine($"Monitor: {pair.Key} ----- Name der Adresse: {pair.Value}");
@@ -61,7 +67,7 @@ namespace DesktopFox
                 for (int i = 0; i < monitor.Length; i++)
                 {
                     if (wrapper.GetMonitorRECT(monitor[i]).X == monitorDict.ElementAt(0).Value.Width)
-                        addNewMonitor(monitor[i], "Second");
+                        addNewMonitor(monitor[i], MonitorEnum.SecondMonitor);
                 }
             }
             if (monitor.Length > 2)
@@ -69,8 +75,8 @@ namespace DesktopFox
                 //Dritten Monitor festlegen
                 for (int i = 0; i < monitor.Length; i++)
                 {
-                    if (wrapper.GetMonitorRECT(monitor[i]).X > monitorDict["Main"].getWidth() + monitorDict["Second"].getWidth() || wrapper.GetMonitorRECT(monitor[i]).X < 0)
-                        addNewMonitor(monitor[i], "Third");
+                    if (wrapper.GetMonitorRECT(monitor[i]).X > monitorDict[MonitorEnum.MainMonitor].Width + monitorDict[MonitorEnum.SecondMonitor].Width || wrapper.GetMonitorRECT(monitor[i]).X < 0)
+                        addNewMonitor(monitor[i], MonitorEnum.ThirdMonitor);
                 }
             }
             calcBoundary();
@@ -81,11 +87,11 @@ namespace DesktopFox
         /// </summary>
         /// <param name="pos"></param>
         /// <param name="monID"></param>
-        private void addNewMonitor(String monID, String pos)
+        private void addNewMonitor(String monID, MonitorEnum monPos)
         {
-            Monitor monitor = new Monitor(monID, pos);
+            Monitor monitor = new Monitor(monID, monPos, wrapper.GetMonitorRECT(monID).Height, wrapper.GetMonitorRECT(monID).Width);
             //monitor.Name;
-            monitorDict.Add(pos, monitor);
+            monitorDict.Add(monPos, monitor);
         }
 
         /// <summary>
@@ -114,8 +120,7 @@ namespace DesktopFox
 
         public void newAnimatedWPs(List<int> monitors, string mediaUri)
         {
-            if(wallpapers == null) 
-                wallpapers = new List<Wallpaper>();
+            wallpapers ??= new List<Wallpaper>();
 
             if (wallpapers.Count != 0)
                 clearWallpapers();
@@ -197,8 +202,6 @@ namespace DesktopFox
                 backgroundWindow.Top = s.Bounds.Top;
                 backgroundWindow.Left = s.Bounds.Left * widthFaktor;
 
-
-
                 backgroundWindow.Width = SystemParameters.PrimaryScreenWidth;
                 backgroundWindow.Height = SystemParameters.PrimaryScreenHeight;
 
@@ -238,7 +241,7 @@ namespace DesktopFox
             }
         }
 
-        public void clearWallpapers()
+        public void clearWallpapers(bool lastClean = false)
         {
             if (wallpapers.Count <= 0) return;
 
@@ -249,6 +252,9 @@ namespace DesktopFox
                 wrapper.SetWallpaper(wallpaper.myMonitor.ID, wrapper.GetWallpaper(wallpaper.myMonitor.ID));
             }
             wallpapers.Clear();
+
+            if(lastClean) wallpapers = null;
+            
             Debug.WriteLine("Alle WPs wurden geschlossen");
         }
         #endregion
@@ -273,32 +279,27 @@ namespace DesktopFox
         /// <summary>
         /// Gibt alle Monitore zurück
         /// </summary>
-        public IDictionary<String, Monitor> getMonitors { get { return monitorDict; } }
+        public IDictionary<MonitorEnum, Monitor> getMonitors { get { return monitorDict; } }
 
         /// <summary>
         /// Gibt den Hauptmonitor des Systems zurück
         /// </summary>
-        public Monitor getMainMonitor
-        {
-            get { return monitorDict["Main"]; }
-        }
+        public Monitor getMainMonitor { get { return monitorDict[MonitorEnum.MainMonitor]; } }
 
         /// <summary>
         /// Gibt den Zweiten Monitor des Systems zurück
         /// </summary>
-        public Monitor getSecondMonitor
-        {
-            get { return monitorDict["Second"]; }
-        }
+        public Monitor getSecondMonitor { get { return monitorDict[MonitorEnum.SecondMonitor]; } }
 
         /// <summary>
         /// Gibt den Dritten Monitor des Systems zurück
         /// </summary>
-        public Monitor getThirdMonitor
-        {
-            get { return monitorDict["Third"]; }
-        }
+        public Monitor getThirdMonitor { get { return monitorDict[MonitorEnum.ThirdMonitor]; } }
 
+        /// <summary>
+        /// Gibt die Liste mit Hintergrundbildern zurück. <see cref="wallpapers"/>
+        /// </summary>
+        public List<Wallpaper> getWallpapers { get { return wallpapers; } }
         
     }
 }

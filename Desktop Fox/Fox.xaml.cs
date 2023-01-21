@@ -17,21 +17,22 @@ namespace DesktopFox
     /// </summary>
     public partial class Fox : Window
     {
-        private FileChecker fileChecker;
+        private readonly FileChecker fileChecker;
         private Gallery gallery;
-        private GalleryManager GM;
+        private readonly GalleryManager GM;
         private Settings settings;
-        private SettingsManager SM;
-        private NotifyIcon notifyIcon;
+        private readonly SettingsManager SM;
+        private readonly NotifyIcon notifyIcon;
         private MainWindow MW;
-        private MainWindowVM mainWindowVM;
-        private ContextPopupVM contextPopupVM;
-        private PreviewVM previewVM;
-        private AnimatedWallpaperConfigVM animatedWPConfigVM;
-        private AddSetVM addSetVM;
-        private SettingsVM settingsVM;
-        private GalleryShadow shadow;
-        private VirtualDesktop vDesk;
+        private readonly MainWindowVM mainWindowVM;
+        private readonly ContextPopupVM contextPopupVM;
+        private readonly PreviewVM previewVM;
+        private readonly AnimatedWallpaperConfigVM animatedWPConfigVM;
+        private readonly AddSetVM addSetVM;
+        private readonly SettingsVM settingsVM;
+        private readonly GalleryShadow shadow;
+        private readonly VirtualDesktop vDesk;
+        private WallpaperSaves wallpaperSaves;
         public Shuffler shuffler;
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace DesktopFox
             loadFiles();
             shadow = new GalleryShadow(gallery);
 
-            vDesk = new VirtualDesktop();
+            vDesk = new VirtualDesktop(wallpaperSaves: wallpaperSaves);
             SM = new SettingsManager(this, settings, vDesk);
             mainWindowVM = new MainWindowVM(this);
             GM = new GalleryManager(this, SM, gallery, shadow, mainWindowVM);         
@@ -78,6 +79,11 @@ namespace DesktopFox
         public VirtualDesktop VirtualDesktop { get { return vDesk; } }
 
         /// <summary>
+        /// Gibt die gespeicherten Hintergrundbilder zurück
+        /// </summary>
+        public WallpaperSaves WallpaperSaves { get { return wallpaperSaves; } }
+
+        /// <summary>
         /// Gibt die Instanz des Shufflers zurück
         /// </summary>
         public Shuffler Shuffler { get { return shuffler; } }
@@ -105,17 +111,21 @@ namespace DesktopFox
         /// </summary>
         public void loadFiles()
         {
-            var tmpGal = DF_Json.loadFile("gallery");
+            var tmpGal = DF_Json.loadFile(SaveFileType.Gallerie);
             if (tmpGal == null)
                 gallery = new Gallery();
             else
                 gallery = fileChecker.FullCheck((Gallery)tmpGal);
 
-            var tmpSet = DF_Json.loadFile("settings");
+            var tmpSet = DF_Json.loadFile(SaveFileType.Settings);
             if(tmpSet == null)
                 settings = new Settings();
             else
                 settings = (Settings)tmpSet;
+
+            var tmpWPs = DF_Json.loadFile(SaveFileType.Wallpaper);
+            if (tmpWPs != null && ((WallpaperSaves)tmpWPs).wallpapers.Count >= 0)
+                wallpaperSaves = (WallpaperSaves)tmpWPs;
         }
 
         /// <summary>
@@ -167,7 +177,7 @@ namespace DesktopFox
         {
             //MW.Hide();
             mainWindowVM.CurrentView = null;
-            Application_Close(null, null);
+            SaveOnClose(lastClose: false);
 
             foreach (var i in mainWindowVM.MainWindowModel._pictureViews)
             {
@@ -182,6 +192,30 @@ namespace DesktopFox
             GC.Collect();
         }
 
+        private void SaveOnClose(bool lastClose = true)
+        {
+            wallpaperSaves ??= new();
+
+            if (vDesk.getWallpapers != null || vDesk.getWallpapers.Count() > 0)
+            {
+                wallpaperSaves.wallpapers = vDesk.getWallpapers;
+                if (DF_Json.saveFile(wallpaperSaves))
+                    Debug.WriteLine("App Close. Animierte Wallpaper gespeichert");
+                else
+                    Debug.WriteLine("App Close. Fehler beim Speichern von Animierten Wallpapern");
+            }
+
+            if (DF_Json.saveFile(gallery) & DF_Json.saveFile(settings))
+                Debug.WriteLine("App Close. Speichern der Daten war erfolgreich");
+            else
+                Debug.WriteLine("App Close. FEHLER. Daten konnten nicht gespeichert werden.");
+
+            if (lastClose)
+            {
+                vDesk.clearWallpapers(lastClean: lastClose);
+            }
+        }
+
         /// <summary>
         /// Cleanupfunktion beim Beenden der Application
         /// </summary>
@@ -189,14 +223,7 @@ namespace DesktopFox
         /// <param name="e"></param>
         private void Application_Close(object sender, CancelEventArgs e)
         {
-            //Note: Unbedingt vor dem Beenden die Reihenfolge der Galerie Anpassen
-            //Kann nach Drag & Drop von den Views/VM abweichen und muss für einen neustart dementsprechend angepasst werden
-            //PS: Sollte warscheinlich schon vorher gemacht werden (Beim Drag eine Funktion angestoßen werden oder Listener)
-
-            if (DF_Json.saveFile(gallery) & DF_Json.saveFile(settings))
-                Debug.WriteLine("App Close. Speichern der Daten war erfolgreich");
-            else
-                Debug.WriteLine("App Close. FEHLER. Daten konnten nicht gespeichert werden.");
+            SaveOnClose();
         }
     }
 }

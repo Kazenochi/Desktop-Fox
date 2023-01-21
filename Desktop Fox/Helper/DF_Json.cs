@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Windows.Documents;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace DesktopFox
@@ -28,6 +29,7 @@ namespace DesktopFox
             var option = Formatting.Indented;
             String saveFolder = BaseDir + "\\Saves\\";
             var json = JsonConvert.SerializeObject(obj, option);
+
 
             if (obj.GetType() == typeof(Gallery))
             {
@@ -55,6 +57,19 @@ namespace DesktopFox
                     return false;
                 }
             }
+            else if (obj.GetType() == typeof(WallpaperSaves))
+            {
+                try
+                {
+                    File.WriteAllText(saveFolder + "Wallpapers.json", json);
+                    return true;
+                }
+                catch
+                {
+                    Console.WriteLine("Save Error: Wallpapers");
+                    return false;
+                }
+            }
             else
             {
                 Console.WriteLine("Save Error: Das Angegebene Objekt besitzt keinen gültigen Typ");
@@ -64,19 +79,17 @@ namespace DesktopFox
         /// <summary>
         /// Läd den Angegebenen Dateityp aus der Gespeicherten JSON Datei
         /// </summary>
-        /// <param name="FileType">"gallery" = Laden der Galerie; "settings" = Laden der Einstellungen</param>
+        /// <param name="Type">"gallery" = Laden der Galerie; "settings" = Laden der Einstellungen</param>
         /// <returns>"Null" falls ein Fehler beim laden der Dateien stattfindet</returns>
-        public static object loadFile(String FileType)
+        public static object loadFile(SaveFileType Type)
         {
-            if (!Directory.Exists(BaseDir + "\\Saves")) return null;
-                
-            FileType = FileType.ToLower();
+            if (!Directory.Exists(BaseDir + "\\Saves")) return null;              
 
             try
             {
-                switch (FileType)
+                switch (Type)
                 {
-                    case "gallery":
+                    case SaveFileType.Gallerie:
                         using (StreamReader reader = new StreamReader(BaseDir + "\\Saves\\DF_Gallery.json"))
                         {
                             String json = reader.ReadToEnd();
@@ -94,7 +107,7 @@ namespace DesktopFox
                         }
                         break;
 
-                    case "settings":
+                    case SaveFileType.Settings:
                         using (StreamReader reader = new StreamReader(BaseDir + "\\Saves\\Settings.json"))
                         {
                             String json = reader.ReadToEnd();
@@ -103,6 +116,13 @@ namespace DesktopFox
                         }
                         break;
 
+                    case SaveFileType.Wallpaper:
+                        using (StreamReader reader = new StreamReader(BaseDir + "\\Saves\\Wallpapers.json"))
+                        {
+                            String json = reader.ReadToEnd();
+                            WallpaperSaves wallpapers = JsonConvert.DeserializeObject<WallpaperSaves>(json);
+                            return wallpapers;
+                        }
                     default:
                         Debug.WriteLine("Fehler bei der Auswahl der zu ladenden Datei");
                         break;

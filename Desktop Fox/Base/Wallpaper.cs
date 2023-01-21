@@ -1,5 +1,6 @@
 ﻿using DesktopFox.MVVM.Model;
 using DesktopFox.MVVM.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,13 @@ namespace DesktopFox
 
         public Stretch myStretch;
 
+        [JsonIgnore]
         public IntPtr myHandler;
 
+        [JsonIgnore]
         public AnimatedWallpaperVM myViewModel;
 
+        [JsonIgnore]
         public AnimatedWallpaperModel myModel;
     }
 }

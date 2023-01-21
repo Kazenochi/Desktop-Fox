@@ -196,7 +196,7 @@ namespace DesktopFox
         {
             wallpaperSaves ??= new();
 
-            if (vDesk.getWallpapers != null || vDesk.getWallpapers.Count() > 0)
+            if (vDesk.getWallpapers != null && vDesk.getWallpapers.Count() > 0)
             {
                 wallpaperSaves.wallpapers = vDesk.getWallpapers;
                 if (DF_Json.saveFile(wallpaperSaves))

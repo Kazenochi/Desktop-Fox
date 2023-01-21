@@ -10,6 +10,7 @@
         Title="BackgroundWindow"
         Background="Black"
         d:DataContext="{d:DesignInstance Type=ViewModels:BackgroundWindowVM}"
+        ShowInTaskbar="False"
         WindowStyle="None">
     <WindowChrome.WindowChrome>
         <WindowChrome ResizeBorderThickness="0" CaptionHeight="0"/>

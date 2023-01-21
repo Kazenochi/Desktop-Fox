@@ -46,6 +46,11 @@
                                   Binding.TargetUpdated="Video1TargetUpdated"
                                   d:Source="\Assets\shenheXganyu.mp4"
                                   d:LoadedBehavior="Play">
+                        <MediaElement.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="{Binding animatedWallpaperConfigModel.Rotation}"/>
+                            </TransformGroup>
+                        </MediaElement.LayoutTransform>
                     </MediaElement>
 
                     <Grid Width="50" Height="50" 
@@ -87,6 +92,11 @@
                                   Binding.TargetUpdated="Video2TargetUpdated"
                                   d:Source="\Assets\shenheXganyu.mp4"
                                   d:LoadedBehavior="Manual">
+                        <MediaElement.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="{Binding animatedWallpaperConfigModel.Rotation}"/>
+                            </TransformGroup>
+                        </MediaElement.LayoutTransform>
                     </MediaElement>
                     <Grid Width="50" Height="50" 
                           VerticalAlignment="Top"
@@ -124,6 +134,11 @@
                                   Binding.TargetUpdated="Video3TargetUpdated"
                                   d:Source="\Assets\shenheXganyu.mp4"
                                   d:LoadedBehavior="Manual">
+                        <MediaElement.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="{Binding animatedWallpaperConfigModel.Rotation}"/>
+                            </TransformGroup>
+                        </MediaElement.LayoutTransform>
                     </MediaElement>
                     <Grid Width="50" Height="50" 
                           VerticalAlignment="Top"
@@ -164,6 +179,15 @@
                     Command="{Binding StopCommand}">
                 <Image Source="\Icons\Icons_Pause.png" 
                                     Stretch="Uniform" Margin="10"/>
+            </Button>
+            <Button Style="{StaticResource DF_Button_Border}"
+                    Command="{Binding MuteCommand}">
+                <Image Source="\Icons\Icons_Settings.png" 
+                                    Stretch="Uniform" Margin="10"/>
+            </Button>
+            <Button Style="{StaticResource DF_Button_Border}"
+                    Content="Right"
+                    Command="{Binding RotateClockwiseCommand}">
             </Button>
         </StackPanel>
     </Grid>

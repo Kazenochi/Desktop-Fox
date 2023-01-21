@@ -10,6 +10,8 @@ namespace DesktopFox.MVVM.ViewModels
         public AnimatedWallpaperVM(Wallpaper wallpaper)
         {
             this.AnimatedWallpaperModel.SourceUri = wallpaper.MediaUri;
+            this.AnimatedWallpaperModel.Rotation = wallpaper.myRotation;
+            this.AnimatedWallpaperModel.IsMuted = wallpaper.muted;
         }
 
     }

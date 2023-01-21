@@ -18,10 +18,16 @@
                       Stretch="UniformToFill"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
-                      IsMuted="{Binding AnimatedWallpaperModel.IsMuted}"
+                      IsMuted="{Binding AnimatedWallpaperModel.IsMuted, Mode=OneWay}"
                       Source="{Binding AnimatedWallpaperModel.SourceUri}"
                       d:Source="\Assets\shenheXganyu.mp4"
                       d:LoadedBehavior="Play"
-                      />
+                      >
+            <MediaElement.LayoutTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="{Binding AnimatedWallpaperModel.Rotation}"/>
+                </TransformGroup>
+            </MediaElement.LayoutTransform>
+        </MediaElement>
     </Grid>
 </UserControl>

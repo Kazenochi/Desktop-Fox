@@ -9,5 +9,8 @@ namespace DesktopFox.MVVM.Model
 
         private bool _isMuted = true;
         public bool IsMuted { get { return _isMuted; } set { _isMuted = value;RaisePropertyChanged(nameof(IsMuted));} }
+
+        private int _rotation = 0;
+        public int Rotation { get { return _rotation;} set { _rotation = value;RaisePropertyChanged(nameof(Rotation)); } }
     }
 }

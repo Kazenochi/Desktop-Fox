@@ -35,6 +35,10 @@ namespace DesktopFox.MVVM.ViewModels
 
         public ICommand StopCommand { get { return new DF_Command.DelegateCommand(o => StopVideo()); } }
 
+        public ICommand MuteCommand { get { return new DF_Command.DelegateCommand(o => vDesk.getWallpapers.First().myModel.IsMuted = !vDesk.getWallpapers.First().myModel.IsMuted); } }
+
+        public ICommand RotateClockwiseCommand { get { return new DF_Command.DelegateCommand(o => animatedWallpaperConfigModel.Rotation += 90); } }
+
 
         private void CheckSavedWallpapers()
         {
@@ -84,7 +88,10 @@ namespace DesktopFox.MVVM.ViewModels
                 monitorList.Add(3);
 
             if(monitorList.Count > 0)
-                vDesk.newAnimatedWPs(monitorList, animatedWallpaperConfigModel.SourceUri);
+            {
+                vDesk.newAnimatedWPs(monitorList, animatedWallpaperConfigModel.SourceUri, animatedWallpaperConfigModel.Rotation, true);
+            }
+                
         }
 
         private void StopVideo()

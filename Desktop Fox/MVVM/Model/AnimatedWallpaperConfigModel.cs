@@ -25,5 +25,8 @@ namespace DesktopFox.MVVM.Model
         private bool _monitor3 = false;
         public bool Monitor3 { get { return _monitor3; } set { _monitor3 = value; RaisePropertyChanged(nameof(Monitor3)); } }
 
+        private int _rotation = 0;
+        public int Rotation { get { return _rotation; } set { _rotation = value; RaisePropertyChanged(nameof(Rotation)); } }
+
     }
 }

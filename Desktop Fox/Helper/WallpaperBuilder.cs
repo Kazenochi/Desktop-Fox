@@ -4,7 +4,7 @@ namespace DesktopFox
 {
     static class WallpaperBuilder
     {
-        static public Wallpaper makeWallpaper(VirtualDesktop vDesk, int monitorNr, string mediaUri, Stretch mediaStretch = Stretch.UniformToFill)
+        static public Wallpaper makeWallpaper(VirtualDesktop vDesk, int monitorNr, string mediaUri, int imageRotation, bool muted, Stretch mediaStretch = Stretch.UniformToFill)
         {
             if (monitorNr <= 0 || monitorNr > vDesk.getMonitorCount()) return null;
 
@@ -27,6 +27,8 @@ namespace DesktopFox
 
             wallpaper.MediaUri = mediaUri;
             wallpaper.myStretch = mediaStretch; 
+            wallpaper.myRotation = imageRotation;
+            wallpaper.muted = muted;
 
             return wallpaper;
         }

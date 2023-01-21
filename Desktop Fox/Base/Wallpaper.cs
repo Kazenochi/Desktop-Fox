@@ -18,6 +18,10 @@ namespace DesktopFox
 
         public Stretch myStretch;
 
+        public int myRotation;
+
+        public bool muted;
+
         [JsonIgnore]
         public IntPtr myHandler;
 

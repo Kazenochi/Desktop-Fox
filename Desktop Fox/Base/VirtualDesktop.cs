@@ -118,7 +118,7 @@ namespace DesktopFox
 
         #region Fensterfunktionen für Custom / Animierte Hintergründe
 
-        public void newAnimatedWPs(List<int> monitors, string mediaUri)
+        public void newAnimatedWPs(List<int> monitors, string mediaUri, int imageRotation, bool muted)
         {
             wallpapers ??= new List<Wallpaper>();
 
@@ -127,7 +127,7 @@ namespace DesktopFox
 
             foreach(int monitor in monitors)
             {
-                wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitor, mediaUri));
+                wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitor, mediaUri, imageRotation, muted));
             }  
             buildDesktop();
         }

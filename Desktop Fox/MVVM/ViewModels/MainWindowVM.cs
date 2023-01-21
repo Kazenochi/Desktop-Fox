@@ -17,10 +17,11 @@ namespace DesktopFox
     /// </summary>
     public class MainWindowVM : ObserverNotifyChange
     {
-        public AddSetView AddSetView = new AddSetView();
-        public Settings_MainView Settings_MainView = new Settings_MainView();
-        public ContextPopupView ContextPopupView = new ContextPopupView();
-        public PreviewView PreviewView = new PreviewView();
+        public AddSetView AddSetView = new();
+        public Settings_MainView Settings_MainView = new();
+        public ContextPopupView ContextPopupView = new();
+        public PreviewView PreviewView = new();
+        public AnimatedWallpaperConfigView AnimatedWPConfigView = new();
 
         private MainWindow _mainWindow;
         private Fox DF;
@@ -34,39 +35,13 @@ namespace DesktopFox
         {
             DF = desktopFox;
             MainWindowModel = new MainWindowModel();
-            MainPanel = PreviewView;
+            
+            MainPanelBlur = PreviewView;
 
             DF.SettingsManager.Settings.PropertyChanged += Settings_PropertyChanged;
             MainWindowModel.CollectionChangedVM += CollectionChanged_Event_VM;  
             Task.Run(() => CheckMultiMonitor());
         }
-
-        private bool _animatedToggle = false;
-        public bool AnimatedToggle { get { return _animatedToggle; } set { _animatedToggle = value; RaisePropertyChanged(nameof(AnimatedToggle)); } }
-        public ICommand AnimatedToggleCommand { get { return new DF_Command.DelegateCommand(o => SwitchMainPanel()); } }
-
-        public AnimatedWallpaperConfigView AnimatedWPConfigView = new AnimatedWallpaperConfigView();
-
-        private bool _clickPaneVisible = true;
-        public bool ClickPaneVisible { get { return _clickPaneVisible; } set { _clickPaneVisible = value; RaisePropertyChanged(nameof(ClickPaneVisible)); } }
-        private void SwitchMainPanel()
-        {
-            if(MainPanel == this.PreviewView)
-            {
-                MainPanel = this.AnimatedWPConfigView;
-                MainPanel.AnimateInSoft();
-                ClickPaneVisible = false;
-            }
-            else if(MainPanel == this.AnimatedWPConfigView)
-            {
-                MainPanel = this.PreviewView;
-                MainPanel.AnimateInSoft();            
-                ClickPaneVisible = true;
-            }
-                
-        }
-
-
 
 
         /// <summary>
@@ -75,6 +50,7 @@ namespace DesktopFox
         public MainWindowModel MainWindowModel { get; set; }
 
         #region Binding Variablen
+
         /// <summary>
         /// Gibt die View im Hauptfenster an die im Context angezeigt werden soll. <see cref="MainWindow.ContextViews"/> 
         /// </summary>
@@ -92,6 +68,30 @@ namespace DesktopFox
         /// </summary>
         public AnimatedBaseView MainPanel { get { return _mainPanel; } set { _mainPanel = value; RaisePropertyChanged(nameof(MainPanel)); } }
         private AnimatedBaseView _mainPanel;
+
+        /// <summary>
+        /// Hauptfenster der Preview das im Falle eines Contextswitches verwaschen werden kann. <see cref="MainWindow.MainPanelContextBlur"/>
+        /// </summary>
+        public AnimatedBaseView MainPanelBlur { get { return _mainPanelBlur; } set { _mainPanelBlur = value; RaisePropertyChanged(nameof(MainPanelBlur)); } }
+        private AnimatedBaseView _mainPanelBlur;
+
+        /// <summary>
+        /// Wert für die Anzeige der <see cref="MainWindow.hideClickPane"/>. Wird deaktiviert falls ein Kontextfenster in <see cref="MainPanel"/> angezeigt wird
+        /// </summary>
+        private bool _clickPaneVisible = true;
+        public bool ClickPaneVisible { get { return _clickPaneVisible; } set { _clickPaneVisible = value; RaisePropertyChanged(nameof(ClickPaneVisible)); } }
+
+        /// <summary>
+        /// Opacity der <see cref="MainPanelBlur"/> Ebene.
+        /// </summary>
+        public double BlurOpacity { get { return _blurOpacity; } set { _blurOpacity = value; RaisePropertyChanged(nameof(BlurOpacity)); } }
+        private double _blurOpacity = 1;
+
+        /// <summary>
+        /// Stärke des Verwaschungseffektes der <see cref="MainPanelBlur"/> Ebene
+        /// </summary>
+        public int BlurStrength { get { return _blurStrength; } set { _blurStrength = value; RaisePropertyChanged(nameof(BlurStrength)); } }
+        private int _blurStrength = 1;
 
         /// <summary>
         /// Enthält das Objekt das Aktuell in der Listbox des Hauptfensters angezeigt wird. <see cref="MainWindow.lbPictures"/>
@@ -129,8 +129,6 @@ namespace DesktopFox
         public bool EmptyInfo { get { return _emptyInfo; } set { _emptyInfo = value; RaisePropertyChanged(nameof(EmptyInfo)); } }
         private bool _emptyInfo = true;
 
-        
-
         /// <summary>
         /// Helferklasse die das gespeicherte Viewmodel des ausgewählten Sets aktualisiert und Informiert notwendige Klassen <see cref="SChange"/>
         /// </summary>
@@ -152,6 +150,7 @@ namespace DesktopFox
         #endregion
 
         #region Kommandos
+
         /// <summary>
         /// Kommando das das ausgewählte Set aktiviert
         /// </summary>
@@ -201,6 +200,12 @@ namespace DesktopFox
         /// Kommando das das Hauptfenster maximiert
         /// </summary>
         public ICommand MaximizeCommand { get { return new DF_Command.DelegateCommand(o => MaximizeWindow()); } }
+
+        /// <summary>
+        /// Kommando um den Context in <see cref="MainPanel"/> zu ändern
+        /// </summary>
+        public ICommand AnimatedToggleCommand { get { return new DF_Command.DelegateCommand(o => SwitchMainPanel()); } }
+
         #endregion
 
         #region Methoden
@@ -423,15 +428,26 @@ namespace DesktopFox
         }
 
         /// <summary>
-        /// Entfernt die Views beim schließen mit etwas verzögerung.
-        /// Gewährleistet das die Animation abgeschlossen ist, bevor die View geändert wird.
+        /// Wechselt den Inhalt von <see cref="MainPanel"/> und Stößt die Animationen beim Wechsel an
         /// </summary>
-        /// <param name="animationTime">Dauer der Animation in Sekunden</param>
-        /// <returns></returns>
-        private async Task ContentCleanup(double animationTime)
+        private void SwitchMainPanel()
         {
-            //await Task.Delay((int)animationTime * 1000);
-            _currentView = null;
+            if (MainPanel == null)
+            {
+                MainPanel = this.AnimatedWPConfigView;
+                BlurOpacity = 0.2;
+                BlurStrength = 20;
+                MainPanel.AnimateInSoft();
+                ClickPaneVisible = false;
+            }
+            else if (MainPanel == this.AnimatedWPConfigView)
+            {
+                MainPanel.AnimateOut();
+                BlurOpacity = 1;
+                BlurStrength = 0;
+                _mainPanel = null;
+                ClickPaneVisible = true;
+            }
         }
 
         /// <summary>
@@ -458,7 +474,7 @@ namespace DesktopFox
             else if(CurrentView != null)
             {
                 CurrentView.AnimateOut();
-                Task.Run(() => ContentCleanup(CurrentView.AnimationTime));
+                _currentView = null;
             }
 
             if (CurrentView == ContextPopupView)
@@ -467,6 +483,15 @@ namespace DesktopFox
                 ((AddSetVM)AddSetView.DataContext).ContentChange(SelectedVM);
         }
 
+        /// <summary>
+        /// Helfer Methode Die bei einem Drag & Drop Event in <see cref="MainWindow.lbPictures"/> aufgerufen wird. 
+        /// Siehe Ebenfalls <see cref="MainWindow.ListBoxItem_ListBoxDrop(object, DragEventArgs)"/>
+        /// Ordnet die Gallerie Liste anhand der neuen Anordnung der Views in der Listbox
+        /// </summary>
+        /// <param name="pv"></param>
+        /// <param name="pvm"></param>
+        /// <param name="targetIndex"></param>
+        /// <param name="removedIndex"></param>
         public void DropItemEvent(PictureView pv, PictureVM pvm, int targetIndex, int removedIndex)
         {
             bool debug = false;

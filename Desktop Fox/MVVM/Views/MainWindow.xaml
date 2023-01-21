@@ -113,6 +113,17 @@
                     </Grid>
                 </Button>
 
+
+
+                <Button x:Name="button_Add"          
+                        Grid.Column="0" 
+                        Style="{StaticResource DF_Button_Border}"
+                        Command="{Binding AddSetViewCommand}">
+                    <Image Name="AddImage"
+                                    Source="\Icons\Icons_Plus.png" 
+                                    Stretch="Uniform" Margin="10"/>
+                </Button>
+
                 <Button x:Name="button_Animation"        
                         FontSize="20"
                         Grid.Column="0" 
@@ -128,15 +139,7 @@
                     </Border>
                     -->
                 </Button>
-
-                <Button x:Name="button_Add"          
-                        Grid.Column="0" 
-                        Style="{StaticResource DF_Button_Border}"
-                        Command="{Binding AddSetViewCommand}">
-                    <Image Name="AddImage"
-                                    Source="\Icons\Icons_Plus.png" 
-                                    Stretch="Uniform" Margin="10"/>
-                </Button>
+                
                 <Button x:Name="button_Settings" 
                         FontSize="20"
                         Grid.Column="1" 
@@ -295,6 +298,18 @@
             </Border>
             <!--#endregion-->
 
+            <ContentControl x:Name="MainPanelContextBlur"
+                            Margin="10,0,10,10"
+                            Grid.RowSpan="2"
+                            Grid.Row="1"
+                            Content="{Binding MainPanelBlur}" 
+                            d:Content="{view:PreviewView}"
+                            Opacity="{Binding BlurOpacity}"
+                            Panel.ZIndex="1">
+                <ContentControl.Effect>
+                    <BlurEffect Radius="{Binding BlurStrength}" d:Radius="20"/>
+                </ContentControl.Effect>
+            </ContentControl>
 
             <ContentControl x:Name="MainPanelContext"
                             Margin="10,0,10,10"

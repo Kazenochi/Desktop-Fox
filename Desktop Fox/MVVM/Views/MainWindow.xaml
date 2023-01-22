@@ -72,7 +72,6 @@
                         Panel.ZIndex="3">
                 <Grid>
                     <Button x:Name="button_StopSet"     
-                            FontSize="20"
                             Grid.Column="0" 
                             IsEnabled="{Binding CanActivate, Converter={StaticResource BoolInverter}}"
                             Command="{Binding StopSetCommand}"
@@ -81,15 +80,13 @@
                                         Stretch="Uniform" Margin="10"/>
                     </Button>
                     <Button x:Name="button_ActivateSet" 
-                            FontSize="20"
                             Grid.Column="0" 
                             Visibility="{Binding CanActivate, Converter={StaticResource BoolConverter}}"
                             Command="{Binding ActivateSetCommand}"
                             Style="{StaticResource DF_Button_Border}">
-                        <Border Margin="8,5,0,5">
+                        <Border Margin="15,15,10,15">
                             <Image Source="\Icons\Icons_Play.png" 
-                                        Stretch="Uniform"
-                                        Margin="5"/>
+                                        Stretch="Uniform"/>
                         </Border>
                     </Button>
                 </Grid>
@@ -100,7 +97,7 @@
                             Command="{Binding NextMonitorCommand}"
                             Visibility="{Binding MultiMonitor, Converter={StaticResource BoolConverter}}"
                             Style="{StaticResource DF_Button_Border}">
-                    <Grid Margin="10">
+                    <Grid Margin="12">
                         <Image Source="\Icons\Icons_Monitor.png" 
                                     Stretch="Uniform" Margin="0,2,0,0"/>
                         <Label Content="{Binding MultiMonitorContent}"

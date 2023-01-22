@@ -430,6 +430,8 @@ namespace DesktopFox
         /// </summary>
         private void SwitchMainPanel()
         {
+            SwitchViews(null);
+
             if (MainPanel == null)
             {
                 MainPanel = this.AnimatedWPConfigView;
@@ -466,6 +468,8 @@ namespace DesktopFox
         {
             if (newView != null && newView != CurrentView)
             {
+                if(MainPanel != null) SwitchMainPanel();
+
                 newView.AnimateIn();
                 CurrentView = newView;
             }

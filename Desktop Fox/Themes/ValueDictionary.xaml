@@ -30,6 +30,19 @@
     <SolidColorBrush x:Key="HighlightBrushRed">#FFFF8A00</SolidColorBrush>
     
     <Image x:Key="DF_Icon" Source="\MVVM\Views\DF_Icon.ico"/>
+    <BitmapImage x:Key="DayIcon" UriSource="\Icons\Icons_Day.png"/>
+    <BitmapImage x:Key="NightIcon" UriSource="\Icons\Icons_Night.png"/>
+    <BitmapImage x:Key="DayNightIcon" UriSource="\Icons\Icons_DayNight.png"/>
+    <BitmapImage x:Key="DeleteIcon" UriSource="\Icons\Icons_Delete.png"/>
+    <BitmapImage x:Key="FolderIcon" UriSource="\Icons\Icons_Folder.png"/>
+    <BitmapImage x:Key="PlusIcon" UriSource="\Icons\Icons_Plus.png"/>
+    <BitmapImage x:Key="MinusIcon" UriSource="\Icons\Icons_Minus.png"/>
+    <BitmapImage x:Key="MonitorIcon" UriSource="\Icons\Icons_Monitor.png"/>
+    <BitmapImage x:Key="PlayIcon" UriSource="\Icons\Icons_Play.png"/>
+    <BitmapImage x:Key="PauseIcon" UriSource="\Icons\Icons_Pause.png"/>
+    <BitmapImage x:Key="SaveIcon" UriSource="\Icons\Icons_Save.png"/>
+    <BitmapImage x:Key="SettingsIcon" UriSource="\Icons\Icons_Settings.png"/>
+    
     <BooleanToVisibilityConverter x:Key="BoolConverter"/>
     <local:BoolInverter x:Key="BoolInverter"/>
     <local:BoolToIntConverter x:Key="BoolToIntConverter"/>

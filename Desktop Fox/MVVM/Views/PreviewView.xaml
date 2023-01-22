@@ -56,6 +56,8 @@
                     </Image.Triggers>
                 </Image>
                 <Image x:Name="ForeImage"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
                        Source="{Binding PreviewModel.ForegroundImage}"
                        Stretch="{Binding PreviewModel.ImageStretch}"
                        d:Source="/Assets/murmel.png"
@@ -97,46 +99,102 @@
 
             <Border VerticalAlignment="Top"
                     HorizontalAlignment="Right"
-                    Margin="0,50,50,0"
-                    Grid.Column="2"
-                    Height="40" Width="100">
+                    Margin="0,80,80,0"
+                    Grid.Column="2">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1.2" ScaleY="1.2" CenterX="30" CenterY="30"/>
+                    </TransformGroup>
+                </Border.RenderTransform>
                 <Border.Clip>
-                    <RectangleGeometry Rect="0,0,100,40"
-                                       RadiusX="20"
-                                       RadiusY="20"/>
+                    <EllipseGeometry RadiusX="29.5" RadiusY="29.5" Center="30,30"/>
                 </Border.Clip>
                 <Grid>
+                
+                <RadioButton x:Name="radio_PreviewDay"
+                             IsChecked="{Binding PreviewModel.Day}"
+                             d:IsChecked="True"
+                             Style="{StaticResource DF_RadioButton_Border_Round_Preview}">
+                    <Grid>
+                        <Image Source="{StaticResource DayIcon}" 
+                               Stretch="Uniform"
+                               Margin="10,10,30,30"/>
+                        <Border Margin="10,10,30,30">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                                   Mode=FindAncestor, 
+                                                                                   AncestorType={x:Type RadioButton}}, 
+                                                                                   Path=IsChecked}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                       Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                <Rectangle.Fill>
+                                    <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                </Rectangle.Fill>
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="{StaticResource DayIcon}"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
 
-                    <RadioButton x:Name="radio_PreviewDay"
-                                 Content="D         "
-                                 FontSize="20"
-                                 IsChecked="{Binding PreviewModel.Day}"
-                                 d:IsChecked="True"
-                                 Style="{StaticResource DF_RadioButton}">
-                    </RadioButton>
+                        </Border>
+                    </Grid>
+                </RadioButton>
 
-                    <Border>
-                        <Border.Clip>
-                            <RectangleGeometry Rect="-60,50,130,80">
-                                <RectangleGeometry.Transform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="-45"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </RectangleGeometry.Transform>
-                            </RectangleGeometry>
-                        </Border.Clip>
-                        <RadioButton x:Name="radio_PreviewNight"
-                                     Content="         N"
-                                     FontSize="20"
+                <Border>
+                    <Border.Clip>
+                        <RectangleGeometry Rect="-60,42.5,100,100">
+                            <RectangleGeometry.Transform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-45"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </RectangleGeometry.Transform>
+                        </RectangleGeometry>
+                    </Border.Clip>
+                    <RadioButton x:Name="radio_PreviewNight"
                                      IsChecked="{Binding PreviewModel.Day, Converter={StaticResource BoolInverter}}"
-                                     Style="{StaticResource DF_RadioButton}">
-                        </RadioButton>
-                    </Border>
-
-                </Grid>
+                                     Style="{StaticResource DF_RadioButton_Border_Round_Preview}">
+                        <Grid>
+                            <Image Source="{StaticResource NightIcon}"                                  
+                                   Stretch="Uniform"
+                                   Margin="28,29,10,10"/>
+                            <Border Margin="28,29,10,10">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                               Mode=FindAncestor, 
+                                                                               AncestorType={x:Type RadioButton}}, 
+                                                                               Path=IsChecked}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                               Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="{StaticResource NightIcon}"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
+                    </RadioButton>
+                </Border>
+            </Grid>
             </Border>
         </Grid>
     </Border>

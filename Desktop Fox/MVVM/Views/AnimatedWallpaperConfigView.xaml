@@ -173,7 +173,7 @@
             <Button Style="{StaticResource DF_Button_Border}"
                     Command="{Binding ActivateCommand}">
                 <Image Source="\Icons\Icons_Play.png" 
-                                    Stretch="Uniform" Margin="10,10,5,10"/>
+                                    Stretch="Uniform" Margin="15,15,10,15"/>
             </Button>
             <Button Style="{StaticResource DF_Button_Border}"
                     Command="{Binding StopCommand}">

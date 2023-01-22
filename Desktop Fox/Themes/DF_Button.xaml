@@ -50,7 +50,7 @@
                                         HorizontalAlignment="Center"/>
                         </Border>
                         <Border Width="63" Height="63"
-                                CornerRadius="25"
+                                CornerRadius="31"
                                 BorderThickness="3"
                                 BorderBrush="{TemplateBinding BorderBrush}">
                         </Border>

@@ -75,8 +75,10 @@ namespace DesktopFox
                         picShuffleStart();                       
                     else
                         picShuffleStop();
-                    break;
 
+                    daytimeTimerStart();
+                    break;
+                    
                 case nameof(SM.Settings.DesktopModeSingle):
                     if (SM.Settings.IsRunning)
                         picShuffleStart();
@@ -179,8 +181,7 @@ namespace DesktopFox
         /// Startet anhand der Einstellungen die jeweiligen Manager.
         /// </summary>
         public void picShuffleStart()
-        {
-            daytimeTimerStart();
+        {  
             if (SM.Settings.DesktopModeSingle && GM.getActiveSet() == null)
                 return;
             else if (GM.getActiveSet(any: true) == null)

@@ -42,8 +42,11 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+    <PackageReference Include="LibVLCSharp" Version="3.6.7" />
+    <PackageReference Include="LibVLCSharp.WPF" Version="3.6.7" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.18" />
   </ItemGroup>
 
   <ItemGroup>
@@ -92,6 +95,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="lib\" />
     <Folder Include="Saves\" />
   </ItemGroup>
 

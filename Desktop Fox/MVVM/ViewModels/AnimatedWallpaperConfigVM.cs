@@ -35,10 +35,17 @@ namespace DesktopFox.MVVM.ViewModels
 
         public ICommand StopCommand { get { return new DF_Command.DelegateCommand(o => StopVideo()); } }
 
-        public ICommand MuteCommand { get { return new DF_Command.DelegateCommand(o => vDesk.getWallpapers.First().myModel.IsMuted = !vDesk.getWallpapers.First().myModel.IsMuted); } }
+        public ICommand MuteCommand { get { return new DF_Command.DelegateCommand(o => MuteAudio()); } }
 
         public ICommand RotateClockwiseCommand { get { return new DF_Command.DelegateCommand(o => animatedWallpaperConfigModel.Rotation += 90); } }
 
+        private void MuteAudio()
+        {
+            if (vDesk.getWallpapers.First().myModel.Volume != 0)
+                vDesk.getWallpapers.First().myModel.Volume = 0;
+            else
+                vDesk.getWallpapers.First().myModel.Volume = 100;
+        }
 
         private void CheckSavedWallpapers()
         {

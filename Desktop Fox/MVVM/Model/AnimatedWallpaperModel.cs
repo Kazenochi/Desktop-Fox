@@ -12,5 +12,8 @@ namespace DesktopFox.MVVM.Model
 
         private int _rotation = 0;
         public int Rotation { get { return _rotation;} set { _rotation = value;RaisePropertyChanged(nameof(Rotation)); } }
+
+        private int _volume = 0;
+        public int Volume { get { return _volume;} set { _volume = value;RaisePropertyChanged(nameof(Volume)); } }
     }
 }

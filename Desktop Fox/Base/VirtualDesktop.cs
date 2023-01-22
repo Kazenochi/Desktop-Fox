@@ -235,7 +235,7 @@ namespace DesktopFox
                 */
 
                 AnimatedWallpaperVM animatedWPVM = new AnimatedWallpaperVM(wallpaper);
-                AnimatedWallpaperView animatedWPView = new AnimatedWallpaperView();
+                AnimatedWallpaperView animatedWPView = new AnimatedWallpaperView(wallpaper.MediaUri, wallpaper.myRotation, animatedWPVM.AnimatedWallpaperModel);
                 animatedWPView.DataContext = animatedWPVM;
                 wallpaper.myViewModel = animatedWPVM;
                 wallpaper.myModel = animatedWPVM.AnimatedWallpaperModel;

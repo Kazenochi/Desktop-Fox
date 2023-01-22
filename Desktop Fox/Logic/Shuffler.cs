@@ -72,7 +72,7 @@ namespace DesktopFox
             {
                 case nameof(SM.Settings.IsRunning):
                     if (SM.Settings.IsRunning)
-                        picShuffleStart();
+                        picShuffleStart();                       
                     else
                         picShuffleStop();
                     break;
@@ -180,7 +180,7 @@ namespace DesktopFox
         /// </summary>
         public void picShuffleStart()
         {
-
+            daytimeTimerStart();
             if (SM.Settings.DesktopModeSingle && GM.getActiveSet() == null)
                 return;
             else if (GM.getActiveSet(any: true) == null)

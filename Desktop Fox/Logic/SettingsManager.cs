@@ -31,6 +31,7 @@ namespace DesktopFox
             DF = DesktopFox;
             _settings = settings;
             vDesk = virtualDesktop;
+            SettingsCheckOnLoad();
             _settings.PropertyChanged += Settings_PropertyChanged;
         }
 
@@ -97,6 +98,27 @@ namespace DesktopFox
                     break;
 
                 default: return;
+            }
+        }
+
+        /// <summary>
+        /// Methode die Systemeinstellungen mit den gespeicherten Einstellungen abgleich
+        /// Nach jetzigem Stand nur für den RegKey Eintrag notwendig
+        /// </summary>
+        private void SettingsCheckOnLoad()
+        {
+            if (_settings == null) return;
+
+            if (_settings.AutostartOn && regKey.GetValue("Desktopfox") == null)
+            {
+                string appLocation = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+                Debug.WriteLine("Autostart wurde gesetzt. Rückgabewert der App Location: " + appLocation);
+                regKey.SetValue("Desktopfox", appLocation);
+            }
+            else if (!_settings.AutostartOn && regKey.GetValue("Desktopfox") != null)
+            {
+                Debug.WriteLine("Registryeintrag wurde Entfernt");
+                regKey.DeleteValue("Desktopfox");
             }
         }
 

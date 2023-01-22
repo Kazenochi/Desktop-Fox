@@ -119,7 +119,7 @@ namespace DesktopFox
                 this.Opacity = 1;
 
                 var sb = new Storyboard();
-                var fadeinAnimationX = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.7));
+                var fadeinAnimationX = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.4));
                 sb.Children.Add(fadeinAnimationX);
                 Storyboard.SetTarget(sb, this);
                 Storyboard.SetTargetProperty(sb, new PropertyPath(System.Windows.Controls.Control.OpacityProperty));
@@ -131,7 +131,7 @@ namespace DesktopFox
             }
         }
 
-        private void ClosingStoryboardFinished(object sender, EventArgs e)
+        public void ClosingStoryboardFinished(object sender, EventArgs e)
         {
             CloseLock = false;
             this.Close();

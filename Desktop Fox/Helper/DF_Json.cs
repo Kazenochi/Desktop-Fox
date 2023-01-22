@@ -1,10 +1,8 @@
-﻿using DesktopFox;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Windows.Documents;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace DesktopFox
@@ -76,6 +74,7 @@ namespace DesktopFox
                 return false;
             }
         }
+
         /// <summary>
         /// Läd den Angegebenen Dateityp aus der Gespeicherten JSON Datei
         /// </summary>
@@ -135,6 +134,10 @@ namespace DesktopFox
 
         }
 
+        /// <summary>
+        /// Löscht den angegebenen <see cref="SaveFileType"/> aus dem lokalen Verzeichniss
+        /// </summary>
+        /// <param name="Type"></param>
         public static void deleteFile(SaveFileType Type)
         {
             if (!Directory.Exists(BaseDir + "\\Saves")) return;
@@ -171,7 +174,6 @@ namespace DesktopFox
                 return;
             }
         }
-
 
         /// <summary>
         /// Kopiert ein Collection object und gibt die Kopie zurück

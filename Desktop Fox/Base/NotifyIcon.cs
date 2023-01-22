@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Markup;
 using Application = System.Windows.Application;
@@ -13,15 +9,12 @@ namespace DesktopFox
     internal class NotifyIcon
     {
 
-        private System.Windows.Forms.NotifyIcon? notifyIcon;
-        private System.Windows.Forms.ContextMenuStrip NotifyIconContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem CloseMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem AutostartMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem AutoSetChangeMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem LanguageMenuItem;
+        private readonly System.Windows.Forms.NotifyIcon? notifyIcon;
+        private readonly System.Windows.Forms.ContextMenuStrip NotifyIconContextMenu;
+        private readonly System.Windows.Forms.ToolStripMenuItem CloseMenuItem;
+        private readonly System.Windows.Forms.ToolStripMenuItem LanguageMenuItem;
         private String _language = "en-EN";
-        private Fox DF;
-        private Settings _settings;
+        private readonly Fox DF;
 
         /// <summary>
         /// Konstuktor

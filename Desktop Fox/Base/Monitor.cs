@@ -17,6 +17,8 @@ namespace DesktopFox
         /// </summary>
         /// <param name="monID">ID des Monitors</param>
         /// <param name="monName">Name unter dem der Monitor gespeichert werden soll</param>
+        /// <param name="height">Höhe des Monitors</param>
+        /// <param name="width">Breite des Monitors</param>
         public Monitor(String monID, MonitorEnum monName, int height, int width)
         {
             DesktopWallpaper tmpWrapper = new DesktopWallpaper();

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows;
-using System.Windows.Shapes;
+
 
 namespace DesktopFox
 {
@@ -29,10 +25,14 @@ namespace DesktopFox
             return getList(getFileInfo(folderDialog.SelectedPath)); 
         }
 
+        /// <summary>
+        /// Öffnet einen <see cref="OpenFileDialog"/> um eine Video Datei Auszuwählen
+        /// </summary>
+        /// <returns>Pfad zur ausgewählten Datei</returns>
         public static string openSingleFileDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Video files (*.mp4)|*.mp4;*.mkv;*.gif";
+            openFileDialog.Filter = "Video files (*.mp4,*.mkv,etc.)|*.mp4;*.mkv|All files (*.*)|*.*";
             openFileDialog.Multiselect = false;
             openFileDialog.CheckFileExists = true;
             openFileDialog.CheckPathExists = true;

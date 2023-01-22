@@ -1,5 +1,4 @@
-﻿using DesktopFox.MVVM.Model;
-using DesktopFox.MVVM.ViewModels;
+﻿using DesktopFox.MVVM.ViewModels;
 using DesktopFox.MVVM.Views;
 using IDesktopWallpaperWrapper;
 using System;
@@ -14,14 +13,12 @@ namespace DesktopFox
 {
     public class VirtualDesktop
     {
-        private DesktopWallpaper wrapper = new DesktopWallpaper();
-        private IDictionary<MonitorEnum, Monitor> monitorDict = new Dictionary<MonitorEnum, Monitor>();
-        private int monitorCount;
-        //private Collection activeCollection;
-        private int[] boundary;
+        private readonly DesktopWallpaper wrapper = new();
+        private readonly IDictionary<MonitorEnum, Monitor> monitorDict = new Dictionary<MonitorEnum, Monitor>();
+        private readonly int monitorCount;
         private List<Wallpaper> wallpapers;
         private IntPtr progman, workerw;
-        private bool debug = true;
+        private readonly bool debug = true;
 
         /// <summary>
         /// Konstruktor
@@ -112,12 +109,19 @@ namespace DesktopFox
                 }
             }
             bound[0] = width;
-            this.boundary = bound;
+            //this.boundary = bound;
             //Console.WriteLine("Gesamte Desktop Auflösung Breite:" + width + " Höhe: " + hight);
         }
 
-        #region Fensterfunktionen für Custom / Animierte Hintergründe
+        #region FensterMethoden für Custom / Animierte Hintergründe
 
+        /// <summary>
+        /// Erstellt neue Animierte Hintergrundbilder
+        /// </summary>
+        /// <param name="monitors">Liste aus Monitor Nummern, auf denen das Hintergrundbild angezeigt werden soll</param>
+        /// <param name="mediaUri">Pfad zur Datei die auf den Wallpaper angezeigt werden soll</param>
+        /// <param name="imageRotation">Rotationswert den das Wallpaper haben soll</param>
+        /// <param name="muted">Ob die Hintergrundbilder eine Tonausgabe haben sollen</param>
         public void newAnimatedWPs(List<int> monitors, string mediaUri, int imageRotation, bool muted)
         {
             wallpapers ??= new List<Wallpaper>();
@@ -182,6 +186,9 @@ namespace DesktopFox
             return workerw;
         }
 
+        /// <summary>
+        /// Bauen des Hintergrundes, zwischen Desktop Icons und Hintergrundbild in Windows 
+        /// </summary>
         private void buildDesktop()
         {
             if (wallpapers.Count <= 0) return;
@@ -241,9 +248,13 @@ namespace DesktopFox
             }
         }
 
+        /// <summary>
+        /// Aufräumfunktion für die Animierten Hintergrundbilder
+        /// </summary>
+        /// <param name="lastClean">Ob es sich bei diesem Aufruf um den Letzten handelt bevor die Applikation beendet wird</param>
         public void clearWallpapers(bool lastClean = false)
         {
-            if (wallpapers.Count <= 0) return;
+            if (wallpapers == null || wallpapers.Count <= 0) return;
 
             foreach(Wallpaper wallpaper in wallpapers)
             {
@@ -257,7 +268,10 @@ namespace DesktopFox
             
             Debug.WriteLine("Alle WPs wurden geschlossen");
         }
+
         #endregion
+
+        #region Getter / Setter
 
         /// <summary>
         /// Gibt die Anzahl der Monitore zurück
@@ -300,6 +314,7 @@ namespace DesktopFox
         /// Gibt die Liste mit Hintergrundbildern zurück. <see cref="wallpapers"/>
         /// </summary>
         public List<Wallpaper> getWallpapers { get { return wallpapers; } }
-        
+
+        #endregion
     }
 }

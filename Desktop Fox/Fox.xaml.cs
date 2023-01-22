@@ -22,7 +22,6 @@ namespace DesktopFox
         private readonly GalleryManager GM;
         private Settings settings;
         private readonly SettingsManager SM;
-        private readonly NotifyIcon notifyIcon;
         private MainWindow MW;
         private readonly MainWindowVM mainWindowVM;
         private readonly ContextPopupVM contextPopupVM;
@@ -42,7 +41,7 @@ namespace DesktopFox
         {
             InitializeComponent();
             this.Hide();
-            notifyIcon = new NotifyIcon(this);
+            NotifyIcon notifyIcon = new NotifyIcon(this);
             fileChecker = new FileChecker();
             loadFiles();
             shadow = new GalleryShadow(gallery);
@@ -88,6 +87,10 @@ namespace DesktopFox
         /// </summary>
         public Shuffler Shuffler { get { return shuffler; } }
 
+        /// <summary>
+        /// Gibt die Instanz des Hauptfensters zurück
+        /// </summary>
+        /// <returns></returns>
         public MainWindow GetMainWindow()
         {
             if(MW != null) return MW;
@@ -192,6 +195,10 @@ namespace DesktopFox
             GC.Collect();
         }
 
+        /// <summary>
+        /// Hilfsmethode zum Speichern der Dateien beim Beenden des Programms oder dem Schließen des Hauptfensters
+        /// </summary>
+        /// <param name="lastClose"></param>
         private void SaveOnClose(bool lastClose = true)
         {
             wallpaperSaves ??= new();
@@ -226,7 +233,8 @@ namespace DesktopFox
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Application_Close(object sender, CancelEventArgs e)
-        {
+        {   if (MW != null)
+                MW.ClosingStoryboardFinished(null, null);
             SaveOnClose();
         }
     }

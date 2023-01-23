@@ -12,9 +12,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <lvc:VideoView x:Name="VideoView">
-            <MediaElement x:Name="MediaElement" 
-                          Volume="{Binding AnimatedWallpaperModel.Volume}">
-            </MediaElement>
         </lvc:VideoView>
     </Grid>
 </UserControl>

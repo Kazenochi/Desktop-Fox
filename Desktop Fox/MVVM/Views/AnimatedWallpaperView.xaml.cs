@@ -1,19 +1,11 @@
-﻿using DesktopFox.MVVM.Model;
+﻿using DesktopFox.Helper;
+using DesktopFox.MVVM.Model;
 using LibVLCSharp.Shared;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace DesktopFox.MVVM.Views
 {
@@ -24,60 +16,67 @@ namespace DesktopFox.MVVM.Views
     {
         LibVLC _libVLC;
         LibVLCSharp.Shared.MediaPlayer _mediaPlayer;
-        string myUri;
-        int myRotation = 0;
+        private bool _playLock = true;
+        private string[] _vlcCommands;
+        private string _mediaUri;
 
-        public AnimatedWallpaperView(string mediaUri, int rotation, AnimatedWallpaperModel myModel)
-        {        
-            myUri = mediaUri;
-            myRotation = rotation;
+        public AnimatedWallpaperView() 
+        {
             InitializeComponent();
+        }
+
+        public AnimatedWallpaperView(Wallpaper wallpaper)
+        {
+            InitializeComponent();
+            
+            _mediaUri = wallpaper.myMediaUri;
+            _vlcCommands = VLCCommandBuilder.BuildCommands(wallpaper);
+
             this.VideoView.Loaded += VideoView_Loaded;
             Unloaded += Controls_Unloaded;
-            myModel.PropertyChanged += MyModel_PropertyChanged;
+            wallpaper.PropertyChanged += Wallpaper_PropertyChanged;
         }
 
-        private void MyModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Wallpaper_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            _mediaPlayer.Volume = ((AnimatedWallpaperModel)sender).Volume; 
-        }
-
-        private void WallpaperMedia_MediaEnded(object sender, RoutedEventArgs e)
-        {    
-            ((MediaElement)sender).Play();
+            _mediaPlayer.Volume = (int)((Wallpaper)sender).Volume;
         }
 
         private void VideoView_Loaded(object sender, RoutedEventArgs e)
         {
-            if(myRotation == 90) 
-            {
-                _libVLC = new LibVLC(enableDebugLogs: true, VLCCommands.Transform, VLCCommands.Rotate90, "--crop=9:16");
-            }
-            else if (myRotation == 180)
-            {
-                _libVLC = new LibVLC(enableDebugLogs: true, VLCCommands.Transform, VLCCommands.Rotate180);
-            }
-            else
-            {
-                _libVLC = new LibVLC(enableDebugLogs: true, "--aspect-ratio=16:9");
-            }
-            
-            _mediaPlayer = new LibVLCSharp.Shared.MediaPlayer(_libVLC);
-            _mediaPlayer.Volume = 0;
-            
-
-            this.VideoView.MediaPlayer = _mediaPlayer;
-            
-            using (var media = new Media(_libVLC, new Uri(myUri)))
-                this.VideoView.MediaPlayer.Play(media);
+            _playLock = false;
+            BuildMedia();
         }
 
+        private void BuildMedia()
+        {
+            if (_playLock) return;
+
+            _libVLC = new LibVLC(_vlcCommands);
+            
+            _mediaPlayer = new MediaPlayer(_libVLC)
+            {
+                Volume = 0
+            };
+
+            this.VideoView.MediaPlayer = _mediaPlayer;
+            _mediaPlayer.CropGeometry = "16:9"; 
+            using var media = new Media(_libVLC, new Uri(_mediaUri));
+            this.VideoView.MediaPlayer.Play(media);
+        }
 
         private void Controls_Unloaded(object sender, RoutedEventArgs e)
         {
-            _mediaPlayer.Stop();
-            _mediaPlayer.Dispose();
-            _libVLC.Dispose();
+            try
+            {
+                _mediaPlayer.Stop();
+                _mediaPlayer.Dispose();
+                _libVLC.Dispose();
+            }
+            catch (System.AccessViolationException)
+            {
+                Debug.WriteLine("Fehler beim Entladen des Mediaplayer Objekts in AnimatedWallpaperView");
+            }
         }
     }
 }

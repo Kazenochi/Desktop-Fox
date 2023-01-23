@@ -122,7 +122,7 @@ namespace DesktopFox
         /// <param name="mediaUri">Pfad zur Datei die auf den Wallpaper angezeigt werden soll</param>
         /// <param name="imageRotation">Rotationswert den das Wallpaper haben soll</param>
         /// <param name="muted">Ob die Hintergrundbilder eine Tonausgabe haben sollen</param>
-        public void newAnimatedWPs(List<int> monitors, string mediaUri, int imageRotation, bool muted)
+        public void newAnimatedWPs(List<int> monitors, Wallpaper wallpaperBluePrint)
         {
             wallpapers ??= new List<Wallpaper>();
 
@@ -131,7 +131,7 @@ namespace DesktopFox
 
             foreach(int monitor in monitors)
             {
-                wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitor, mediaUri, imageRotation, muted));
+                wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitor, wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, wallpaperBluePrint.Volume));
             }  
             buildDesktop();
         }
@@ -234,11 +234,9 @@ namespace DesktopFox
                 backgroundWindow.Height = wallpaper.myMonitor.Height;
                 */
 
-                AnimatedWallpaperVM animatedWPVM = new AnimatedWallpaperVM(wallpaper);
-                AnimatedWallpaperView animatedWPView = new AnimatedWallpaperView(wallpaper.MediaUri, wallpaper.myRotation, animatedWPVM.AnimatedWallpaperModel);
+                AnimatedWallpaperVM animatedWPVM = new AnimatedWallpaperVM();
+                AnimatedWallpaperView animatedWPView = new AnimatedWallpaperView(wallpaper);
                 animatedWPView.DataContext = animatedWPVM;
-                wallpaper.myViewModel = animatedWPVM;
-                wallpaper.myModel = animatedWPVM.AnimatedWallpaperModel;
 
                 backgroundWindowVM.BackgroundModel.Wallpaper = animatedWPView;
 

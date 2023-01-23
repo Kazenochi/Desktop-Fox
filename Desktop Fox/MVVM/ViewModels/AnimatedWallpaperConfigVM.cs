@@ -1,5 +1,7 @@
 ﻿using DesktopFox.MVVM.Model;
+using DesktopFox.MVVM.Views;
 using System.Collections.Generic;
+using DesktopFox;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.TextFormatting;
@@ -10,23 +12,18 @@ namespace DesktopFox.MVVM.ViewModels
     {
         private VirtualDesktop vDesk;
         public AnimatedWallpaperConfigModel animatedWallpaperConfigModel { get; set; } = new();
+        private Wallpaper tempWallpaper;
 
         public AnimatedWallpaperConfigVM(VirtualDesktop virtualDesktop)
         {
             this.vDesk = virtualDesktop;
-            
-            int monitorCount = vDesk.getMonitorCount();
 
-            if (monitorCount >= 1)
-                animatedWallpaperConfigModel.Monitor1_Visible = true;
+            for(int i = 0; i < vDesk.getMonitorCount(); i++)
+            {
+                animatedWallpaperConfigModel._monitorVisibility[i] = true;
+            }
 
-            if(monitorCount >= 2)
-                animatedWallpaperConfigModel.Monitor2_Visible = true;
-
-            if(monitorCount >= 3)
-                animatedWallpaperConfigModel.Monitor3_Visible = true;
-
-            CheckSavedWallpapers();
+            //CheckSavedWallpapers();
         }
 
         public ICommand SelectVideoCommand { get { return new DF_Command.DelegateCommand(o => SelectVideo()); } }
@@ -37,47 +34,84 @@ namespace DesktopFox.MVVM.ViewModels
 
         public ICommand MuteCommand { get { return new DF_Command.DelegateCommand(o => MuteAudio()); } }
 
+        public ICommand VolumeUpCommand { get { return new DF_Command.DelegateCommand(o => VolumeUp()); } }
+
+        public ICommand VolumeDownCommand { get { return new DF_Command.DelegateCommand(o => VolumeDown()); } }
+
         public ICommand RotateClockwiseCommand { get { return new DF_Command.DelegateCommand(o => animatedWallpaperConfigModel.Rotation += 90); } }
+
+
+        private void SelectVideo()
+        {
+            animatedWallpaperConfigModel.SourceUri = DF_FolderDialog.openSingleFileDialog() ?? "";
+            if (animatedWallpaperConfigModel.SourceUri == null || animatedWallpaperConfigModel.SourceUri == "") return;
+
+            tempWallpaper ??= WallpaperBuilder.makeWallpaper(vDesk, 1, animatedWallpaperConfigModel.SourceUri, framesPerSecond: FPS.Preview);
+
+            for (int i = 0; i < vDesk.getMonitorCount(); i++)
+            {
+                animatedWallpaperConfigModel._monitorViews[i] = new AnimatedWallpaperView(tempWallpaper);
+                animatedWallpaperConfigModel.RaisePropertyChanged();
+
+            }      
+        }
 
         private void MuteAudio()
         {
-            if (vDesk.getWallpapers.First().myModel.Volume != 0)
-                vDesk.getWallpapers.First().myModel.Volume = 0;
+            if (vDesk.getWallpapers.Count <= 0) return;
+
+            if(vDesk.getWallpapers.First().Volume == Enums.Volume.Mute)
+                vDesk.getWallpapers.First().Volume = Enums.Volume.Vol_50;
             else
-                vDesk.getWallpapers.First().myModel.Volume = 100;
+                vDesk.getWallpapers.First().Volume = Enums.Volume.Mute;
         }
 
-        private void CheckSavedWallpapers()
+        private void VolumeUp()
+        {
+            if (vDesk.getWallpapers.Count <= 0) return;
+            vDesk.getWallpapers.First().Volume = vDesk.getWallpapers.First().Volume.Next();
+        }
+
+        private void VolumeDown()
+        {
+            if (vDesk.getWallpapers.Count <= 0) return;
+            vDesk.getWallpapers.First().Volume = vDesk.getWallpapers.First().Volume.Next();
+        }
+
+        /// <summary>
+        /// Überprüfen der Gespeicherten Wallpaper in <see cref="VirtualDesktop.wallpapers"/> und anzeigen der Videos.
+        /// </summary>
+        public void CheckSavedWallpapers()
         {
             if (vDesk.getWallpapers == null || vDesk.getWallpapers.Count == 0) return;
 
             var wallpapers = vDesk.getWallpapers;
-            animatedWallpaperConfigModel.SourceUri = wallpapers.First().MediaUri;
+            Wallpaper wallpaperBluePrint = wallpapers.First();
+            wallpaperBluePrint = WallpaperBuilder.ChangeToPreview(wallpaperBluePrint);
+            animatedWallpaperConfigModel.SourceUri = wallpapers.First().myMediaUri;   
 
-            foreach(var wallpaper in wallpapers)
+            foreach (var wallpaper in wallpapers)
             {
                 switch (wallpaper.myMonitor.Name)
                 {
                     case MonitorEnum.MainMonitor:
                         animatedWallpaperConfigModel.Monitor1 = true;
+                        animatedWallpaperConfigModel.Monitor1_Video = new AnimatedWallpaperView(wallpaperBluePrint);
                         break;
                     
                     case MonitorEnum.SecondMonitor:
                         animatedWallpaperConfigModel.Monitor2 = true;
+                        animatedWallpaperConfigModel.Monitor2_Video = new AnimatedWallpaperView(wallpaperBluePrint);
                         break;
                         
                     case MonitorEnum.ThirdMonitor:
                         animatedWallpaperConfigModel.Monitor3 = true;
+                        animatedWallpaperConfigModel.Monitor3_Video = new AnimatedWallpaperView(wallpaperBluePrint);
                         break;
                 }
             }
         }
 
-
-        private void SelectVideo()
-        {            
-            animatedWallpaperConfigModel.SourceUri = DF_FolderDialog.openSingleFileDialog() ?? ""; 
-        }
 
         private void ActivateVideo()
         {
@@ -96,7 +130,7 @@ namespace DesktopFox.MVVM.ViewModels
 
             if(monitorList.Count > 0)
             {
-                vDesk.newAnimatedWPs(monitorList, animatedWallpaperConfigModel.SourceUri, animatedWallpaperConfigModel.Rotation, true);
+                vDesk.newAnimatedWPs(monitorList, tempWallpaper);
             }
                 
         }

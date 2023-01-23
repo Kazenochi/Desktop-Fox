@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using DesktopFox.Enums;
+using System.Windows.Media;
 
 namespace DesktopFox
 {
@@ -15,7 +16,8 @@ namespace DesktopFox
         /// <param name="muted">Gibt an ob das Hintergrundbild Stumm geschaltet sein soll</param>
         /// <param name="mediaStretch"><see cref="Stretch"/> Wert des Hintergrundbildes</param>
         /// <returns></returns>
-        static public Wallpaper makeWallpaper(VirtualDesktop vDesk, int monitorNr, string mediaUri, int imageRotation, bool muted, Stretch mediaStretch = Stretch.UniformToFill)
+        static public Wallpaper makeWallpaper(VirtualDesktop vDesk, int monitorNr, string mediaUri, 
+            VLCRotation imageRotation = VLCRotation.None, Volume volume = Volume.Mute, FPS framesPerSecond = FPS.FPS_60)
         {
             if (monitorNr <= 0 || monitorNr > vDesk.getMonitorCount()) return null;
 
@@ -36,13 +38,19 @@ namespace DesktopFox
                     break;
             }
 
-            wallpaper.MediaUri = mediaUri;
-            wallpaper.myStretch = mediaStretch; 
+            wallpaper.myMediaUri = mediaUri;
+            wallpaper.myFPS = framesPerSecond; 
             wallpaper.myRotation = imageRotation;
-            wallpaper.muted = muted;
+            wallpaper.Volume = volume;
 
             return wallpaper;
         }
 
+
+        static public Wallpaper ChangeToPreview(Wallpaper wallpaper)
+        {
+            wallpaper.myFPS = FPS.Preview;
+            return wallpaper;
+        }
     }
 }

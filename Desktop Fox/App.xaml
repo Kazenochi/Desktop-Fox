@@ -58,6 +58,9 @@
             <DataTemplate DataType="{x:Type views:AnimatedWallpaperConfigView}">
                 <views:AnimatedWallpaperConfigView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type views:AnimatedWallpaperView}">
+                <views:AnimatedWallpaperView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 

@@ -76,7 +76,7 @@ namespace DesktopFox
                     else
                         picShuffleStop();
 
-                    daytimeTimerStart();
+                    //daytimeTimerStart();
                     break;
                     
                 case nameof(SM.Settings.DesktopModeSingle):

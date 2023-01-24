@@ -20,6 +20,8 @@ namespace DesktopFox.MVVM.Views
         private bool _playLock = true;
         private string[] _vlcCommands;
         private string _mediaUri;
+        private int _volume;
+        private Wallpaper _wallpaper;
 
         public AnimatedWallpaperView() 
         {
@@ -32,10 +34,11 @@ namespace DesktopFox.MVVM.Views
             
             _mediaUri = wallpaper.myMediaUri;
             _vlcCommands = VLCCommandBuilder.BuildCommands(wallpaper);
-
+            _volume = (int)wallpaper.Volume;
+            _wallpaper = wallpaper;
             this.VideoView.Loaded += VideoView_Loaded;
             Unloaded += Controls_Unloaded;
-            wallpaper.PropertyChanged += Wallpaper_PropertyChanged;
+            _wallpaper.PropertyChanged += Wallpaper_PropertyChanged;
         }
 
         private void Wallpaper_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -49,14 +52,21 @@ namespace DesktopFox.MVVM.Views
                     break;
 
                 case nameof(Wallpaper.PlayPause):
-                    if(((Wallpaper)sender).PlayPause == VLCState.Playing)
+                    try
                     {
-                        _mediaPlayer.Play();
+                        if (((Wallpaper)sender).PlayPause == VLCState.Playing)
+                        {
+                            _mediaPlayer.Play();
+                        }
+                        else if(_mediaPlayer.IsPlaying)
+                        {
+                            _mediaPlayer.Pause();
+                        }
                     }
-                    else
+                    catch (System.AccessViolationException)
                     {
-                        _mediaPlayer.Pause();
-                    }             
+                        Debug.WriteLine("Fehler beim Entladen des Mediaplayer Objekts in AnimatedWallpaperView");
+                    }     
                     break;
             }
         }
@@ -82,10 +92,13 @@ namespace DesktopFox.MVVM.Views
             _mediaPlayer.CropGeometry = "16:9"; 
             using var media = new Media(_libVLC, new Uri(_mediaUri));
             this.VideoView.MediaPlayer.Play(media);
+            _mediaPlayer.Volume = _volume;
         }
 
-        private void Controls_Unloaded(object sender, RoutedEventArgs e)
+        public void Controls_Unloaded(object sender, RoutedEventArgs e)
         {
+            if (_mediaPlayer == null) return;
+            _wallpaper.PropertyChanged -= Wallpaper_PropertyChanged;
             try
             {
                 _mediaPlayer.Stop();

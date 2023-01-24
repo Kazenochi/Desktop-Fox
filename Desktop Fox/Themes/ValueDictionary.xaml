@@ -44,6 +44,7 @@
     <BitmapImage x:Key="SettingsIcon" UriSource="\Icons\Icons_Settings.png"/>
     
     <BooleanToVisibilityConverter x:Key="BoolConverter"/>
+    <local:BooleanToVisibilityConverter x:Key="BoolVisibilityConverter"/>
     <local:BoolInverter x:Key="BoolInverter"/>
     <local:BoolToIntConverter x:Key="BoolToIntConverter"/>
     <local:BorderClipConverter x:Key="BorderClipConverter"/>

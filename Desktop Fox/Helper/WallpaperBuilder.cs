@@ -1,4 +1,4 @@
-﻿using DesktopFox.Enums;
+﻿
 using System.Windows.Media;
 
 namespace DesktopFox
@@ -17,7 +17,7 @@ namespace DesktopFox
         /// <param name="mediaStretch"><see cref="Stretch"/> Wert des Hintergrundbildes</param>
         /// <returns></returns>
         static public Wallpaper makeWallpaper(VirtualDesktop vDesk, int monitorNr, string mediaUri, 
-            VLCRotation imageRotation = VLCRotation.None, Volume volume = Volume.Mute, FPS framesPerSecond = FPS.FPS_60)
+            VLCRotation imageRotation = VLCRotation.None, VLCVolume volume = VLCVolume.Mute, FPS framesPerSecond = FPS.FPS_60)
         {
             if (monitorNr <= 0 || monitorNr > vDesk.getMonitorCount()) return null;
 

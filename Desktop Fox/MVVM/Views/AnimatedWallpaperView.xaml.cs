@@ -1,4 +1,5 @@
 ﻿using DesktopFox.Helper;
+using DesktopFox;
 using DesktopFox.MVVM.Model;
 using LibVLCSharp.Shared;
 using System;
@@ -22,7 +23,7 @@ namespace DesktopFox.MVVM.Views
 
         public AnimatedWallpaperView() 
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
 
         public AnimatedWallpaperView(Wallpaper wallpaper)
@@ -39,7 +40,25 @@ namespace DesktopFox.MVVM.Views
 
         private void Wallpaper_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            _mediaPlayer.Volume = (int)((Wallpaper)sender).Volume;
+            if(_mediaPlayer == null) return;
+
+            switch (e.PropertyName)
+            {
+                case nameof(Wallpaper.Volume):
+                    _mediaPlayer.Volume = (int)((Wallpaper)sender).Volume;
+                    break;
+
+                case nameof(Wallpaper.PlayPause):
+                    if(((Wallpaper)sender).PlayPause == VLCState.Playing)
+                    {
+                        _mediaPlayer.Play();
+                    }
+                    else
+                    {
+                        _mediaPlayer.Pause();
+                    }             
+                    break;
+            }
         }
 
         private void VideoView_Loaded(object sender, RoutedEventArgs e)

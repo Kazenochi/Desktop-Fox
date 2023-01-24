@@ -1,9 +1,7 @@
-﻿using DesktopFox.Enums;
-using DesktopFox.MVVM.Model;
-using DesktopFox.MVVM.ViewModels;
+﻿using LibVLCSharp.Shared;
 using Newtonsoft.Json;
 using System;
-using System.Windows.Media;
+
 
 namespace DesktopFox
 {
@@ -17,9 +15,11 @@ namespace DesktopFox
 
         public FPS myFPS = FPS.Min;
    
-        private Volume _volume = Volume.Mute;
-        public Volume Volume { get { return _volume; } set { _volume = value; RaisePropertyChanged(nameof(Volume)); } }
-     
+        private VLCVolume _volume = VLCVolume.Mute;
+        public VLCVolume Volume { get { return _volume; } set { _volume = value; RaisePropertyChanged(nameof(Volume)); } }
+
+        private VLCState _playPause = VLCState.Playing;
+        public VLCState PlayPause { get { return _playPause; } set { _playPause = value; RaisePropertyChanged(nameof(PlayPause)); } }
 
         [JsonIgnore]
         public IntPtr myHandler;

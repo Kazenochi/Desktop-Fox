@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace DesktopFox.Enums
+namespace DesktopFox
 {
-    public enum Volume
+    public enum VLCVolume
     {
         Mute = 0,
         Vol_5 = 5,

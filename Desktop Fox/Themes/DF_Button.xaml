@@ -121,7 +121,7 @@
            x:Key="DF_ToggleButton_Border">
         <Setter Property="Background" Value="{StaticResource ControlBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Margin" Value="10,0"/>
         <Setter Property="Padding" Value="0"/>
@@ -135,11 +135,19 @@
                             <ContentPresenter VerticalAlignment="Center"
                                           HorizontalAlignment="Center"/>
                         </Border>
-
-                        <Border Width="303" Height="170"
+                        <Border Width="300" Height="168"
                                 CornerRadius="10"
-                                BorderThickness="3"
+                                BorderThickness="{TemplateBinding BorderThickness}"
                                 BorderBrush="{TemplateBinding BorderBrush}">
+                        </Border>
+                        <Border Height="50" Width="50" 
+                                CornerRadius="25" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="3"
+                                Background="{TemplateBinding Background}">
+                            <Border.RenderTransform>
+                                <TranslateTransform Y="85"/>
+                            </Border.RenderTransform>
                         </Border>
                     </Grid>
                 </ControlTemplate>
@@ -156,7 +164,7 @@
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
-                <Setter Property="BorderThickness" Value="5"/>
+                <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="BorderBrush" Value="{StaticResource ControlPressedTextBrush}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">

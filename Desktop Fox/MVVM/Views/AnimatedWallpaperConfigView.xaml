@@ -27,119 +27,86 @@
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-            
-            <ToggleButton x:Name="Monitor1_ToggleButton"
-                          IsChecked="{Binding animatedWallpaperConfigModel.Monitor1}"
-                          Visibility="{Binding animatedWallpaperConfigModel.Monitor1_Visible,Converter={StaticResource BoolConverter}}"  
+            <StackPanel.RenderTransform>
+                <TranslateTransform Y="-130"/>
+            </StackPanel.RenderTransform>
+
+            <Button Style="{StaticResource DF_Button_Border}"
+                Command="{Binding SelectVideoCommand}">
+                <Image Source="\Icons\Icons_Folder.png" 
+                                        Stretch="Uniform" Margin="11,10,6,10"/>
+            </Button>
+            <Button Style="{StaticResource DF_Button_Border}"
+                        Visibility="{Binding AWPConfigModel.PlayPauseToggle, Converter={StaticResource BoolVisibilityConverter}, ConverterParameter=false}"
+                        d:Visibility="Collapsed"
+                        Command="{Binding ActivateCommand}">
+                <Image Source="\Icons\Icons_Play.png" 
+                                        Stretch="Uniform" Margin="15,15,10,15"/>
+            </Button>
+            <Button x:Name="StopButton"
+                    Style="{StaticResource DF_Button_Border}"
+                    Content="X"
+                    Visibility="{Binding AWPConfigModel.PlayPauseToggle, Converter={StaticResource BoolConverter}}" 
+                    Command="{Binding StopCommand}">
+            </Button>
+            <Button Style="{StaticResource DF_Button_Border}"
+                        Content="Right"
+                        Command="{Binding RotateClockwiseCommand}">
+            </Button>
+        </StackPanel>
+     
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Grid Height="auto" Width="auto">
+                <Border>
+                    <ContentControl x:Name="Monitor1_Video"
+                                    Visibility="{Binding AWPConfigModel.Video1Visibility, Converter={StaticResource BoolConverter}}"
+                                    Content="{Binding AWPConfigModel.Monitor1_Video}">
+                    </ContentControl>
+                </Border>
+                <ToggleButton x:Name="Monitor1_ToggleButton"
+                          IsChecked="{Binding AWPConfigModel.Monitor1}"
+                          Visibility="{Binding AWPConfigModel.Monitor1_Visible,Converter={StaticResource BoolConverter}}"  
                           Style="{StaticResource DF_ToggleButton_Border}"
                           VerticalContentAlignment="Center"
                           HorizontalContentAlignment="Center"
-                          ClipToBounds="True"
                           d:IsChecked="True">
-                <Grid Height="{Binding RelativeSource={
-                                RelativeSource AncestorType={x:Type ToggleButton}}, 
-                                Path=ActualHeight}"
-                      Width="{Binding RelativeSource={
-                                RelativeSource AncestorType={x:Type ToggleButton}}, 
-                                Path=ActualWidth}"
-                      VerticalAlignment="Center"
-                      HorizontalAlignment="Center">
-                    <ContentControl x:Name="Monitor1_Video"
-                                    d:Content="{views:AnimatedWallpaperView}"
-                                    Content="{Binding animatedWallpaperConfigModel.Monitor1_Video}">
-
-                    </ContentControl>
-
-                    <Grid Width="50" Height="50" 
-                          VerticalAlignment="Top"
-                          HorizontalAlignment="Left" 
-                          Margin="5">
-
-                        <Ellipse Fill="Black"/>
-                        <Ellipse Fill="#FF61EB4E"
-                                 Margin="3"/>
-                        <Label Background="Transparent"
-                           Foreground="#FF0D0037"
-                           Content="1"
-                           Margin="0,-6"
-                           HorizontalContentAlignment="Center"
-                           FontFamily="{StaticResource Default}"
-                           FontSize="40" FontWeight="Bold"/>
-                    </Grid>
-                </Grid>
-            </ToggleButton>
-            <ToggleButton x:Name="Monitor2_ToggleButton"
-                          VerticalContentAlignment="Stretch"
-                          HorizontalContentAlignment="Stretch"
-                          IsChecked="{Binding animatedWallpaperConfigModel.Monitor2}"
-                          Visibility="{Binding animatedWallpaperConfigModel.Monitor2_Visible,Converter={StaticResource BoolConverter}}"
-                          Style="{StaticResource DF_ToggleButton_Border}">
-                <Grid Height="{Binding RelativeSource={
-                                RelativeSource AncestorType={x:Type ToggleButton}}, 
-                                Path=ActualHeight}"
-                      Width="{Binding RelativeSource={
-                                RelativeSource AncestorType={x:Type ToggleButton}}, 
-                                Path=ActualWidth}"
-                      VerticalAlignment="Center"
-                      HorizontalAlignment="Center">
+                </ToggleButton>
+            </Grid>
+            <Grid Height="auto" Width="auto">
+                <Border>
                     <ContentControl x:Name="Monitor2_Video"
-                                    d:Content="{views:AnimatedWallpaperView}"
-                                    Content="{Binding animatedWallpaperConfigModel.Monitor2_Video}">
-
+                                    Visibility="{Binding AWPConfigModel.Video2Visibility, Converter={StaticResource BoolConverter}}"
+                                    Content="{Binding AWPConfigModel.Monitor2_Video}">
                     </ContentControl>
-                    <Grid Width="50" Height="50" 
-                          VerticalAlignment="Top"
-                          HorizontalAlignment="Left" 
-                          Margin="5">
-
-                        <Ellipse Fill="Black"/>
-                        <Ellipse Fill="#FF41A6FF"
-                                 Margin="3"/>
-                        <Label Background="Transparent"
-                           Foreground="#FF0D0037"
-                           Content="2"
-                           Margin="0,-6"
-                           HorizontalContentAlignment="Center"
-                           FontFamily="{StaticResource Default}"
-                           FontSize="40" FontWeight="Bold"/>
-                    </Grid>
-                </Grid>
-            </ToggleButton>
-            <ToggleButton x:Name="Monitor3_ToggleButton"
-                          IsChecked="{Binding animatedWallpaperConfigModel.Monitor3}"
-                          Visibility="{Binding animatedWallpaperConfigModel.Monitor3_Visible,Converter={StaticResource BoolConverter}}"
-                          Style="{StaticResource DF_ToggleButton_Border}">
-                <Grid Height="{Binding RelativeSource={
-                                RelativeSource AncestorType={x:Type ToggleButton}}, 
-                                Path=ActualHeight}"
-                      Width="{Binding RelativeSource={
-                                RelativeSource AncestorType={x:Type ToggleButton}}, 
-                                Path=ActualWidth}"
-                      VerticalAlignment="Center"
-                      HorizontalAlignment="Center">
+                </Border>
+                <ToggleButton x:Name="Monitor2_ToggleButton"
+                          IsChecked="{Binding AWPConfigModel.Monitor2}"
+                          Visibility="{Binding AWPConfigModel.Monitor2_Visible,Converter={StaticResource BoolConverter}}"  
+                          Style="{StaticResource DF_ToggleButton_Border}"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          d:IsChecked="False">
+                </ToggleButton>
+            </Grid>
+            <Grid Height="auto" Width="auto">
+                <Border>
                     <ContentControl x:Name="Monitor3_Video"
-                                    d:Content="{views:AnimatedWallpaperView}"
-                                    Content="{Binding animatedWallpaperConfigModel.Monitor3_Video}">
+                                    Visibility="{Binding AWPConfigModel.Video3Visibility, Converter={StaticResource BoolConverter}}"
+                                    Content="{Binding AWPConfigModel.Monitor3_Video}">
                     </ContentControl>
-                    <Grid Width="50" Height="50" 
-                          VerticalAlignment="Top"
-                          HorizontalAlignment="Left" 
-                          Margin="5">
-
-                        <Ellipse Fill="Black"/>
-                        <Ellipse Fill="#FFFF3C3C"
-                                 Margin="3"/>
-                        <Label Background="Transparent"
-                               Foreground="#FF0D0037"
-                               Content="3"
-                               Margin="0,-6"
-                               HorizontalContentAlignment="Center"
-                               FontFamily="{StaticResource Default}"
-                               FontSize="40" FontWeight="Bold"/>
-                    </Grid>
-                </Grid>
-            </ToggleButton>
-            
+                </Border>
+                <ToggleButton x:Name="Monitor3_ToggleButton"
+                          IsChecked="{Binding AWPConfigModel.Monitor3}"
+                          Visibility="{Binding AWPConfigModel.Monitor3_Visible,Converter={StaticResource BoolConverter}}"  
+                          Style="{StaticResource DF_ToggleButton_Border}"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          d:IsChecked="True">
+                </ToggleButton>
+            </Grid>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" 
@@ -149,42 +116,34 @@
                 <TranslateTransform Y="200"/>
             </StackPanel.RenderTransform>
 
-            <StackPanel Orientation="Horizontal">
-
-                <Button Style="{StaticResource DF_Button_Border}"
-                        Command="{Binding SelectVideoCommand}">
-                    <Image Source="\Icons\Icons_Folder.png" 
-                                        Stretch="Uniform" Margin="11,10,6,10"/>
-                </Button>
-                <Button Style="{StaticResource DF_Button_Border}"
-                        Command="{Binding ActivateCommand}">
-                    <Image Source="\Icons\Icons_Play.png" 
-                                        Stretch="Uniform" Margin="15,15,10,15"/>
-                </Button>
-                <Button Style="{StaticResource DF_Button_Border}"
-                        Command="{Binding StopCommand}">
-                    <Image Source="\Icons\Icons_Pause.png" 
-                                        Stretch="Uniform" Margin="10"/>
-                </Button>
-                <Button Style="{StaticResource DF_Button_Border}"
-                        Content="Right"
-                        Command="{Binding RotateClockwiseCommand}">
-                </Button>
-            </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Style="{StaticResource DF_Button_Border}"
-                        Command="{Binding VolumeUpCommand}">
-                    <Image Source="\Icons\Icons_Plus.png" 
-                                        Stretch="Uniform" Margin="10"/>
-                </Button>
                 <Button Style="{StaticResource DF_Button_Border}"
                         Command="{Binding VolumeDownCommand}">
                     <Image Source="\Icons\Icons_Minus.png" 
                                         Stretch="Uniform" Margin="10"/>
                 </Button>
                 <Button Style="{StaticResource DF_Button_Border}"
+                        Command="{Binding VolumeUpCommand}">
+                    <Image Source="\Icons\Icons_Plus.png" 
+                                        Stretch="Uniform" Margin="10"/>
+                </Button>
+                <Button Style="{StaticResource DF_Button_Border}"
                         Command="{Binding MuteCommand}" Content="Mute">
+                </Button>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center">
+                <Button Style="{StaticResource DF_Button_Border}"
+                        Command="{Binding VideoPlayCommand}">
+                    <Image Source="\Icons\Icons_Play.png" 
+                                        Stretch="Uniform" Margin="15,15,10,15"/>
+                </Button>
+                <Button Style="{StaticResource DF_Button_Border}"
+                        Command="{Binding VideoPauseCommand}">
+                    <Image Source="\Icons\Icons_Pause.png" 
+                                        Stretch="Uniform" Margin="10"/>
                 </Button>
             </StackPanel>
         </StackPanel>

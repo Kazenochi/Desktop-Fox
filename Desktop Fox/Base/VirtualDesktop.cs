@@ -201,7 +201,7 @@ namespace DesktopFox
                 Screen s = Screen.AllScreens[wallpaper.myMonitor.Number-1];
                 BackgroundWindow backgroundWindow = new BackgroundWindow();
 
-                if (wallpaper.myMonitor.Number > 0)
+                if (wallpaper.myMonitor.Name > MonitorEnum.MainMonitor)
                 {
                     widthFaktor = (SystemParameters.PrimaryScreenWidth / wallpaper.myMonitor.Width);
                 }
@@ -210,7 +210,7 @@ namespace DesktopFox
                 backgroundWindow.Left = s.Bounds.Left * widthFaktor;
 
                 backgroundWindow.Width = SystemParameters.PrimaryScreenWidth;
-                backgroundWindow.Height = SystemParameters.PrimaryScreenHeight;
+                backgroundWindow.Height = SystemParameters.PrimaryScreenWidth;
 
                 if (debug)
                 {

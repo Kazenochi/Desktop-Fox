@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.TextFormatting;
 using LibVLCSharp.Shared;
+using Windows.UI.WindowManagement;
 
 namespace DesktopFox.MVVM.ViewModels
 {
@@ -74,7 +75,11 @@ namespace DesktopFox.MVVM.ViewModels
             AWPConfigModel.SourceUri = DF_FolderDialog.openSingleFileDialog() ?? "";
             if (AWPConfigModel.SourceUri == null || AWPConfigModel.SourceUri == "") return;
 
-            tmpWallpaper ??= WallpaperBuilder.makeWallpaper(vDesk, 1, AWPConfigModel.SourceUri, framesPerSecond: FPS.Preview);
+            if(tmpWallpaper == null)
+                tmpWallpaper = WallpaperBuilder.makeWallpaper(vDesk, 1, AWPConfigModel.SourceUri, framesPerSecond: FPS.Preview);
+            else         
+                tmpWallpaper.myMediaUri = AWPConfigModel.SourceUri;
+
 
             for (int i = 0; i < vDesk.getMonitorCount(); i++)
             {
@@ -93,11 +98,13 @@ namespace DesktopFox.MVVM.ViewModels
 
             if(vDesk.getWallpapers.First().Volume == VLCVolume.Mute)
             {
+                AWPConfigModel.IsMuted = false;
                 vDesk.getWallpapers.First().Volume = AWPConfigModel.Volume;
             }       
             else
             {
                 AWPConfigModel.Volume = vDesk.getWallpapers.First().Volume;
+                AWPConfigModel.IsMuted = true;
                 vDesk.getWallpapers.First().Volume = VLCVolume.Mute;
             }              
         }
@@ -107,8 +114,11 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         private void VolumeUp()
         {
-            if (vDesk.getWallpapers.Count <= 0) return;
+            if (vDesk.getWallpapers == null || vDesk.getWallpapers.Count <= 0) return;
+            if (vDesk.getWallpapers.First().Volume.Next() == VLCVolume.Mute) return;
+
             vDesk.getWallpapers.First().Volume = vDesk.getWallpapers.First().Volume.Next();
+            AWPConfigModel.Volume = vDesk.getWallpapers.First().Volume;
         }
 
         /// <summary>
@@ -116,8 +126,11 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         private void VolumeDown()
         {
-            if (vDesk.getWallpapers.Count <= 0) return;
+            if (vDesk.getWallpapers == null || vDesk.getWallpapers.Count <= 0) return;
+            if (vDesk.getWallpapers.First().Volume.Previous() == VLCVolume.Vol_150) return;
+
             vDesk.getWallpapers.First().Volume = vDesk.getWallpapers.First().Volume.Previous();
+            AWPConfigModel.Volume = vDesk.getWallpapers.First().Volume;
         }
 
         private void VideoPlay()
@@ -159,6 +172,8 @@ namespace DesktopFox.MVVM.ViewModels
 
             for (int i = 0; i < vDesk.getMonitorCount(); i++)
             {
+                //if (AWPConfigModel._monitorVideos[i] == null) continue;
+
                 AWPConfigModel._monitorVideos[i] = new AnimatedWallpaperView(tmpWallpaper); 
             }
             AWPConfigModel.RaisePropertyChanged();
@@ -169,32 +184,35 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         public void CheckSavedWallpapers()
         {
-        if (vDesk.getWallpapers == null || vDesk.getWallpapers.Count == 0) return;
+            if (vDesk.getWallpapers == null || vDesk.getWallpapers.Count == 0) return;
 
-        var wallpapers = vDesk.getWallpapers;
-        Wallpaper wallpaperBluePrint = wallpapers.First();
-        wallpaperBluePrint = WallpaperBuilder.ChangeToPreview(wallpaperBluePrint);
-        AWPConfigModel.SourceUri = wallpapers.First().myMediaUri;   
+            var wallpapers = vDesk.getWallpapers;
+            Wallpaper wallpaperBluePrint = DF_Json.objectCopy(wallpapers.First());       
+            AWPConfigModel.SourceUri = wallpaperBluePrint.myMediaUri;   
+            AWPConfigModel.Volume = wallpaperBluePrint.Volume;
+            
+            wallpaperBluePrint = WallpaperBuilder.ChangeToPreview(wallpaperBluePrint);
+            tmpWallpaper = wallpaperBluePrint;
 
-        foreach (var wallpaper in wallpapers)
-        {
-            switch (wallpaper.myMonitor.Name)
+            foreach (var wallpaper in wallpapers)
             {
-                case MonitorEnum.MainMonitor:
-                    AWPConfigModel.Monitor1 = true;
-                    AWPConfigModel.Monitor1_Video = new AnimatedWallpaperView(wallpaperBluePrint);
-                    break;
+                switch (wallpaper.myMonitor.Name)
+                {
+                    case MonitorEnum.MainMonitor:
+                        AWPConfigModel.Monitor1 = true;
+                        AWPConfigModel.Monitor1_Video = new AnimatedWallpaperView(wallpaperBluePrint);
+                        break;
                     
-                case MonitorEnum.SecondMonitor:
-                    AWPConfigModel.Monitor2 = true;
-                    AWPConfigModel.Monitor2_Video = new AnimatedWallpaperView(wallpaperBluePrint);
-                    break;
+                    case MonitorEnum.SecondMonitor:
+                        AWPConfigModel.Monitor2 = true;
+                        AWPConfigModel.Monitor2_Video = new AnimatedWallpaperView(wallpaperBluePrint);
+                        break;
                         
-                case MonitorEnum.ThirdMonitor:
-                    AWPConfigModel.Monitor3 = true;
-                    AWPConfigModel.Monitor3_Video = new AnimatedWallpaperView(wallpaperBluePrint);
-                    break;
-                }
+                    case MonitorEnum.ThirdMonitor:
+                        AWPConfigModel.Monitor3 = true;
+                        AWPConfigModel.Monitor3_Video = new AnimatedWallpaperView(wallpaperBluePrint);
+                        break;
+                    }
             }
         }
 
@@ -205,7 +223,7 @@ namespace DesktopFox.MVVM.ViewModels
         {
             if (AWPConfigModel.SourceUri == null) return;
             AWPConfigModel.PlayPauseToggle = true;
-
+            
             List<int> monitorList = new List<int>();
 
             if (AWPConfigModel.Monitor1)

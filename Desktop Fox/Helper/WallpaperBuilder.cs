@@ -50,6 +50,7 @@ namespace DesktopFox
         static public Wallpaper ChangeToPreview(Wallpaper wallpaper)
         {
             wallpaper.myFPS = FPS.Preview;
+            wallpaper.Volume = VLCVolume.Mute;
             return wallpaper;
         }
     }

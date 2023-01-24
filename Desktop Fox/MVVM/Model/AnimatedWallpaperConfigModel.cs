@@ -34,9 +34,18 @@ namespace DesktopFox.MVVM.Model
 
         private VLCRotation _rotation = VLCRotation.None;
         public VLCRotation Rotation { get { return _rotation; } set { _rotation = value; RaisePropertyChanged(nameof(Rotation)); } }
-
+   
+        /// <summary>
+        /// Backupvariable um Volume Zwischen zu Speichern
+        /// </summary>
+        public VLCVolume Volume { get { return _volume; } set { _volume = value; VolumeProgress = (int)value; } }
         private VLCVolume _volume = VLCVolume.Mute;
-        public VLCVolume Volume { get { return _volume;} set { _volume = value; RaisePropertyChanged(nameof(Volume)); } }
+
+        private int _volumeProgress;
+        public int VolumeProgress { get { return _volumeProgress; } set { _volumeProgress = value; RaisePropertyChanged(nameof(VolumeProgress)); } }
+
+        private bool _isMuted = false;
+        public bool IsMuted { get { return _isMuted; } set { _isMuted = value; RaisePropertyChanged(nameof(IsMuted)); } }
 
     }
 }

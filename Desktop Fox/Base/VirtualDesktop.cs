@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
@@ -129,10 +130,20 @@ namespace DesktopFox
             if (wallpapers.Count != 0)
                 clearWallpapers();
 
+            //Sicherheitsabfrage um zu gewährliesten das nur von einem Video die Audio abgespielt wird.
+            for(int i = 0; i < monitors.Count;i++)
+            {
+                if(i == 0)
+                    wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitors[i], wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, wallpaperBluePrint.Volume));
+                else
+                    wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitors[i], wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, VLCVolume.Mute));
+            }
+            /*
             foreach(int monitor in monitors)
             {
                 wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitor, wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, wallpaperBluePrint.Volume));
             }  
+            */
             buildDesktop();
         }
 

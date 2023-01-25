@@ -12,12 +12,6 @@ namespace DesktopFox.MVVM.Model
         public string SourceUri { get { return _sourceUri; } set { _sourceUri = value; RaisePropertyChanged(nameof(SourceUri)); } }
         private string _sourceUri = "";
 
-        /// <summary>
-        /// Toggle Variable für die Anzeige der Play/Pause Buttons in <see cref="AnimatedWallpaperConfigView"/>
-        /// </summary>
-        public bool PlayPauseToggle { get { return _playPauseToggle; } set { _playPauseToggle = value; RaisePropertyChanged(nameof(PlayPauseToggle)); } }
-        private bool _playPauseToggle = false;
-
         #region Visibility Binding der Monitor Toggle Buttons in Config View
         public bool[] _monitorVisibility = new bool[3];
         public bool Monitor1_Visible { get { return _monitorVisibility[0]; } set { _monitorVisibility[0] = value; RaisePropertyChanged(nameof(Monitor1_Visible)); } }
@@ -63,5 +57,23 @@ namespace DesktopFox.MVVM.Model
         /// </summary>
         public bool IsMuted { get { return _isMuted; } set { _isMuted = value; RaisePropertyChanged(nameof(IsMuted)); } }
         private bool _isMuted = false;
+
+        /// <summary>
+        /// Lock Variable die für das Blockieren der Steuerelemente zuständig ist, befor ein Video Ausgewählt ist
+        /// </summary>
+        public bool VideoPreviewEnable { get { return _videoPreviewEnable; } set { _videoPreviewEnable = value; RaisePropertyChanged(nameof(VideoPreviewEnable)); } }
+        private bool _videoPreviewEnable = false;
+
+        /// <summary>
+        /// Lock Variable die die Soundsteuerelemente Blockiert
+        /// </summary>
+        public bool AudioEnable { get { return _audioEnable; } set { _audioEnable = value; RaisePropertyChanged(nameof(AudioEnable)); } }
+        private bool _audioEnable = false;
+
+        /// <summary>
+        /// Lock Variable die Activierungs Buttons
+        /// </summary>
+        public bool ActivateControlEnable { get { return _activateControlEnable; } set { _activateControlEnable = value; RaisePropertyChanged(nameof(ActivateControlEnable)); } }
+        private bool _activateControlEnable = false;
     }
 }

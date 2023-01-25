@@ -13,7 +13,7 @@
                             MinWidth="200"                        
                             Background="Transparent">
                         <Border x:Name="PART_Track"
-                                CornerRadius="30"
+                                CornerRadius="7.5"
                                 Background="{TemplateBinding Background}"
                                 ClipToBounds="True"
                                 BorderThickness="1">
@@ -29,7 +29,7 @@
                             </Border.BorderBrush>
                             <Border x:Name="PART_Indicator"
                                         ClipToBounds="True"
-                                        CornerRadius="30,0,0,30"
+                                        CornerRadius="7.5,0,0,7.5"
                                         HorizontalAlignment="Left"
                                         BorderBrush="{StaticResource BorderBrush}"
                                         Background="{TemplateBinding Foreground}"

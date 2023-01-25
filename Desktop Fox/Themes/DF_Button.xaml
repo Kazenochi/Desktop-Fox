@@ -47,7 +47,11 @@
                                 CornerRadius="30"
                                 Background="{TemplateBinding Background}">
                             <ContentPresenter VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"/>
+                                              HorizontalAlignment="Center">
+                                <ContentPresenter.RenderTransform>
+                                    <ScaleTransform/>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
                         </Border>
                         <Border Width="63" Height="63"
                                 CornerRadius="31"
@@ -70,6 +74,8 @@
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="{StaticResource BorderBrush}"/>
             </Trigger>
+
+           
         </Style.Triggers>
     </Style>
 

@@ -38,21 +38,38 @@ namespace DesktopFox.MVVM.ViewModels
                         AWPConfigModel.Monitor1_Video = new AnimatedWallpaperView(tmpWallpaper);                     
                     else
                         AWPConfigModel.Monitor1_Video = null;
+
+                    CheckActivateControlLock();
                     break;
+
                 case (nameof(AWPConfigModel.Monitor2)):
                     if (AWPConfigModel.Monitor2 && tmpWallpaper != null)
                         AWPConfigModel.Monitor2_Video = new AnimatedWallpaperView(tmpWallpaper);
                     else
                         AWPConfigModel.Monitor2_Video = null;
+
+                    CheckActivateControlLock();
                     break;
+
                 case (nameof(AWPConfigModel.Monitor3)):
                     if (AWPConfigModel.Monitor3 && tmpWallpaper != null)
                         AWPConfigModel.Monitor3_Video = new AnimatedWallpaperView(tmpWallpaper);
                     else
                         AWPConfigModel.Monitor3_Video = null;
+
+                    CheckActivateControlLock();
                     break;
+
+                case (nameof(AWPConfigModel.SourceUri)):
+                    if(AWPConfigModel.SourceUri == "")
+                        AWPConfigModel.VideoPreviewEnable = false;
+                    else
+                        AWPConfigModel.VideoPreviewEnable = true;
+                    break;
+                   
             }
         }
+
 
         #region Commands
 
@@ -116,8 +133,9 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         private void SelectVideo()
         {
-            AWPConfigModel.SourceUri = DF_FolderDialog.openSingleFileDialog() ?? "";
-            if (AWPConfigModel.SourceUri == null || AWPConfigModel.SourceUri == "") return;
+            var tmpUri = DF_FolderDialog.openSingleFileDialog();
+            if (tmpUri == null) return;
+            AWPConfigModel.SourceUri = tmpUri;
 
             if(tmpWallpaper == null)
                 tmpWallpaper = WallpaperBuilder.makeWallpaper(vDesk, 1, AWPConfigModel.SourceUri, framesPerSecond: FPS.Preview);
@@ -125,6 +143,15 @@ namespace DesktopFox.MVVM.ViewModels
                 tmpWallpaper.myMediaUri = AWPConfigModel.SourceUri;
 
             RefreshVideos();
+        }
+
+        private void CheckActivateControlLock()
+        {
+            AWPConfigModel.ActivateControlEnable = false;
+            foreach(var i in AWPConfigModel._monitorVideos)
+            {
+                if(i != null) AWPConfigModel.ActivateControlEnable = true;
+            }
         }
 
         /// <summary>
@@ -261,7 +288,7 @@ namespace DesktopFox.MVVM.ViewModels
         }
 
         /// <summary>
-        /// Überprüfen der gespeicherten Wallpaper in <see cref="VirtualDesktop.wallpapers"/> und anzeigen der Videos.
+        /// Überprüfen der gespeicherten Wallpaper in <see cref="VirtualDesktop.wallpapers"/> und anzeigen der Videos falls welche geladen wurden.
         /// </summary>
         public void CheckSavedWallpapers()
         {
@@ -271,7 +298,6 @@ namespace DesktopFox.MVVM.ViewModels
                 return;
             }
                       
-
             var wallpapers = vDesk.getWallpapers;
             Wallpaper wallpaperBluePrint = DF_Json.objectCopy(wallpapers.First());       
             AWPConfigModel.SourceUri = wallpaperBluePrint.myMediaUri;   
@@ -300,6 +326,8 @@ namespace DesktopFox.MVVM.ViewModels
                         break;
                     }
             }
+            CheckActivateControlLock();
+            AWPConfigModel.AudioEnable = true;
         }
 
         /// <summary>
@@ -310,7 +338,6 @@ namespace DesktopFox.MVVM.ViewModels
             if (AWPConfigModel.SourceUri == null) return;
             if (tmpWallpaper == null) return;
 
-            AWPConfigModel.PlayPauseToggle = true;
             
             List<int> monitorList = new List<int>();
 
@@ -326,18 +353,29 @@ namespace DesktopFox.MVVM.ViewModels
             if(monitorList.Count > 0)
             {
                 vDesk.newAnimatedWPs(monitorList, tmpWallpaper);
-            }            
+            }
+            AWPConfigModel.AudioEnable = true;
         }
 
         /// <summary>
         /// Bereinigt den Desktop Hintergrund von allen Fenstern
         /// </summary>
         private void StopVideo()
-        {
-            AWPConfigModel.PlayPauseToggle = false;
+        {          
+            AWPConfigModel.AudioEnable = false;
             vDesk.clearWallpapers();
         }
 
+        #endregion
+
+        #region Funktionsablauf der Lock Variablen
+        /*
+        1. Auswählen des Ordner Pfads oder laden Des Ordnerpfads rufen den Listener auf und Schalten Die Monitor Frei
+        2. Anwählen der Monitore Löst das Toggle Event des Listeners auf und Über die Checkfunktion wird ermittelt ob die Controls verfügbar sind
+           Diese können nur gewählt werden wenn mindestens ein Monitor Ausgewählt ist.
+        3. Wenn über die Controlls ein Bild als Hintergrund Aktiviert wird. Werden Die Audio Elemente Freigeschaltet.
+         
+         */
         #endregion
     }
 }

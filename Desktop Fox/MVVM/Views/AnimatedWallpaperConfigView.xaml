@@ -30,25 +30,27 @@
                         Margin="0,20">
 
                 <Button Style="{StaticResource DF_Button_Border}"
-                Command="{Binding SelectVideoCommand}">
+                        Command="{Binding SelectVideoCommand}">
                     <Image Source="\Icons\Icons_Folder.png" 
                                         Stretch="Uniform" Margin="11,10,6,10"/>
                 </Button>
-                <Button Style="{StaticResource DF_Button_Border}"
-                        Visibility="{Binding AWPConfigModel.PlayPauseToggle, Converter={StaticResource BoolVisibilityConverter}, ConverterParameter=false}"
-                        d:Visibility="Collapsed"
+                <Button Style="{StaticResource DF_Button_Border}"                     
+                        IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
                         Command="{Binding ActivateCommand}">
                     <Image Source="\Icons\Icons_Play.png" 
                                         Stretch="Uniform" Margin="15,15,10,15"/>
                 </Button>
+
+
                 <Button x:Name="StopButton"
-                    Style="{StaticResource DF_Button_Border}"
-                    Visibility="{Binding AWPConfigModel.PlayPauseToggle, Converter={StaticResource BoolConverter}}" 
-                    Command="{Binding StopCommand}">
+                        Style="{StaticResource DF_Button_Border}"
+                        IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
+                        Command="{Binding StopCommand}">
                     <Image Source="\Icons\Icons_Cancel.png" 
                            Stretch="Uniform" Margin="13"/>
                 </Button>
                 <Button Style="{StaticResource DF_Button_Border}"
+                        IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
                         Command="{Binding RotateClockwiseCommand}">
                     <Image Source="\Icons\Icons_Arrow_ClockRotation.png" 
                            Stretch="Uniform" Margin="10,8,10,10"/>
@@ -67,11 +69,12 @@
                         </ContentControl>
                     </Border>
                     <ToggleButton x:Name="Monitor1_ToggleButton"
-                          IsChecked="{Binding AWPConfigModel.Monitor1}"
-                          Visibility="{Binding AWPConfigModel.Monitor1_Visible,Converter={StaticResource BoolConverter}}"  
-                          Style="{StaticResource DF_ToggleButton_Border}"
-                          VerticalContentAlignment="Center"
-                          HorizontalContentAlignment="Center"
+                                  IsChecked="{Binding AWPConfigModel.Monitor1}"
+                                  Visibility="{Binding AWPConfigModel.Monitor1_Visible,Converter={StaticResource BoolConverter}}"  
+                                  Style="{StaticResource DF_ToggleButton_Border}"
+                                  VerticalContentAlignment="Center"
+                                  HorizontalContentAlignment="Center"
+                                  IsEnabled="{Binding AWPConfigModel.VideoPreviewEnable}"
                           d:IsChecked="True">
                     </ToggleButton>
                 </Grid>
@@ -83,12 +86,13 @@
                         </ContentControl>
                     </Border>
                     <ToggleButton x:Name="Monitor2_ToggleButton"
-                          IsChecked="{Binding AWPConfigModel.Monitor2}"
-                          Visibility="{Binding AWPConfigModel.Monitor2_Visible,Converter={StaticResource BoolConverter}}"  
-                          Style="{StaticResource DF_ToggleButton_Border}"
-                          VerticalContentAlignment="Center"
-                          HorizontalContentAlignment="Center"
-                          d:IsChecked="False">
+                                  IsChecked="{Binding AWPConfigModel.Monitor2}"
+                                  Visibility="{Binding AWPConfigModel.Monitor2_Visible,Converter={StaticResource BoolConverter}}"  
+                                  Style="{StaticResource DF_ToggleButton_Border}"
+                                  VerticalContentAlignment="Center"
+                                  HorizontalContentAlignment="Center"
+                                  IsEnabled="{Binding AWPConfigModel.VideoPreviewEnable}"
+                                  d:IsChecked="False">
                     </ToggleButton>
                 </Grid>
                 <Grid Height="auto" Width="auto">
@@ -99,12 +103,13 @@
                         </ContentControl>
                     </Border>
                     <ToggleButton x:Name="Monitor3_ToggleButton"
-                          IsChecked="{Binding AWPConfigModel.Monitor3}"
-                          Visibility="{Binding AWPConfigModel.Monitor3_Visible,Converter={StaticResource BoolConverter}}"  
-                          Style="{StaticResource DF_ToggleButton_Border}"
-                          VerticalContentAlignment="Center"
-                          HorizontalContentAlignment="Center"
-                          d:IsChecked="True">
+                                  IsChecked="{Binding AWPConfigModel.Monitor3}"
+                                  Visibility="{Binding AWPConfigModel.Monitor3_Visible,Converter={StaticResource BoolConverter}}"  
+                                  Style="{StaticResource DF_ToggleButton_Border}"
+                                  VerticalContentAlignment="Center"
+                                  HorizontalContentAlignment="Center"
+                                  IsEnabled="{Binding AWPConfigModel.VideoPreviewEnable}"
+                                  d:IsChecked="True">
                     </ToggleButton>
                 </Grid>
             </StackPanel>
@@ -117,12 +122,14 @@
                 <StackPanel Orientation="Horizontal" 
                         HorizontalAlignment="Center">
                     <Button Style="{StaticResource DF_Button_Border}"
-                        Command="{Binding VideoPlayCommand}">
+                            IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
+                            Command="{Binding VideoPlayCommand}">
                         <Image Source="\Icons\Icons_Play.png" 
                                         Stretch="Uniform" Margin="15,15,10,15"/>
                     </Button>
                     <Button Style="{StaticResource DF_Button_Border}"
-                        Command="{Binding VideoPauseCommand}">
+                            IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
+                            Command="{Binding VideoPauseCommand}">
                         <Image Source="\Icons\Icons_Pause.png" 
                                         Stretch="Uniform" Margin="12"/>
                     </Button>
@@ -136,9 +143,10 @@
                     HorizontalAlignment="Stretch"/>
 
                 <StackPanel Orientation="Vertical" 
+                            IsEnabled="{Binding AWPConfigModel.AudioEnable}"
                             HorizontalAlignment="Center">
                     <ProgressBar x:Name="SoundProgressBar"
-                                 Height="60" Width="400"
+                                 Height="15" Width="400"
                                  IsEnabled="{Binding AWPConfigModel.IsMuted, Converter={StaticResource BoolInverter}}"
                                  Value="{Binding AWPConfigModel.VolumeProgress}"
                                  Margin="0,0,0,10"

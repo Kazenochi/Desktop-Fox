@@ -97,8 +97,9 @@ namespace DesktopFox.MVVM.Views
 
         public void Controls_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (_mediaPlayer == null) return;
             _wallpaper.PropertyChanged -= Wallpaper_PropertyChanged;
+            if (_mediaPlayer == null) return;
+            
             try
             {
                 _mediaPlayer.Stop();

@@ -438,10 +438,12 @@ namespace DesktopFox
                 BlurOpacity = 0.2;
                 BlurStrength = 20;
                 MainPanel.AnimateInSoft();
+                ((AnimatedWallpaperConfigVM)((AnimatedWallpaperConfigView)MainPanel).DataContext).ShowVideosOnOpen();
                 ClickPaneVisible = false;
             }
             else if (MainPanel == this.AnimatedWPConfigView)
             {
+                ((AnimatedWallpaperConfigVM)((AnimatedWallpaperConfigView)MainPanel).DataContext).HideVideosOnClose();
                 MainPanel.AnimateOut();
                 BlurOpacity = 1;
                 BlurStrength = 0;

@@ -33,6 +33,7 @@ namespace DesktopFox
         private readonly VirtualDesktop vDesk;
         private WallpaperSaves wallpaperSaves;
         public Shuffler shuffler;
+        private bool firstStart = true;
 
         /// <summary>
         /// Konstruktor
@@ -148,6 +149,7 @@ namespace DesktopFox
                 MW.lbPictures.ItemsSource = mainWindowVM.MainWindowModel._pictureViews;
 
 
+                firstStart = false;
                 //Auslagern nach mainWindowModel
                 foreach (var i in mainWindowVM.MainWindowModel._pictureViewVMs)
                 {
@@ -163,6 +165,7 @@ namespace DesktopFox
                 mainWindowVM.PreviewView.DataContext = previewVM;
                 animatedWPConfigVM.CheckSavedWallpapers();
                 mainWindowVM.AnimatedWPConfigView.DataContext = animatedWPConfigVM;
+
             }
             mainWindowVM.SetCurrentMain(MW);
             shuffler.startPreviewShuffleTimer();

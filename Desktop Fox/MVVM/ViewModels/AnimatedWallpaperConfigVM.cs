@@ -18,14 +18,14 @@ namespace DesktopFox.MVVM.ViewModels
 
         public AnimatedWallpaperConfigVM(VirtualDesktop virtualDesktop)
         {
-            AWPConfigModel.PropertyChanged += AWPConfigModel_PropertyChanged;
+            
             this.vDesk = virtualDesktop;
 
             for(int i = 0; i < vDesk.getMonitorCount(); i++)
             {
                 AWPConfigModel._monitorVisibility[i] = true;
             }
-
+            AWPConfigModel.PropertyChanged += AWPConfigModel_PropertyChanged;
             //CheckSavedWallpapers();
         }
 
@@ -34,34 +34,78 @@ namespace DesktopFox.MVVM.ViewModels
             switch(e.PropertyName)
             {
                 case (nameof(AWPConfigModel.Monitor1)):
-
+                    if (AWPConfigModel.Monitor1 && tmpWallpaper != null)
+                        AWPConfigModel.Monitor1_Video = new AnimatedWallpaperView(tmpWallpaper);                     
+                    else
+                        AWPConfigModel.Monitor1_Video = null;
+                    break;
+                case (nameof(AWPConfigModel.Monitor2)):
+                    if (AWPConfigModel.Monitor2 && tmpWallpaper != null)
+                        AWPConfigModel.Monitor2_Video = new AnimatedWallpaperView(tmpWallpaper);
+                    else
+                        AWPConfigModel.Monitor2_Video = null;
+                    break;
+                case (nameof(AWPConfigModel.Monitor3)):
+                    if (AWPConfigModel.Monitor3 && tmpWallpaper != null)
+                        AWPConfigModel.Monitor3_Video = new AnimatedWallpaperView(tmpWallpaper);
+                    else
+                        AWPConfigModel.Monitor3_Video = null;
                     break;
             }
         }
 
         #region Commands
 
+        /// <summary>
+        /// Kommando zum Aufrufen des <see cref="DF_FolderDialog.openSingleFileDialog"/> und einlesen des Videopfades
+        /// </summary>
         public ICommand SelectVideoCommand { get { return new DF_Command.DelegateCommand(o => SelectVideo()); } }
 
+        /// <summary>
+        /// Kommando das die Videos in der Preview auf dem Desktop anzeigt. <see cref="ActivateVideo"/> & <see cref="VirtualDesktop.newAnimatedWPs(List{int}, Wallpaper)"/>
+        /// </summary>
         public ICommand ActivateCommand { get { return new DF_Command.DelegateCommand(o => ActivateVideo()); } }
 
+        /// <summary>
+        /// Kommando das die Vidoes auf dem Desktop Collected und löscht. <see cref="StopVideo"/> & <see cref="VirtualDesktop.clearWallpapers(bool)"/>
+        /// </summary>
         public ICommand StopCommand { get { return new DF_Command.DelegateCommand(o => StopVideo()); } }
 
+        /// <summary>
+        /// Kommando das die Lautstärke des Videos Stumm schaltet oder den Alten Wert Wiederherstellt.
+        /// </summary>
         public ICommand MuteCommand { get { return new DF_Command.DelegateCommand(o => MuteAudio()); } }
 
+        /// <summary>
+        /// Kommando zur Erhöhung der Lautstärke der Videos
+        /// </summary>
         public ICommand VolumeUpCommand { get { return new DF_Command.DelegateCommand(o => VolumeUp()); } }
 
+        /// <summary>
+        /// Kommando zum Verringern der Lautstärke der Videos
+        /// </summary>
         public ICommand VolumeDownCommand { get { return new DF_Command.DelegateCommand(o => VolumeDown()); } }
 
+        /// <summary>
+        /// Kommando um die Videos zu Starten (Sowohl Vorschau als auch Desktop) 
+        /// </summary>
         public ICommand VideoPlayCommand { get { return new DF_Command.DelegateCommand(o => VideoPlay()); } }
 
+        /// <summary>
+        /// Kommando um die Videos zu Pausiere (Sowohl Vorschau als auch Desktop)
+        /// </summary>
         public ICommand VideoPauseCommand { get { return new DF_Command.DelegateCommand(o => VideoPause()); } }
 
+        /// <summary>
+        /// Kommando Rotieren des Videos im Uhrzeigersinn in den gespeicherten Werten <see cref="VLCRotation"/>
+        /// </summary>
         public ICommand RotateClockwiseCommand { get { return new DF_Command.DelegateCommand(o => RotateClockwise()); } }
 
+        #region Kommandos zum Anzeigen oder Verstecken der Videos
         public ICommand HideVideo1Command { get { return new DF_Command.DelegateCommand(o => AWPConfigModel.Monitor1 = !AWPConfigModel.Monitor1); } }
         public ICommand HideVideo2Command { get { return new DF_Command.DelegateCommand(o => AWPConfigModel.Monitor2 = !AWPConfigModel.Monitor2); } }
         public ICommand HideVideo3Command { get { return new DF_Command.DelegateCommand(o => AWPConfigModel.Monitor3 = !AWPConfigModel.Monitor3); } }
+        #endregion
 
         #endregion
 
@@ -80,12 +124,7 @@ namespace DesktopFox.MVVM.ViewModels
             else         
                 tmpWallpaper.myMediaUri = AWPConfigModel.SourceUri;
 
-
-            for (int i = 0; i < vDesk.getMonitorCount(); i++)
-            {
-                AWPConfigModel._monitorVideos[i] = new AnimatedWallpaperView(tmpWallpaper);
-            }
-            AWPConfigModel.RaisePropertyChanged();
+            RefreshVideos();
         }
 
         /// <summary>
@@ -133,6 +172,10 @@ namespace DesktopFox.MVVM.ViewModels
             AWPConfigModel.Volume = vDesk.getWallpapers.First().Volume;
         }
 
+        /// <summary>
+        /// Startet die Wiedergabe der Videos. Variable <see cref="Wallpaper.PlayPause"/> wird gesetzt und 
+        /// von <see cref="AnimatedWallpaperView.Wallpaper_PropertyChanged(object?, System.ComponentModel.PropertyChangedEventArgs)"/> verarbeitet.
+        /// </summary>
         private void VideoPlay()
         {
             if(vDesk.getWallpapers != null)
@@ -147,6 +190,10 @@ namespace DesktopFox.MVVM.ViewModels
             tmpWallpaper.PlayPause = VLCState.Playing;
         }
 
+        /// <summary>
+        /// Stoppt die Wiedergabe der Videos. Variable <see cref="Wallpaper.PlayPause"/> wird gesetzt und 
+        /// von <see cref="AnimatedWallpaperView.Wallpaper_PropertyChanged(object?, System.ComponentModel.PropertyChangedEventArgs)"/> verarbeitet.
+        /// </summary>
         private void VideoPause()
         {
             if(vDesk.getWallpapers!= null)
@@ -162,6 +209,47 @@ namespace DesktopFox.MVVM.ViewModels
         }
 
         /// <summary>
+        /// Baut die Vorschau wieder neu auf
+        /// </summary>
+        private void RefreshVideos()
+        {
+            if (tmpWallpaper == null) return;
+
+            for (int i = 0; i < AWPConfigModel._monitors.Length; i++)
+            {
+                if (!AWPConfigModel._monitors[i]) continue;
+                AWPConfigModel._monitorVideos[i] = new AnimatedWallpaperView(tmpWallpaper);
+            }
+            
+            AWPConfigModel.RaisePropertyChanged();
+        }
+
+        /// <summary>
+        /// Setzt die Sichtbarkeit von allen Videos auf Collapsed
+        /// </summary>
+        public void HideVideosOnClose()
+        {
+            AWPConfigModel.Video1Visibility = false;
+            AWPConfigModel.Video2Visibility = false;
+            AWPConfigModel.Video3Visibility = false;
+        }
+
+        /// <summary>
+        /// Setzt die Sichtbarkeit von allen Videos auf Visible
+        /// </summary>
+        public void ShowVideosOnOpen()
+        {
+            if(AWPConfigModel.Monitor1)
+                AWPConfigModel.Video1Visibility = true;
+
+            if(AWPConfigModel.Monitor2)
+                AWPConfigModel.Video2Visibility = true;
+
+            if(AWPConfigModel.Monitor3)
+                AWPConfigModel.Video3Visibility = true;
+        }
+
+        /// <summary>
         /// Rotiert die Vorschaubilder im Uhrzeigersinn anhand der in <see cref="VLCRotation"/> vorgegebenen Werte
         /// </summary>
         private void RotateClockwise()
@@ -169,14 +257,7 @@ namespace DesktopFox.MVVM.ViewModels
             if (tmpWallpaper == null) return;
 
             tmpWallpaper.myRotation = tmpWallpaper.myRotation.Next();
-
-            for (int i = 0; i < vDesk.getMonitorCount(); i++)
-            {
-                //if (AWPConfigModel._monitorVideos[i] == null) continue;
-
-                AWPConfigModel._monitorVideos[i] = new AnimatedWallpaperView(tmpWallpaper); 
-            }
-            AWPConfigModel.RaisePropertyChanged();
+            RefreshVideos();
         }
 
         /// <summary>
@@ -184,7 +265,12 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         public void CheckSavedWallpapers()
         {
-            if (vDesk.getWallpapers == null || vDesk.getWallpapers.Count == 0) return;
+            if (vDesk.getWallpapers == null || vDesk.getWallpapers.Count == 0)
+            {
+                RefreshVideos();
+                return;
+            }
+                      
 
             var wallpapers = vDesk.getWallpapers;
             Wallpaper wallpaperBluePrint = DF_Json.objectCopy(wallpapers.First());       
@@ -222,6 +308,8 @@ namespace DesktopFox.MVVM.ViewModels
         private void ActivateVideo()
         {
             if (AWPConfigModel.SourceUri == null) return;
+            if (tmpWallpaper == null) return;
+
             AWPConfigModel.PlayPauseToggle = true;
             
             List<int> monitorList = new List<int>();

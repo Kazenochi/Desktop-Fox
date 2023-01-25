@@ -56,9 +56,11 @@
                 </Border>
                 <Button x:Name="button_Rename"
                         Style="{StaticResource DF_Button_Border}"
-                        Content="Rename"
                         FontSize="20"
-                        Command="{Binding RenameSetCommand}"/>
+                        Command="{Binding RenameSetCommand}">
+                    <Image Source="\Icons\Icons_Rename.png" 
+                           Stretch="Uniform" Margin="13"/>
+                </Button>
             </StackPanel>
             <Border Background="{StaticResource BorderBrush}"
                     HorizontalAlignment="Stretch"

@@ -124,17 +124,10 @@
                 <Button x:Name="button_Animation"        
                         FontSize="20"
                         Grid.Column="0" 
-                        Content="Mov"
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding AnimatedToggleCommand}">
-                    <!--
-                    <Border Margin="5">
-                        <Grid>
-                            <Image Source="\Icons\Icons_Plus.png" 
-                                   Stretch="Uniform" Margin="5"/>
-                        </Grid>
-                    </Border>
-                    -->
+                    <Image Source="\Icons\Icons_Video.png" 
+                                   Stretch="Uniform" Margin="10"/>
                 </Button>
                 
                 <Button x:Name="button_Settings" 

@@ -43,13 +43,15 @@
                 </Button>
                 <Button x:Name="StopButton"
                     Style="{StaticResource DF_Button_Border}"
-                    Content="X"
                     Visibility="{Binding AWPConfigModel.PlayPauseToggle, Converter={StaticResource BoolConverter}}" 
                     Command="{Binding StopCommand}">
+                    <Image Source="\Icons\Icons_Cancel.png" 
+                           Stretch="Uniform" Margin="13"/>
                 </Button>
                 <Button Style="{StaticResource DF_Button_Border}"
-                        Content="Right"
                         Command="{Binding RotateClockwiseCommand}">
+                    <Image Source="\Icons\Icons_Arrow_ClockRotation.png" 
+                           Stretch="Uniform" Margin="10,8,10,10"/>
                 </Button>
             </StackPanel>
 
@@ -122,7 +124,7 @@
                     <Button Style="{StaticResource DF_Button_Border}"
                         Command="{Binding VideoPauseCommand}">
                         <Image Source="\Icons\Icons_Pause.png" 
-                                        Stretch="Uniform" Margin="10"/>
+                                        Stretch="Uniform" Margin="12"/>
                     </Button>
                 </StackPanel>
 
@@ -159,7 +161,9 @@
                                    Stretch="Uniform" Margin="10"/>
                         </Button>
                         <Button Style="{StaticResource DF_Button_Border}"
-                                Command="{Binding MuteCommand}" Content="Mute">
+                                Command="{Binding MuteCommand}">
+                            <Image Source="\Icons\Icons_Music_Toon.png" 
+                                    Stretch="Uniform" Margin="9,10,11,10"/>
                         </Button>
                     </StackPanel>
 

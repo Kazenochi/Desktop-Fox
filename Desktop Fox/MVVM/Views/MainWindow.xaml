@@ -71,7 +71,8 @@
                         HorizontalAlignment="Center"
                         Panel.ZIndex="3">
                 <Grid>
-                    <Button x:Name="button_StopSet"     
+                    <Button x:Name="button_StopSet" 
+                            ToolTip="Stop the wallpaper manager"
                             Grid.Column="0" 
                             IsEnabled="{Binding CanActivate, Converter={StaticResource BoolInverter}}"
                             Command="{Binding StopSetCommand}"
@@ -79,7 +80,8 @@
                         <Image Source="\Icons\Icons_Pause.png" 
                                         Stretch="Uniform" Margin="10"/>
                     </Button>
-                    <Button x:Name="button_ActivateSet" 
+                    <Button x:Name="button_ActivateSet"
+                            ToolTip="Start the wallpaper manager"
                             Grid.Column="0" 
                             Visibility="{Binding CanActivate, Converter={StaticResource BoolConverter}}"
                             Command="{Binding ActivateSetCommand}"
@@ -92,6 +94,7 @@
                 </Grid>
 
                 <Button x:Name="button_ActiveSet" 
+                        ToolTip="Selected monitor on which the pictureset should be displayed"
                             Grid.Column="0" 
                             FontSize="20"
                             Command="{Binding NextMonitorCommand}"
@@ -112,7 +115,8 @@
 
 
 
-                <Button x:Name="button_Add"          
+                <Button x:Name="button_Add"  
+                        ToolTip="Add a new Pictureset"
                         Grid.Column="0" 
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding AddSetViewCommand}">
@@ -121,7 +125,8 @@
                                     Stretch="Uniform" Margin="10"/>
                 </Button>
 
-                <Button x:Name="button_Animation"        
+                <Button x:Name="button_Animation" 
+                        ToolTip="Opens the configuration menu for video wallpaper"
                         FontSize="20"
                         Grid.Column="0" 
                         Style="{StaticResource DF_Button_Border}"
@@ -130,7 +135,8 @@
                                    Stretch="Uniform" Margin="10"/>
                 </Button>
                 
-                <Button x:Name="button_Settings" 
+                <Button x:Name="button_Settings"
+                        ToolTip="Opens the settings menu"
                         FontSize="20"
                         Grid.Column="1" 
                         Style="{StaticResource DF_Button_Border}"

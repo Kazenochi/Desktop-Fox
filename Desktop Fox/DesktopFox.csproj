@@ -22,9 +22,11 @@
     <None Remove="Icons\Icons_Day.png" />
     <None Remove="Icons\Icons_DayNight.png" />
     <None Remove="Icons\Icons_Delete.png" />
+    <None Remove="Icons\Icons_Denie.png" />
     <None Remove="Icons\Icons_Folder.png" />
     <None Remove="Icons\Icons_Minus.png" />
     <None Remove="Icons\Icons_Monitor.png" />
+    <None Remove="Icons\Icons_Music_Simple.png" />
     <None Remove="Icons\Icons_Music_Toon.png" />
     <None Remove="Icons\Icons_Night.png" />
     <None Remove="Icons\Icons_Pause.png" />
@@ -34,6 +36,7 @@
     <None Remove="Icons\Icons_Save.png" />
     <None Remove="Icons\Icons_Settings.png" />
     <None Remove="Icons\Icons_Stop.png" />
+    <None Remove="Icons\Icons_Transfer.png" />
     <None Remove="Icons\Icons_Video.png" />
     <None Remove="MVVM\Views\DF_Icon.ico" />
   </ItemGroup>
@@ -72,6 +75,7 @@
     <Resource Include="Icons\Icons_Delete.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\Icons_Denie.png" />
     <Resource Include="Icons\Icons_Folder.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -81,6 +85,7 @@
     <Resource Include="Icons\Icons_Monitor.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\Icons_Music_Simple.png" />
     <Resource Include="Icons\Icons_Music_Toon.png" />
     <Resource Include="Icons\Icons_Night.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -102,6 +107,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Icons_Stop.png" />
+    <Resource Include="Icons\Icons_Transfer.png" />
     <Resource Include="Icons\Icons_Video.png" />
     <Resource Include="MVVM\Views\DF_Icon.ico" />
   </ItemGroup>

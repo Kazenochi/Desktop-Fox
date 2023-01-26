@@ -30,44 +30,47 @@
                         VerticalAlignment="Top"
                         Margin="0,5,0,0">
             <RadioButton x:Name="radio_Shuffle_False"
-                             Content="Linear" 
-                             FontSize="20"          
-                             Margin="5,5,5,5"
-                             IsChecked="{Binding settings.Shuffle, Converter={StaticResource BoolInverter}}"
-                             Style="{StaticResource DF_RadioButton_Border}"/>
+                         ToolTip="Shows the wallpapers in order"
+                         Content="Linear" 
+                         FontSize="20"          
+                         Margin="5,5,5,5"
+                         IsChecked="{Binding settings.Shuffle, Converter={StaticResource BoolInverter}}"
+                         Style="{StaticResource DF_RadioButton_Border}"/>
             <RadioButton x:Name="radio_Shuffle_True"
-                             Content="Shuffle" 
-                             FontSize="20"
-                             Margin="5,5,5,5"
-                             IsChecked="{Binding settings.Shuffle}"
-                             Style="{StaticResource DF_RadioButton_Border}"/>
+                         ToolTip="Shuffles the wallpapers"
+                         Content="Shuffle" 
+                         FontSize="20"
+                         Margin="5,5,5,5"
+                         IsChecked="{Binding settings.Shuffle}"
+                         Style="{StaticResource DF_RadioButton_Border}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" 
-                        Grid.Row="3"
-                        HorizontalAlignment="Center" Margin="0,0,0,10">
+                    Grid.Row="3"
+                    HorizontalAlignment="Center" 
+                    Margin="0,0,0,10">
             <TextBlock FontFamily="{StaticResource Default}"
-                           Foreground="{StaticResource TextBrush}"
-                           FontSize="20"
-                           VerticalAlignment="Center">
-                    Intervall time
+                       Foreground="{StaticResource TextBrush}"
+                       FontSize="20"
+                       VerticalAlignment="Center">
+                    Wallpaper intervall time
             </TextBlock>
 
             <Border x:Name="border1"
-                        Height="30" Width="70" 
-                        Background="{StaticResource ControlBrush}" 
-                        CornerRadius="15"
-                        Margin="10,0,10,0">
+                    Height="30" Width="70" 
+                    Background="{StaticResource ControlBrush}" 
+                    CornerRadius="15"
+                    Margin="10,0,10,0">
                 <TextBox x:Name="shuffleTime"
-                             MaxLength="3"
-                             Foreground="{StaticResource TextBrush}"
-                             FontSize="20"
-                             VerticalAlignment="Center"
-                             Background="Transparent"
-                             BorderBrush="Transparent"
-                             TextAlignment="Center"
-                             Margin="10,1,10,1"
-                             TextChanged="TextBox_TextChanged"
-                             Text="{Binding ShuffleModel.ShuffleTime}"/>
+                         MaxLength="3"
+                         Foreground="{StaticResource TextBrush}"
+                         FontSize="20"
+                         VerticalAlignment="Center"
+                         Background="Transparent"
+                         BorderBrush="Transparent"
+                         TextAlignment="Center"
+                         Margin="10,1,10,1"
+                         TextChanged="TextBox_TextChanged"
+                         Text="{Binding ShuffleModel.ShuffleTime}"/>
             </Border>
 
             <TextBlock FontFamily="{StaticResource Default}"
@@ -77,6 +80,7 @@
                     Min
             </TextBlock>
             <Button Grid.Column="1"
+                    ToolTip="Save the intervall time"
                     VerticalAlignment="Center"
                     Margin="30,0,0,0"
                     FontSize="20"

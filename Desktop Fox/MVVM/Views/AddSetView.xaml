@@ -24,7 +24,9 @@
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
-                               TextAlignment="Center"><Run Text="Please select the collection time"/></TextBlock>
+                               TextAlignment="Center"
+                               Text="Please select the collection type"/>
+                    
                     <StackPanel Orientation="Horizontal" 
                                 Grid.Row="1"
                                 HorizontalAlignment="Center"
@@ -32,6 +34,7 @@
                                 Margin="0,10,0,0">
                         
                         <RadioButton x:Name="radio_Day"
+                                     ToolTip="Adds the new pictures to the day collection of the set"
                                      FontSize="20"          
                                      Margin="20,5"
                                      Style="{StaticResource DF_RadioButton_Border_Round}" 
@@ -69,6 +72,7 @@
                         </RadioButton>
                         
                         <RadioButton x:Name="radio_Night"
+                                     ToolTip="Adds the new pictures to the night collection of the set"
                                      Margin="20,5"
                                      Style="{StaticResource DF_RadioButton_Border_Round}"
                                      IsChecked="{Binding Day, Converter={StaticResource BoolInverter}}">
@@ -121,7 +125,8 @@
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
-                               TextAlignment="Center"><Run Text="Please select a set"/></TextBlock>
+                               TextAlignment="Center"
+                               Text="Select set"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -140,6 +145,7 @@
                                     Grid.Column="1"
                                     HorizontalAlignment="Right">
                             <Button x:Name="button_CreateNewSet"
+                                    ToolTip="Generates a new pictureset for the new pictures. Name can be changed later."
                                     Content="New"
                                     FontSize="20"
                                     Style="{StaticResource DF_Button_Border}"
@@ -164,7 +170,8 @@
                                FontSize="20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
-                               TextAlignment="Center"><Run Text="Please select a folder"/></TextBlock>
+                               TextAlignment="Center"
+                               Text="Selected folder"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -180,6 +187,7 @@
                                Content="{Binding Path=AddSetModel.FolderPath}"
                                Grid.ColumnSpan="2"/>
                         <Button x:Name="button_SelectFolder"
+                                ToolTip="Select the folder containing the images you want to add."
                                 Style="{StaticResource DF_Button_Border}"
                                 HorizontalAlignment="Right"
                                 Grid.Column="1"
@@ -199,6 +207,7 @@
                         Margin="10"/>
                 <Grid>
                     <Button x:Name="button_AddPictures"
+                            ToolTip="Adds the new pictures to the selected set."
                             IsEnabled="{Binding CanAdd}"
                             Style="{StaticResource DF_Button_Border}"
                             Grid.Row="3"

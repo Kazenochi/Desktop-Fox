@@ -55,6 +55,7 @@
                     </Border.Style>
                 </Border>
                 <Button x:Name="button_Rename"
+                        ToolTip="Rename the selected pictureset"
                         Style="{StaticResource DF_Button_Border}"
                         FontSize="20"
                         Command="{Binding RenameSetCommand}">
@@ -72,6 +73,7 @@
                         HorizontalAlignment="Center"
                         Margin="5">
                 <RadioButton x:Name="radio_Day"
+                             ToolTip="Edit only the day collection of the selected pictureset"
                              Margin="5"
                              IsEnabled="{Binding CanDeleteDay}"
                              IsChecked="{Binding DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=1}"
@@ -106,6 +108,7 @@
                     </Grid>
                 </RadioButton>
                 <RadioButton x:Name="radio_Night"
+                             ToolTip="Edit only the night collection of the selected pictureset"
                              FontSize="20"
                              Margin="5"
                              IsEnabled="{Binding CanDeleteNight}"
@@ -141,6 +144,7 @@
                     </Grid>
                 </RadioButton>
                 <RadioButton x:Name="radio_Both"
+                             ToolTip="Edit both collections of the selected pictureset"
                              FontSize="20"
                              Margin="5"
                              IsEnabled="{Binding CanDeleteBoth}"
@@ -185,6 +189,7 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <Button IsEnabled="{Binding CanOpenFolder}"
+                        ToolTip="Opens the Windows Folder of the selected collection"
                         Command="{Binding OpenFolderCommand}"
                         Style="{StaticResource DF_Button_Border}">
                     <Border Margin="4,0,0,0">
@@ -202,6 +207,7 @@
                             Style="{StaticResource DF_Button_Border}"
                             Margin="0"/>
                     <Button x:Name="button_Delete"
+                            ToolTip="Delete the selected collection"
                             RenderOptions.BitmapScalingMode="LowQuality"
                             FontSize="20"  
                             Margin="0"

@@ -10,8 +10,8 @@
              mc:Ignorable="d" 
              HorizontalAlignment="Right"
              VerticalAlignment="Bottom"
-             d:DesignHeight="250" d:DesignWidth="900">
-    <Border Height="250" Width="650"
+             d:DesignHeight="350" d:DesignWidth="650">
+    <Border Height="350" Width="650"
             Background="Transparent"
             CornerRadius="20">
         <Grid>
@@ -28,7 +28,7 @@
                 <ContentControl x:Name="SettingsPage"
                                 Grid.Row="1"
                                 Content="{Binding CurrentView}"
-                                d:Content="{views:Settings_Info}"/>
+                                d:Content="{views:Settings_ShuffleView}"/>
             </Border>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom"
@@ -48,7 +48,7 @@
                              Style="{StaticResource DF_FolderRadioButton}" 
                              Command="{Binding DaytimeCommand}"/>
                 <RadioButton x:Name="settings_radio_Style"
-                             Content="Mode"
+                             Content="Monitors"
                              Style="{StaticResource DF_FolderRadioButton}" 
                              Command="{Binding StyleCommand}"/>
                 <RadioButton x:Name="settings_radio_DMode"

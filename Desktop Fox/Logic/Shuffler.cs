@@ -434,56 +434,8 @@ namespace DesktopFox
             for(int i = 0; i < GM.Gallery.activeSetsList.Count; i++)
             {
                 if (GM.Gallery.activeSetsList[i] == "Empty") continue;
-
                 DF_PicShuffle(vDesk.GetMonitor(i+1), GM.GetCollection(isDay, GM.Gallery.activeSetsList[i]));
-            }
-
-            /* Ziemlich unnötiges Zeug
-            
-            //Überprüft wieviele Monitore angesprochen werden müssen und gibt diese
-            //Information an den eigenen Shuffler weiter.
-            //Aktueller Stand und Bilder werden von Ihm abgefragt und neu belegt bzw. an den   
-            
-            //Sicherheitsabfrage falls der benutzer kein aktives Set ausgewählt hat. Für die Anderen Monitore wird dann das erste Set genommen
-            Collection tmpCol2;
-            Collection tmpCol3;
-
-            if (GM.getActiveSet(2) == null)
-                tmpCol2 = GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName);
-            else
-                tmpCol2 = GM.GetCollection(isDay, GM.getActiveSet(2, any: true).SetName);
-
-            if (GM.getActiveSet(3) == null)
-                tmpCol3 = GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName);
-            else
-                tmpCol3 = GM.GetCollection(isDay, GM.getActiveSet(3, any: true).SetName);
-
-
-            Debug.WriteLine("Start des Desktop Triggers: isDay = " + isDay);
-            //Note: Kann noch mit und zusammenfassung verbessert werdenforeach verbessert/erweitert werden....
-            switch (vDesk.getMonitorCount())
-            {
-                case 1:
-                    DF_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
-                    break;
-
-                case 2:
-                    DF_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
-                    DF_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
-                    break;
-
-                case 3:
-                    DF_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
-                    DF_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
-                    DF_PicShuffle(vDesk.getThirdMonitor.ID, tmpCol3, 3);
-                    break;
-                default:
-                    Debug.WriteLine("Fehler in Shuffler, beim ermitteln der Monitor Anzahl");
-                    break;
-            }
-            tmpCol2 = null;
-            tmpCol3 = null;
-            */
+            }    
         }
 
         #endregion

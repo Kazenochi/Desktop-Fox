@@ -312,6 +312,8 @@ namespace DesktopFox
         /// </summary>
         private void StopSet()
         {
+            GM ??= DF.GalleryManager;
+
             switch (SelectedMonitor)
             {
                 case 1: SelectedVM.pictureSet.IsActive1 = false; break;
@@ -329,7 +331,7 @@ namespace DesktopFox
         private void ActivateSet()
         {
             if (SelectedVM == null) return;
-            if(GM == null) GM = DF.GalleryManager;
+            GM ??= DF.GalleryManager;
 
             switch (SelectedMonitor)
             {

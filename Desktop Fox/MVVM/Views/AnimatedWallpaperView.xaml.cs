@@ -82,14 +82,14 @@ namespace DesktopFox.MVVM.Views
             if (_playLock) return;
 
             _libVLC = new LibVLC(_vlcCommands);
-            
+
             _mediaPlayer = new MediaPlayer(_libVLC)
             {
-                Volume = 0
+                Volume = 0,
+                CropGeometry = "16:9"
             };
 
-            this.VideoView.MediaPlayer = _mediaPlayer;
-            _mediaPlayer.CropGeometry = "16:9"; 
+            this.VideoView.MediaPlayer = _mediaPlayer;     
             using var media = new Media(_libVLC, new Uri(_mediaUri));
             this.VideoView.MediaPlayer.Play(media);
             _mediaPlayer.Volume = _volume;

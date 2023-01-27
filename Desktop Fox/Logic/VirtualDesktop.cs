@@ -221,7 +221,7 @@ namespace DesktopFox
                 backgroundWindow.Left = s.Bounds.Left * widthFaktor;
 
                 backgroundWindow.Width = SystemParameters.PrimaryScreenWidth;
-                backgroundWindow.Height = SystemParameters.PrimaryScreenWidth;
+                backgroundWindow.Height = SystemParameters.PrimaryScreenHeight;
 
                 if (debug)
                 {

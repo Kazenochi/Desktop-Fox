@@ -9,9 +9,11 @@
              xmlns:lvc="clr-namespace:LibVLCSharp.WPF;assembly=LibVLCSharp.WPF"
              d:DataContext="{d:DesignInstance Type=ViewModels:AnimatedWallpaperVM}"
              mc:Ignorable="d" 
+             VerticalAlignment="Stretch"
+             HorizontalAlignment="Stretch"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+
         <lvc:VideoView x:Name="VideoView">
-        </lvc:VideoView>
-    </Grid>
+            </lvc:VideoView>
+
 </UserControl>

@@ -4,6 +4,7 @@ using DesktopFox.MVVM.ViewModels;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -54,6 +55,7 @@ namespace DesktopFox
             SM.Settings.PropertyChanged += Shuffler_Settings_PropertyChanged;
             mainWindowVM.PropertyChanged += MainWindowVM_PropertyChanged;
             Task.Run(() => DaytimeTimerStart());
+            if (SM.Settings.IsRunning) PicShuffleStart();
         }
 
         private void MainWindowVM_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -76,7 +78,6 @@ namespace DesktopFox
                     else
                         PicShuffleStop();
 
-                    //daytimeTimerStart();
                     break;
                     
                 case nameof(SM.Settings.DesktopModeSingle):
@@ -220,11 +221,11 @@ namespace DesktopFox
         /// </summary>
         /// <param name="monitorID"></param>
         /// <param name="activeCol"></param>
-        private void DF_PicShuffle(String monitorID, Collection activeCol, int monitor)
+        private void DF_PicShuffle(Monitor monitor, Collection activeCol)
         {
             int tmpCount = 0;
             int[] tmpLockList;
-            switch (monitor)
+            switch (monitor.Number)
             {
                 case 1: tmpCount = picCount1; tmpLockList = lockList1; break;
                 case 2: tmpCount = picCount2; tmpLockList = lockList2; break;
@@ -266,7 +267,7 @@ namespace DesktopFox
                     if (match == false)
                         break;
                 }
-                vDesk.getWrapper.SetWallpaper(monitorID, activeCol.singlePics.ElementAt(tmpCount).Key);
+                vDesk.getWrapper.SetWallpaper(monitor.ID, activeCol.singlePics.ElementAt(tmpCount).Key);
             }
             else
             {
@@ -276,17 +277,17 @@ namespace DesktopFox
                 else
                     tmpCount = 0;
 
-                vDesk.getWrapper.SetWallpaper(monitorID, activeCol.singlePics.ElementAt(tmpCount).Key);
+                vDesk.getWrapper.SetWallpaper(monitor.ID, activeCol.singlePics.ElementAt(tmpCount).Key);
             }
 
-            Debug.Write("Ändern des Hintergrundes. Monitor: " + monitor + ", Zahl: " + tmpCount + ", LockListe: ");
+            Debug.Write("Ändern des Hintergrundes. Monitor: " + monitor.Number + ", Zahl: " + tmpCount + ", LockListe: ");
             foreach (var item in tmpLockList)
             {
                 Debug.Write(item + ", ");
             }
             Debug.WriteLine("");
             //Note: Wofür... Bestimmt wichtig :)... Rückgabe des Counters 
-            switch (monitor)
+            switch (monitor.Number)
             {
                 case 1: picCount1 = tmpCount; break;
                 case 2: picCount2 = tmpCount; break;
@@ -430,11 +431,19 @@ namespace DesktopFox
         /// <param name="e"></param>
         private void DesktopTimer_Trigger(object sender, System.Timers.ElapsedEventArgs e)
         {
+            for(int i = 0; i < GM.Gallery.activeSetsList.Count; i++)
+            {
+                if (GM.Gallery.activeSetsList[i] == "Empty") continue;
+
+                DF_PicShuffle(vDesk.GetMonitor(i+1), GM.GetCollection(isDay, GM.Gallery.activeSetsList[i]));
+            }
+
+            /* Ziemlich unnötiges Zeug
+            
             //Überprüft wieviele Monitore angesprochen werden müssen und gibt diese
             //Information an den eigenen Shuffler weiter.
-            //Aktueller Stand und Bilder werden von Ihm abgefragt und neu belegt bzw. an den         
-
-
+            //Aktueller Stand und Bilder werden von Ihm abgefragt und neu belegt bzw. an den   
+            
             //Sicherheitsabfrage falls der benutzer kein aktives Set ausgewählt hat. Für die Anderen Monitore wird dann das erste Set genommen
             Collection tmpCol2;
             Collection tmpCol3;
@@ -474,6 +483,7 @@ namespace DesktopFox
             }
             tmpCol2 = null;
             tmpCol3 = null;
+            */
         }
 
         #endregion

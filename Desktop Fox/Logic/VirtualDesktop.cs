@@ -305,6 +305,21 @@ namespace DesktopFox
         public IDictionary<MonitorEnum, Monitor> getMonitors { get { return monitorDict; } }
 
         /// <summary>
+        /// Gibt den verlangten System Monitor zurück
+        /// </summary>
+        /// <param name="number">Nummer des Monitors: 1=Main, 2=Second, 3=Third</param>
+        /// <returns></returns>
+        public Monitor GetMonitor(int number)
+        {
+            switch (number)
+            {
+                case 1: return monitorDict[MonitorEnum.MainMonitor]; break;
+                case 2: return monitorDict[MonitorEnum.SecondMonitor]; break;
+                case 3: return monitorDict[MonitorEnum.ThirdMonitor]; break;
+                default: Debug.WriteLine("Kein Monitor mit diesem Wert verfügbar"); return null; break;            
+            }
+        }
+        /// <summary>
         /// Gibt den Hauptmonitor des Systems zurück
         /// </summary>
         public Monitor getMainMonitor { get { return monitorDict[MonitorEnum.MainMonitor]; } }

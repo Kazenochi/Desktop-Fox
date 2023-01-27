@@ -53,7 +53,7 @@ namespace DesktopFox
             vDesk = virtualDesktop;
             SM.Settings.PropertyChanged += Shuffler_Settings_PropertyChanged;
             mainWindowVM.PropertyChanged += MainWindowVM_PropertyChanged;
-            Task.Run(() => daytimeTimerStart());
+            Task.Run(() => DaytimeTimerStart());
         }
 
         private void MainWindowVM_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -72,28 +72,28 @@ namespace DesktopFox
             {
                 case nameof(SM.Settings.IsRunning):
                     if (SM.Settings.IsRunning)
-                        picShuffleStart();                       
+                        PicShuffleStart();                       
                     else
-                        picShuffleStop();
+                        PicShuffleStop();
 
                     //daytimeTimerStart();
                     break;
                     
                 case nameof(SM.Settings.DesktopModeSingle):
                     if (SM.Settings.IsRunning)
-                        picShuffleStart();
+                        PicShuffleStart();
                     break;
 
                 //Reagiert auf Night da Beide angestoßen werden und Night der Letzte Wert ist der geändert wird.
                 case nameof(SM.Settings.NightStart):
-                    daytimeTimerStart();
+                    DaytimeTimerStart();
                     break;
 
                 default: return;
             }
         }
 
-        public void mWinHandler(MainWindow mainWindow)
+        public void MWinHandler(MainWindow mainWindow)
         {
             mWindow = mainWindow;
         }
@@ -107,8 +107,8 @@ namespace DesktopFox
         {
             if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
             {
-                previewTimerReset();
-                previewShuffleAsync();
+                PreviewTimerReset();
+                PreviewShuffleAsync();
             }
         }
 
@@ -117,11 +117,11 @@ namespace DesktopFox
         /// </summary>
         public void previewRefresh()
         {
-            previewTimerReset();
+            PreviewTimerReset();
             if(previewCount > 0)
                 previewCount--;
 
-            previewShuffleAsync();
+            PreviewShuffleAsync();
         }
 
         /// <summary>
@@ -131,13 +131,13 @@ namespace DesktopFox
         {
             if (previewVM.PreviewModel.FaderLock == false && GM.getPreviewSet() != null)
             {
-                previewTimerReset();
+                PreviewTimerReset();
                 previewCount = previewCount - 2;
                 if (previewCount < 0)
                 {
                     previewCount = GM.GetCollection(previewDay, GM.getPreviewSet().SetName).singlePics.Count - 1;
                 }
-                previewShuffleAsync();
+                PreviewShuffleAsync();
             }
         }
 
@@ -149,7 +149,7 @@ namespace DesktopFox
         /// Shuffle Funktion für den Windows eigenen Shuffel Modus. 
         /// </summary>
         /// <param name="path"></param>
-        public void winPicShuffle(String path)
+        public void WinPicShuffle(String path)
         {
             /* Shuffle Modus vom Wrapper. Shufflet
              * ACHTUNG Wechsel Passiert nur auf einem Monitor mit zwei monitoren verdoppelt sich die Zeit pro Monitor
@@ -178,29 +178,26 @@ namespace DesktopFox
         }
 
         /// <summary>
-        /// Startet anhand der Einstellungen die jeweiligen Manager.
+        /// Startet anhand der Einstellungen in <see cref="Settings.DesktopModeSingle"/> die jeweiligen Manager.
         /// </summary>
-        public void picShuffleStart()
+        public void PicShuffleStart()
         {  
-            if (SM.Settings.DesktopModeSingle && GM.getActiveSet() == null)
-                return;
-            else if (GM.getActiveSet(any: true) == null)
-                return;
+            if (SM.Settings.DesktopModeSingle && GM.getActiveSet() == null) return;
+            if (GM.getActiveSet(any: true) == null) return;
 
             Debug.WriteLine("Start des Wechsels von Windows und DF Shuffle. Einzelmodus = " + SM.Settings.DesktopModeSingle);
 
+            IsDayCheck();
+
             if (SM.Settings.DesktopModeSingle)
             {
-                stopDesktopTimer();
-                winPicShuffle(GM.GetCollection(isDay, GM.getActiveSet().SetName).folderDirectory);
+                StopDesktopTimer();
+                WinPicShuffle(GM.GetCollection(isDay, GM.getActiveSet().SetName).folderDirectory);
             }
             else
             {
-                startDesktopTimer();
-                stopWinDesktop();
-
-                //Einmaliges Anstoßen der Desktopfunktion beim Ändern der Einstellungen
-                //desktopTimer_Trigger(null, null);
+                StartDesktopTimer();
+                StopWinDesktop();
             }
 
         }
@@ -208,14 +205,14 @@ namespace DesktopFox
         /// <summary>
         /// Stoppt den Shuffle für den Desktophintergrund
         /// </summary>
-        public void picShuffleStop()
+        public void PicShuffleStop()
         {
             if (desktopShuffleTimer != null)
             {
                 desktopShuffleTimer.Stop();
                 //desktopShuffleTimer.Dispose();
             }
-            stopWinDesktop();
+            StopWinDesktop();
         }
 
         /// <summary>
@@ -223,7 +220,7 @@ namespace DesktopFox
         /// </summary>
         /// <param name="monitorID"></param>
         /// <param name="activeCol"></param>
-        private void df_PicShuffle(String monitorID, Collection activeCol, int monitor)
+        private void DF_PicShuffle(String monitorID, Collection activeCol, int monitor)
         {
             int tmpCount = 0;
             int[] tmpLockList;
@@ -300,7 +297,7 @@ namespace DesktopFox
         /// <summary>
         /// Funktion die das Große Preview Bild shuffelt
         /// </summary>
-        public async Task previewShuffleAsync()
+        public async Task PreviewShuffleAsync()
         {
             //Debug.WriteLine("Preview Shuffle ausgelöst");
             var tmpPreviewSet = GM.getPreviewSet();
@@ -328,9 +325,9 @@ namespace DesktopFox
         }
 
         /// <summary>
-        /// Überprüft was aktuell für eine Tageszeit ist und setzt das lokale Flag dafür
+        /// Überprüft anhand der Systemzeit die Tageszeit und setzt das lokale Flag (<see cref="isDay"/>) dafür
         /// </summary>
-        private async Task isDayCheck()
+        private void IsDayCheck()
         {
             TimeSpan dayStart = SM.Settings.DayStart;
             TimeSpan nightStart = SM.Settings.NightStart;
@@ -358,9 +355,10 @@ namespace DesktopFox
             }
 
 
-
+            /*
             if (SM.Settings.IsRunning)
-                Task.Run(() => picShuffleStart());
+                Task.Run(() => PicShuffleStart());
+            */
 
             Debug.WriteLine("Tageszeit wurde überprüft. Aktuell ist isDay: " + isDay);
         }
@@ -374,13 +372,13 @@ namespace DesktopFox
         /// <summary>
         /// Startet den Timer für den Desktop Shuffler
         /// </summary>
-        public void startDesktopTimer()
+        public void StartDesktopTimer()
         {
             //Timer der nur für die eigene Shuffle Funktion benötigt wird. Wird ausschließlich für den Multimode verwendet.
             if (desktopShuffleTimer == null)
             {
                 desktopShuffleTimer = new Timer(SM.Settings.ShuffleTime.TotalMilliseconds); //Timer läuft in MS Umwandlung ("Wert vom Benutzer" * Minute * Sekunde)
-                desktopShuffleTimer.Elapsed += desktopTimer_Trigger;
+                desktopShuffleTimer.Elapsed += DesktopTimer_Trigger;
                 desktopShuffleTimer.Enabled = true;
                 Debug.WriteLine("DF Desktop Timer hat gestartet");
             }
@@ -391,7 +389,7 @@ namespace DesktopFox
                 desktopShuffleTimer.Start();
                 Debug.WriteLine("DF Timer läuft bereits. Zeit wurde zurückgesetzt");
             }
-            desktopTimer_Trigger(null, null);
+            DesktopTimer_Trigger(null, null);
             if (!SM.Settings.IsRunning)
                 SM.Settings.IsRunning = true;
         }
@@ -399,7 +397,7 @@ namespace DesktopFox
         /// <summary>
         /// Stoppt den Desktop Timer
         /// </summary>
-        public void stopDesktopTimer()
+        public void StopDesktopTimer()
         {
             if (desktopShuffleTimer != null)
             {
@@ -412,7 +410,7 @@ namespace DesktopFox
         /// <summary>
         /// Stoppt den Windows Shuffler
         /// </summary>
-        public void stopWinDesktop(Boolean Shutdown = false)
+        public void StopWinDesktop(Boolean Shutdown = false)
         {
             vDesk.getWrapper.SetSlideshowShuffle(false);
             var monitors = vDesk.getMonitors;
@@ -430,7 +428,7 @@ namespace DesktopFox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void desktopTimer_Trigger(object sender, System.Timers.ElapsedEventArgs e)
+        private void DesktopTimer_Trigger(object sender, System.Timers.ElapsedEventArgs e)
         {
             //Überprüft wieviele Monitore angesprochen werden müssen und gibt diese
             //Information an den eigenen Shuffler weiter.
@@ -457,18 +455,18 @@ namespace DesktopFox
             switch (vDesk.getMonitorCount())
             {
                 case 1:
-                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
+                    DF_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
                     break;
 
                 case 2:
-                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
-                    df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
+                    DF_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
+                    DF_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
                     break;
 
                 case 3:
-                    df_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
-                    df_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
-                    df_PicShuffle(vDesk.getThirdMonitor.ID, tmpCol3, 3);
+                    DF_PicShuffle(vDesk.getMainMonitor.ID, GM.GetCollection(isDay, GM.getActiveSet(any: true).SetName), 1);
+                    DF_PicShuffle(vDesk.getSecondMonitor.ID, tmpCol2, 2);
+                    DF_PicShuffle(vDesk.getThirdMonitor.ID, tmpCol3, 3);
                     break;
                 default:
                     Debug.WriteLine("Fehler in Shuffler, beim ermitteln der Monitor Anzahl");
@@ -485,14 +483,14 @@ namespace DesktopFox
         /// <summary>
         /// Start des Preview Timers
         /// </summary>
-        public void startPreviewShuffleTimer()
+        public void StartPreviewShuffleTimer()
         {
             if (previewTimer == null)
             {
                 previewTimer = new Timer();
                 //timer.Tick += new EventHandler(previewShuffle);
                 previewTimer.Interval = PreviewShuffleTime.TotalMilliseconds;
-                previewTimer.Elapsed += new ElapsedEventHandler(dispatcher);
+                previewTimer.Elapsed += new ElapsedEventHandler(Dispatcher);
                 previewTimer.Start();
                 Debug.WriteLine("Timer gestartet");
             }
@@ -502,13 +500,13 @@ namespace DesktopFox
                 previewTimer.Start();
             }
             //Einmaliger Aufruf um Bild in der Vorschau zu aktualisieren
-            dispatcher(null, null);
+            Dispatcher(null, null);
         }
 
         /// <summary>
         /// Stoppt den Preview Shuffle Timer
         /// </summary>
-        public void stopPreviewShuffleTimer()
+        public void StopPreviewShuffleTimer()
         {
             if (previewTimer != null)
                 previewTimer.Stop();
@@ -520,10 +518,10 @@ namespace DesktopFox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void dispatcher(object sender, ElapsedEventArgs e)
+        public void Dispatcher(object sender, ElapsedEventArgs e)
         {
             //Fire and Forget. Es muss nicht auf das Laden und wechseln der Bilder gewartet werden.
-            previewShuffleAsync();
+            PreviewShuffleAsync();
         }
 
         #endregion
@@ -532,7 +530,7 @@ namespace DesktopFox
         /// <summary>
         /// Setzt die vergangene Zeit des Preview Timers auf 0 zurück
         /// </summary>
-        public void previewTimerReset()
+        public void PreviewTimerReset()
         {
             if (previewTimer != null)
             {
@@ -545,7 +543,7 @@ namespace DesktopFox
         /// Gibt den Status des Preview Timers zurück
         /// </summary>
         /// <returns></returns>
-        public Boolean isRunningPreviewTimer()
+        public Boolean IsRunningPreviewTimer()
         {
             if (previewTimer == null)
                 return false;
@@ -557,13 +555,14 @@ namespace DesktopFox
         /// Berechnet die Zeit bis zum nächsten Tageszeitenwechsel und Startet den Timer falls diese noch nicht vorhanden ist.
         /// Falls ein Tageswechsel erfolgt ist wird auserdem das aktive Set weitergeschoben falls diese option aktiv ist
         /// </summary>
-        public void daytimeTimerStart()
+        public void DaytimeTimerStart()
         {
             TimeSpan untilTimeChange;
             DateTime timeNow = System.DateTime.Now;
             TimeSpan currentTime = timeNow.TimeOfDay;
 
-            isDayCheck();
+            IsDayCheck();
+
             if (isDay)
                 untilTimeChange = SM.Settings.NightStart - currentTime;
             else
@@ -577,7 +576,7 @@ namespace DesktopFox
                 //Beim Start des Programms wird festgestellt wieviel Zeit noch bis zum nächsten Tageszeitwechsel bleibt.
 
                 daytimeTimer = new Timer(untilTimeChange.TotalMilliseconds);
-                daytimeTimer.Elapsed += currentDaytime_Trigger;
+                daytimeTimer.Elapsed += CurrentDaytime_Trigger;
                 daytimeTimer.Enabled = true;
                 Debug.WriteLine("Tageszeiten Timer hat gestartet. Verbleibende Zeit zum Wechsel: " + untilTimeChange);
             }
@@ -591,34 +590,37 @@ namespace DesktopFox
                 Debug.WriteLine("Tageszeiten Timer hat aktualisiert. Verbleibende Zeit zum Wechsel: " + untilTimeChange);
             }
 
-            //Neues Setzten des Tageswechsel
-            //Tageswechsel erfolgt immer beim ende der Nacht und nicht zum wechsel des Datums um ein wechsel zwischen den Sets wärend der Laufzeit zu verhindern
-            //Ein Set wird als (Tag -> Nacht) und nicht als (Nacht -> Tag -> Nacht) gehandelt 
-            if (isDay && DateTime.Now > SM.Settings.NextDaySwitch)
-            {
-                //Weiterschieben der Sets Jedes Set wird am Tageswechsel um eine position in der Liste weitergeschoben
-                //
-                if (SM.Settings.AutoSetChange)
-                {
-                    for (int i = 1; i <= 3; i++)
-                    {
-                        if (GM.getActiveSet(i) != null)
-                            GM.setActiveSet(GM.getNextSet(GM.getActiveSet(i).SetName), i);
-                    }
-                }
+            AutoSetChange();
+        }
 
-                SM.Settings.NextDaySwitch = DateTime.Now.Subtract(DateTime.Now.TimeOfDay).Add(TimeSpan.FromDays(1).Add(SM.Settings.DayStart));
-                Debug.WriteLine("SetSwitch ausgelöst. Nächster Tageswechsel: " + SM.Settings.NextDaySwitch);
-            }
-            else
+        /// <summary>
+        /// Neues Setzten des Tageswechsel
+        /// Tageswechsel erfolgt immer beim Ende der Nacht und nicht zum wechsel des Datums um einen Wechsel zwischen den Sets wärend der Laufzeit zu verhindern
+        /// Ein Set wird als (Tag -> Nacht) und nicht als (Nacht -> Tag -> Nacht) gehandelt 
+        /// </summary>
+        private void AutoSetChange()
+        {
+            if (!isDay || DateTime.Now < SM.Settings.NextDaySwitch)
             {
                 SM.Settings.NextDaySwitch = DateTime.Now.Subtract(DateTime.Now.TimeOfDay).Add(TimeSpan.FromDays(1).Add(SM.Settings.DayStart));
                 Debug.WriteLine("Debugging -> Nächster Tageswechsel: " + SM.Settings.NextDaySwitch);
+                return;
             }
 
-            //Debug
-            //DateTime newDaySwitch = DateTime.Now.Subtract(DateTime.Now.TimeOfDay).Add(TimeSpan.FromDays(1).Add(SM.getDayStart()));
+            //Weiterschieben der Sets Jedes Set wird am Tageswechsel um eine position in der Liste weitergeschoben
+            //
+            if (SM.Settings.AutoSetChange)
+            {
+                for (int i = 1; i <= 3; i++)
+                {
+                    if (GM.getActiveSet(i) == null) continue;
 
+                    GM.setActiveSet(GM.getNextSet(GM.getActiveSet(i).SetName), i);
+                }
+            }
+
+            SM.Settings.NextDaySwitch = DateTime.Now.Subtract(DateTime.Now.TimeOfDay).Add(TimeSpan.FromDays(1).Add(SM.Settings.DayStart));
+            Debug.WriteLine("SetSwitch ausgelöst. Nächster Tageswechsel: " + SM.Settings.NextDaySwitch);
         }
 
         /// <summary>
@@ -626,12 +628,12 @@ namespace DesktopFox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void currentDaytime_Trigger(object sender, System.Timers.ElapsedEventArgs e)
+        private void CurrentDaytime_Trigger(object sender, System.Timers.ElapsedEventArgs e)
         {
             isDay = !isDay;
-            Task.Run(() => daytimeTimerStart());
+            Task.Run(() => DaytimeTimerStart());
             if (SM.Settings.IsRunning)
-                Task.Run(() => picShuffleStart());
+                Task.Run(() => PicShuffleStart());
             Debug.WriteLine("Tageszeittrigger wurde ausgelöst. isDay = " + isDay);
         }
 
@@ -659,7 +661,7 @@ namespace DesktopFox
                 previewTimer.Dispose();
             }
 
-            stopWinDesktop();
+            StopWinDesktop();
 
             //SM.setRunning(false);
         }

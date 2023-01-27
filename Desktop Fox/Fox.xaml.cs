@@ -9,6 +9,7 @@ using DesktopFox.MVVM.ViewModels;
 using System.ComponentModel;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace DesktopFox
 {
@@ -43,15 +44,15 @@ namespace DesktopFox
             InitializeComponent();
             this.Hide();
             NotifyIcon notifyIcon = new NotifyIcon(this);
-            fileChecker = new FileChecker();
+            fileChecker = new FileChecker();          
             loadFiles();
             shadow = new GalleryShadow(gallery);
 
             vDesk = new VirtualDesktop(wallpaperSaves: wallpaperSaves);
             SM = new SettingsManager(this, settings, vDesk);
             mainWindowVM = new MainWindowVM(this);
-            GM = new GalleryManager(this, SM, gallery, shadow, mainWindowVM);         
-            
+            GM = new GalleryManager(this, SM, gallery, shadow, mainWindowVM);
+
             addSetVM = new AddSetVM(mainWindowVM, GM);
             settingsVM = new SettingsVM(settings);
             contextPopupVM = new ContextPopupVM(mainWindowVM, GM);
@@ -143,7 +144,7 @@ namespace DesktopFox
             if(MW == null) 
             { 
                 MW ??= new MainWindow();
-                shuffler.mWinHandler(MW);
+                shuffler.MWinHandler(MW);
                 MW.Closed += MW_Closed;
                 MW.DataContext = mainWindowVM;
                 MW.lbPictures.ItemsSource = mainWindowVM.MainWindowModel._pictureViews;
@@ -168,7 +169,7 @@ namespace DesktopFox
 
             }
             mainWindowVM.SetCurrentMain(MW);
-            shuffler.startPreviewShuffleTimer();
+            shuffler.StartPreviewShuffleTimer();
             if(mainWindowVM.MainWindowModel._pictureViews.Count > 0)
                 mainWindowVM.SelectedItem = mainWindowVM.MainWindowModel._pictureViews.ElementAt(0);
 
@@ -192,7 +193,7 @@ namespace DesktopFox
             }
             mainWindowVM.MainWindowModel._pictureViews.Clear();
             mainWindowVM.SetCurrentMain(null);
-            shuffler.mWinHandler(null);
+            shuffler.MWinHandler(null);
             MW.DataContext = null;
             MW.Closed -= MW_Closed;
             MW = null;

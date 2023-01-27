@@ -188,6 +188,7 @@
                      Grid.Row="1"         
                      BorderBrush="Transparent" 
                      Background="Transparent"
+                     ItemsSource="{Binding MainWindowModel._pictureViews}"
                      SelectedItem="{Binding SelectedItem}"                  
                      local:DragAndDropExtension.ScrollOnDragDrop="True"
                      Panel.ZIndex="3">

@@ -64,6 +64,8 @@ namespace DesktopFox
             ReadyPictureVMs();
         }
 
+        #region Getter 
+
         /// <summary>
         /// Gibt die Instanz des Settings Manager zurück
         /// </summary>
@@ -99,6 +101,10 @@ namespace DesktopFox
             
             return null;
         }
+
+        #endregion
+
+        #region Methoden
 
         /// <summary>
         /// Erstmalige Initialisierung der View Models für die Einträge in der Galerie und Model zuweisung der PictureSets
@@ -175,6 +181,10 @@ namespace DesktopFox
             MW.Show();
         }
 
+        #endregion
+
+        #region App/Window Close Methoden
+
         /// <summary>
         /// Funktion für das schließen des Haupfensters. Nicht benötigte Elemente werden entbunden
         /// </summary>
@@ -187,13 +197,15 @@ namespace DesktopFox
 
             mainWindowVM.CurrentView = null;
             SaveOnClose(lastClose: false);
-            
+
+            /*
             foreach (var i in mainWindowVM.MainWindowModel._pictureViews)
             {
                 i.DataContext = null; 
             }
             mainWindowVM.MainWindowModel._pictureViews.Clear();
-            
+            */
+
             mainWindowVM.SetCurrentMain(null);
             shuffler.MWinHandler(null);
             MW.DataContext = null;
@@ -244,5 +256,7 @@ namespace DesktopFox
                 MW.ClosingStoryboardFinished(null, null);
             SaveOnClose();
         }
+
+        #endregion
     }
 }

@@ -19,6 +19,7 @@
     <None Remove="Assets\Nunito-VariableFont_wght.ttf" />
     <None Remove="Icons\Icons_Arrow_ClockRotation.png" />
     <None Remove="Icons\Icons_Cancel.png" />
+    <None Remove="Icons\Icons_Checkmark.png" />
     <None Remove="Icons\Icons_Day.png" />
     <None Remove="Icons\Icons_DayNight.png" />
     <None Remove="Icons\Icons_Delete.png" />
@@ -66,6 +67,7 @@
     <Resource Include="Assets\Nunito-VariableFont_wght.ttf" />
     <Resource Include="Icons\Icons_Arrow_ClockRotation.png" />
     <Resource Include="Icons\Icons_Cancel.png" />
+    <Resource Include="Icons\Icons_Checkmark.png" />
     <Resource Include="Icons\Icons_Day.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

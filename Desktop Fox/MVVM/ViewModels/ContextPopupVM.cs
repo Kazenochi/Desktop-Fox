@@ -1,5 +1,6 @@
 ﻿using DesktopFox.MVVM.Model;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DesktopFox.MVVM.ViewModels
@@ -7,10 +8,12 @@ namespace DesktopFox.MVVM.ViewModels
     /// <summary>
     /// ViewModel der <see cref="Views.ContextPopupView"/> Klasse
     /// </summary>
-    public class ContextPopupVM : ObserverNotifyChange
+    public class ContextPopupVM : ObserverNotifyChange, IMessageContainer
     {
-        private MainWindowVM MWVM;
-        private GalleryManager GM;
+        private readonly MainWindowVM MWVM;
+        private readonly GalleryManager GM;
+        public MessageVM MessageVM { get; set; }
+
         public ContextPopupModel contextModel { get; set; }
 
         /// <summary>
@@ -23,6 +26,9 @@ namespace DesktopFox.MVVM.ViewModels
             MWVM = mainWindowVM;
             GM = galleryManager;
             contextModel = new ContextPopupModel();
+            MessageVM = new();
+            MessageVM.DefineContainer(this);
+
             if (MWVM.SelectedVM != null)
                 contextModel.PictureSetName = MWVM.SelectedVM.pictureSet.SetName;
 
@@ -82,7 +88,7 @@ namespace DesktopFox.MVVM.ViewModels
         /// <summary>
         /// Kommando das die gewählte Komponente des Sets entfernt
         /// </summary>
-        public ICommand RemoveCommand { get { return new DF_Command.DelegateCommand(o => RemoveValue()); } }
+        public ICommand RemoveCommand { get { return new DF_Command.DelegateCommand(o => ShowMessageBox()); } }
 
         /// <summary>
         /// Kommando das den Ordner des Ausgewählten Sets in Windows öffnet
@@ -160,6 +166,15 @@ namespace DesktopFox.MVVM.ViewModels
         }
 
         /// <summary>
+        /// Zeigt die Messagebox in der Control an
+        /// </summary>
+        private void ShowMessageBox()
+        { 
+            MessageVM.GenerateMessage(MessageType.Delete);
+            contextModel.MessageVisibility = true;
+        }
+
+        /// <summary>
         /// Benennt das Ausgewählte Set um. Note: Gefährlicher Code, Fehlerfälle werden nicht abgefangen.
         /// </summary>
         private void RenameSet() 
@@ -209,6 +224,30 @@ namespace DesktopFox.MVVM.ViewModels
             contextModel.PictureSetName = pictureViewVM.pictureSet.SetName;
             DeletionSelect = 0;
             DeleteValidation();
+        }
+
+        /// <summary>
+        /// <see cref="IMessageContainer"/> Antwort Methode.
+        /// Löscht bei <see cref="MessageBoxResult.Yes"/> das ausgewählte Set
+        /// </summary>
+        /// <param name="result"></param>
+        public void MessageAnswer(MessageBoxResult result)
+        {
+            switch(result)
+            {
+                case MessageBoxResult.Yes:
+                    RemoveValue();
+                    contextModel.MessageVisibility = false;
+                    break;
+
+                case MessageBoxResult.No:
+                    contextModel.MessageVisibility = false;
+                    break;
+
+                default:
+                    contextModel.MessageVisibility = false;
+                    break;
+            }
         }
 
         #endregion

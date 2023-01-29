@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS8618: Non-Nullable-Feld "onlyOneMutex" muss beim Beenden des Konstruktors einen Wert ungleich NULL enthalten. Erwägen Sie eine Deklaration von "Feld" als Nullable.
+dotnet_diagnostic.CS8618.severity = suggestion

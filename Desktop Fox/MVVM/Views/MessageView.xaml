@@ -9,59 +9,44 @@
                          mc:Ignorable="d"
                          d:DataContext="{d:DesignInstance Type=ViewModels:MessageVM}"
                          d:DesignHeight="450" d:DesignWidth="800">
-    <Grid VerticalAlignment="Stretch"
-          HorizontalAlignment="Stretch">
-    <Border Background="Black" Opacity=".5">
-        <Border.Effect>
-            <BlurEffect Radius="20"/>
-        </Border.Effect>
-    </Border>
     <Border Background="{StaticResource BackgroundBrush}"
-                BorderThickness="2"
-                BorderBrush="{StaticResource BorderBrush}"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                CornerRadius="20"
-                Height="150"
-                Width="250">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="80"/>
-                </Grid.RowDefinitions>
-                <TextBlock FontFamily="{StaticResource Default}"
-                           Foreground="{StaticResource TextBrush}"
-                           FontSize="15"
-                           Margin="10"
-                           TextAlignment="Center"
-                           Text="{Binding Model.Message}" 
-                           TextWrapping="Wrap" 
-                           TextTrimming="WordEllipsis">
-                </TextBlock>
-                <Border Background="{StaticResource BorderBrush}"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Bottom"
-                        Height="2"
-                        Margin="10,0,10,0"
-                        CornerRadius="1"/>
+            BorderThickness="2"
+            BorderBrush="{StaticResource BorderBrush}"
+            CornerRadius="20"
+            Height="150"
+            Width="250">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <TextBlock FontFamily="{StaticResource Default}"
+                       Foreground="{StaticResource TextBrush}"
+                       FontSize="15"
+                       Margin="10"
+                       TextAlignment="Center"
+                       Text="Do you want to delete&#xD;&#xA;the selected Set ?">
+            </TextBlock>
+            <Border Background="{StaticResource BorderBrush}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom"
+                    Height="2"
+                    Margin="10,0,10,0"
+                    CornerRadius="1"/>
 
-                <StackPanel Orientation="Horizontal"
-                            Grid.Row="1"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center">
-                    <Button FontSize="20"
-                            Command="{Binding YesCommand}"
-                            Style="{StaticResource DF_Button_Red_Border}">
-                        <Image Source="\Icons\Icons_Checkmark.png" Margin="10,12,11,10"/>
-                    </Button>
-                    <Button FontSize="20"
-                            Command="{Binding NoCommand}"
-                            Style="{StaticResource DF_Button_Border}">
-                        <Image Source="\Icons\Icons_Cancel.png" Margin="15"/>
-                    </Button>
-                </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="1"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Button Content="Yes"
+                    FontSize="20"
+                    Style="{StaticResource DF_Button_Border}"/>
+                <Button Content="No"
+                    FontSize="20"
+                    Style="{StaticResource DF_Button_Border}"/>
+            </StackPanel>
 
-            </Grid>
-        </Border>
-    </Grid>
+        </Grid>
+    </Border>
+
 </local:AnimatedBaseView>

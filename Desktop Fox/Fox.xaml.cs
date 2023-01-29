@@ -23,7 +23,7 @@ namespace DesktopFox
         private readonly GalleryManager GM;
         private Settings settings;
         private readonly SettingsManager SM;
-        private MainWindow MW;
+        private MainWindow? MW;
         private readonly MainWindowVM mainWindowVM;
         private readonly ContextPopupVM contextPopupVM;
         private readonly PreviewVM previewVM;
@@ -183,15 +183,17 @@ namespace DesktopFox
         private void MW_Closed(object? sender, System.EventArgs e)
         {
             //MW.Hide();
+            if (MW == null) return;
+
             mainWindowVM.CurrentView = null;
             SaveOnClose(lastClose: false);
-            /*
+            
             foreach (var i in mainWindowVM.MainWindowModel._pictureViews)
             {
                 i.DataContext = null; 
             }
             mainWindowVM.MainWindowModel._pictureViews.Clear();
-            */
+            
             mainWindowVM.SetCurrentMain(null);
             shuffler.MWinHandler(null);
             MW.DataContext = null;

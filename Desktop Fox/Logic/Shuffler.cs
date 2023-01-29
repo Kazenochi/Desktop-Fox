@@ -14,7 +14,7 @@ namespace DesktopFox
 {
     public class Shuffler
     {
-        private MainWindow mWindow;
+        private MainWindow? mWindow;
         private MainWindowVM MWVM;
         private PreviewVM previewVM;
         private VirtualDesktop vDesk;
@@ -94,7 +94,7 @@ namespace DesktopFox
             }
         }
 
-        public void MWinHandler(MainWindow mainWindow)
+        public void MWinHandler(MainWindow? mainWindow)
         {
             mWindow = mainWindow;
         }

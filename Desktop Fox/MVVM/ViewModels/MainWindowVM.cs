@@ -21,7 +21,7 @@ namespace DesktopFox
         public PreviewView PreviewView = new();
         public AnimatedWallpaperConfigView AnimatedWPConfigView = new();
 
-        private MainWindow _mainWindow;
+        private MainWindow? _mainWindow;
         private readonly Fox DF;
         private GalleryManager GM;
 
@@ -250,7 +250,7 @@ namespace DesktopFox
         /// Aktualisiert die zuweisung des Hauptfensters
         /// </summary>
         /// <param name="mainWindow"></param>
-        public void SetCurrentMain(MainWindow mainWindow)
+        public void SetCurrentMain(MainWindow? mainWindow)
         {
             _mainWindow = mainWindow;
             ((PreviewVM)PreviewView.DataContext).PreviewModel.ImageStretch = (Stretch)DF.SettingsManager.Settings.PreviewFillMode;

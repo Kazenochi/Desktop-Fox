@@ -61,7 +61,9 @@
                             FontSize="20"
                             Command="{Binding RenameSetCommand}">
                         <Image Source="\Icons\Icons_Rename.png" 
-                               Stretch="Uniform" Margin="13"/>
+                               Stretch="Uniform" 
+                               Margin="13"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
                 </StackPanel>
                 <Border Background="{StaticResource BorderBrush}"
@@ -81,7 +83,9 @@
                                  Style="{StaticResource DF_RadioButton_Border_Round}">
                         <Grid>
                             <Image Source="\Icons\Icons_Day.png" 
-                                        Stretch="Uniform" Margin="10"/>
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
                             <Border Margin="10">
                                 <Border.Style>
                                     <Style TargetType="Border">
@@ -117,7 +121,9 @@
                                  Style="{StaticResource DF_RadioButton_Border_Round}">
                         <Grid>
                             <Image Source="\Icons\Icons_Night.png" 
-                                        Stretch="Uniform" Margin="10,10,14,10"/>
+                                   Stretch="Uniform" 
+                                   Margin="10,10,14,10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
                             <Border Margin="10,10,14,10">
                                 <Border.Style>
                                     <Style TargetType="Border">
@@ -153,7 +159,9 @@
                                  Style="{StaticResource DF_RadioButton_Border_Round}">
                         <Grid>
                             <Image Source="\Icons\Icons_DayNight.png" 
-                                        Stretch="Uniform" Margin="10"/>
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
                             <Border Margin="10">
                                 <Border.Style>
                                     <Style TargetType="Border">
@@ -196,7 +204,9 @@
                         <Border Margin="4,0,0,0">
                             <Grid>
                                 <Image Source="\Icons\Icons_Folder.png" 
-                                        Stretch="Uniform" Margin="10"/>
+                                       Stretch="Uniform" 
+                                       Margin="10"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
                             </Grid>
                         </Border>
                     </Button>
@@ -218,7 +228,9 @@
                             <Border Margin="5">
                                 <Grid>
                                     <Image Source="\Icons\Icons_Delete.png" 
-                                        Stretch="Uniform" Margin="5"/>
+                                           Stretch="Uniform" 
+                                           Margin="5"
+                                           RenderOptions.BitmapScalingMode="HighQuality"/>
                                 </Grid>
                             </Border>
                         </Button>
@@ -227,7 +239,8 @@
             </StackPanel>
         </Border>
 
-        <Grid Visibility="{Binding contextModel.MessageVisibility, Converter={StaticResource BoolConverter}}">
+        <Grid Visibility="{Binding contextModel.MessageVisibility, Converter={StaticResource BoolConverter}}"
+              d:Visibility="Collapsed">
             <views:MessageView VerticalAlignment="Stretch" 
                            HorizontalAlignment="Stretch"
                            DataContext="{Binding MessageVM}"/>

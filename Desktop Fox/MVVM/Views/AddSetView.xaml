@@ -41,8 +41,9 @@
                                      IsChecked="{Binding Day}">
                             <Grid>
                                 <Image Source="\Icons\Icons_Day.png" 
-                                    Stretch="Uniform"
-                                    Margin="10"/>
+                                       Stretch="Uniform"
+                                       Margin="10"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
 
                                 <Border Margin="10">
                                     <Border.Style>
@@ -64,7 +65,8 @@
                                             <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
                                         </Rectangle.Fill>
                                         <Rectangle.OpacityMask>
-                                            <ImageBrush ImageSource="\Icons\Icons_Day.png"/>
+                                            <ImageBrush ImageSource="\Icons\Icons_Day.png" 
+                                                        RenderOptions.BitmapScalingMode="HighQuality"/>
                                         </Rectangle.OpacityMask>
                                     </Rectangle>
                                 </Border>
@@ -78,8 +80,9 @@
                                      IsChecked="{Binding Day, Converter={StaticResource BoolInverter}}">
                             <Grid Margin="0,0,4,0">
                                 <Image Source="\Icons\Icons_Night.png" 
-                                        Stretch="Uniform"
-                                        Margin="10"/>
+                                       Stretch="Uniform"
+                                       Margin="10"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
 
                                 <Border Margin="10">
                                     <Border.Style>
@@ -101,7 +104,8 @@
                                             <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
                                         </Rectangle.Fill>
                                         <Rectangle.OpacityMask>
-                                            <ImageBrush ImageSource="\Icons\Icons_Night.png"/>
+                                            <ImageBrush ImageSource="\Icons\Icons_Night.png"
+                                                        RenderOptions.BitmapScalingMode="HighQuality"/>
                                         </Rectangle.OpacityMask>
                                     </Rectangle>
                                 </Border>
@@ -194,7 +198,8 @@
                                 Command="{Binding OpenFolderDialog}">
                             <Image Source="\Icons\Icons_Folder.png" 
                                     Stretch="Uniform"
-                                    Margin="12,10,7,10"/>
+                                    Margin="12,10,7,10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
 
                         </Button>
                     </Grid>
@@ -214,7 +219,8 @@
                             Command="{Binding AddNewSet}">
                         <Image Source="\Icons\Icons_Plus.png" 
                                 Stretch="Uniform"
-                                Margin="10"/>
+                                Margin="10"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
 
                     </Button>
                 </Grid>

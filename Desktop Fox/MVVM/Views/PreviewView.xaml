@@ -118,7 +118,8 @@
                     <Grid>
                         <Image Source="{StaticResource DayIcon}" 
                                Stretch="Uniform"
-                               Margin="10,10,30,30"/>
+                               Margin="10,10,30,30"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                         <Border Margin="10,10,30,30">
                             <Border.Style>
                                 <Style TargetType="Border">
@@ -166,7 +167,8 @@
                         <Grid>
                             <Image Source="{StaticResource NightIcon}"                                  
                                    Stretch="Uniform"
-                                   Margin="28,29,10,10"/>
+                                   Margin="28,29,10,10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
                             <Border Margin="28,29,10,10">
                                 <Border.Style>
                                     <Style TargetType="Border">

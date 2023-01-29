@@ -33,14 +33,18 @@
                         ToolTip="Choose a video from you computer"
                         Command="{Binding SelectVideoCommand}">
                     <Image Source="\Icons\Icons_Folder.png" 
-                                        Stretch="Uniform" Margin="11,10,6,10"/>
+                           Stretch="Uniform" 
+                           Margin="11,10,6,10"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Button Style="{StaticResource DF_Button_Border}"
                         ToolTip="Show the selected video on the desktop"
                         IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
                         Command="{Binding ActivateCommand}">
                     <Image Source="\Icons\Icons_Transfer.png" 
-                                        Stretch="Uniform" Margin="10,5,10,10"/>
+                           Stretch="Uniform" 
+                           Margin="10,5,10,10"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
 
 
@@ -50,7 +54,9 @@
                         IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
                         Command="{Binding StopCommand}">
                     <Image Source="\Icons\Icons_Cancel.png" 
-                           Stretch="Uniform" Margin="13"/>
+                           Stretch="Uniform" 
+                           Margin="13"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Button Style="{StaticResource DF_Button_Border}"
                         ToolTip="Rotates the video clockwise. 
@@ -58,7 +64,9 @@
                         IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
                         Command="{Binding RotateClockwiseCommand}">
                     <Image Source="\Icons\Icons_Arrow_ClockRotation.png" 
-                           Stretch="Uniform" Margin="10,8,10,10"/>
+                           Stretch="Uniform" 
+                           Margin="10,8,10,10"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
             </StackPanel>
 
@@ -131,14 +139,18 @@
                             IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
                             Command="{Binding VideoPlayCommand}">
                         <Image Source="\Icons\Icons_Play.png" 
-                                        Stretch="Uniform" Margin="15,15,10,15"/>
+                               Stretch="Uniform" 
+                               Margin="15,15,10,15"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
                     <Button Style="{StaticResource DF_Button_Border}"
                             ToolTip="Stops the video playback"
                             IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
                             Command="{Binding VideoPauseCommand}">
                         <Image Source="\Icons\Icons_Pause.png" 
-                                        Stretch="Uniform" Margin="12"/>
+                               Stretch="Uniform" 
+                               Margin="12"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
                 </StackPanel>
 
@@ -168,21 +180,27 @@
                                 IsEnabled="{Binding AWPConfigModel.IsMuted, Converter={StaticResource BoolInverter}}"
                                 Command="{Binding VolumeDownCommand}">
                             <Image Source="\Icons\Icons_Minus.png"     
-                                   Stretch="Uniform" Margin="10"/>
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Button>
                         <Button Style="{StaticResource DF_Button_Border}"
                                 ToolTip="Increase the volume of the video"
                                 IsEnabled="{Binding AWPConfigModel.IsMuted, Converter={StaticResource BoolInverter}}"
                                 Command="{Binding VolumeUpCommand}">
                             <Image Source="\Icons\Icons_Plus.png" 
-                                   Stretch="Uniform" Margin="10"/>
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Button>
                         <Button Style="{StaticResource DF_Button_Border}"
                                 ToolTip="Mute/Unmute video"
                                 Command="{Binding MuteCommand}">
                             <Grid>
                                 <Image Source="\Icons\Icons_Music_Simple.png" 
-                                        Stretch="Uniform" Margin="9,10,11,10"/>
+                                       Stretch="Uniform" 
+                                       Margin="9,10,11,10"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
               
                             </Grid>
                         </Button>

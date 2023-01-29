@@ -87,7 +87,9 @@
                     Command="{Binding SaveShuffleTimeCommand}"
                     Style="{StaticResource DF_Button_Border}">
                 <Image Source="\Icons\Icons_Save.png" 
-                           Stretch="Uniform" Margin="13"/>
+                       Stretch="Uniform" 
+                       Margin="13"
+                       RenderOptions.BitmapScalingMode="HighQuality"/>
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
                         <BeginStoryboard>

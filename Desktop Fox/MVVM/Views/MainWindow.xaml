@@ -88,7 +88,8 @@
                             Style="{StaticResource DF_Button_Border}">
                         <Border Margin="15,15,10,15">
                             <Image Source="\Icons\Icons_Play.png" 
-                                        Stretch="Uniform"/>
+                                   Stretch="Uniform"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Border>
                     </Button>
                 </Grid>
@@ -102,7 +103,8 @@
                             Style="{StaticResource DF_Button_Border}">
                     <Grid Margin="12">
                         <Image Source="\Icons\Icons_Monitor.png" 
-                                    Stretch="Uniform" Margin="0,2,0,0"/>
+                               Stretch="Uniform" Margin="0,2,0,0"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                         <Label Content="{Binding MultiMonitorContent}"
                                     FontFamily="{StaticResource Default}"
                                     Foreground="{StaticResource TextBrush}"
@@ -121,8 +123,9 @@
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding AddSetViewCommand}">
                     <Image Name="AddImage"
-                                    Source="\Icons\Icons_Plus.png" 
-                                    Stretch="Uniform" Margin="10"/>
+                           Source="\Icons\Icons_Plus.png" 
+                           Stretch="Uniform" Margin="10"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
 
                 <Button x:Name="button_Animation" 
@@ -132,7 +135,8 @@
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding AnimatedToggleCommand}">
                     <Image Source="\Icons\Icons_Video.png" 
-                                   Stretch="Uniform" Margin="10"/>
+                           Stretch="Uniform" Margin="10"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 
                 <Button x:Name="button_Settings"
@@ -142,7 +146,8 @@
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding SettingsMainViewCommand}">
                     <Image Source="\Icons\Icons_Settings.png" 
-                                    Stretch="Uniform" Margin="10"/>
+                           Stretch="Uniform" Margin="10"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
             </StackPanel>
 

@@ -32,7 +32,7 @@ namespace DesktopFox
         public static string openSingleFileDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Video files (*.mp4,*.mkv,etc.)|*.mp4;*.mkv|All files (*.*)|*.*";
+            openFileDialog.Filter = "Video files (*.mp4,*.mkv,etc.)|*.mp4;*.mkv;*.webm;*.avi;*.flv;*.mov;*.mkv;|All files (*.*)|*.*";
             openFileDialog.Multiselect = false;
             openFileDialog.CheckFileExists = true;
             openFileDialog.CheckPathExists = true;

@@ -2,6 +2,7 @@
 using DesktopFox.MVVM.Model;
 using DesktopFox.MVVM.ViewModels;
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,27 +16,24 @@ namespace DesktopFox
     public class Shuffler
     {
         private MainWindow? mWindow;
-        private MainWindowVM MWVM;
-        private PreviewVM previewVM;
-        private VirtualDesktop vDesk;
-        private GalleryManager GM;
-        private SettingsManager SM;
+        private readonly MainWindowVM MWVM;
+        private readonly PreviewVM previewVM;
+        private readonly VirtualDesktop vDesk;
+        private readonly GalleryManager GM;
+        private readonly SettingsManager SM;
         public Boolean isDay;
-        private Boolean previewDay = true;
-        private int picCount1 = 0;
-        private int picCount2 = 0;
-        private int picCount3 = 0;
-        private int[] lockList1 = new int[3];
-        private int[] lockList2 = new int[3];
-        private int[] lockList3 = new int[3];
-        private Settings _settings;
+        private readonly Boolean previewDay = true;
+
+        private readonly LockListQueue[] lockListQueues = new LockListQueue[3];
+
+        private readonly Settings _settings;
         private int previewCount = 0;
         private Timer previewTimer;
         private Timer desktopShuffleTimer;
         private Timer daytimeTimer;
-        private TimeSpan PreviewShuffleTime = TimeSpan.FromSeconds(10);
+        private readonly TimeSpan PreviewShuffleTime = TimeSpan.FromSeconds(10);
         
-        private Random random = new Random();
+        private readonly Random random = new Random();
 
         /// <summary>
         /// Konstruktor
@@ -58,13 +56,18 @@ namespace DesktopFox
             if (SM.Settings.IsRunning) PicShuffleStart();
         }
 
+        /// <summary>
+        /// Wird benötigt um auf das ändern des aktuell ausgewählten Sets zu reagieren 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainWindowVM_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(MWVM.SelectedItem)) return;
         }
 
         /// <summary>
-        /// Listener für änderungen in den Settings auf die der Shuffler reagieren muss.
+        /// Listener für Änderungen in den Settings auf die der Shuffler reagieren muss.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -73,6 +76,7 @@ namespace DesktopFox
             switch (e.PropertyName)
             {
                 case nameof(SM.Settings.IsRunning):
+                    Debug.WriteLine("IsRunning Property Changed Raised: " + SM.Settings.IsRunning);
                     if (SM.Settings.IsRunning)
                         PicShuffleStart();                       
                     else
@@ -94,6 +98,11 @@ namespace DesktopFox
             }
         }
 
+        /// <summary>
+        /// Setzt eine neue referenz zum <see cref="MainWindow"/> beim erstellen. <see cref="Fox.MakeMainWindow"/>
+        /// Note: Wird evtl. nicht mehr benötigt
+        /// </summary>
+        /// <param name="mainWindow"></param>
         public void MWinHandler(MainWindow? mainWindow)
         {
             mWindow = mainWindow;
@@ -190,6 +199,12 @@ namespace DesktopFox
 
             IsDayCheck();
 
+            for (int i = 0; i < GM.Gallery.activeSetsList.Count; i++)
+            {
+                if (GM.Gallery.activeSetsList[i] == "Empty") continue;   
+                lockListQueues[i] = new LockListQueue(GM.GetCollection(isDay, GM.Gallery.activeSetsList[i]).singlePics.Count);
+            }
+
             if (SM.Settings.DesktopModeSingle)
             {
                 StopDesktopTimer();
@@ -223,7 +238,16 @@ namespace DesktopFox
         /// <param name="activeCol"></param>
         private void DF_PicShuffle(Monitor monitor, Collection activeCol)
         {
-            int tmpCount = 0;
+            LockListQueue queue = lockListQueues.ElementAt((int)monitor.Name - 1);
+
+            if (SM.Settings.Shuffle)
+                vDesk.getWrapper.SetWallpaper(monitor.ID, activeCol.singlePics.ElementAt(queue.GetNewRandomItem()).Key);
+            else
+                vDesk.getWrapper.SetWallpaper(monitor.ID, activeCol.singlePics.ElementAt(queue.GetNextItem()).Key);
+
+
+            /* Note: Absolut unnötiger aufwand. Entfernen falls nichts mehr aufkommt
+
             int[] tmpLockList;
             switch (monitor.Number)
             {
@@ -293,6 +317,8 @@ namespace DesktopFox
                 case 2: picCount2 = tmpCount; break;
                 case 3: picCount3 = tmpCount; break;
             }
+            */
+
         }
 
         /// <summary>
@@ -390,9 +416,11 @@ namespace DesktopFox
                 desktopShuffleTimer.Start();
                 Debug.WriteLine("DF Timer läuft bereits. Zeit wurde zurückgesetzt");
             }
-            DesktopTimer_Trigger(null, null);
+            DesktopTimer_Kickstart();
+            //DesktopTimer_Trigger(null, null);
             if (!SM.Settings.IsRunning)
                 SM.Settings.IsRunning = true;
+                
         }
 
         /// <summary>
@@ -435,7 +463,24 @@ namespace DesktopFox
             {
                 if (GM.Gallery.activeSetsList[i] == "Empty") continue;
                 DF_PicShuffle(vDesk.GetMonitor(i+1), GM.GetCollection(isDay, GM.Gallery.activeSetsList[i]));
-            }    
+            }
+        }
+
+        /// <summary>
+        /// Wird für den einmaligen Anstoß von <see cref="DF_PicShuffle(Monitor, Collection)"/> benötigt, 
+        /// wenn sich Einstellungen geändert haben und der <see cref="desktopShuffleTimer"/> neu gestartet
+        /// oder Initialisiert wurde.
+        /// </summary>
+        private void DesktopTimer_Kickstart()
+        {
+            Debug.WriteLine("Kickstart der TimerFunktion. Wehe das steht mehr als einmal im Debug -_- ");
+            for (int i = 0; i < GM.Gallery.activeSetsList.Count; i++)
+            {
+                if (GM.Gallery.activeSetsList[i] == "Empty") continue;
+                if (GM.LastMonitorChanged() != MonitorEnum.None && (int)GM.LastMonitorChanged() - 1 != i) continue;
+                DF_PicShuffle(vDesk.GetMonitor(i + 1), GM.GetCollection(isDay, GM.Gallery.activeSetsList[i]));
+            }
+            GM.LastMonitorChanged(reset: true);
         }
 
         #endregion

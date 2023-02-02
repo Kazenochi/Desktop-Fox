@@ -26,6 +26,7 @@ namespace DesktopFox
         private SettingsManager SM;
         private MainWindowVM MWVM;
         private Fox DF;
+        private MonitorEnum _lastMonitorChanged = MonitorEnum.None;
 
         /// <summary>
         /// Konstruktor
@@ -366,15 +367,29 @@ namespace DesktopFox
         /// <param name="monitor">1 = Erstes Set, 2 = Zweites Set, ...</param>
         public void setActiveSet(String pictureSet, int monitor = 1)
         {
+            _lastMonitorChanged = (MonitorEnum)monitor;
             if(pictureSet != null)
             {
                 _gallery.activeSetsList[monitor - 1] = pictureSet;
+                Debug.WriteLine("Nr3. Settings Running True");
                 SM.Settings.IsRunning = true;
                 foreach(var i in MWVM.MainWindowModel._pictureViewVMs)
                 {
                     i.ActiveSetChanged(pictureSet, monitor);
                 }
             }
+        }
+
+        /// <summary>
+        /// Hilfsmethode für Shuffler. Ändern von Hintergrundbildern wird nur auf dem Monitor angestoßen der zuletzt geändert wurde
+        /// </summary>
+        /// <returns></returns>
+        public MonitorEnum LastMonitorChanged(bool reset = false)
+        {  
+            if (reset)
+                _lastMonitorChanged = MonitorEnum.None;
+
+            return _lastMonitorChanged;        
         }
 
         /// <summary>
@@ -389,8 +404,12 @@ namespace DesktopFox
             if(monitor != 0)
             {
                 _gallery.activeSetsList[monitor - 1] = "Empty";
-                if(!areSetsActive())
-                    SM.Settings.IsRunning = false;
+                if (!areSetsActive())
+                {
+                    _lastMonitorChanged = MonitorEnum.None;
+                    SM.Settings.IsRunning = false; 
+                }
+                    
 
                 foreach (var i in MWVM.MainWindowModel._pictureViewVMs)
                 {
@@ -405,7 +424,11 @@ namespace DesktopFox
                     {
                         _gallery.activeSetsList[i] = "Empty";
                         if (!areSetsActive())
-                            SM.Settings.IsRunning = false;
+                        {
+                            _lastMonitorChanged = MonitorEnum.None;
+                            SM.Settings.IsRunning = false;  
+                        }
+
                         return true;
                     }
                 }

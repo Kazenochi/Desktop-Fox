@@ -366,8 +366,11 @@ namespace DesktopFox
             GM.setActiveSet(SelectedVM.pictureSet.SetName, SelectedMonitor);
             CanActivate = false;
 
-            ((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = false;
-            ((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = true;
+            //DF.SettingsManager.Settings.IsRunning = false;
+            //Debug.WriteLine("Nr2. Settings Running True");
+            //DF.SettingsManager.Settings.IsRunning = true;
+            //((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = false;
+            //((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = true;
         }
 
         /// <summary>

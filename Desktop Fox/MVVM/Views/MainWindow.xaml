@@ -135,7 +135,7 @@
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding AnimatedToggleCommand}">
                     <Image Source="\Icons\Icons_Video.png" 
-                           Stretch="Uniform" Margin="10"
+                           Stretch="Uniform" Margin="11"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 

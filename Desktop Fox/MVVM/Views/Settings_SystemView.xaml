@@ -26,18 +26,20 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
                             Margin="0,10,0,0">
-                    <RadioButton x:Name="radio_AutoSetChangeOn"
-                                 Content="On" 
-                                 FontSize="20"          
+                    <RadioButton x:Name="radio_AutoSetChangeOn"        
                                  Margin="5,5,5,5"
-                                 Style="{StaticResource DF_RadioButton_Border}" 
-                                 IsChecked="{Binding settings.AutoSetChange}"/>
+                                 Style="{StaticResource DF_RadioButton_Border_Round}" 
+                                 IsChecked="{Binding settings.AutoSetChange}">
+                        <Image Source="\Icons\Icons_On.png"
+                               Margin="10"/>
+                    </RadioButton>
                     <RadioButton x:Name="radio_AutoSetChangeOff"
-                                 Content="Off" 
-                                 FontSize="20"
                                  Margin="5,5,5,5"
-                                 Style="{StaticResource DF_RadioButton_Border}"
-                                 IsChecked="{Binding settings.AutoSetChange, Converter={StaticResource BoolInverter}}"/>
+                                 Style="{StaticResource DF_RadioButton_Border_Round}"
+                                 IsChecked="{Binding settings.AutoSetChange, Converter={StaticResource BoolInverter}}">
+                        <Image Source="\Icons\Icons_Off.png"
+                               Margin="10"/>
+                    </RadioButton>
                 </StackPanel>
             </StackPanel>
             <Border Background="{StaticResource BorderBrush}"
@@ -60,18 +62,20 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
                             Margin="0,10,0,0">
-                    <RadioButton x:Name="radio_AutoStartOn"
-                                 Content="On" 
-                                 FontSize="20"          
+                    <RadioButton x:Name="radio_AutoStartOn"        
                                  Margin="5,5,5,5"
-                                 Style="{StaticResource DF_RadioButton_Border}" 
-                                 IsChecked="{Binding settings.AutostartOn}"/>
+                                 Style="{StaticResource DF_RadioButton_Border_Round}" 
+                                 IsChecked="{Binding settings.AutostartOn}">
+                        <Image Source="\Icons\Icons_On.png"
+                               Margin="10"/>
+                    </RadioButton>
                     <RadioButton x:Name="radio_AutoStartOff"
-                                 Content="Off" 
-                                 FontSize="20"
                                  Margin="5,5,5,5"
-                                 Style="{StaticResource DF_RadioButton_Border}"
-                                 IsChecked="{Binding settings.AutostartOn, Converter={StaticResource BoolInverter}}"/>
+                                 Style="{StaticResource DF_RadioButton_Border_Round}"
+                                 IsChecked="{Binding settings.AutostartOn, Converter={StaticResource BoolInverter}}">
+                        <Image Source="\Icons\Icons_Off.png"
+                               Margin="10"/>
+                    </RadioButton>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

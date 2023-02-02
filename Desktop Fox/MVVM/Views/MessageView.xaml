@@ -60,7 +60,7 @@
                             Command="{Binding NoCommand}"
                             Style="{StaticResource DF_Button_Border}">
                         <Image Source="\Icons\Icons_Cancel.png" 
-                               Margin="15"
+                               Margin="13"
                                RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
                 </StackPanel>

@@ -30,6 +30,8 @@
     <None Remove="Icons\Icons_Music_Simple.png" />
     <None Remove="Icons\Icons_Music_Toon.png" />
     <None Remove="Icons\Icons_Night.png" />
+    <None Remove="Icons\Icons_Off.png" />
+    <None Remove="Icons\Icons_On.png" />
     <None Remove="Icons\Icons_Pause.png" />
     <None Remove="Icons\Icons_Play.png" />
     <None Remove="Icons\Icons_Plus.png" />
@@ -92,6 +94,8 @@
     <Resource Include="Icons\Icons_Night.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\Icons_Off.png" />
+    <Resource Include="Icons\Icons_On.png" />
     <Resource Include="Icons\Icons_Pause.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

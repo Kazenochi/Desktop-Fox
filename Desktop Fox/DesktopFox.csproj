@@ -9,7 +9,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>DesktopFox.App</StartupObject>
     <ApplicationIcon>Assets\DF_Icon.ico</ApplicationIcon>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageLicenseFile>license</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -96,7 +96,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\AniNote\LICENSE.txt">
+    <None Include="..\license">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

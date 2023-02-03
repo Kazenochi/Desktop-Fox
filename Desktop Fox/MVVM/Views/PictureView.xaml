@@ -66,8 +66,6 @@
                        d:Source="/Assets/よぞら - 夜空 .png"/>
             </Border>
             <Label x:Name="pLabel" 
-                   Content="{Binding pictureSet.SetName}" 
-                   d:Content="Pictureset great"
                    FontSize="22" FontFamily="{StaticResource Default}" 
                    FontWeight="Bold"
                    HorizontalAlignment="Left" 
@@ -75,6 +73,10 @@
                    Width="414" Height="30" 
                    Padding="20,1,5,0" 
                    Grid.IsSharedSizeScope="True">
+                <TextBlock Text="{Binding pictureSet.SetName}"
+                           d:Text="Pictureset great. Test eines sehr langen Sets"
+                           TextTrimming="CharacterEllipsis"
+                           Width="320"/>
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.7">
                         <LinearGradientBrush.RelativeTransform>

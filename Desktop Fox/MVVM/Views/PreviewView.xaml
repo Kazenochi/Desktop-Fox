@@ -79,9 +79,13 @@
                        FontFamily="{StaticResource Default}"
                        FontSize="25"
                        Padding="15,5,10,5"
-                       FontWeight="Heavy"
-                       d:Content="Super Cooles Picture Set mit Relativem max namen"
-                       Content="{Binding PreviewModel.SetName}"/>
+                       FontWeight="Heavy">
+                    <TextBlock Text="{Binding PreviewModel.SetName}"
+                               d:Text="Super Cooles langes Set"
+                               TextTrimming="CharacterEllipsis">
+                        
+                    </TextBlock>
+                </Label>
             </Grid>
 
             <Grid VerticalAlignment="Bottom"

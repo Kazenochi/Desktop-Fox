@@ -306,6 +306,11 @@ namespace DesktopFox
         public void RenameSet(String pictureSet, String newName)
         {
             _shadow.Rename(pictureSet, newName);
+            for(int i = 0; i < _gallery.activeSetsList.Count; i++)
+            {
+                if (_gallery.activeSetsList[i] == pictureSet)
+                    _gallery.activeSetsList[i] = newName;
+            }
         }
 
         /// <summary>
@@ -373,9 +378,9 @@ namespace DesktopFox
                 _gallery.activeSetsList[monitor - 1] = pictureSet;
                 Debug.WriteLine("Nr3. Settings Running True");
                 SM.Settings.IsRunning = true;
-                foreach(var i in MWVM.MainWindowModel._pictureViewVMs)
+                for (int i = 0; i < MWVM.MainWindowModel._pictureViewVMs.Count; i++)
                 {
-                    i.ActiveSetChanged(pictureSet, monitor);
+                    MWVM.MainWindowModel._pictureViewVMs[i].ActiveSetChanged(pictureSet, monitor);
                 }
             }
         }

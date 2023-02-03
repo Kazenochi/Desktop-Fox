@@ -66,8 +66,6 @@
                        d:Source="/Assets/よぞら - 夜空 .png"/>
             </Border>
             <Label x:Name="pLabel" 
-                   Content="{Binding pictureSet.SetName}" 
-                   d:Content="Pictureset great"
                    FontSize="22" FontFamily="{StaticResource Default}" 
                    FontWeight="Bold"
                    HorizontalAlignment="Left" 
@@ -75,6 +73,10 @@
                    Width="414" Height="30" 
                    Padding="20,1,5,0" 
                    Grid.IsSharedSizeScope="True">
+                <TextBlock Text="{Binding pictureSet.SetName}"
+                           d:Text="Pictureset great. Test eines sehr langen Sets"
+                           TextTrimming="CharacterEllipsis"
+                           Width="320"/>
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.7">
                         <LinearGradientBrush.RelativeTransform>
@@ -121,7 +123,7 @@
                     <Ellipse Fill="#FF41A6FF"
                              Margin="2"/>
                     <Label Background="Transparent"
-                           Foreground="#FF0D0037"
+                           Foreground="Black"
                            Content="2"
                            Margin="0,-6"
                            HorizontalContentAlignment="Center"
@@ -140,7 +142,7 @@
                     <Ellipse Fill="#FFFF3C3C"
                              Margin="2"/>
                     <Label Background="Transparent"
-                           Foreground="#FF0D0037"
+                           Foreground="Black"
                            Content="3"
                            Margin="2,-6"
                            HorizontalContentAlignment="Center"
@@ -171,8 +173,8 @@
                                 <TranslateTransform/>
                             </TransformGroup>
                         </LinearGradientBrush.RelativeTransform>
-                        <GradientStop Color="#FFFFB800"/>
-                        <GradientStop Color="#FFFFB800" Offset="1"/>
+                        <GradientStop Color="{StaticResource Color_HighlightBrushRed}"/>
+                        <GradientStop Color="{StaticResource Color_HighlightBrushRed}" Offset="1"/>
                         <GradientStop Color="#00000000" Offset="0.1"/>
                         <GradientStop Color="#00000000" Offset="0.9"/>
                     </LinearGradientBrush>
@@ -189,7 +191,7 @@
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF362806" Offset="1"/>
-                        <GradientStop Color="#FFFFB800" Offset="0.398"/>
+                        <GradientStop Color="{StaticResource Color_HighlightBrushRed}" Offset="0.398"/>
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>

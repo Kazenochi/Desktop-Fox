@@ -64,6 +64,64 @@
                        d:Stretch="UniformToFill">
                 </Image>
             </Grid>
+            <Grid VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2">
+                <Border Background="{StaticResource TextBrush}"
+                        CornerRadius="0,20,0,0"
+                        Opacity="0.6">
+                    <Border.Effect>
+                        <BlurEffect Radius="5"/>
+                    </Border.Effect>
+                </Border>
+                <Label Background="Transparent"
+                       FontFamily="{StaticResource Default}"
+                       FontSize="25"
+                       Padding="15,5,10,5"
+                       FontWeight="Heavy">
+                    <TextBlock Text="{Binding PreviewModel.SetName}"
+                               d:Text="Super Cooles langes Set"
+                               TextTrimming="CharacterEllipsis">
+                        
+                    </TextBlock>
+                </Label>
+            </Grid>
+
+            <Grid VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Grid.Row="2"
+                    Grid.Column="2">
+                <Border Background="{StaticResource TextBrush}"
+                        CornerRadius="20,0,0,0"
+                        Opacity="0.6">
+                    <Border.Effect>
+                        <BlurEffect Radius="5"/>
+                    </Border.Effect>
+                </Border>
+                <StackPanel Orientation="Horizontal">
+                    <Label Background="Transparent"
+                       FontFamily="{StaticResource Default}"
+                       FontSize="25"
+                       Padding="15,5,5,5"
+                       FontWeight="Heavy"
+                       d:Content="20"
+                       Content="{Binding PreviewModel.PictureCountCurrent}"/>
+                    <Label Background="Transparent"
+                       FontFamily="{StaticResource Default}"
+                       FontSize="25"
+                       Padding="0,5,0,5"
+                       FontWeight="Heavy"
+                       Content="/"/>
+                    <Label Background="Transparent"
+                       FontFamily="{StaticResource Default}"
+                       FontSize="25"
+                       Padding="5,5,10,5"
+                       FontWeight="Heavy"
+                       d:Content="100"
+                       Content="{Binding PreviewModel.PictureCountMax}"/>
+                </StackPanel>
+            </Grid>
 
 
             <Button x:Name="button_Backward"
@@ -118,7 +176,8 @@
                     <Grid>
                         <Image Source="{StaticResource DayIcon}" 
                                Stretch="Uniform"
-                               Margin="10,10,30,30"/>
+                               Margin="10,10,30,30"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                         <Border Margin="10,10,30,30">
                             <Border.Style>
                                 <Style TargetType="Border">
@@ -166,7 +225,8 @@
                         <Grid>
                             <Image Source="{StaticResource NightIcon}"                                  
                                    Stretch="Uniform"
-                                   Margin="28,29,10,10"/>
+                                   Margin="28,29,10,10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
                             <Border Margin="28,29,10,10">
                                 <Border.Style>
                                     <Style TargetType="Border">

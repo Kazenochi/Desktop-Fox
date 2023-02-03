@@ -23,8 +23,7 @@ namespace DesktopFox
         {
             DesktopWallpaper tmpWrapper = new DesktopWallpaper();
             ID = monID;
-            Name = monName;
-            Number = ((int)monName);
+            Name = monName;   
             Height = height;
             Width = width;
         }

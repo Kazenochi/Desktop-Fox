@@ -13,18 +13,14 @@
           VerticalAlignment="Stretch"
           Margin="15">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Label FontFamily="{StaticResource Default}"
+        <StackPanel Grid.Row="1" 
+                    VerticalAlignment="Center">
+            <Label FontFamily="{StaticResource Default}"
                FontSize="20"
                Foreground="{StaticResource TextBrush}"
                FontWeight="Bold"
                Content="Program Info"/>
-
-        <StackPanel Grid.Row="1">
-            <Grid Margin="0, -3">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -44,7 +40,7 @@
                        Content="{Binding InfoModel.AppName}"
                        Grid.Column="1"/>
             </Grid>
-            <Grid Margin="0, -3">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -65,7 +61,7 @@
                        Grid.Column="1"/>
                 
             </Grid>
-            <Grid Margin="0, -3">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -86,7 +82,7 @@
                        Grid.Column="1"/>
                 
             </Grid>
-            <Grid Margin="0, -3">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -106,7 +102,7 @@
                        Grid.Column="1"/>
                 
             </Grid>
-            <Grid Margin="0, -3">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>

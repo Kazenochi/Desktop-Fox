@@ -12,7 +12,7 @@ namespace DesktopFox
     /// </summary>
     public class MainWindowModel : ObserverNotifyChange
     {
-        public ObservableCollection<PictureView> _pictureViews;
+        public ObservableCollection<PictureView> _pictureViews { get; set; }
         public ObservableCollection<PictureVM> _pictureViewVMs;
         
         /// <summary>

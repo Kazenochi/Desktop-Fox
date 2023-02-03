@@ -71,16 +71,19 @@ namespace DesktopFox
                             break;
                     }
                     //Spezielles Anstoßen aufgrund der Zusatzfunktion 
-                    DF.Shuffler.picShuffleStart();
+                    DF.Shuffler.PicShuffleStart();
                     break;
 
                 case nameof(_settings.DesktopModeSingle):
                     if (GM == null)
                         GM = DF.GalleryManager;
+
                     if (_settings.DesktopModeSingle && GM.getActiveSet(1) == null)
                         _settings.IsRunning = false;
+
                     else if (!_settings.DesktopModeSingle && GM.areSetsActive())
-                        _settings.IsRunning = true;
+                        _settings.IsRunning = true;    
+                    
                     break;
 
                 case nameof(_settings.AutostartOn):

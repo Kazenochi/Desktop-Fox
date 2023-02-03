@@ -17,6 +17,12 @@ namespace DesktopFox
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public void RaisePropertyChanged()
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(null));
+        }
+
         /// <summary>
         /// TemplateMethode um mögliche Änderungen an andere Objekte zu übergeben
         /// </summary>

@@ -4,6 +4,7 @@ namespace DesktopFox
 {
     public enum MonitorEnum
     {
+        None = 0,
         /// <summary>
         /// Erster Monitor
         /// </summary>

@@ -8,16 +8,12 @@
         xmlns:ViewModels="clr-namespace:DesktopFox.MVVM.ViewModels" 
         mc:Ignorable="d"
         Title="BackgroundWindow"
-        Background="Black"
+        Background="Transparent"
         d:DataContext="{d:DesignInstance Type=ViewModels:BackgroundWindowVM}"
         ShowInTaskbar="False"
+        AllowsTransparency="True"
         WindowStyle="None">
-    <WindowChrome.WindowChrome>
-        <WindowChrome ResizeBorderThickness="0" CaptionHeight="0"/>
-    </WindowChrome.WindowChrome>
     <Grid>
-        <ContentControl VerticalAlignment="Stretch"
-                        HorizontalAlignment="Stretch"
-                        Content="{Binding BackgroundModel.Wallpaper}"/>
+        <ContentControl Content="{Binding BackgroundModel.Wallpaper}"/>
     </Grid>
 </Window>

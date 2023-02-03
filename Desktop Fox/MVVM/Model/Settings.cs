@@ -52,12 +52,12 @@ namespace DesktopFox
         //Note: Tile macht meines erachtens wenig sinn für die meiste art von Hintergründen (Niemand mag Tile -_- )
         /// <summary>
         /// Wie sollen die Hintergründe auf dem Desktop angezeigt werden.
-        ///DWPOS_CENTER = 0 = Zentriertes Bild das Mittig auf dem Bildschirm dargestellt wird. Kein Strecken oder ändern des Seitenverhältnisses.
+        ///* DWPOS_CENTER = 0 = Zentriertes Bild das Mittig auf dem Bildschirm dargestellt wird. Kein Strecken oder ändern des Seitenverhältnisses.
         ///DWPOS_TILE   = 1 = Splaziert das Bild in einem Ziegelmuster über alle Monitore.
         ///DWPOS_STRETCH= 2 = Streckt das Bild über den gesamten Monitor und ändert das Seitenverhältnis.
-        ///DWPOS_FIT    = 3 = Scalliert das Bild auf die Monitorgröße. Seitenverhältnis wird behalten. Letterboxen können entstehen.
-        ///DWPOS_FILL   = 4 = Skaliert das Bild bis der Monitor komplett gefüllt ist. Schneidet Teile des Bildes ab.
-        ///DWPOS_SPAN   = 5 = Streckt ein Bild über alle Monitore 
+        ///* DWPOS_FIT    = 3 = Scalliert das Bild auf die Monitorgröße. Seitenverhältnis wird behalten. Letterboxen können entstehen.
+        ///* DWPOS_FILL   = 4 = Skaliert das Bild bis der Monitor komplett gefüllt ist. Schneidet Teile des Bildes ab.
+        ///* DWPOS_SPAN   = 5 = Streckt ein Bild über alle Monitore 
         /// </summary>
         public int DesktopFillMode { get { return (int)_desktopFillMode; } set { _desktopFillMode = (DESKTOP_WALLPAPER_POSITION)value; RaisePropertyChanged(nameof(DesktopFillMode)); } }
         private DESKTOP_WALLPAPER_POSITION _desktopFillMode = DESKTOP_WALLPAPER_POSITION.DWPOS_FILL;

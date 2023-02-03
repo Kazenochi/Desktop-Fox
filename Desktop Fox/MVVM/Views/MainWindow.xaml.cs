@@ -116,6 +116,15 @@ namespace DesktopFox
         {
             if (CloseLock)
             {
+                //SEHR WICHTIG. Cleanup von VLC Objekten da diese ansonsten nicht richtig Entladen werden.
+                //Führt andernfalls zu einer Memory Access Violation wenn das neue Hauptfenster geöffnet wird.  
+                if(MainPanelContext.Content != null)
+                {
+                    ((AnimatedWallpaperConfigVM)((AnimatedWallpaperConfigView)MainPanelContext.Content).DataContext).AWPConfigModel.Monitor1_Video = null;
+                    ((AnimatedWallpaperConfigVM)((AnimatedWallpaperConfigView)MainPanelContext.Content).DataContext).AWPConfigModel.Monitor2_Video = null;
+                    ((AnimatedWallpaperConfigVM)((AnimatedWallpaperConfigView)MainPanelContext.Content).DataContext).AWPConfigModel.Monitor3_Video = null;
+                }
+
                 this.Opacity = 1;
 
                 var sb = new Storyboard();

@@ -10,6 +10,7 @@
     <Color x:Key="Color_ControlPressed">#FF161558</Color>
     <Color x:Key="Color_Highlight">#FFC6F2FC</Color>
     <Color x:Key="Color_ControlPressedText">Aqua</Color>
+    <Color x:Key="Color_HighlightBrushRed">#FFFF9D00</Color>
     
     <Color x:Key="Color_Text">White</Color>
     
@@ -21,13 +22,13 @@
     
     <SolidColorBrush x:Key="ControlBrush">#FF4C77D7</SolidColorBrush>
     <SolidColorBrush x:Key="ControlPressedBrush">#FF161558</SolidColorBrush>
-    <SolidColorBrush x:Key="HighlightBrush">#FFC6F2FC</SolidColorBrush>
+    <SolidColorBrush x:Key="HighlightBrush">aqua</SolidColorBrush>
     <SolidColorBrush x:Key="ControlPressedTextBrush">Aqua</SolidColorBrush>
     
     <!-- FF0839A7   FF161558 -->
     <SolidColorBrush x:Key="ControlBrushRed">#FFC81E1E</SolidColorBrush>
     <SolidColorBrush x:Key="ControlPressedBrushRed">#FF8D0F0F</SolidColorBrush>
-    <SolidColorBrush x:Key="HighlightBrushRed">#FFFF8A00</SolidColorBrush>
+    <SolidColorBrush x:Key="HighlightBrushRed">#FFFF9D00</SolidColorBrush>
     
     <Image x:Key="DF_Icon" Source="\MVVM\Views\DF_Icon.ico"/>
     <BitmapImage x:Key="DayIcon" UriSource="\Icons\Icons_Day.png"/>
@@ -44,6 +45,7 @@
     <BitmapImage x:Key="SettingsIcon" UriSource="\Icons\Icons_Settings.png"/>
     
     <BooleanToVisibilityConverter x:Key="BoolConverter"/>
+    <local:BooleanToVisibilityConverter x:Key="BoolVisibilityConverter"/>
     <local:BoolInverter x:Key="BoolInverter"/>
     <local:BoolToIntConverter x:Key="BoolToIntConverter"/>
     <local:BorderClipConverter x:Key="BorderClipConverter"/>

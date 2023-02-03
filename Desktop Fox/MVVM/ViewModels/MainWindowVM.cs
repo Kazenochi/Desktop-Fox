@@ -21,7 +21,7 @@ namespace DesktopFox
         public PreviewView PreviewView = new();
         public AnimatedWallpaperConfigView AnimatedWPConfigView = new();
 
-        private MainWindow _mainWindow;
+        private MainWindow? _mainWindow;
         private readonly Fox DF;
         private GalleryManager GM;
 
@@ -250,7 +250,7 @@ namespace DesktopFox
         /// Aktualisiert die zuweisung des Hauptfensters
         /// </summary>
         /// <param name="mainWindow"></param>
-        public void SetCurrentMain(MainWindow mainWindow)
+        public void SetCurrentMain(MainWindow? mainWindow)
         {
             _mainWindow = mainWindow;
             ((PreviewVM)PreviewView.DataContext).PreviewModel.ImageStretch = (Stretch)DF.SettingsManager.Settings.PreviewFillMode;
@@ -312,6 +312,8 @@ namespace DesktopFox
         /// </summary>
         private void StopSet()
         {
+            GM ??= DF.GalleryManager;
+
             switch (SelectedMonitor)
             {
                 case 1: SelectedVM.pictureSet.IsActive1 = false; break;
@@ -329,7 +331,7 @@ namespace DesktopFox
         private void ActivateSet()
         {
             if (SelectedVM == null) return;
-            if(GM == null) GM = DF.GalleryManager;
+            GM ??= DF.GalleryManager;
 
             switch (SelectedMonitor)
             {
@@ -364,8 +366,11 @@ namespace DesktopFox
             GM.setActiveSet(SelectedVM.pictureSet.SetName, SelectedMonitor);
             CanActivate = false;
 
-            ((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = false;
-            ((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = true;
+            //DF.SettingsManager.Settings.IsRunning = false;
+            //Debug.WriteLine("Nr2. Settings Running True");
+            //DF.SettingsManager.Settings.IsRunning = true;
+            //((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = false;
+            //((SettingsVM)Settings_MainView.DataContext).settings.IsRunning = true;
         }
 
         /// <summary>
@@ -438,10 +443,12 @@ namespace DesktopFox
                 BlurOpacity = 0.2;
                 BlurStrength = 20;
                 MainPanel.AnimateInSoft();
+                ((AnimatedWallpaperConfigVM)((AnimatedWallpaperConfigView)MainPanel).DataContext).ShowVideosOnOpen();
                 ClickPaneVisible = false;
             }
             else if (MainPanel == this.AnimatedWPConfigView)
             {
+                ((AnimatedWallpaperConfigVM)((AnimatedWallpaperConfigView)MainPanel).DataContext).HideVideosOnClose();
                 MainPanel.AnimateOut();
                 BlurOpacity = 1;
                 BlurStrength = 0;
@@ -464,7 +471,7 @@ namespace DesktopFox
         /// Ändernt die Views im Mainwindow <see cref="MainWindow.ContextViews"/>
         /// </summary>
         /// <param name="newView">Neue View die Angezeigt werden soll. null = keine View anzeigen.</param>
-        public void SwitchViews(AnimatedBaseView newView)
+        public void SwitchViews(AnimatedBaseView? newView)
         {
             if (newView != null && newView != CurrentView)
             {

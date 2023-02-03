@@ -190,5 +190,21 @@ namespace DesktopFox
             }
             return null;
         }
+
+        /// <summary>
+        /// Kopiert ein Collection object und gibt die Kopie zurück
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns></returns>
+        public static Wallpaper objectCopy(Wallpaper wallpaper)
+        {
+            if (wallpaper != null)
+            {
+                var option = Formatting.Indented;
+                var json = JsonConvert.SerializeObject(wallpaper, option);
+                return JsonConvert.DeserializeObject<Wallpaper>(json);
+            }
+            return null;
+        }
     }
 }

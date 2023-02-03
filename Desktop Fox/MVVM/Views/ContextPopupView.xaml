@@ -12,209 +12,238 @@
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="400"
              KeyDown="AnimatedBaseView_KeyDown">
-    <Border Background="{StaticResource BackgroundBrush}"
-            BorderBrush="{StaticResource BorderBrush}"
-            BorderThickness="0.5"
-            CornerRadius="20"
-            Height="330"
-            Width="350">
-        <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <StackPanel Orientation="Vertical"
+    <Grid>
+        <Border Background="{StaticResource BackgroundBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0.5"
+                CornerRadius="20"
+                Height="330"
+                Width="350">
+            <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-                <Border Height="40" Width="300" 
-                        CornerRadius="20"
-                        Margin="10,0,10,0">
-                    <TextBox x:Name="pictureSetName"
-                             MaxLength="25"
-                             d:Text="123456789ABCDEFGHIJK12345"
-                             Foreground="{StaticResource TextBrush}"
-                             FontSize="20"
-                             VerticalAlignment="Center"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             CaretBrush="{StaticResource TextBrush}"
-                             TextAlignment="Center"
-                             Margin="5,0,5,0"
-                             Text="{Binding contextModel.PictureSetName}">
-                    </TextBox>
-                    <Border.Style>
-                        <Style>
-                            <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
-                            <Setter Property="Border.BorderThickness" Value="3"/>
-                            <Style.Triggers>
-                                <Trigger Property="Border.IsMouseOver" Value="True">
-                                    <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
-                                    <Setter Property="Border.Cursor" Value="Hand"/>
-                                </Trigger>
-                                <DataTrigger Binding="{Binding ElementName=pictureSetName, Path=IsFocused}" Value="true">
-                                    <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                </Border>
-                <Button x:Name="button_Rename"
-                        Style="{StaticResource DF_Button_Border}"
-                        Content="Rename"
-                        FontSize="20"
-                        Command="{Binding RenameSetCommand}"/>
-            </StackPanel>
-            <Border Background="{StaticResource BorderBrush}"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    Height="2"
-                    CornerRadius="1"
-                    Margin="10"/>
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Margin="5">
-                <RadioButton x:Name="radio_Day"
-                             Margin="5"
-                             IsEnabled="{Binding CanDeleteDay}"
-                             IsChecked="{Binding DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=1}"
-                             Style="{StaticResource DF_RadioButton_Border_Round}">
-                    <Grid>
-                        <Image Source="\Icons\Icons_Day.png" 
-                                    Stretch="Uniform" Margin="10"/>
-                        <Border Margin="10">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
-                                                                               Mode=FindAncestor, 
-                                                                               AncestorType={x:Type RadioButton}}, 
-                                                                               Path=IsChecked}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
-                                               Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
-                                <Rectangle.Fill>
-                                    <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
-                                </Rectangle.Fill>
-                                <Rectangle.OpacityMask>
-                                    <ImageBrush ImageSource="\Icons\Icons_Day.png"/>
-                                </Rectangle.OpacityMask>
-                            </Rectangle>
-                        </Border>
-                    </Grid>
-                </RadioButton>
-                <RadioButton x:Name="radio_Night"
-                             FontSize="20"
-                             Margin="5"
-                             IsEnabled="{Binding CanDeleteNight}"
-                             IsChecked="{Binding DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=2}"
-                             Style="{StaticResource DF_RadioButton_Border_Round}">
-                    <Grid>
-                        <Image Source="\Icons\Icons_Night.png" 
-                                    Stretch="Uniform" Margin="10,10,14,10"/>
-                        <Border Margin="10,10,14,10">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
-                                                                               Mode=FindAncestor, 
-                                                                               AncestorType={x:Type RadioButton}}, 
-                                                                               Path=IsChecked}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
-                                               Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
-                                <Rectangle.Fill>
-                                    <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
-                                </Rectangle.Fill>
-                                <Rectangle.OpacityMask>
-                                    <ImageBrush ImageSource="\Icons\Icons_Night.png"/>
-                                </Rectangle.OpacityMask>
-                            </Rectangle>
-                        </Border>
-                    </Grid>
-                </RadioButton>
-                <RadioButton x:Name="radio_Both"
-                             FontSize="20"
-                             Margin="5"
-                             IsEnabled="{Binding CanDeleteBoth}"
-                             IsChecked="{Binding DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
-                             Style="{StaticResource DF_RadioButton_Border_Round}">
-                    <Grid>
-                        <Image Source="\Icons\Icons_DayNight.png" 
-                                    Stretch="Uniform" Margin="10"/>
-                        <Border Margin="10">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
-                                                                               Mode=FindAncestor, 
-                                                                               AncestorType={x:Type RadioButton}}, 
-                                                                               Path=IsChecked}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
-                                               Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
-                                <Rectangle.Fill>
-                                    <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
-                                </Rectangle.Fill>
-                                <Rectangle.OpacityMask>
-                                    <ImageBrush ImageSource="\Icons\Icons_DayNight.png"/>
-                                </Rectangle.OpacityMask>
-                            </Rectangle>
-                        </Border>
-                    </Grid>
-                </RadioButton>
-            </StackPanel>
-            <Border Background="{StaticResource BorderBrush}"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    Height="2"
-                    CornerRadius="1"
-                    Margin="10"/>
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center">
-                <Button IsEnabled="{Binding CanOpenFolder}"
-                        Command="{Binding OpenFolderCommand}"
-                        Style="{StaticResource DF_Button_Border}">
-                    <Border Margin="4,0,0,0">
-                        <Grid>
-                            <Image Source="\Icons\Icons_Folder.png" 
-                                    Stretch="Uniform" Margin="10"/>
-                        </Grid>
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center">
+                    <Border Height="40" Width="300" 
+                            CornerRadius="20"
+                            Margin="10,0,10,0">
+                        <TextBox x:Name="pictureSetName"
+                                 MaxLength="25"
+                                 d:Text="123456789ABCDEFGHIJK12345"
+                                 Foreground="{StaticResource TextBrush}"
+                                 FontSize="20"
+                                 VerticalAlignment="Center"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 CaretBrush="{StaticResource TextBrush}"
+                                 TextAlignment="Center"
+                                 Margin="5,0,5,0"
+                                 Text="{Binding contextModel.PictureSetName}">
+                        </TextBox>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+                                <Setter Property="Border.BorderThickness" Value="3"/>
+                                <Style.Triggers>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                                        <Setter Property="Border.Cursor" Value="Hand"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding ElementName=pictureSetName, Path=IsFocused}" Value="true">
+                                        <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
                     </Border>
-                </Button>
-                <Grid>
-                    <Button Content="Delete"
-                            FontSize="20"
-                            Background="Gray"
-                            Foreground="DarkGray"
+                    <Button x:Name="button_Rename"
+                            ToolTip="Rename the selected pictureset"
                             Style="{StaticResource DF_Button_Border}"
-                            Margin="0"/>
-                    <Button x:Name="button_Delete"
-                            RenderOptions.BitmapScalingMode="LowQuality"
-                            FontSize="20"  
-                            Margin="0"
-                            Command="{Binding RemoveCommand}"
-                            IsEnabled="{Binding CanDelete}"
-                            Style="{StaticResource DF_Button_Red_Border}">
-                        <Border Margin="5">
+                            FontSize="20"
+                            Command="{Binding RenameSetCommand}">
+                        <Image Source="\Icons\Icons_Rename.png" 
+                               Stretch="Uniform" 
+                               Margin="13"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Button>
+                </StackPanel>
+                <Border Background="{StaticResource BorderBrush}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        Height="2"
+                        CornerRadius="1"
+                        Margin="10"/>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="5">
+                    <RadioButton x:Name="radio_Day"
+                                 ToolTip="Edit only the day collection of the selected pictureset"
+                                 Margin="5"
+                                 IsEnabled="{Binding CanDeleteDay}"
+                                 IsChecked="{Binding DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=1}"
+                                 Style="{StaticResource DF_RadioButton_Border_Round}">
+                        <Grid>
+                            <Image Source="\Icons\Icons_Day.png" 
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <Border Margin="10">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                                   Mode=FindAncestor, 
+                                                                                   AncestorType={x:Type RadioButton}}, 
+                                                                                   Path=IsChecked}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                                   Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="\Icons\Icons_Day.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
+                    </RadioButton>
+                    <RadioButton x:Name="radio_Night"
+                                 ToolTip="Edit only the night collection of the selected pictureset"
+                                 FontSize="20"
+                                 Margin="5"
+                                 IsEnabled="{Binding CanDeleteNight}"
+                                 IsChecked="{Binding DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=2}"
+                                 Style="{StaticResource DF_RadioButton_Border_Round}">
+                        <Grid>
+                            <Image Source="\Icons\Icons_Night.png" 
+                                   Stretch="Uniform" 
+                                   Margin="10,10,14,10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <Border Margin="10,10,14,10">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                                   Mode=FindAncestor, 
+                                                                                   AncestorType={x:Type RadioButton}}, 
+                                                                                   Path=IsChecked}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                                   Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="\Icons\Icons_Night.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
+                    </RadioButton>
+                    <RadioButton x:Name="radio_Both"
+                                 ToolTip="Edit both collections of the selected pictureset"
+                                 FontSize="20"
+                                 Margin="5"
+                                 IsEnabled="{Binding CanDeleteBoth}"
+                                 IsChecked="{Binding DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource DF_RadioButton_Border_Round}">
+                        <Grid>
+                            <Image Source="\Icons\Icons_DayNight.png" 
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <Border Margin="10">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                                   Mode=FindAncestor, 
+                                                                                   AncestorType={x:Type RadioButton}}, 
+                                                                                   Path=IsChecked}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                                   Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="\Icons\Icons_DayNight.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
+                    </RadioButton>
+                </StackPanel>
+                <Border Background="{StaticResource BorderBrush}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        Height="2"
+                        CornerRadius="1"
+                        Margin="10"/>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button IsEnabled="{Binding CanOpenFolder}"
+                            ToolTip="Opens the Windows Folder of the selected collection"
+                            Command="{Binding OpenFolderCommand}"
+                            Style="{StaticResource DF_Button_Border}">
+                        <Border Margin="4,0,0,0">
                             <Grid>
-                                <Image Source="\Icons\Icons_Delete.png" 
-                                    Stretch="Uniform" Margin="5"/>
+                                <Image Source="\Icons\Icons_Folder.png" 
+                                       Stretch="Uniform" 
+                                       Margin="10"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
                             </Grid>
                         </Border>
                     </Button>
-                </Grid>
+                    <Grid>
+                        <Button Content="Delete"
+                                FontSize="20"
+                                Background="Gray"
+                                Foreground="DarkGray"
+                                Style="{StaticResource DF_Button_Border}"
+                                Margin="0"/>
+                        <Button x:Name="button_Delete"
+                                ToolTip="Delete the selected collection"
+                                RenderOptions.BitmapScalingMode="LowQuality"
+                                FontSize="20"  
+                                Margin="0"
+                                Command="{Binding RemoveCommand}"
+                                IsEnabled="{Binding CanDelete}"
+                                Style="{StaticResource DF_Button_Red_Border}">
+                            <Border Margin="5">
+                                <Grid>
+                                    <Image Source="\Icons\Icons_Delete.png" 
+                                           Stretch="Uniform" 
+                                           Margin="5"
+                                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                                </Grid>
+                            </Border>
+                        </Button>
+                    </Grid>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Border>
+        </Border>
+
+        <Grid Visibility="{Binding contextModel.MessageVisibility, Converter={StaticResource BoolConverter}}"
+              d:Visibility="Collapsed">
+            <views:MessageView VerticalAlignment="Stretch" 
+                           HorizontalAlignment="Stretch"
+                           DataContext="{Binding MessageVM}"/>
+        </Grid>
+    </Grid>
 </local:AnimatedBaseView>

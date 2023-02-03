@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
@@ -122,17 +123,27 @@ namespace DesktopFox
         /// <param name="mediaUri">Pfad zur Datei die auf den Wallpaper angezeigt werden soll</param>
         /// <param name="imageRotation">Rotationswert den das Wallpaper haben soll</param>
         /// <param name="muted">Ob die Hintergrundbilder eine Tonausgabe haben sollen</param>
-        public void newAnimatedWPs(List<int> monitors, string mediaUri, int imageRotation, bool muted)
+        public void newAnimatedWPs(List<int> monitors, Wallpaper wallpaperBluePrint)
         {
             wallpapers ??= new List<Wallpaper>();
 
             if (wallpapers.Count != 0)
                 clearWallpapers();
 
+            //Sicherheitsabfrage um zu gewährliesten das nur von einem Video die Audio abgespielt wird.
+            for(int i = 0; i < monitors.Count;i++)
+            {
+                if(i == 0)
+                    wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitors[i], wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, wallpaperBluePrint.Volume));
+                else
+                    wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitors[i], wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, VLCVolume.Mute));
+            }
+            /*
             foreach(int monitor in monitors)
             {
-                wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitor, mediaUri, imageRotation, muted));
+                wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitor, wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, wallpaperBluePrint.Volume));
             }  
+            */
             buildDesktop();
         }
 
@@ -201,7 +212,7 @@ namespace DesktopFox
                 Screen s = Screen.AllScreens[wallpaper.myMonitor.Number-1];
                 BackgroundWindow backgroundWindow = new BackgroundWindow();
 
-                if (wallpaper.myMonitor.Number > 0)
+                if (wallpaper.myMonitor.Name > MonitorEnum.MainMonitor)
                 {
                     widthFaktor = (SystemParameters.PrimaryScreenWidth / wallpaper.myMonitor.Width);
                 }
@@ -234,11 +245,9 @@ namespace DesktopFox
                 backgroundWindow.Height = wallpaper.myMonitor.Height;
                 */
 
-                AnimatedWallpaperVM animatedWPVM = new AnimatedWallpaperVM(wallpaper);
-                AnimatedWallpaperView animatedWPView = new AnimatedWallpaperView();
+                AnimatedWallpaperVM animatedWPVM = new AnimatedWallpaperVM();
+                AnimatedWallpaperView animatedWPView = new AnimatedWallpaperView(wallpaper);
                 animatedWPView.DataContext = animatedWPVM;
-                wallpaper.myViewModel = animatedWPVM;
-                wallpaper.myModel = animatedWPVM.AnimatedWallpaperModel;
 
                 backgroundWindowVM.BackgroundModel.Wallpaper = animatedWPView;
 
@@ -295,6 +304,21 @@ namespace DesktopFox
         /// </summary>
         public IDictionary<MonitorEnum, Monitor> getMonitors { get { return monitorDict; } }
 
+        /// <summary>
+        /// Gibt den verlangten System Monitor zurück
+        /// </summary>
+        /// <param name="number">Nummer des Monitors: 1=Main, 2=Second, 3=Third</param>
+        /// <returns></returns>
+        public Monitor GetMonitor(int number)
+        {
+            switch (number)
+            {
+                case 1: return monitorDict[MonitorEnum.MainMonitor]; 
+                case 2: return monitorDict[MonitorEnum.SecondMonitor]; 
+                case 3: return monitorDict[MonitorEnum.ThirdMonitor];
+                default: Debug.WriteLine("Kein Monitor mit diesem Wert verfügbar"); return null;            
+            }
+        }
         /// <summary>
         /// Gibt den Hauptmonitor des Systems zurück
         /// </summary>

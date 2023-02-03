@@ -9,6 +9,7 @@ using DesktopFox.MVVM.ViewModels;
 using System.ComponentModel;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace DesktopFox
 {
@@ -22,7 +23,7 @@ namespace DesktopFox
         private readonly GalleryManager GM;
         private Settings settings;
         private readonly SettingsManager SM;
-        private MainWindow MW;
+        private MainWindow? MW;
         private readonly MainWindowVM mainWindowVM;
         private readonly ContextPopupVM contextPopupVM;
         private readonly PreviewVM previewVM;
@@ -33,6 +34,7 @@ namespace DesktopFox
         private readonly VirtualDesktop vDesk;
         private WallpaperSaves wallpaperSaves;
         public Shuffler shuffler;
+        private bool firstStart = true;
 
         /// <summary>
         /// Konstruktor
@@ -42,15 +44,15 @@ namespace DesktopFox
             InitializeComponent();
             this.Hide();
             NotifyIcon notifyIcon = new NotifyIcon(this);
-            fileChecker = new FileChecker();
-            loadFiles();
+            fileChecker = new FileChecker();          
+            LoadFiles();
             shadow = new GalleryShadow(gallery);
 
             vDesk = new VirtualDesktop(wallpaperSaves: wallpaperSaves);
             SM = new SettingsManager(this, settings, vDesk);
             mainWindowVM = new MainWindowVM(this);
-            GM = new GalleryManager(this, SM, gallery, shadow, mainWindowVM);         
-            
+            GM = new GalleryManager(this, SM, gallery, shadow, mainWindowVM);
+
             addSetVM = new AddSetVM(mainWindowVM, GM);
             settingsVM = new SettingsVM(settings);
             contextPopupVM = new ContextPopupVM(mainWindowVM, GM);
@@ -59,8 +61,10 @@ namespace DesktopFox
 
             shuffler = new Shuffler(mainWindowVM, GM, SM, previewVM, vDesk);
 
-            readyPictureVMs();
+            ReadyPictureVMs();
         }
+
+        #region Getter 
 
         /// <summary>
         /// Gibt die Instanz des Settings Manager zurück
@@ -98,10 +102,14 @@ namespace DesktopFox
             return null;
         }
 
+        #endregion
+
+        #region Methoden
+
         /// <summary>
         /// Erstmalige Initialisierung der View Models für die Einträge in der Galerie und Model zuweisung der PictureSets
         /// </summary>
-        public void readyPictureVMs()
+        public void ReadyPictureVMs()
         {
             foreach (var i in gallery.PictureSetList.Values)
             {
@@ -112,7 +120,7 @@ namespace DesktopFox
         /// <summary>
         /// Laden der Gallery und Settings JSON Dateien
         /// </summary>
-        public void loadFiles()
+        public void LoadFiles()
         {
             var tmpGal = DF_Json.loadFile(SaveFileType.Gallery);
             if (tmpGal == null)
@@ -134,7 +142,7 @@ namespace DesktopFox
         /// <summary>
         /// Erstellt das Hauptfenster neu oder Ruft diese auf.
         /// </summary>
-        public void makeMainWindow()
+        public void MakeMainWindow()
         {
             //Sicherung falls Fenster Aufgerufen wird bevor der Shuffler initialisiert wurde
             if (shuffler == null) return;
@@ -142,34 +150,38 @@ namespace DesktopFox
             if(MW == null) 
             { 
                 MW ??= new MainWindow();
-                shuffler.mWinHandler(MW);
                 MW.Closed += MW_Closed;
-                MW.DataContext = mainWindowVM;
-                MW.lbPictures.ItemsSource = mainWindowVM.MainWindowModel._pictureViews;
-
-
-                //Auslagern nach mainWindowModel
-                foreach (var i in mainWindowVM.MainWindowModel._pictureViewVMs)
+                MW.DataContext = mainWindowVM;               
+    
+                if(firstStart)
                 {
-                    var tmpView = new PictureView();
-                    tmpView.DataContext = i;
-                    mainWindowVM.MainWindowModel._pictureViews.Add(tmpView);
+                    //Auslagern nach mainWindowModel
+                    foreach (var i in mainWindowVM.MainWindowModel._pictureViewVMs)
+                    {
+                        var tmpView = new PictureView();
+                        tmpView.DataContext = i;
+                        mainWindowVM.MainWindowModel._pictureViews.Add(tmpView);
+                    }
+                    
+                    mainWindowVM.AddSetView.DataContext = addSetVM;
+                    mainWindowVM.Settings_MainView.DataContext = settingsVM;
+                    mainWindowVM.ContextPopupView.DataContext = contextPopupVM;
+                    mainWindowVM.PreviewView.DataContext = previewVM;
+                    animatedWPConfigVM.CheckSavedWallpapers();
+                    mainWindowVM.AnimatedWPConfigView.DataContext = animatedWPConfigVM;
                 }
-                MW.lbPictures.Items.Refresh();
 
-                mainWindowVM.AddSetView.DataContext = addSetVM;
-                mainWindowVM.Settings_MainView.DataContext = settingsVM;
-                mainWindowVM.ContextPopupView.DataContext = contextPopupVM;
-                mainWindowVM.PreviewView.DataContext = previewVM;
-                mainWindowVM.AnimatedWPConfigView.DataContext = animatedWPConfigVM;
             }
             mainWindowVM.SetCurrentMain(MW);
-            shuffler.startPreviewShuffleTimer();
-            if(mainWindowVM.MainWindowModel._pictureViews.Count > 0)
-                mainWindowVM.SelectedItem = mainWindowVM.MainWindowModel._pictureViews.ElementAt(0);
+            shuffler.StartPreviewShuffleTimer();
 
+            firstStart = false;
             MW.Show();
         }
+
+        #endregion
+
+        #region App/Window Close Methoden
 
         /// <summary>
         /// Funktion für das schließen des Haupfensters. Nicht benötigte Elemente werden entbunden
@@ -179,16 +191,12 @@ namespace DesktopFox
         private void MW_Closed(object? sender, System.EventArgs e)
         {
             //MW.Hide();
+            if (MW == null) return;
+
             mainWindowVM.CurrentView = null;
             SaveOnClose(lastClose: false);
 
-            foreach (var i in mainWindowVM.MainWindowModel._pictureViews)
-            {
-                i.DataContext = null; 
-            }
-            mainWindowVM.MainWindowModel._pictureViews.Clear();
             mainWindowVM.SetCurrentMain(null);
-            shuffler.mWinHandler(null);
             MW.DataContext = null;
             MW.Closed -= MW_Closed;
             MW = null;
@@ -201,10 +209,10 @@ namespace DesktopFox
         /// <param name="lastClose"></param>
         private void SaveOnClose(bool lastClose = true)
         {
-            wallpaperSaves ??= new();
 
-            if (vDesk.getWallpapers != null && vDesk.getWallpapers.Count() > 0)
+            if (vDesk.getWallpapers != null && vDesk.getWallpapers.Count > 0)
             {
+                wallpaperSaves ??= new();
                 wallpaperSaves.wallpapers = vDesk.getWallpapers;
                 if (DF_Json.saveFile(wallpaperSaves))
                     Debug.WriteLine("App Close. Animierte Wallpaper gespeichert");
@@ -237,5 +245,7 @@ namespace DesktopFox
                 MW.ClosingStoryboardFinished(null, null);
             SaveOnClose();
         }
+
+        #endregion
     }
 }

@@ -57,7 +57,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="720*"/>
-                <RowDefinition Height="100*"/>
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1280*"/>
@@ -67,31 +67,35 @@
             <StackPanel Orientation="Horizontal"
                         Grid.Row="2"
                         Grid.Column= "1"
+                        Margin="0,0,0,10"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Panel.ZIndex="3">
                 <Grid>
-                    <Button x:Name="button_StopSet"     
+                    <Button x:Name="button_StopSet" 
+                            ToolTip="Stop the wallpaper manager"
                             Grid.Column="0" 
                             IsEnabled="{Binding CanActivate, Converter={StaticResource BoolInverter}}"
                             Command="{Binding StopSetCommand}"
                             Style="{StaticResource DF_Button_Border}">
                         <Image Source="\Icons\Icons_Pause.png" 
-                                        Stretch="Uniform" Margin="10"/>
+                               Margin="10"/>
                     </Button>
-                    <Button x:Name="button_ActivateSet" 
+                    <Button x:Name="button_ActivateSet"
+                            ToolTip="Start the wallpaper manager"
                             Grid.Column="0" 
                             Visibility="{Binding CanActivate, Converter={StaticResource BoolConverter}}"
                             Command="{Binding ActivateSetCommand}"
                             Style="{StaticResource DF_Button_Border}">
                         <Border Margin="15,15,10,15">
                             <Image Source="\Icons\Icons_Play.png" 
-                                        Stretch="Uniform"/>
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Border>
                     </Button>
                 </Grid>
 
                 <Button x:Name="button_ActiveSet" 
+                        ToolTip="Selected monitor on which the pictureset should be displayed"
                             Grid.Column="0" 
                             FontSize="20"
                             Command="{Binding NextMonitorCommand}"
@@ -99,7 +103,8 @@
                             Style="{StaticResource DF_Button_Border}">
                     <Grid Margin="12">
                         <Image Source="\Icons\Icons_Monitor.png" 
-                                    Stretch="Uniform" Margin="0,2,0,0"/>
+                               Stretch="Uniform" Margin="0,2,0,0"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                         <Label Content="{Binding MultiMonitorContent}"
                                     FontFamily="{StaticResource Default}"
                                     Foreground="{StaticResource TextBrush}"
@@ -112,38 +117,37 @@
 
 
 
-                <Button x:Name="button_Add"          
+                <Button x:Name="button_Add"  
+                        ToolTip="Add a new Pictureset"
                         Grid.Column="0" 
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding AddSetViewCommand}">
                     <Image Name="AddImage"
-                                    Source="\Icons\Icons_Plus.png" 
-                                    Stretch="Uniform" Margin="10"/>
+                           Source="\Icons\Icons_Plus.png" 
+                           Margin="10"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
 
-                <Button x:Name="button_Animation"        
+                <Button x:Name="button_Animation" 
+                        ToolTip="Opens the configuration menu for video wallpaper"
                         FontSize="20"
                         Grid.Column="0" 
-                        Content="Mov"
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding AnimatedToggleCommand}">
-                    <!--
-                    <Border Margin="5">
-                        <Grid>
-                            <Image Source="\Icons\Icons_Plus.png" 
-                                   Stretch="Uniform" Margin="5"/>
-                        </Grid>
-                    </Border>
-                    -->
+                    <Image Source="\Icons\Icons_Video.png" 
+                           Margin="11"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 
-                <Button x:Name="button_Settings" 
+                <Button x:Name="button_Settings"
+                        ToolTip="Opens the settings menu"
                         FontSize="20"
                         Grid.Column="1" 
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding SettingsMainViewCommand}">
                     <Image Source="\Icons\Icons_Settings.png" 
-                                    Stretch="Uniform" Margin="10"/>
+                           Margin="10"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
             </StackPanel>
 
@@ -189,6 +193,7 @@
                      Grid.Row="1"         
                      BorderBrush="Transparent" 
                      Background="Transparent"
+                     ItemsSource="{Binding MainWindowModel._pictureViews}"
                      SelectedItem="{Binding SelectedItem}"                  
                      local:DragAndDropExtension.ScrollOnDragDrop="True"
                      Panel.ZIndex="3">
@@ -310,6 +315,7 @@
 
             <ContentControl x:Name="MainPanelContext"
                             Margin="10,0,10,10"
+                            ClipToBounds="True"
                             Grid.RowSpan="2"
                             Grid.Row="1"
                             Content="{Binding MainPanel}" 

@@ -87,7 +87,7 @@ namespace DesktopFox
         /// <param name="e"></param>
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            DF.makeMainWindow();
+            DF.MakeMainWindow();
         }
 
         private void LanguageMenuItem_Click(object sender, EventArgs e)

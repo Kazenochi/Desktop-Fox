@@ -20,7 +20,7 @@
                            VerticalAlignment="Center"
                            TextAlignment="Center"
                            Margin="0,0,0,10">
-                        Do you want to use one picture set<LineBreak/>or use different sets for each monitor
+                        Wallpaper format on the desktop
             </TextBlock>
 
             <StackPanel Orientation="Horizontal" 
@@ -29,29 +29,33 @@
                             VerticalAlignment="Top"
                             Margin="0,10,0,0">
                 <RadioButton x:Name="radio_DMode_Span"
-                                 Content="Span" 
-                                 FontSize="20"
-                                 Margin="5,5,5,5"
-                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=5}"
-                                 Style="{StaticResource DF_RadioButton_Border}"/>
+                             ToolTip="Spans the Image over every monitor if possible"
+                             Content="Span" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=5}"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
                 <RadioButton x:Name="radio_DMode_Center"
-                                 Content="Center" 
-                                 FontSize="20"
-                                 Margin="5,5,5,5"
-                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=0}"
-                                 Style="{StaticResource DF_RadioButton_Border}"/>
-                <RadioButton x:Name="radio_DMode_Fill"
-                                 Content="Fill" 
-                                 FontSize="20"
-                                 Margin="5,5,5,5"
-                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=4}"
-                                 Style="{StaticResource DF_RadioButton_Border}"/>
+                             ToolTip="Centers the Image without changes"
+                             Content="Center" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=0}"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
                 <RadioButton x:Name="radio_DMode_Fit"
-                                 Content="Fit" 
-                                 FontSize="20"
-                                 Margin="5,5,5,5"
-                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
-                                 Style="{StaticResource DF_RadioButton_Border}"/>
+                             ToolTip="Zooms the image until reaching the background corners, may result in letterboxes"
+                             Content="Fit" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
+                <RadioButton x:Name="radio_DMode_Fill"
+                             ToolTip="Zooms in the image until the background is completely covered"
+                             Content="Fill" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=4}"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

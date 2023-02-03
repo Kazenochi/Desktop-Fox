@@ -365,3 +365,6 @@ FodyWeavers.xsd
 /TestProject/TestProject.csproj
 /TestProject/Usings.cs
 /TestProject/UnitTest1.cs
+/TestProject/TestProject.csproj
+/TestProject/UnitTest1.cs
+/TestProject/Usings.cs

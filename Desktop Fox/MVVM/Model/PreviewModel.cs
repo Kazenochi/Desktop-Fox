@@ -29,6 +29,24 @@ namespace DesktopFox.MVVM.Model
         private Stretch _imageStretch = Stretch.UniformToFill;
 
         /// <summary>
+        /// Setname in der Preview
+        /// </summary>
+        public string SetName { get { return _setName; } set { _setName = value; RaisePropertyChanged(nameof(SetName)); } }
+        private string _setName = "";
+
+        /// <summary>
+        /// Zeigt die Menge an bilder der aktuellen Preview an. 
+        /// </summary>
+        public int PictureCountMax { get { return _pictureCountMax; } set { _pictureCountMax = value; RaisePropertyChanged(nameof(PictureCountMax)); } }
+        private int _pictureCountMax = 0;
+
+        /// <summary>
+        /// Zeigt das wievielte bild in der Collection gerade angezeigt wird.
+        /// </summary>
+        public int PictureCountCurrent { get { return _pictureCountCurrent; } set { _pictureCountCurrent = value; RaisePropertyChanged(nameof(PictureCountCurrent)); } }
+        private int _pictureCountCurrent = 0;
+
+        /// <summary>
         /// Flag ob in der Vorschau die Tag oder Nachtbilder der Collection angezeigt werden soll
         /// </summary>
         public bool Day 
@@ -46,9 +64,6 @@ namespace DesktopFox.MVVM.Model
 
         public bool FaderLock { get { return _faderLock; } set { _faderLock = value; RaisePropertyChanged(nameof(FaderLock)); } }
         private bool _faderLock = false;
-
-        public bool AnimationStart { get { return _animationStart; } set { _animationStart = value; RaisePropertyChanged(nameof(AnimationStart)); } }
-        private bool _animationStart = false;
 
         #endregion
     }

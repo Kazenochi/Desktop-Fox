@@ -13,7 +13,7 @@ namespace DesktopFox
     /// </summary>
     public class LockListQueue
     {
-        private int _pictureCount = 0;
+        public int _pictureCount { get; private set; } = 0;
         private int lastItem = 0;
         private int half = 0;
         private int lockAmount = 0;
@@ -34,10 +34,7 @@ namespace DesktopFox
             half = pictureCount / 2;
             lockAmount = (int)(pictureCount * 0.4);
 
-            for(int i = 0; i < pictureCount; i++)
-            {
-                WhiteList.Add(i);
-            }
+            ResetPictureCount();
         }
 
         /// <summary>
@@ -84,19 +81,11 @@ namespace DesktopFox
                 lastItem++;
                 if(lastItem > _pictureCount-1)
                     lastItem = 0;
-                return lastItem;
-                
+                return lastItem;               
             }
-                
+           
             linear = true;
-            LockList.Clear();
-            WhiteList.Clear();
-
-            for (int i = 0; i < _pictureCount; i++)
-            {
-                WhiteList.Add(i);
-            }
-            
+            ResetPictureCount();               
             lastItem = 0;
             return WhiteList.ElementAt(lastItem);
         }
@@ -119,6 +108,27 @@ namespace DesktopFox
         private int NewRandomNumber(int min, int max)
         {
             return random.Next(min, max);
+        }
+
+        /// <summary>
+        /// Setzt die Klasse zurück
+        /// </summary>
+        /// <param name="newPictureCount"></param>
+        public void ResetPictureCount(int newPictureCount = 0) 
+        { 
+            if(newPictureCount != 0)
+            {
+                _pictureCount = newPictureCount;
+                half = _pictureCount / 2;
+                lockAmount = (int)(_pictureCount * 0.4);
+            }               
+
+            LockList.Clear();
+            WhiteList.Clear();
+            for (int i = 0; i < _pictureCount; i++)
+            {
+                WhiteList.Add(i);
+            }
         }
 
     }

@@ -150,15 +150,12 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         private void RemoveValue()
         {
-            bool tmpDay = false;
-            bool deleteAll = false;
-
             switch (DeletionSelect)
             {
-                case 1: tmpDay = true; GM.removeCollection(MWVM.SelectedVM.pictureSet.SetName, true); break;
-                case 2: tmpDay = false; GM.removeCollection(MWVM.SelectedVM.pictureSet.SetName, false); break;
-                case 3: deleteAll = true; GM.removeCollection(MWVM.SelectedVM.pictureSet.SetName, true, all: true); break;
-                case 4: deleteAll = true; GM.removeCollection(MWVM.SelectedVM.pictureSet.SetName, true, all: true); break;
+                case 1: GM.removeCollection(MWVM.SelectedVM.pictureSet.SetName, true); break;
+                case 2: GM.removeCollection(MWVM.SelectedVM.pictureSet.SetName, false); break;
+                case 3: GM.removeCollection(MWVM.SelectedVM.pictureSet.SetName, true, all: true); break;
+                case 4: GM.removeCollection(MWVM.SelectedVM.pictureSet.SetName, true, all: true); break;
             }
             DeletionSelect = 0;
             DeleteValidation();

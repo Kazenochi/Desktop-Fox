@@ -150,10 +150,8 @@ namespace DesktopFox
             if(MW == null) 
             { 
                 MW ??= new MainWindow();
-                shuffler.MWinHandler(MW);
                 MW.Closed += MW_Closed;
-                MW.DataContext = mainWindowVM;
-                
+                MW.DataContext = mainWindowVM;               
     
                 if(firstStart)
                 {
@@ -198,16 +196,7 @@ namespace DesktopFox
             mainWindowVM.CurrentView = null;
             SaveOnClose(lastClose: false);
 
-            /*
-            foreach (var i in mainWindowVM.MainWindowModel._pictureViews)
-            {
-                i.DataContext = null; 
-            }
-            mainWindowVM.MainWindowModel._pictureViews.Clear();
-            */
-
             mainWindowVM.SetCurrentMain(null);
-            shuffler.MWinHandler(null);
             MW.DataContext = null;
             MW.Closed -= MW_Closed;
             MW = null;

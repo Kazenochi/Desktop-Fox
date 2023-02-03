@@ -313,10 +313,10 @@ namespace DesktopFox
         {
             switch (number)
             {
-                case 1: return monitorDict[MonitorEnum.MainMonitor]; break;
-                case 2: return monitorDict[MonitorEnum.SecondMonitor]; break;
-                case 3: return monitorDict[MonitorEnum.ThirdMonitor]; break;
-                default: Debug.WriteLine("Kein Monitor mit diesem Wert verfügbar"); return null; break;            
+                case 1: return monitorDict[MonitorEnum.MainMonitor]; 
+                case 2: return monitorDict[MonitorEnum.SecondMonitor]; 
+                case 3: return monitorDict[MonitorEnum.ThirdMonitor];
+                default: Debug.WriteLine("Kein Monitor mit diesem Wert verfügbar"); return null;            
             }
         }
         /// <summary>

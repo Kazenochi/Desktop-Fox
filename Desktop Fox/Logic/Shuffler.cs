@@ -15,18 +15,15 @@ namespace DesktopFox
 {
     public class Shuffler
     {
-        private MainWindow? mWindow;
         private readonly MainWindowVM MWVM;
         private readonly PreviewVM previewVM;
         private readonly VirtualDesktop vDesk;
         private readonly GalleryManager GM;
         private readonly SettingsManager SM;
         public Boolean isDay;
-        private readonly Boolean previewDay = true;
 
         private readonly LockListQueue[] lockListQueues = new LockListQueue[3];
 
-        private readonly Settings _settings;
         private int previewCount = 0;
         private Timer previewTimer;
         private Timer desktopShuffleTimer;
@@ -98,15 +95,6 @@ namespace DesktopFox
             }
         }
 
-        /// <summary>
-        /// Setzt eine neue referenz zum <see cref="MainWindow"/> beim erstellen. <see cref="Fox.MakeMainWindow"/>
-        /// Note: Wird evtl. nicht mehr benötigt
-        /// </summary>
-        /// <param name="mainWindow"></param>
-        public void MWinHandler(MainWindow? mainWindow)
-        {
-            mWindow = mainWindow;
-        }
 
         #region Preview Steuerelemente
 
@@ -145,7 +133,7 @@ namespace DesktopFox
                 previewCount = previewCount - 2;
                 if (previewCount < 0)
                 {
-                    previewCount = GM.GetCollection(previewDay, GM.getPreviewSet().SetName).singlePics.Count - 1;
+                    previewCount = GM.GetCollection(previewVM.PreviewModel.Day, previewVM.PreviewModel.SetName).singlePics.Count - 1;
                 }
                 PreviewShuffleAsync();
             }
@@ -239,6 +227,10 @@ namespace DesktopFox
         private void DF_PicShuffle(Monitor monitor, Collection activeCol)
         {
             LockListQueue queue = lockListQueues.ElementAt((int)monitor.Name - 1);
+
+            if (queue._pictureCount != activeCol.singlePics.Count)
+                queue.ResetPictureCount(activeCol.singlePics.Count);
+
 
             if (SM.Settings.Shuffle)
                 vDesk.getWrapper.SetWallpaper(monitor.ID, activeCol.singlePics.ElementAt(queue.GetNewRandomItem()).Key);
@@ -339,13 +331,20 @@ namespace DesktopFox
                 if (previewCount >= 0 && previewCount < GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count)
                 {
                     tmpPreviewModel.BackgroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key));
+                    tmpPreviewModel.PictureCountCurrent = previewCount + 1;
+                    tmpPreviewModel.SetName = tmpPreviewSet.SetName;
+                    tmpPreviewModel.PictureCountMax = GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count;
                     previewCount++;
                 }
                 else
                 {
                     //Anzeigen des Bildes an Erster Stelle und setzten des Counters um einene gleichmäßige Rotation zu ermöglichen
+                    
+                    tmpPreviewModel.BackgroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(0).Key));                    
+                    tmpPreviewModel.PictureCountCurrent = 1;
+                    tmpPreviewModel.SetName = tmpPreviewSet.SetName;
+                    tmpPreviewModel.PictureCountMax = GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count;
                     previewCount = 1;
-                    tmpPreviewModel.BackgroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(0).Key));
                 }
             }
             previewVM.PreviewModel.FaderLock = true;
@@ -473,7 +472,6 @@ namespace DesktopFox
         /// </summary>
         private void DesktopTimer_Kickstart()
         {
-            Debug.WriteLine("Kickstart der TimerFunktion. Wehe das steht mehr als einmal im Debug -_- ");
             for (int i = 0; i < GM.Gallery.activeSetsList.Count; i++)
             {
                 if (GM.Gallery.activeSetsList[i] == "Empty") continue;
@@ -607,6 +605,7 @@ namespace DesktopFox
         /// </summary>
         private void AutoSetChange()
         {
+
             if (!isDay || DateTime.Now < SM.Settings.NextDaySwitch)
             {
                 SM.Settings.NextDaySwitch = DateTime.Now.Subtract(DateTime.Now.TimeOfDay).Add(TimeSpan.FromDays(1).Add(SM.Settings.DayStart));

@@ -471,7 +471,7 @@ namespace DesktopFox
         /// Ändernt die Views im Mainwindow <see cref="MainWindow.ContextViews"/>
         /// </summary>
         /// <param name="newView">Neue View die Angezeigt werden soll. null = keine View anzeigen.</param>
-        public void SwitchViews(AnimatedBaseView newView)
+        public void SwitchViews(AnimatedBaseView? newView)
         {
             if (newView != null && newView != CurrentView)
             {

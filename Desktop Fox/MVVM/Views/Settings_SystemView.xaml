@@ -31,14 +31,16 @@
                                  Style="{StaticResource DF_RadioButton_Border_Round}" 
                                  IsChecked="{Binding settings.AutoSetChange}">
                         <Image Source="\Icons\Icons_On.png"
-                               Margin="10"/>
+                               Margin="10"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </RadioButton>
                     <RadioButton x:Name="radio_AutoSetChangeOff"
                                  Margin="5,5,5,5"
                                  Style="{StaticResource DF_RadioButton_Border_Round}"
                                  IsChecked="{Binding settings.AutoSetChange, Converter={StaticResource BoolInverter}}">
                         <Image Source="\Icons\Icons_Off.png"
-                               Margin="10"/>
+                               Margin="10"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </RadioButton>
                 </StackPanel>
             </StackPanel>
@@ -67,14 +69,16 @@
                                  Style="{StaticResource DF_RadioButton_Border_Round}" 
                                  IsChecked="{Binding settings.AutostartOn}">
                         <Image Source="\Icons\Icons_On.png"
-                               Margin="10"/>
+                               Margin="10"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </RadioButton>
                     <RadioButton x:Name="radio_AutoStartOff"
                                  Margin="5,5,5,5"
                                  Style="{StaticResource DF_RadioButton_Border_Round}"
                                  IsChecked="{Binding settings.AutostartOn, Converter={StaticResource BoolInverter}}">
                         <Image Source="\Icons\Icons_Off.png"
-                               Margin="10"/>
+                               Margin="10"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </RadioButton>
                 </StackPanel>
             </StackPanel>

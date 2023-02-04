@@ -228,7 +228,7 @@ namespace DesktopFox
         {
             LockListQueue queue = lockListQueues.ElementAt((int)monitor.Name - 1);
 
-            if (queue._pictureCount != activeCol.singlePics.Count)
+            if (queue.PictureCount != activeCol.singlePics.Count)
                 queue.ResetPictureCount(activeCol.singlePics.Count);
 
 

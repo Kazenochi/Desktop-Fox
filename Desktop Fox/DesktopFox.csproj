@@ -119,10 +119,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Saves\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\license">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>

@@ -206,7 +206,9 @@ namespace DesktopFox
                 
                 foreach(PictureView i in MWVM.MainWindowModel._pictureViews)
                 {
-                    if (i.pLabel.Content == pictureSet)
+                    if (tmpDeleteViews != null && tmpDeleteVM != null) break;
+
+                    if (((PictureVM)i.DataContext).pictureSet.SetName == pictureSet)
                     {
                         tmpDeleteViews = i;
                         tmpDeleteVM = (PictureVM)i.DataContext;

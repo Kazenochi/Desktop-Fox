@@ -41,7 +41,6 @@ namespace DesktopFox
             Task.Run(() => CheckMultiMonitor());
         }
 
-
         /// <summary>
         /// Gibt das Model dieser Klasse zurück
         /// </summary>

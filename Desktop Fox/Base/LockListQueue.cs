@@ -13,16 +13,16 @@ namespace DesktopFox
     /// </summary>
     public class LockListQueue
     {
-        public int _pictureCount { get; private set; } = 0;
+        public int PictureCount { get; private set; } = 0;
         private int lastItem = 0;
         private int half = 0;
         private int lockAmount = 0;
         private int newItemIndex = 0;
         private bool linear = false;
 
-        private Random random = new();
-        private Queue<int> LockList = new();
-        private List<int> WhiteList = new();
+        private readonly Random random = new();
+        private readonly Queue<int> LockList = new();
+        private readonly List<int> WhiteList = new();
 
         /// <summary>
         /// Konstruktor
@@ -30,7 +30,7 @@ namespace DesktopFox
         /// <param name="pictureCount">Anzahl der Bilder die Verwaltet werden sollen</param>
         public LockListQueue(int pictureCount)
         {
-            _pictureCount = pictureCount;
+            PictureCount = pictureCount;
             half = pictureCount / 2;
             lockAmount = (int)(pictureCount * 0.4);
 
@@ -42,9 +42,7 @@ namespace DesktopFox
         /// </summary>
         /// <returns></returns>
         public int GetNewRandomItem()
-        {
-            linear = false;
-
+        {          
             if (lastItem < half)
                 newItemIndex = NewRandomNumber(half, WhiteList.Count);
             else
@@ -60,13 +58,12 @@ namespace DesktopFox
            
             LockList.Enqueue(lastItem);
             WhiteList.Remove(lastItem);
-
             half = (int)(WhiteList.Count / 2);
+            linear = false;
 
             if (!LockList.Contains(lastItem)) return -1;
             if (WhiteList.Contains(lastItem)) return -1;
             
-            Debug.WriteLine("Last before return.");
             return lastItem;
         }
 
@@ -79,7 +76,7 @@ namespace DesktopFox
             if (linear)
             {
                 lastItem++;
-                if(lastItem > _pictureCount-1)
+                if(lastItem > PictureCount-1)
                     lastItem = 0;
                 return lastItem;               
             }
@@ -118,14 +115,14 @@ namespace DesktopFox
         { 
             if(newPictureCount != 0)
             {
-                _pictureCount = newPictureCount;
-                half = _pictureCount / 2;
-                lockAmount = (int)(_pictureCount * 0.4);
+                PictureCount = newPictureCount;
+                half = PictureCount / 2;
+                lockAmount = (int)(PictureCount * 0.4);
             }               
 
             LockList.Clear();
             WhiteList.Clear();
-            for (int i = 0; i < _pictureCount; i++)
+            for (int i = 0; i < PictureCount; i++)
             {
                 WhiteList.Add(i);
             }

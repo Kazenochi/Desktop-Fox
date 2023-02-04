@@ -48,16 +48,15 @@
                 <StackPanel Orientation="Horizontal"
                             Grid.Row="1"
                             VerticalAlignment="Center"
-                            HorizontalAlignment="Center">
-                    <Button FontSize="20"
-                            Command="{Binding YesCommand}"
+                            HorizontalAlignment="Center"
+                            Margin="2">
+                    <Button Command="{Binding YesCommand}"
                             Style="{StaticResource DF_Button_Red_Border}">
                         <Image Source="\Icons\Icons_Checkmark.png" 
                                Margin="10,12,11,10"
                                RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
-                    <Button FontSize="20"
-                            Command="{Binding NoCommand}"
+                    <Button Command="{Binding NoCommand}"
                             Style="{StaticResource DF_Button_Border}">
                         <Image Source="\Icons\Icons_Cancel.png" 
                                Margin="13"

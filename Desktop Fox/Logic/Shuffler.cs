@@ -326,31 +326,27 @@ namespace DesktopFox
             var tmpPreviewSet = GM.getPreviewSet();
             PreviewModel tmpPreviewModel = previewVM.PreviewModel;
 
-            if (tmpPreviewSet == null)
+            if (tmpPreviewSet == null) return;
+         
+            if (previewCount >= 0 && previewCount < GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count)
             {
-                //tmpPreviewModel.ForegroundImage = await Task.Run(() => ImageHandler.dummy());
+                tmpPreviewModel.BackgroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key));
+                tmpPreviewModel.PictureCountCurrent = previewCount + 1;
+                tmpPreviewModel.SetName = tmpPreviewSet.SetName;
+                tmpPreviewModel.PictureCountMax = GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count;
+                previewCount++;
             }
             else
             {
-                if (previewCount >= 0 && previewCount < GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count)
-                {
-                    tmpPreviewModel.BackgroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(previewCount).Key));
-                    tmpPreviewModel.PictureCountCurrent = previewCount + 1;
-                    tmpPreviewModel.SetName = tmpPreviewSet.SetName;
-                    tmpPreviewModel.PictureCountMax = GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count;
-                    previewCount++;
-                }
-                else
-                {
-                    //Anzeigen des Bildes an Erster Stelle und setzten des Counters um einene gleichmäßige Rotation zu ermöglichen
+                //Anzeigen des Bildes an Erster Stelle und setzten des Counters um einene gleichmäßige Rotation zu ermöglichen
                     
-                    tmpPreviewModel.BackgroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(0).Key));                    
-                    tmpPreviewModel.PictureCountCurrent = 1;
-                    tmpPreviewModel.SetName = tmpPreviewSet.SetName;
-                    tmpPreviewModel.PictureCountMax = GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count;
-                    previewCount = 1;
-                }
+                tmpPreviewModel.BackgroundImage = await Task.Run(() => ImageHandler.load(GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.ElementAt(0).Key));                    
+                tmpPreviewModel.PictureCountCurrent = 1;
+                tmpPreviewModel.SetName = tmpPreviewSet.SetName;
+                tmpPreviewModel.PictureCountMax = GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count;
+                previewCount = 1;
             }
+            
             previewVM.PreviewModel.FaderLock = true;
         }
 

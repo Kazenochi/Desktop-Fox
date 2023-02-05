@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace TestProject
 {
     [TestClass]
-    public class UnitTest1
+    public class LockList_RandomGenerator
     {
         [TestMethod]
         public void LockList_RandomQueueTest()

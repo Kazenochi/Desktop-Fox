@@ -3,9 +3,6 @@ using IDesktopWallpaperWrapper.Win32;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Windows.Controls;
-using System.Windows.Media;
-using static System.Windows.Forms.AxHost;
 using DPos = IDesktopWallpaperWrapper.Win32.DESKTOP_WALLPAPER_POSITION;
 
 namespace DesktopFox

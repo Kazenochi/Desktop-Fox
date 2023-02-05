@@ -2,13 +2,10 @@
 using DesktopFox.MVVM.Model;
 using DesktopFox.MVVM.ViewModels;
 using System;
-using System.Collections;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using Timer = System.Timers.Timer;
 
 namespace DesktopFox
@@ -28,9 +25,7 @@ namespace DesktopFox
         private Timer previewTimer;
         private Timer desktopShuffleTimer;
         private Timer daytimeTimer;
-        private readonly TimeSpan PreviewShuffleTime = TimeSpan.FromSeconds(10);
-        
-        private readonly Random random = new Random();
+        private readonly TimeSpan PreviewShuffleTime = TimeSpan.FromSeconds(10);       
 
         /// <summary>
         /// Konstruktor

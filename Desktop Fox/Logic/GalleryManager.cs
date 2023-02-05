@@ -3,15 +3,9 @@ using DesktopFox.MVVM.ViewModels;
 using DesktopFox.MVVM.Views;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.TextFormatting;
+
 
 namespace DesktopFox
 {

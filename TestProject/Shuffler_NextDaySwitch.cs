@@ -13,8 +13,8 @@ namespace TestProject
             DateTime NextSwitch = DateTime.Now.AddHours(23);
 
             DateTime returnValue = CheckDaySwitch.Check(DateNow, NextSwitch);
-            Debug.WriteLine($"Current Time: {DateNow} | Time Until Switch: {returnValue - DateNow}");
-            Debug.WriteLine($"Next Switch: {NextSwitch} | Return Value: {returnValue}");
+            Debug.WriteLine($"Current Time:\t{DateNow} \t| Time Until Switch:\t{returnValue - DateNow}");
+            Debug.WriteLine($"Next Switch:\t{NextSwitch} \t| Return Value:\t\t{returnValue}");
             Assert.AreEqual(NextSwitch, returnValue);           
         }
 
@@ -25,8 +25,8 @@ namespace TestProject
             DateTime NextSwitch = DateTime.Now.AddDays(1);
 
             DateTime returnValue = CheckDaySwitch.Check(DateNow, NextSwitch);
-            Debug.WriteLine($"Current Time: {DateNow} | Time Until Switch: {returnValue - DateNow}");
-            Debug.WriteLine($"Next Switch: {NextSwitch} | Return Value: {returnValue}");
+            Debug.WriteLine($"Current Time:\t{DateNow} \t| Time Until Switch:\t{returnValue - DateNow}");
+            Debug.WriteLine($"Next Switch:\t{NextSwitch} \t| Return Value:\t\t{returnValue}");
             Assert.AreEqual(NextSwitch.AddDays(1), returnValue);
         }
 
@@ -44,8 +44,8 @@ namespace TestProject
                 DateNow = DateTime.Now.AddHours(i);
                 DateTime returnValue = CheckDaySwitch.Check(DateNow, NextSwitch);
                 Debug.WriteLine($"Count: {i}");
-                Debug.WriteLine($"Current Time: {DateNow} | Time Until Switch: {returnValue-DateNow}");
-                Debug.WriteLine($"Next Switch: {NextSwitch} | Return Value: {returnValue}");
+                Debug.WriteLine($"Current Time:\t{DateNow} \t| Time Until Switch:\t{returnValue - DateNow}");
+                Debug.WriteLine($"Next Switch:\t{NextSwitch} \t| Return Value:\t\t{returnValue}");
 
                 if (DateNow.TimeOfDay > DayStart)
                     AddDay = 1;                   
@@ -97,8 +97,8 @@ namespace TestProject
                 //DateNow = DateTime.Now.AddDays(i);
                 DateTime returnValue = CheckDaySwitch.Check(DateNow, NextSwitch);
                 Debug.WriteLine($"Count: {i}");
-                Debug.WriteLine($"Current Time: {DateNow} | Time Until Switch: {returnValue - DateNow}");
-                Debug.WriteLine($"Next Switch: {NextSwitch} | Return Value: {returnValue}");
+                Debug.WriteLine($"Current Time:\t{DateNow} \t| Time Until Switch:\t{returnValue - DateNow}");
+                Debug.WriteLine($"Next Switch:\t{NextSwitch} \t| Return Value:\t\t{returnValue}");
 
                 if (DateNow.TimeOfDay > DayStart)
                 {
@@ -163,8 +163,11 @@ namespace TestProject
                 DateNow = DateTime.Now.AddHours(TestValues);
                 DateTime returnValue = CheckDaySwitch.Check(DateNow, NextSwitch);
                 Debug.WriteLine($"Count: {TestValues}");
-                Debug.WriteLine($"Current Time: {DateNow} | Time Until Switch: {returnValue - DateNow}");
-                Debug.WriteLine($"Next Switch: {NextSwitch} | Return Value: {returnValue}");
+                Debug.WriteLine($"Current Time:\t{DateNow} \t| Time Until Switch:\t{returnValue - DateNow}");
+                Debug.WriteLine($"Next Switch:\t{NextSwitch} \t| Return Value:\t\t{returnValue}");
+
+                if((returnValue - DateNow).TotalMinutes < 0)
+                    Error = true;
 
                 if (DateNow.TimeOfDay > DayStart)
                     AddDay = 1;

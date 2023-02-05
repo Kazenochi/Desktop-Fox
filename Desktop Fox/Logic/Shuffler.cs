@@ -22,9 +22,6 @@ namespace DesktopFox
         private readonly SettingsManager SM;
         public Boolean isDay;
 
-        public Boolean _debugToggle = false;
-        public DateTime _debug_DateTime;
-
         private readonly LockListQueue[] lockListQueues = new LockListQueue[3];
 
         private int previewCount = 0;
@@ -52,8 +49,12 @@ namespace DesktopFox
             vDesk = virtualDesktop;
             SM.Settings.PropertyChanged += Shuffler_Settings_PropertyChanged;
             mainWindowVM.PropertyChanged += MainWindowVM_PropertyChanged;
-            Task.Run(() => DaytimeTimerStart());
-            if (SM.Settings.IsRunning) PicShuffleStart();
+
+            if (SM.Settings.IsRunning) 
+                PicShuffleStart();
+            else 
+                DaytimeTimerStart();
+
         }
 
         /// <summary>
@@ -419,7 +420,7 @@ namespace DesktopFox
                 Debug.WriteLine("DF Timer läuft bereits. Zeit wurde zurückgesetzt");
             }
             DesktopTimer_Kickstart();
-            //DesktopTimer_Trigger(null, null);
+            
             if (!SM.Settings.IsRunning)
                 SM.Settings.IsRunning = true;
                 

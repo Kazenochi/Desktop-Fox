@@ -21,11 +21,11 @@ namespace DesktopFox
     /// </summary>
     public class GalleryManager
     {
-        private Gallery _gallery;
-        private GalleryShadow _shadow;
-        private SettingsManager SM;
-        private MainWindowVM MWVM;
-        private Fox DF;
+        private readonly Gallery _gallery;
+        private readonly GalleryShadow _shadow;
+        private readonly SettingsManager SM;
+        private readonly MainWindowVM MWVM;
+        private readonly Fox DF;
         private MonitorEnum _lastMonitorChanged = MonitorEnum.None;
 
         /// <summary>

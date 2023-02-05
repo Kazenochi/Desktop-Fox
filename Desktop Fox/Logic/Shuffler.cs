@@ -22,6 +22,9 @@ namespace DesktopFox
         private readonly SettingsManager SM;
         public Boolean isDay;
 
+        public Boolean _debugToggle = false;
+        public DateTime _debug_DateTime;
+
         private readonly LockListQueue[] lockListQueues = new LockListQueue[3];
 
         private int previewCount = 0;
@@ -594,8 +597,10 @@ namespace DesktopFox
                 daytimeTimer.Start();
                 Debug.WriteLine("Tageszeiten Timer hat aktualisiert. Verbleibende Zeit zum Wechsel: " + untilTimeChange);
             }
+            if (SM.Settings.AutoSetChange && DateTime.Now > SM.Settings.NextDaySwitch)
+                AutoSetChange();
 
-            AutoSetChange();
+            SM.Settings.NextDaySwitch = CheckDaySwitch.Check(DateTime.Now, SM.Settings.NextDaySwitch);                
         }
 
         /// <summary>
@@ -605,16 +610,6 @@ namespace DesktopFox
         /// </summary>
         private void AutoSetChange()
         {
-
-            if (!isDay || DateTime.Now < SM.Settings.NextDaySwitch)
-            {
-                SM.Settings.NextDaySwitch = DateTime.Now.Subtract(DateTime.Now.TimeOfDay).Add(TimeSpan.FromDays(1).Add(SM.Settings.DayStart));
-                Debug.WriteLine("Debugging -> Nächster Tageswechsel: " + SM.Settings.NextDaySwitch);
-                return;
-            }
-
-            //Weiterschieben der Sets Jedes Set wird am Tageswechsel um eine position in der Liste weitergeschoben
-            //
             if (SM.Settings.AutoSetChange)
             {
                 for (int i = 1; i <= 3; i++)
@@ -624,9 +619,7 @@ namespace DesktopFox
                     GM.setActiveSet(GM.getNextSet(GM.getActiveSet(i).SetName), i);
                 }
             }
-
-            SM.Settings.NextDaySwitch = DateTime.Now.Subtract(DateTime.Now.TimeOfDay).Add(TimeSpan.FromDays(1).Add(SM.Settings.DayStart));
-            Debug.WriteLine("SetSwitch ausgelöst. Nächster Tageswechsel: " + SM.Settings.NextDaySwitch);
+            Debug.WriteLine("SetSwitch ausgelöst");
         }
 
         /// <summary>

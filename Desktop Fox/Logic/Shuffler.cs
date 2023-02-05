@@ -566,8 +566,7 @@ namespace DesktopFox
         public void DaytimeTimerStart()
         {
             TimeSpan untilTimeChange;
-            DateTime timeNow = System.DateTime.Now;
-            TimeSpan currentTime = timeNow.TimeOfDay;
+            TimeSpan currentTime = DateTime.Now.TimeOfDay;
 
             IsDayCheck();
 
@@ -595,12 +594,14 @@ namespace DesktopFox
                 daytimeTimer.Stop();
                 daytimeTimer.Interval = untilTimeChange.TotalMilliseconds;
                 daytimeTimer.Start();
-                Debug.WriteLine("Tageszeiten Timer hat aktualisiert. Verbleibende Zeit zum Wechsel: " + untilTimeChange);
+                Debug.WriteLine("Tageszeiten Timer wurde aktualisiert. Verbleibende Zeit zum Wechsel: " + untilTimeChange);
             }
+
+            SM.Settings.NextDaySwitch = CheckDaySwitch.Check(DateTime.Now, SM.Settings.NextDaySwitch);
+
             if (SM.Settings.AutoSetChange && DateTime.Now > SM.Settings.NextDaySwitch)
                 AutoSetChange();
-
-            SM.Settings.NextDaySwitch = CheckDaySwitch.Check(DateTime.Now, SM.Settings.NextDaySwitch);                
+                    
         }
 
         /// <summary>
@@ -610,14 +611,11 @@ namespace DesktopFox
         /// </summary>
         private void AutoSetChange()
         {
-            if (SM.Settings.AutoSetChange)
+            for (int i = 1; i <= 3; i++)
             {
-                for (int i = 1; i <= 3; i++)
-                {
-                    if (GM.getActiveSet(i) == null) continue;
+                if (GM.getActiveSet(i) == null) continue;
 
-                    GM.setActiveSet(GM.getNextSet(GM.getActiveSet(i).SetName), i);
-                }
+                GM.setActiveSet(GM.getNextSet(GM.getActiveSet(i).SetName), i);
             }
             Debug.WriteLine("SetSwitch ausgelöst");
         }
@@ -630,7 +628,7 @@ namespace DesktopFox
         private void CurrentDaytime_Trigger(object sender, System.Timers.ElapsedEventArgs e)
         {
             isDay = !isDay;
-            Task.Run(() => DaytimeTimerStart());
+            DaytimeTimerStart();
             if (SM.Settings.IsRunning)
                 Task.Run(() => PicShuffleStart());
             Debug.WriteLine("Tageszeittrigger wurde ausgelöst. isDay = " + isDay);

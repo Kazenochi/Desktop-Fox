@@ -154,7 +154,7 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         private void SaveShuffleTimeValue()
         {
-            settings.ShuffleTime = TimeSpan.FromMinutes(ShuffleModel.ShuffleTime);
+            settings.ShuffleTime = ShuffleModel.SaveValues(); 
         }
 
         #endregion

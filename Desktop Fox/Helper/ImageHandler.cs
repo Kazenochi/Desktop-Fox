@@ -93,7 +93,7 @@ namespace DesktopFox
         }
 
         /// <summary>
-        /// Gibt die Rotation des Bildes zurück, welche in den Metadaten steht.
+        /// Gibt die Rotation des Bildes zurück, welche in den Metadaten steht. https://stackoverflow.com/a/63627972/20939585
         /// </summary>
         /// <param name="path">Vollständiger Pfad zur Bilddatei</param>
         /// <returns></returns>
@@ -111,12 +111,12 @@ namespace DesktopFox
 
                     #region Diagramm zu EXIF Orientierung
                     /* EXIF Orientierung
-                     * -----> Row
+                     *   -----> X
                      * |
                      * |
-                     * | Column
+                     * | Y
                      * V
-                     *        Row       Column      Rotation            Spiegel 
+                     *        X         Y           Rotation            Spiegel 
                      * 1    = Top       Left        
                      * 2 *  = Top       Right                           Y-Achse Gespiegelt
                      * 3    = Bottom    Right       180° Gedreht
@@ -126,6 +126,7 @@ namespace DesktopFox
                      * 7 *  = Right     Bottom      -90° Gedreht        X-Achse Gespiegelt
                      * 8    = Left      Bottom       90° Gedreht
                      */
+
                     #endregion
 
                     //Auslesen der Rotation aus dem EXIF und vorbereiten der Variable zum bearbeiten der Bitmap

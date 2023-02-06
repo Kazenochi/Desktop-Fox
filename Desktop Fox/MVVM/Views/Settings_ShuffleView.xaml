@@ -55,24 +55,42 @@
             </TextBlock>
 
             <Border x:Name="border1"
-                    Height="30" Width="70" 
+                    Height="36" Width="76" 
                     Background="{StaticResource ControlBrush}" 
-                    CornerRadius="15"
-                    Margin="10,0,10,0">
+                    CornerRadius="18"
+                    Margin="10,0">
                 <TextBox x:Name="shuffleTime"
                          MaxLength="3"
                          Foreground="{StaticResource TextBrush}"
+                         BorderThickness="0"
+                         CaretBrush="{StaticResource TextBrush}"
                          FontSize="20"
                          VerticalAlignment="Center"
                          Background="Transparent"
-                         BorderBrush="Transparent"
                          TextAlignment="Center"
-                         Margin="10,1,10,1"
-                         TextChanged="TextBox_TextChanged"
-                         Text="{Binding ShuffleModel.ShuffleTime}"/>
+                         Margin="10,0,10,0"
+                         PreviewKeyDown="TextBox_PreviewKeyDown"
+                         d:Text="10"
+                         Text="{Binding DaytimeModel.DayStartHours}">
+                </TextBox>
+                <Border.Style>
+                    <Style>
+                        <Setter Property="Border.Background" Value="{StaticResource ControlBrush}"/>
+                        <Setter Property="Border.BorderThickness" Value="3"/>
+                        <Style.Triggers>
+                            <Trigger Property="Border.IsMouseOver" Value="True">
+                                <Setter Property="Border.BorderBrush" Value="{StaticResource HighlightBrush}"/>
+                                <Setter Property="Border.Cursor" Value="Hand"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding ElementName=shuffleTime, Path=IsFocused}" Value="true">
+                                <Setter Property="Border.Background" Value="{StaticResource ControlPressedBrush}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
             </Border>
 
-                <TextBlock FontFamily="{StaticResource Default}"
+            <TextBlock FontFamily="{StaticResource Default}"
                            Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            VerticalAlignment="Center">

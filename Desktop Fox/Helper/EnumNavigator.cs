@@ -5,8 +5,6 @@ namespace DesktopFox
 {
     public static class EnumNavigator
     {
-        //https://stackoverflow.com/a/643438/20939585 von Yahya Hussein unter CC BY-SA 4.0
-        //Erweitert mit Count Down Funktion
 
         public static T Next<T>(this T src) where T : struct
         {

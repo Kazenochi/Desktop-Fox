@@ -19,19 +19,22 @@ namespace DesktopFox.MVVM.Views
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        /// <summary>
+        /// Textbox Eingabebeschränkung. Es werden lediglich Zahlen, Zurück, Entfernen und Pfeiltasten akzeptiert
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            //https://stackoverflow.com/a/5726430
-            TextBox textBox = sender as TextBox;
-            int iValue = -1;
-
-            if (Int32.TryParse(textBox.Text, out iValue) == false)
+            if (e.Key == Key.Space ||
+                !(
+                e.Key >= Key.D0 && e.Key <= Key.D9 ||
+                e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 ||
+                e.Key == Key.Back || e.Key == Key.Delete ||
+                e.Key >= Key.Left && e.Key <= Key.Down)
+                )
             {
-                TextChange textChange = e.Changes.ElementAt<TextChange>(0);
-                int iAddedLength = textChange.AddedLength;
-                int iOffset = textChange.Offset;
-
-                textBox.Text = textBox.Text.Remove(iOffset, iAddedLength);
+                e.Handled = true;
             }
         }
     }

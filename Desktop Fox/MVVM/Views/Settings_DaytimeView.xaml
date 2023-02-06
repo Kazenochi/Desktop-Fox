@@ -34,23 +34,24 @@
 
             <StackPanel Orientation="Horizontal">
 
-                <Border Height="30" Width="70" 
-                            CornerRadius="15"
-                            Margin="10,0,10,0"
-                            x:Name="border1">
+                <Border x:Name="border1"
+                    Height="36" Width="76" 
+                    Background="{StaticResource ControlBrush}" 
+                    CornerRadius="18"
+                    Margin="10,0">
                     <TextBox x:Name="dayHours"
-                                 MaxLength="2"
-                                 Foreground="{StaticResource TextBrush}"
-                                 BorderThickness="0"
-                                 CaretBrush="{StaticResource TextBrush}"
-                                 FontSize="20"
-                                 VerticalAlignment="Center"
-                                 Background="Transparent"
-                                 TextAlignment="Center"
-                                 Margin="0,-2,0,0"
-                                 d:Text="8"
-                                 TextChanged="TextBox_TextChanged"
-                                 Text="{Binding DaytimeModel.DayStartHours}">
+                             MaxLength="2"
+                             Foreground="{StaticResource TextBrush}"
+                             BorderThickness="0"
+                             CaretBrush="{StaticResource TextBrush}"
+                             FontSize="20"
+                             VerticalAlignment="Center"
+                             Background="Transparent"
+                             TextAlignment="Center"
+                             Margin="10,0,10,0"
+                             PreviewKeyDown="TextBox_PreviewKeyDown"
+                             d:Text="8"
+                             Text="{Binding DaytimeModel.DayStartHours}">
                     </TextBox>
                     <Border.Style>
                         <Style>
@@ -78,10 +79,11 @@
                             :
                 </TextBlock>
 
-                <Border Height="30" Width="70" 
-                            CornerRadius="15"
-                            Margin="10,0,10,0"
-                            x:Name="border2">
+                <Border x:Name="border2"
+                        Height="36" Width="76" 
+                        Background="{StaticResource ControlBrush}" 
+                        CornerRadius="18"
+                        Margin="10,0">
                     <TextBox x:Name="dayMinutes"
                                  MaxLength="2"
                                  Foreground="{StaticResource TextBrush}"
@@ -91,8 +93,8 @@
                                  VerticalAlignment="Center"
                                  Background="Transparent"
                                  TextAlignment="Center"
-                                 Margin="0,-2,0,0"
-                                 TextChanged="TextBox_TextChanged"
+                                 Margin="10,0,10,0"
+                                 PreviewKeyDown="TextBox_PreviewKeyDown"
                                  Text="{Binding DaytimeModel.DayStartMinutes}">
                     </TextBox>
                     <Border.Style>
@@ -135,10 +137,11 @@
 
             <StackPanel Orientation="Horizontal">
 
-                <Border Height="30" Width="70" 
-                            CornerRadius="15"
-                            Margin="10,0,10,0"
-                            x:Name="border3">
+                <Border x:Name="border3"
+                        Height="36" Width="76" 
+                        Background="{StaticResource ControlBrush}" 
+                        CornerRadius="18"
+                        Margin="10,0">
                     <TextBox x:Name="nightHours"
                                  MaxLength="2"
                                  Foreground="{StaticResource TextBrush}"
@@ -148,8 +151,8 @@
                                  VerticalAlignment="Center"
                                  Background="Transparent"
                                  TextAlignment="Center"
-                                 Margin="0,-2,0,0"
-                                 TextChanged="TextBox_TextChanged"
+                                 Margin="10,0,10,0"
+                                 PreviewKeyDown="TextBox_PreviewKeyDown"
                                  Text="{Binding DaytimeModel.NightStartHours}">
                     </TextBox>
                     <Border.Style>
@@ -178,10 +181,11 @@
                             :
                 </TextBlock>
 
-                <Border Height="30" Width="70" 
-                            CornerRadius="15"
-                            Margin="10,0,10,0"
-                            x:Name="border4">
+                <Border x:Name="border4"
+                        Height="36" Width="76" 
+                        Background="{StaticResource ControlBrush}" 
+                        CornerRadius="18"
+                        Margin="10,0">
                     <TextBox x:Name="nightMinutes"
                                  MaxLength="2"
                                  Foreground="{StaticResource TextBrush}"
@@ -191,8 +195,8 @@
                                  VerticalAlignment="Center"
                                  Background="Transparent"
                                  TextAlignment="Center"
-                                 Margin="0,-2,0,0"
-                                 TextChanged="TextBox_TextChanged"
+                                 Margin="10,0,10,0"
+                                 PreviewKeyDown="TextBox_PreviewKeyDown"
                                  Text="{Binding DaytimeModel.NightStartMinutes}">
                     </TextBox>
                     <Border.Style>

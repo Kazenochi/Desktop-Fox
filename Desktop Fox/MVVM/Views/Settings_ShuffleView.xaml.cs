@@ -19,6 +19,7 @@ namespace DesktopFox.MVVM.Views
         {
             InitializeComponent();
         }
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //https://stackoverflow.com/a/5726430
@@ -32,6 +33,20 @@ namespace DesktopFox.MVVM.Views
                 int iOffset = textChange.Offset;
 
                 textBox.Text = textBox.Text.Remove(iOffset, iAddedLength);
+            }
+        }
+
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Space || 
+                !(
+                e.Key >= Key.D0 && e.Key <= Key.D9 || 
+                e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || 
+                e.Key == Key.Back || e.Key == Key.Delete ||
+                e.Key >= Key.Left && e.Key <= Key.Down)
+                ) 
+            {
+                e.Handled = true;
             }
         }
     }

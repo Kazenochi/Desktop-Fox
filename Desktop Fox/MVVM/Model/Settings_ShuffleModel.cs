@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DesktopFox.MVVM.Model
 {
@@ -20,6 +21,18 @@ namespace DesktopFox.MVVM.Model
         public void SetShuffle(TimeSpan shuffleTime)
         {
             ShuffleTime = shuffleTime.Minutes;
+        }
+
+        /// <summary>
+        /// Helferfunktion um bei einer Nullzuweisung, einen Fehler abzufangen.
+        /// </summary>
+        /// <returns></returns>
+        public TimeSpan SaveValues()
+        {
+            if (ShuffleTime <= 0)
+                ShuffleTime = 1;
+
+            return TimeSpan.FromMinutes(ShuffleTime);
         }
     }
 }

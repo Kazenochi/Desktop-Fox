@@ -59,9 +59,9 @@ namespace DesktopFox
             previewVM = new PreviewVM(this);
             animatedWPConfigVM = new AnimatedWallpaperConfigVM(vDesk);
 
+            ReadyPictureVMs();
             shuffler = new Shuffler(mainWindowVM, GM, SM, previewVM, vDesk);
 
-            ReadyPictureVMs();
         }
 
         #region Getter 

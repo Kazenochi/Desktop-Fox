@@ -47,9 +47,8 @@ namespace DesktopFox
 
             if (SM.Settings.IsRunning) 
                 PicShuffleStart();
-            else 
-                DaytimeTimerStart();
-
+            
+            DaytimeTimerStart();
         }
 
         /// <summary>
@@ -375,12 +374,6 @@ namespace DesktopFox
                 isDay = true;
             }
 
-
-            /*
-            if (SM.Settings.IsRunning)
-                Task.Run(() => PicShuffleStart());
-            */
-
             Debug.WriteLine("Tageszeit wurde überprüft. Aktuell ist isDay: " + isDay);
         }
 
@@ -589,11 +582,11 @@ namespace DesktopFox
                 Debug.WriteLine("Tageszeiten Timer wurde aktualisiert. Verbleibende Zeit zum Wechsel: " + untilTimeChange);
             }
 
-            SM.Settings.NextDaySwitch = CheckDaySwitch.Check(DateTime.Now, SM.Settings.NextDaySwitch);
-
             if (SM.Settings.AutoSetChange && DateTime.Now > SM.Settings.NextDaySwitch)
                 AutoSetChange();
-                    
+
+            SM.Settings.NextDaySwitch = CheckDaySwitch.Check(DateTime.Now, SM.Settings.NextDaySwitch);
+          
         }
 
         /// <summary>

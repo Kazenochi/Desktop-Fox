@@ -373,7 +373,9 @@ namespace DesktopFox
             {
                 _gallery.activeSetsList[monitor - 1] = pictureSet;
                 Debug.WriteLine("Nr3. Settings Running True");
-                SM.Settings.IsRunning = true;
+                if(SM.Settings.IsRunning != true)
+                    SM.Settings.IsRunning = true;
+
                 for (int i = 0; i < MWVM.MainWindowModel._pictureViewVMs.Count; i++)
                 {
                     MWVM.MainWindowModel._pictureViewVMs[i].ActiveSetChanged(pictureSet, monitor);

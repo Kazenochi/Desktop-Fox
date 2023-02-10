@@ -357,22 +357,21 @@
                         Margin="0,0,0,0"
                         Panel.ZIndex="3">
                 <Button Width="50"
-                        Height="40"
                         FontWeight="Bold"
                         FontSize="20"
-                        Content="_"                         
-                        Margin="0,-7,0,0"
+                        Content="–"                         
+                        Margin="0,0,0,0"
                         Style="{StaticResource DF_ButtonTitleBarDef}"
                         Command="{Binding MinimizeCommand}"/>
                 <Button Width="50"
-                        Height="30"
                         FontSize="18"
                         Content="▢"
                         Style="{StaticResource DF_ButtonTitleBarDef}"
                         Command="{Binding MaximizeCommand}"/>
                 <Button Width="50"
-                        Height="30"
-                        Content="╳"
+                        Content="×"
+                        FontSize="25"
+                        Margin="0,-3,0,0"
                         Style="{StaticResource DF_ButtonTitleBarExit}"
                         Command="{Binding CloseCommand}"/>
             </StackPanel>

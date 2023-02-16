@@ -137,12 +137,6 @@ namespace DesktopFox
                 else
                     wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitors[i], wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, VLCVolume.Mute));
             }
-            /*
-            foreach(int monitor in monitors)
-            {
-                wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitor, wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, wallpaperBluePrint.Volume));
-            }  
-            */
             buildDesktop();
         }
 
@@ -208,7 +202,7 @@ namespace DesktopFox
             
             foreach (Wallpaper wallpaper in wallpapers)
             {
-                Screen s = Screen.AllScreens[wallpaper.myMonitor.Number-1];
+                Screen s = Screen.AllScreens[wallpaper.myMonitor.Number];
                 BackgroundWindow backgroundWindow = new BackgroundWindow();
 
                 if (wallpaper.myMonitor.Name > MonitorEnum.MainMonitor)

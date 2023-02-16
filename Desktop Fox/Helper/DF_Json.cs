@@ -19,7 +19,7 @@ namespace DesktopFox
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static bool saveFile(object obj)
+        public static bool saveFile(object obj, bool logging = false)
         {
             if (!Directory.Exists(BaseDir + "\\Saves"))
                 Directory.CreateDirectory(BaseDir + "\\Saves");
@@ -34,11 +34,29 @@ namespace DesktopFox
                 try
                 {                
                     File.WriteAllText(saveFolder + "DF_Gallery.json", json);
+
+                    if (logging)
+                    {
+                        File.WriteAllText(saveFolder + "DF_Gallery" + DateTime.Now.ToString() + ".json", json);
+                    }                   
+
                     return true;
                 }
                 catch
                 {
                     Debug.WriteLine("Save Error: Gallery");
+
+                    if(logging)
+                    {
+                        if(!File.Exists(BaseDir + "\\Saves\\Error.log"))
+                        {
+                            File.CreateText("\\Saves\\Error.log");
+                        }
+                        using StreamWriter file = new("\\Saves\\Error.log", append: true);
+                        file.WriteLineAsync(DateTime.Now.ToString() + ":\t Error Writing Gallery.");
+                        file.Close();
+                    }
+
                     return false;
                 }
             }
@@ -47,11 +65,25 @@ namespace DesktopFox
                 try
                 {
                     File.WriteAllText(saveFolder + "Settings.json", json);
+                    if (logging)
+                    {
+                        File.WriteAllText(saveFolder + "Settings" + DateTime.Now.ToString() + ".json", json);
+                    }
                     return true;
                 }
                 catch
                 {
                     Debug.WriteLine("Save Error: Settings");
+                    if (logging)
+                    {
+                        if (!File.Exists(BaseDir + "\\Saves\\Error.log"))
+                        {
+                            File.CreateText("\\Saves\\Error.log");
+                        }
+                        using StreamWriter file = new("\\Saves\\Error.log", append: true);
+                        file.WriteLineAsync(DateTime.Now.ToString() + ":\t Error Writing Settings.");
+                        file.Close();
+                    }
                     return false;
                 }
             }

@@ -209,6 +209,8 @@ namespace DesktopFox
         /// <param name="lastClose"></param>
         private void SaveOnClose(bool lastClose = true)
         {
+            //Verhindern von Unnötigen Speichern, bei keiner Änderung.
+            if (firstStart) return;
 
             if (vDesk.getWallpapers != null && vDesk.getWallpapers.Count > 0)
             {

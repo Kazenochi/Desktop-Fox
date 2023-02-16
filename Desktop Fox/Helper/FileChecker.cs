@@ -21,9 +21,24 @@ namespace DesktopFox
             _shadowHelper = new GalleryShadow(gallery);
             _galleryLoaded = gallery;
 
-            MissingCheck();
+            bool foundMissingFile = MissingCheck();
             NewCheck();
+            if (!foundMissingFile)
+                return _galleryLoaded;
+                
+            for (int i = 0; i < _galleryLoaded.activeSetsList.Count; i++)
+            {
+                if (_galleryLoaded.activeSetsList[i] == "Empty")
+                    continue;
 
+                for(int j = 0; j < _galleryLoaded.PictureSetList.Count; j++)
+                {
+                    if (_galleryLoaded.PictureSetList[j].SetName == _galleryLoaded.activeSetsList[i])
+                        break;
+                    if (j == _galleryLoaded.PictureSetList.Count - 1)
+                        _galleryLoaded.activeSetsList[i] = "Empty";
+                }     
+            }
             return _galleryLoaded;
         }
 
@@ -31,8 +46,9 @@ namespace DesktopFox
         /// Überprüft ob die Verzeichnisse oder Bilder in der Gallerie noch vorhandne sind und entfernd diese andernfalls
         /// </summary>
         /// <param name="gallery"></param>
-        private void MissingCheck()
+        private bool MissingCheck()
         {
+            bool found = false;
             foreach(var i in _galleryLoaded.PictureSetList.Values)
             {
                 if(Directory.Exists(i.DayCol.folderDirectory))
@@ -42,12 +58,14 @@ namespace DesktopFox
                         if (!File.Exists(j.Path))
                         {
                             i.DayCol.singlePics.Remove(j.Path);
+                            found = true;
                         } 
                     }
                 }
                 else
                 {
                     i.DayCol = null;
+                    found = true;
                 }
 
                 if (Directory.Exists(i.NightCol.folderDirectory))
@@ -57,17 +75,20 @@ namespace DesktopFox
                         if (!File.Exists(j.Path))
                         {
                             i.NightCol.singlePics.Remove(j.Path);
+                            found = true;
                         }
                     }
                 }
                 else
                 {
                     i.NightCol = null;
+                    found = true;
                 }
 
                 if (i.DayCol == null && i.DayCol == null)
                     _shadowHelper.Remove(i.SetName);
             }
+            return found;
         }
 
         /// <summary>

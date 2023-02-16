@@ -37,7 +37,7 @@ namespace DesktopFox
 
                     if (logging)
                     {
-                        File.WriteAllText(saveFolder + "DF_Gallery" + DateTime.Now.ToString() + ".json", json);
+                        File.WriteAllText(saveFolder + "DF_Gallery_" + DateTime.Now.ToString("yyyy-mm-dd--HH-mm-ss") + ".json", json);
                     }                   
 
                     return true;
@@ -48,11 +48,7 @@ namespace DesktopFox
 
                     if(logging)
                     {
-                        if(!File.Exists(BaseDir + "\\Saves\\Error.log"))
-                        {
-                            File.CreateText("\\Saves\\Error.log");
-                        }
-                        using StreamWriter file = new("\\Saves\\Error.log", append: true);
+                        using StreamWriter file = new(saveFolder + "\\Error.log", append: true);
                         file.WriteLineAsync(DateTime.Now.ToString() + ":\t Error Writing Gallery.");
                         file.Close();
                     }
@@ -67,7 +63,7 @@ namespace DesktopFox
                     File.WriteAllText(saveFolder + "Settings.json", json);
                     if (logging)
                     {
-                        File.WriteAllText(saveFolder + "Settings" + DateTime.Now.ToString() + ".json", json);
+                        File.WriteAllText(saveFolder + "Settings_" + DateTime.Now.ToString("yyyy-mm-dd--HH-mm-ss") + ".json", json);
                     }
                     return true;
                 }
@@ -76,11 +72,7 @@ namespace DesktopFox
                     Debug.WriteLine("Save Error: Settings");
                     if (logging)
                     {
-                        if (!File.Exists(BaseDir + "\\Saves\\Error.log"))
-                        {
-                            File.CreateText("\\Saves\\Error.log");
-                        }
-                        using StreamWriter file = new("\\Saves\\Error.log", append: true);
+                        using StreamWriter file = new(saveFolder + "\\Error.log", append: true);
                         file.WriteLineAsync(DateTime.Now.ToString() + ":\t Error Writing Settings.");
                         file.Close();
                     }
@@ -129,11 +121,13 @@ namespace DesktopFox
                             //Wird benötigt um das Padding der Datei zu entfernen. Note: KP warum es nötig ist. Beim laden der datei sollte er keine extra Elemente in der Liste haben
                             if (gal.activeSetsList.Count > 3)
                             {
+                                Debug.WriteLine("Padding Delete On Load");
                                 for (int i = 0; i < 3; i++)
                                 {
                                     gal.activeSetsList.Remove(gal.activeSetsList.ElementAt(0));
                                 }
                             }
+                            Debug.WriteLine("Laden der Galerie erfolgreich");
                             return gal;
                         }
                        
@@ -142,6 +136,7 @@ namespace DesktopFox
                         {
                             String json = reader.ReadToEnd();
                             var settings = JsonConvert.DeserializeObject<Settings>(json);
+                            Debug.WriteLine("Laden der Settings erfolgreich");
                             return settings;
                         }             
 
@@ -150,6 +145,7 @@ namespace DesktopFox
                         {
                             String json = reader.ReadToEnd();
                             WallpaperSaves wallpapers = JsonConvert.DeserializeObject<WallpaperSaves>(json);
+                            Debug.WriteLine("Laden der Animierten Wallpapers erfolgreich");
                             return wallpapers;
                         }
                     default:

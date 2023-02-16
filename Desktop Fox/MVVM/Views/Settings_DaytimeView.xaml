@@ -94,6 +94,7 @@
                                  Background="Transparent"
                                  TextAlignment="Center"
                                  Margin="10,0,10,0"
+                             d:Text="6"
                                  PreviewKeyDown="TextBox_PreviewKeyDown"
                                  Text="{Binding DaytimeModel.DayStartMinutes}">
                     </TextBox>
@@ -152,6 +153,7 @@
                                  Background="Transparent"
                                  TextAlignment="Center"
                                  Margin="10,0,10,0"
+                             d:Text="20"
                                  PreviewKeyDown="TextBox_PreviewKeyDown"
                                  Text="{Binding DaytimeModel.NightStartHours}">
                     </TextBox>
@@ -196,6 +198,7 @@
                                  Background="Transparent"
                                  TextAlignment="Center"
                                  Margin="10,0,10,0"
+                             d:Text="45"
                                  PreviewKeyDown="TextBox_PreviewKeyDown"
                                  Text="{Binding DaytimeModel.NightStartMinutes}">
                     </TextBox>

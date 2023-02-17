@@ -62,6 +62,7 @@ namespace DesktopFox.MVVM.Model
         }
         private bool _day = true;
 
+        //Note: Wirst du überhaupt verwendet?
         public bool FaderLock { get { return _faderLock; } set { _faderLock = value; RaisePropertyChanged(nameof(FaderLock)); } }
         private bool _faderLock = false;
 

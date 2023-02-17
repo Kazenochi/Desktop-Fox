@@ -1,5 +1,6 @@
 ﻿using DesktopFox.MVVM.Model;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace DesktopFox.MVVM.ViewModels
@@ -70,7 +71,7 @@ namespace DesktopFox.MVVM.ViewModels
         /// <param name="e"></param>
         private void PreviewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName.ToString() != "Day") return;
+            if (e.PropertyName != nameof(PreviewModel.Day)) return;
 
             DF.shuffler.previewRefresh();
         }

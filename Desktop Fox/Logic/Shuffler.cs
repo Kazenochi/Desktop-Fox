@@ -239,82 +239,11 @@ namespace DesktopFox
             }
             catch (Exception ex)
             {
+                Debug.WriteLine("");
+                Debug.WriteLine("Fehler beim Übergeben des Hintergrundbildes in DF_PicShuffle");
                 Debug.WriteLine(ex.ToString());
+                Debug.WriteLine("");
             }
-
-            /* Note: Absolut unnötiger aufwand. Entfernen falls nichts mehr aufkommt
-
-            int[] tmpLockList;
-            switch (monitor.Number)
-            {
-                case 1: tmpCount = picCount1; tmpLockList = lockList1; break;
-                case 2: tmpCount = picCount2; tmpLockList = lockList2; break;
-                case 3: tmpCount = picCount3; tmpLockList = lockList3; break;
-                default: tmpCount = picCount1; tmpLockList = lockList1; break;
-            }
-
-            //Überprüft ob sich die Einstellung geändert hat und passt diese ggf. an
-            if (vDesk.getWrapper.GetPosition() != SM.getDesktopFillMode())
-                vDesk.getWrapper.SetPosition(SM.getDesktopFillMode());
-
-            //Sollte die Collection weniger als 4 Bilder besitzten, macht es keinen Sinn den Aufwendigeren Shuffler zu benutzen.
-            if (SM.Settings.Shuffle && activeCol.singlePics.Count > 4)
-            {
-                //Shuffle Funktion für die Anzeige
-
-                //"Shiften" des Arrays um eine Position um platz für den Neuen Eintrag zu machen
-                var tmpArray = tmpLockList;
-                Array.Copy(tmpArray, 0, tmpLockList, 1, tmpArray.Length - 1);
-                tmpLockList[0] = tmpCount;
-
-                //Ermitteln eines neuen Random Wertes der noch nicht in den Letzten 3 Bildern vorgekommen ist.
-                //Versuche sind hierbei auf 50 begrenzt um das System nicht zu sehr zu belasten oder einen Deadlock zu verursachen
-
-                Boolean match = false;
-                for (int i = 1; i < 100; i++)
-                {
-                    tmpCount = random.Next(activeCol.singlePics.Count);
-                    foreach (var item in tmpLockList)
-                    {
-                        if (item == tmpCount)
-                        {
-                            Debug.WriteLine("Match für Items: " + item + " = " + tmpCount);
-                            match = true;
-                            break;
-                        }
-                    }
-
-                    if (match == false)
-                        break;
-                }
-                vDesk.getWrapper.SetWallpaper(monitor.ID, activeCol.singlePics.ElementAt(tmpCount).Key);
-            }
-            else
-            {
-                //Lineare Anzeige aller Bilder im Set
-                if (tmpCount < activeCol.singlePics.Count - 1)
-                    tmpCount++;
-                else
-                    tmpCount = 0;
-
-                vDesk.getWrapper.SetWallpaper(monitor.ID, activeCol.singlePics.ElementAt(tmpCount).Key);
-            }
-
-            Debug.Write("Ändern des Hintergrundes. Monitor: " + monitor.Number + ", Zahl: " + tmpCount + ", LockListe: ");
-            foreach (var item in tmpLockList)
-            {
-                Debug.Write(item + ", ");
-            }
-            Debug.WriteLine("");
-            //Note: Wofür... Bestimmt wichtig :)... Rückgabe des Counters 
-            switch (monitor.Number)
-            {
-                case 1: picCount1 = tmpCount; break;
-                case 2: picCount2 = tmpCount; break;
-                case 3: picCount3 = tmpCount; break;
-            }
-            */
-
         }
 
         /// <summary>

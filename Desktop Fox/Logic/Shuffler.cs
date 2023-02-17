@@ -224,17 +224,23 @@ namespace DesktopFox
         /// <param name="activeCol"></param>
         private void DF_PicShuffle(Monitor monitor, Collection activeCol)
         {
+            Debug.WriteLine($"DF_PicShuffle ausgelöst. Monitor: {monitor.Name} \t & {activeCol.folderDirectory}");
             LockListQueue queue = lockListQueues.ElementAt((int)monitor.Name - 1);
 
             if (queue.PictureCount != activeCol.singlePics.Count)
                 queue.ResetPictureCount(activeCol.singlePics.Count);
 
-
-            if (SM.Settings.Shuffle)
-                vDesk.getWrapper.SetWallpaper(monitor.ID, activeCol.singlePics.ElementAt(queue.GetNewRandomItem()).Key);
-            else
-                vDesk.getWrapper.SetWallpaper(monitor.ID, activeCol.singlePics.ElementAt(queue.GetNextItem()).Key);
-
+            try
+            {
+                if (SM.Settings.Shuffle)
+                    vDesk.getWrapper.SetWallpaper(monitor.ID, activeCol.singlePics.ElementAt(queue.GetNewRandomItem()).Key);
+                else
+                    vDesk.getWrapper.SetWallpaper(monitor.ID, activeCol.singlePics.ElementAt(queue.GetNextItem()).Key);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
 
             /* Note: Absolut unnötiger aufwand. Entfernen falls nichts mehr aufkommt
 

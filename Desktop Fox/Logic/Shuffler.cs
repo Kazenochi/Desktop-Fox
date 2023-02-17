@@ -21,7 +21,10 @@ namespace DesktopFox
 
         private readonly LockListQueue[] lockListQueues = new LockListQueue[3];
 
-        private int previewCount = 0;
+        /// <summary>
+        /// <see cref="previewCount"/> -1 wird benötigt für Doppelaufruf. Beim Start wird <see cref="previewRefresh"/> & <see cref="Dispatcher"/> ausgeführt.
+        /// </summary>
+        private int previewCount = -1;
         private Timer previewTimer;
         private Timer desktopShuffleTimer;
         private Timer daytimeTimer;
@@ -116,7 +119,7 @@ namespace DesktopFox
             PreviewTimerReset();
             if(previewCount > 0)
                 previewCount--;
-
+            Debug.WriteLine("Preview Refresh Fire for PreviewShuffleAsync");
             PreviewShuffleAsync();
         }
 
@@ -254,7 +257,6 @@ namespace DesktopFox
             //Debug.WriteLine("Preview Shuffle ausgelöst");
             var tmpPreviewSet = GM.getPreviewSet();
             PreviewModel tmpPreviewModel = previewVM.PreviewModel;
-
             if (tmpPreviewSet == null) return;
          
             if (previewCount >= 0 && previewCount < GM.GetCollection(tmpPreviewModel.Day, tmpPreviewSet.SetName).singlePics.Count)
@@ -449,6 +451,7 @@ namespace DesktopFox
         public void Dispatcher(object sender, ElapsedEventArgs e)
         {
             //Fire and Forget. Es muss nicht auf das Laden und wechseln der Bilder gewartet werden.
+            Debug.WriteLine("Preview Dispatcher Fire for PreviewShuffleAsync");
             PreviewShuffleAsync();
         }
 

@@ -125,7 +125,7 @@ namespace DesktopFox
             var tmpGal = DF_Json.loadFile(SaveFileType.Gallery);
             if (tmpGal == null)
                 gallery = new Gallery();
-            else
+            else if(settings.AutoFileCorrection)
                 gallery = fileChecker.FullCheck((Gallery)tmpGal);
 
             var tmpSet = DF_Json.loadFile(SaveFileType.Settings);

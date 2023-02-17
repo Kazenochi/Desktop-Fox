@@ -88,6 +88,13 @@ namespace DesktopFox
         public bool DesktopModeSingle { get { return _desktopModeSingle; } set { _desktopModeSingle = value; RaisePropertyChanged(nameof(DesktopModeSingle)); } }
         private bool _desktopModeSingle = true;
 
+        /// <summary>
+        /// Flag ob die gespeicherten Galeriedaten an den aktuellen zustand im System angepasst werden.
+        /// Neue Bilder werden der Galerie hinzugefügt und nicht mehr vorhandene werden entfernt.
+        /// </summary>
+        public bool AutoFileCorrection { get { return _autoFileCorrection; } set { _autoFileCorrection = value; RaisePropertyChanged(nameof(AutoFileCorrection)); } }
+        private bool _autoFileCorrection = false;
+        
         #endregion
 
         /// <summary>

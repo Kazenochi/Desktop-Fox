@@ -12,15 +12,22 @@
     <Grid Margin="0">
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Setter Property="Margin" Value="30,0"/>
+                </Style>
+            </StackPanel.Resources>
             <StackPanel HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="280">
+                        VerticalAlignment="Center">
                 <TextBlock FontFamily="{StaticResource Default}"
                            Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           TextAlignment="Center"><Run Text="Auto select new set, "/><LineBreak/><Run Text="when a new day starts"/></TextBlock>
+                           ToolTip="Should a new set be selected from the gallery, if a new day has started"
+                           TextAlignment="Center">
+                    Auto select new set <LineBreak/>
+                </TextBlock>
                 <StackPanel Orientation="Horizontal" 
                             Grid.Row="1"
                             HorizontalAlignment="Center"
@@ -51,14 +58,16 @@
                             CornerRadius="1"
                             Margin="10"/>
             <StackPanel HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="280">
+                        VerticalAlignment="Center">
                 <TextBlock FontFamily="{StaticResource Default}"
                            Foreground="{StaticResource TextBrush}"
                            FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           TextAlignment="Center"><Run Text="Autostart"/><LineBreak/><Run/></TextBlock>
+                           ToolTip="Should the application be launched at startup"
+                           TextAlignment="Center">
+                    Autostart <LineBreak/>
+                </TextBlock>
                 <StackPanel Orientation="Horizontal" 
                             Grid.Row="1"
                             HorizontalAlignment="Center"
@@ -76,6 +85,49 @@
                                  Margin="5,5,5,5"
                                  Style="{StaticResource DF_RadioButton_Border_Round}"
                                  IsChecked="{Binding settings.AutostartOn, Converter={StaticResource BoolInverter}}">
+                        <Image Source="\Icons\Icons_Off.png"
+                               Margin="10"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </RadioButton>
+                </StackPanel>
+            </StackPanel>
+            <Border Background="{StaticResource BorderBrush}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Stretch"
+                            Width="2"
+                            CornerRadius="1"
+                            Margin="10"/>
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock FontFamily="{StaticResource Default}"
+                           Foreground="{StaticResource TextBrush}"
+                           FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           ToolTip="If aktive &#x0a; 
+                                    this funktion checks if new pictures are present &#x0a; 
+                                    in your collection folders and adds them to the gallery. &#x0a;
+                                    If pictures got removed, they will also get removed from the gallery"
+                           TextAlignment="Center">
+                            File Auto<LineBreak/>Correction
+                    </TextBlock>
+                <StackPanel Orientation="Horizontal" 
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0,10,0,0">
+                    <RadioButton x:Name="radio_FileCheckOn"        
+                                 Margin="5,5,5,5"
+                                 Style="{StaticResource DF_RadioButton_Border_Round}" 
+                                 IsChecked="{Binding settings.AutoFileCorrection}">
+                        <Image Source="\Icons\Icons_On.png"
+                               Margin="10"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </RadioButton>
+                    <RadioButton x:Name="radio_FileCheckOff"
+                                 Margin="5,5,5,5"
+                                 Style="{StaticResource DF_RadioButton_Border_Round}"
+                                 IsChecked="{Binding settings.AutoFileCorrection, Converter={StaticResource BoolInverter}}">
                         <Image Source="\Icons\Icons_Off.png"
                                Margin="10"
                                RenderOptions.BitmapScalingMode="HighQuality"/>

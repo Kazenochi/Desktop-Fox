@@ -35,6 +35,7 @@ namespace DesktopFox
         private WallpaperSaves wallpaperSaves;
         public Shuffler shuffler;
         private bool firstStart = true;
+        private bool needsSave = false;
 
         /// <summary>
         /// Konstruktor
@@ -122,17 +123,19 @@ namespace DesktopFox
         /// </summary>
         public void LoadFiles()
         {
-            var tmpGal = DF_Json.loadFile(SaveFileType.Gallery);
-            if (tmpGal == null)
-                gallery = new Gallery();
-            else if(settings.AutoFileCorrection)
-                gallery = fileChecker.FullCheck((Gallery)tmpGal);
-
             var tmpSet = DF_Json.loadFile(SaveFileType.Settings);
             if(tmpSet == null)
                 settings = new Settings();
             else
                 settings = (Settings)tmpSet;
+
+            var tmpGal = DF_Json.loadFile(SaveFileType.Gallery);
+            if (tmpGal == null)
+                gallery = new Gallery();
+            else if (settings.AutoFileCorrection)
+                gallery = fileChecker.FullCheck((Gallery)tmpGal);
+            else
+                gallery = (Gallery)tmpGal;
 
             var tmpWPs = DF_Json.loadFile(SaveFileType.Wallpaper);
             if (tmpWPs != null && ((WallpaperSaves)tmpWPs).wallpapers.Count >= 0)
@@ -176,6 +179,7 @@ namespace DesktopFox
             shuffler.StartPreviewShuffleTimer();
 
             firstStart = false;
+            needsSave = true;
             MW.Show();
         }
 
@@ -210,7 +214,8 @@ namespace DesktopFox
         private void SaveOnClose(bool lastClose = true)
         {
             //Verhindern von Unnötigen Speichern, bei keiner Änderung.
-            if (firstStart) return;
+            if (!needsSave) return;
+            needsSave = false;
 
             if (vDesk.getWallpapers != null && vDesk.getWallpapers.Count > 0)
             {

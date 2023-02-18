@@ -78,6 +78,7 @@
                     <RadioButton x:Name="radio_Day"
                                  ToolTip="Edit only the day collection of the selected pictureset"
                                  Margin="5"
+                                 d:IsChecked="True"
                                  IsEnabled="{Binding CanDeleteDay}"
                                  IsChecked="{Binding DeletionSelect, Converter={StaticResource BoolToIntConverter}, ConverterParameter=1}"
                                  Style="{StaticResource DF_RadioButton_Border_Round}">

@@ -21,12 +21,13 @@
     <SolidColorBrush x:Key="BorderBrush">DarkGray</SolidColorBrush>
     
     <SolidColorBrush x:Key="ControlBrush">#FF4C77D7</SolidColorBrush>
-    <SolidColorBrush x:Key="ControlPressedBrush">#FF161558</SolidColorBrush>
+    <!--<SolidColorBrush x:Key="ControlPressedBrush">#FF161558</SolidColorBrush>-->
+    <SolidColorBrush x:Key="ControlPressedBrush">#FF001d3d</SolidColorBrush>
     <SolidColorBrush x:Key="HighlightBrush">aqua</SolidColorBrush>
     <SolidColorBrush x:Key="ControlPressedTextBrush">Aqua</SolidColorBrush>
     
     <!-- FF0839A7   FF161558 -->
-    <SolidColorBrush x:Key="ControlBrushRed">#FFC81E1E</SolidColorBrush>
+    <SolidColorBrush x:Key="ControlBrushRed">#FFBA1717</SolidColorBrush>
     <SolidColorBrush x:Key="ControlPressedBrushRed">#FF8D0F0F</SolidColorBrush>
     <SolidColorBrush x:Key="HighlightBrushRed">#FFFF9D00</SolidColorBrush>
     

@@ -41,7 +41,6 @@
     <None Remove="Icons\Icons_Stop.png" />
     <None Remove="Icons\Icons_Transfer.png" />
     <None Remove="Icons\Icons_Video.png" />
-    <None Remove="MVVM\Views\DF_Icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -115,7 +114,6 @@
     <Resource Include="Icons\Icons_Stop.png" />
     <Resource Include="Icons\Icons_Transfer.png" />
     <Resource Include="Icons\Icons_Video.png" />
-    <Resource Include="MVVM\Views\DF_Icon.ico" />
   </ItemGroup>
 
   <ItemGroup>

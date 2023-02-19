@@ -10,16 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="Set_DaytimeView">
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="150"/>
-        </Grid.ColumnDefinitions>
-
+    <StackPanel VerticalAlignment="Center">
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <TextBlock FontFamily="{StaticResource Default}"
@@ -32,7 +23,8 @@
                     Day start
             </TextBlock>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
 
                 <Border x:Name="border1"
                     Height="36" Width="76" 
@@ -114,16 +106,6 @@
                         </Style>
                     </Border.Style>
                 </Border>
-
-                <TextBlock FontFamily="{StaticResource Default}"
-                               Foreground="{StaticResource TextBrush}"
-                               FontSize="20"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               TextAlignment="Center">
-                            hh : mm
-                </TextBlock>
-
             </StackPanel>
 
             <TextBlock FontFamily="{StaticResource Default}"
@@ -136,7 +118,8 @@
                     Night start
             </TextBlock>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
 
                 <Border x:Name="border3"
                         Height="36" Width="76" 
@@ -218,15 +201,6 @@
                         </Style>
                     </Border.Style>
                 </Border>
-
-                <TextBlock FontFamily="{StaticResource Default}"
-                               Foreground="{StaticResource TextBrush}"
-                               FontSize="20"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               TextAlignment="Center">
-                            hh : mm
-                </TextBlock>
             </StackPanel>
         </StackPanel>
 
@@ -234,6 +208,7 @@
                 ToolTip="Save the current values"
                 VerticalAlignment="Center"
                 FontSize="20"
+                Margin="30"
                 Command="{Binding SaveDaytimeCommand}"
                 Style="{StaticResource DF_Button_Border}">
             <Image Source="\Icons\Icons_Save.png" 
@@ -273,5 +248,6 @@
                 </EventTrigger>
             </Button.Triggers>
         </Button>
-    </Grid>
+
+    </StackPanel>
 </local:AnimatedBaseView>

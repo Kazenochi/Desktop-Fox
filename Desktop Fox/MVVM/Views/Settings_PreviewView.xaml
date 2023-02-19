@@ -10,45 +10,97 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBlock FontFamily="{StaticResource Default}"
-                   Foreground="{StaticResource TextBrush}"
-                   FontSize="20"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center">
-                    How the preview picture is displayed
-        </TextBlock>
-        <StackPanel Orientation="Horizontal" 
-                    Grid.Row="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Margin="0,10,0,0">
-            <RadioButton x:Name="radio_Preview_Fill"
-                         ToolTip="Center the picture in the preview"
-                         Content="Center" 
-                         FontSize="20"
-                         Margin="5,5,5,5"
-                         IsChecked="{Binding settings.PreviewFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=0}"
-                         Style="{StaticResource DF_RadioButton_Border}"/>
-            <RadioButton x:Name="radio_Preview_Uniform"
-                         ToolTip="Zooms the preview until reaching the corners, may result in letterboxes"
-                         Content="Fit" 
-                         FontSize="20"
-                         Margin="5,5,5,5"
-                         IsChecked="{Binding settings.PreviewFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=2}"
-                         Style="{StaticResource DF_RadioButton_Border}"/>
-            <RadioButton x:Name="radio_Preview_Uni_Fill"
-                         ToolTip="Zooms in the preview until the background is completely covered"
-                         Content="Fill" 
-                         FontSize="20"
-                         Margin="5,5,5,5"
-                         IsChecked="{Binding settings.PreviewFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
-                         Style="{StaticResource DF_RadioButton_Border}"/>
+    <StackPanel VerticalAlignment="Center">
+        <StackPanel>
+            <TextBlock FontFamily="{StaticResource Default}"
+                        Foreground="{StaticResource TextBrush}"
+                        FontSize="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        Preview Pictures
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" 
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Margin="0,10,0,0">
+                <RadioButton x:Name="radio_Preview_Fill"
+                                ToolTip="Center the picture in the preview"
+                                Content="Center" 
+                                FontSize="20"
+                                Margin="5,5,5,5"
+                                IsChecked="{Binding settings.PreviewFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=0}"
+                                Style="{StaticResource DF_RadioButton_Border}"/>
+                <RadioButton x:Name="radio_Preview_Uniform"
+                                ToolTip="Zooms the preview until reaching the corners, may result in letterboxes"
+                                Content="Fit" 
+                                FontSize="20"
+                                Margin="5,5,5,5"
+                                IsChecked="{Binding settings.PreviewFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=2}"
+                                Style="{StaticResource DF_RadioButton_Border}"/>
+                <RadioButton x:Name="radio_Preview_Uni_Fill"
+                                ToolTip="Zooms in the preview until the background is completely covered"
+                                Content="Fill" 
+                                FontSize="20"
+                                Margin="5,5,5,5"
+                                IsChecked="{Binding settings.PreviewFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
+                                Style="{StaticResource DF_RadioButton_Border}"/>
+            </StackPanel>
         </StackPanel>
-    </Grid>
-    
+        <Border Background="{StaticResource BorderBrush}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            Height="2"
+                            CornerRadius="1"
+                            Margin="10,40"/>
+        <StackPanel>
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock FontFamily="{StaticResource Default}"
+                           Foreground="{StaticResource TextBrush}"
+                           FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"
+                           Margin="0,0,0,10">
+                        Desktop Wallpaper
+                </TextBlock>
+
+                <StackPanel Orientation="Horizontal" 
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0,10,0,0">
+                    <RadioButton x:Name="radio_DMode_Center"
+                             ToolTip="Centers the Image without changes"
+                             Content="Center" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=0}"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
+                    <RadioButton x:Name="radio_DMode_Fit"
+                             ToolTip="Zooms the image until reaching the background corners, may result in letterboxes"
+                             Content="Fit" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
+                    <RadioButton x:Name="radio_DMode_Fill"
+                             ToolTip="Zooms in the image until the background is completely covered"
+                             Content="Fill" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=4}"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
+                    <RadioButton x:Name="radio_DMode_Span"
+                             ToolTip="Spans the Image over every monitor if possible"
+                             Content="Span" 
+                             FontSize="20"
+                             Margin="5,5,5,5"
+                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=5}"
+                             Style="{StaticResource DF_RadioButton_Border}"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
 </local:AnimatedBaseView>

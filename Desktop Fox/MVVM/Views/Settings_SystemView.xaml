@@ -8,13 +8,13 @@
              xmlns:viewModels="clr-namespace:DesktopFox.MVVM.ViewModels" 
              d:DataContext="{d:DesignInstance Type=viewModels:SettingsVM}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="350" d:DesignWidth="650">
     <Grid Margin="0">
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type StackPanel}">
-                    <Setter Property="Margin" Value="30,0"/>
+                    <Setter Property="Margin" Value="20,0"/>
                 </Style>
             </StackPanel.Resources>
             <StackPanel HorizontalAlignment="Center"
@@ -26,7 +26,7 @@
                            VerticalAlignment="Center"
                            ToolTip="Should a new set be selected from the gallery, if a new day has started"
                            TextAlignment="Center">
-                    Auto select new set <LineBreak/>
+                    New Pictureset <LineBreak/>On Daychange
                 </TextBlock>
                 <StackPanel Orientation="Horizontal" 
                             Grid.Row="1"

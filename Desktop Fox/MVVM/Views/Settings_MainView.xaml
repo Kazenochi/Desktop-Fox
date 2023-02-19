@@ -23,19 +23,18 @@
                     BorderBrush="{StaticResource BorderBrush}"
                     BorderThickness="0.5"
                     Grid.Row="1"
-                    CornerRadius="20"
-                    >
+                    CornerRadius="20">
                 <ContentControl x:Name="SettingsPage"
                                 Grid.Row="1"
                                 Content="{Binding CurrentView}"
-                                d:Content="{views:Settings_StyleView}"/>
+                                d:Content="{views:Settings_SystemView}"/>
             </Border>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Center"
                         Margin="0,0,0,-0.6">
                 <RadioButton x:Name="settings_radio_Preview" 
-                             Content="Preview"
+                             Content="Fill Modes"
                              IsChecked="True"
                              Style="{StaticResource DF_FolderRadioButton}"
                              Command="{Binding PreviewCommand}"/>
@@ -51,10 +50,6 @@
                              Content="Mode"
                              Style="{StaticResource DF_FolderRadioButton}" 
                              Command="{Binding StyleCommand}"/>
-                <RadioButton x:Name="settings_radio_DMode"
-                             Content="Position"
-                             Style="{StaticResource DF_FolderRadioButton}" 
-                             Command="{Binding DModeCommand}"/>
                 <RadioButton x:Name="settings_radio_System"
                              Content="System"
                              Style="{StaticResource DF_FolderRadioButton}" 
@@ -62,8 +57,7 @@
                 <RadioButton x:Name="settings_radio_Info"
                              Content="Info"
                              Style="{StaticResource DF_FolderRadioButton}" 
-                             Command="{Binding InfoCommand}"
-                             />
+                             Command="{Binding InfoCommand}"/>
             </StackPanel>
         </Grid>     
     </Border>

@@ -333,20 +333,17 @@
                             Panel.ZIndex="2"/>
 
             <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Stretch"
                         HorizontalAlignment="Left"
                         Margin="15,2,0,0">
                 <Image Stretch="UniformToFill"
-                       Source="/MVVM/Views/DF_Icon.ico"
-                       Height="20"
-                       Width="20" 
-                       Margin="0,0,0,0"/>
+                       Source="\Assets\DF_Icon_Small.png"
+                       Margin="3"/>
                 <Label FontFamily="{StaticResource Default}"
                        Content="Desktop Fox"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        FontSize="15"
-                       FontWeight="Light"
+                       FontWeight="Bold"
                        Foreground="#FFEDEDED"
                        Margin="10,0,0,0"/>
             </StackPanel>

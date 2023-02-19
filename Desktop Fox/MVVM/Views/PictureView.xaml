@@ -105,7 +105,7 @@
                              Margin="2"/>
                     <Label Background="Transparent"
                            Foreground="#FF0D0037"
-                           Content="1"
+                           Content="I"
                            Margin="0,-6"
                            HorizontalContentAlignment="Center"
                            FontFamily="{StaticResource Default}"
@@ -124,7 +124,7 @@
                              Margin="2"/>
                     <Label Background="Transparent"
                            Foreground="Black"
-                           Content="2"
+                           Content="II"
                            Margin="0,-6"
                            HorizontalContentAlignment="Center"
                            FontFamily="{StaticResource Default}"
@@ -143,8 +143,8 @@
                              Margin="2"/>
                     <Label Background="Transparent"
                            Foreground="Black"
-                           Content="3"
-                           Margin="2,-6"
+                           Content="III"
+                           Margin="-1,-5.5"
                            HorizontalContentAlignment="Center"
                            FontFamily="{StaticResource Default}"
                            FontSize="20" FontWeight="Bold" 

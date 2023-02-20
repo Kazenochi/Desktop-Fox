@@ -52,7 +52,7 @@
                             VerticalAlignment="Center"
                             Height="2"
                             CornerRadius="1"
-                            Margin="10,40"/>
+                            Margin="10,20"/>
         <StackPanel>
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center">

@@ -14,6 +14,8 @@
 
   <ItemGroup>
     <None Remove="Assets\DF_Icon.ico" />
+    <None Remove="Assets\DF_Icon.png" />
+    <None Remove="Assets\DF_Icon_Small.png" />
     <None Remove="Assets\Dummy.jpg" />
     <None Remove="Assets\murmel.png" />
     <None Remove="Assets\Nunito-VariableFont_wght.ttf" />
@@ -44,6 +46,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\DF_Icon.png" />
+    <Resource Include="Assets\DF_Icon_Small.png" />
     <Resource Include="Assets\Dummy.jpg" />
   </ItemGroup>
 

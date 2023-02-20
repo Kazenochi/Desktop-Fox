@@ -27,7 +27,7 @@
                 <ContentControl x:Name="SettingsPage"
                                 Grid.Row="1"
                                 Content="{Binding CurrentView}"
-                                d:Content="{views:Settings_SystemView}"/>
+                                d:Content="{views:Settings_DaytimeView}"/>
             </Border>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom"
@@ -47,7 +47,7 @@
                              Style="{StaticResource DF_FolderRadioButton}" 
                              Command="{Binding DaytimeCommand}"/>
                 <RadioButton x:Name="settings_radio_Style"
-                             Content="Mode"
+                             Content="Modes"
                              Style="{StaticResource DF_FolderRadioButton}" 
                              Command="{Binding StyleCommand}"/>
                 <RadioButton x:Name="settings_radio_System"

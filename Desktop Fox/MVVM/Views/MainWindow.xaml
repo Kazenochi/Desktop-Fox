@@ -344,7 +344,7 @@
                        HorizontalAlignment="Left"
                        FontSize="15"
                        FontWeight="Bold"
-                       Foreground="#FFEDEDED"
+                       Foreground="{StaticResource TextBrush}"
                        Margin="10,0,0,0"/>
             </StackPanel>
 

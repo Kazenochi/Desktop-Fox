@@ -10,7 +10,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="Set_DaytimeView">
-    <StackPanel VerticalAlignment="Center">
+    <StackPanel VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <TextBlock FontFamily="{StaticResource Default}"
@@ -43,6 +45,7 @@
                              Margin="10,0,10,0"
                              PreviewKeyDown="TextBox_PreviewKeyDown"
                              d:Text="8"
+                             ToolTip="Hour of day start"
                              Text="{Binding DaytimeModel.DayStartHours}">
                     </TextBox>
                     <Border.Style>
@@ -87,6 +90,7 @@
                                  TextAlignment="Center"
                                  Margin="10,0,10,0"
                              d:Text="6"
+                             ToolTip="Minutes of day start"
                                  PreviewKeyDown="TextBox_PreviewKeyDown"
                                  Text="{Binding DaytimeModel.DayStartMinutes}">
                     </TextBox>
@@ -137,6 +141,7 @@
                                  TextAlignment="Center"
                                  Margin="10,0,10,0"
                              d:Text="20"
+                             ToolTip="Hour of night start"
                                  PreviewKeyDown="TextBox_PreviewKeyDown"
                                  Text="{Binding DaytimeModel.NightStartHours}">
                     </TextBox>
@@ -182,6 +187,7 @@
                                  TextAlignment="Center"
                                  Margin="10,0,10,0"
                              d:Text="45"
+                             ToolTip="Minutes of night start"
                                  PreviewKeyDown="TextBox_PreviewKeyDown"
                                  Text="{Binding DaytimeModel.NightStartMinutes}">
                     </TextBox>
@@ -202,10 +208,11 @@
                     </Border.Style>
                 </Border>
             </StackPanel>
+            
         </StackPanel>
 
         <Button Grid.Column="1"
-                ToolTip="Save the current values"
+                ToolTip="Save the current time values"
                 VerticalAlignment="Center"
                 FontSize="20"
                 Margin="30"

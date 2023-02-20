@@ -17,7 +17,7 @@ namespace DesktopFox.MVVM.ViewModels
         public Settings_InfoModel InfoModel { get; set; } = new();
 
         private Settings_DaytimeView _daytimeView = new();
-        private Settings_DModeView _dmodeView = new();
+        //private Settings_DModeView _dmodeView = new();
         private Settings_PreviewView _previewView = new();
         private Settings_ShuffleView _shuffleView = new();
         private Settings_StyleView _styleView = new();
@@ -33,7 +33,7 @@ namespace DesktopFox.MVVM.ViewModels
         {
             this.settings = settings;
             _daytimeView.DataContext = this;
-            _dmodeView.DataContext = this;
+            //_dmodeView.DataContext = this;
             _previewView.DataContext = this;
             _shuffleView.DataContext = this;
             _styleView.DataContext = this;
@@ -64,7 +64,7 @@ namespace DesktopFox.MVVM.ViewModels
         /// <summary>
         /// Kommando um die <see cref="Views.Settings_DModeView"/> anzuzeigen
         /// </summary>
-        public ICommand DModeCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(_dmodeView)); } }
+        //public ICommand DModeCommand { get { return new DF_Command.DelegateCommand(o => SwitchViews(_dmodeView)); } }
 
         /// <summary>
         /// Kommando um die <see cref="Views.Settings_PreviewView"/> anzuzeigen

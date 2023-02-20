@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DesktopFox.MVVM.Views;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -26,11 +27,13 @@ namespace DesktopFox
             onlyOneMutex = new Mutex(true, "Desktop Fox", out isNew);
             if(!isNew)
             {
-                //MessageBox.Show("Eine Instance der Appliction läuft bereits");
                 Debug.WriteLine("Eine Instance der Application läuft bereits. App wird geschlossen");
-                App.Current.Shutdown();
+                base.StartupUri = new Uri(@"./MVVM/Views/StartupError.xaml", UriKind.Relative);
             }
-            base.OnStartup(e);
+            else
+            {
+                base.OnStartup(e);
+            }     
         }
     }
 }

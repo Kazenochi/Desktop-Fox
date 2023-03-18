@@ -10,7 +10,6 @@ namespace DesktopFox
         public MonitorEnum Name;
         public int Height;
         public int Width;
-        public int Number; 
 
         /// <summary>
         /// Konstruktor

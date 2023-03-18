@@ -41,7 +41,7 @@ namespace DesktopFox
                 this.DragMove();
         }
 
-        #region Drag & Drop Funktion. Note: Nicht langzeitgetestet aber scheint ohne logikfehler zu laufen
+        #region Drag & Drop Funktion. Note: langzeitgetestet, scheint ohne logikfehler zu laufen
 
         /// <summary>
         /// Drag Funktionalität für Items in der Listbox

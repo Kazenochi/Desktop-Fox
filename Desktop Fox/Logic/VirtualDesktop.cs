@@ -202,7 +202,7 @@ namespace DesktopFox
             
             foreach (Wallpaper wallpaper in wallpapers)
             {
-                Screen s = Screen.AllScreens[wallpaper.myMonitor.Number];
+                Screen s = Screen.AllScreens[(int)wallpaper.myMonitor.Name-1];
                 BackgroundWindow backgroundWindow = new BackgroundWindow();
 
                 if (wallpaper.myMonitor.Name > MonitorEnum.MainMonitor)
@@ -218,13 +218,14 @@ namespace DesktopFox
 
                 if (debug)
                 {
-                    Debug.WriteLine("Actual Monitor Height: " + wallpaper.myMonitor.Height);
-                    Debug.WriteLine("Actual Monitor Width: " + wallpaper.myMonitor.Width);
-                    Debug.WriteLine("Wallpaper Monitor " + wallpaper.myMonitor.Number);
-                    Debug.WriteLine("BackWindow Top: " + s.Bounds.Top);
-                    Debug.WriteLine("Backwindow Left: " + s.Bounds.Left);
-                    Debug.WriteLine("Backwindow Width: " + backgroundWindow.Width);
-                    Debug.WriteLine("Backwindow Height: " + backgroundWindow.Height);
+                    Debug.WriteLine("Monitor: \t" + (int)wallpaper.myMonitor.Name);
+                    Debug.WriteLine("Actual Monitor Height: \t" + wallpaper.myMonitor.Height);
+                    Debug.WriteLine("Actual Monitor Width: \t" + wallpaper.myMonitor.Width);
+                    Debug.WriteLine("Wallpaper Monitor \t" + (int)wallpaper.myMonitor.Name);
+                    Debug.WriteLine("BackWindow Top: \t" + s.Bounds.Top);
+                    Debug.WriteLine("BackWindow Left: \t" + s.Bounds.Left);
+                    Debug.WriteLine("BackWindow Width: \t" + backgroundWindow.Width);
+                    Debug.WriteLine("BackWindow Height: \t" + backgroundWindow.Height);
                 }
 
                 BackgroundWindowVM backgroundWindowVM = new BackgroundWindowVM();

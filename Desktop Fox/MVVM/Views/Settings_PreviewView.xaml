@@ -73,33 +73,44 @@
                             VerticalAlignment="Top"
                             Margin="0,10,0,0">
                     <RadioButton x:Name="radio_DMode_Center"
-                             ToolTip="Centers the Image without changes"
-                             Content="Center" 
-                             FontSize="20"
-                             Margin="5,5,5,5"
-                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=0}"
-                             Style="{StaticResource DF_RadioButton_Border}"/>
+                                 ToolTip="Centers the Image without changes"
+                                 Content="Center" 
+                                 FontSize="20"
+                                 Margin="5,5,5,5"
+                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=0}"
+                                 Style="{StaticResource DF_RadioButton_Border}"/>
                     <RadioButton x:Name="radio_DMode_Fit"
-                             ToolTip="Zooms the image until reaching the background corners, may result in letterboxes"
-                             Content="Fit" 
-                             FontSize="20"
-                             Margin="5,5,5,5"
-                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
-                             Style="{StaticResource DF_RadioButton_Border}"/>
+                                 ToolTip="Zooms the image until reaching the background corners, may result in letterboxes"
+                                 Content="Fit" 
+                                 FontSize="20"
+                                 Margin="5,5,5,5"
+                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource DF_RadioButton_Border}"/>
                     <RadioButton x:Name="radio_DMode_Fill"
-                             ToolTip="Zooms in the image until the background is completely covered"
-                             Content="Fill" 
-                             FontSize="20"
-                             Margin="5,5,5,5"
-                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=4}"
-                             Style="{StaticResource DF_RadioButton_Border}"/>
+                                 ToolTip="Zooms in the image until the background is completely covered"
+                                 Content="Fill" 
+                                 FontSize="20"
+                                 Margin="5,5,5,5"
+                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=4}"
+                                 Style="{StaticResource DF_RadioButton_Border}"/>
                     <RadioButton x:Name="radio_DMode_Span"
-                             ToolTip="Spans the Image over every monitor if possible"
-                             Content="Span" 
-                             FontSize="20"
-                             Margin="5,5,5,5"
-                             IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=5}"
-                             Style="{StaticResource DF_RadioButton_Border}"/>
+                                 ToolTipService.ShowOnDisabled="True"
+                                 
+                                 Content="Span" 
+                                 FontSize="20"
+                                 Margin="5,5,5,5"
+                                 IsEnabled="{Binding settings.DesktopModeSingle}"
+                                 IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=5}"
+                                 Style="{StaticResource DF_RadioButton_Border}">
+                        <RadioButton.ToolTip>
+                            <ToolTip>
+                                <TextBlock>
+                                     Spans the Image over every monitor if possible
+                                    <LineBreak/> <Bold>Only available in 'Single Mode'</Bold>"
+                                </TextBlock>
+                            </ToolTip>
+                        </RadioButton.ToolTip>
+                    </RadioButton>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

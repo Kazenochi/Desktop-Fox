@@ -520,6 +520,8 @@ namespace DesktopFox
                 Debug.WriteLine("Tageszeiten Timer wurde aktualisiert. Verbleibende Zeit zum Wechsel: " + untilTimeChange);
             }
 
+            DesktopTimer_Kickstart();
+
             if (SM.Settings.AutoSetChange && DateTime.Now > SM.Settings.NextDaySwitch)
                 AutoSetChange();
 

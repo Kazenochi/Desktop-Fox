@@ -105,7 +105,6 @@
             
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="{StaticResource HighlightBrush}"/>
-                <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}"/>
             </Trigger>
             
             <MultiTrigger>

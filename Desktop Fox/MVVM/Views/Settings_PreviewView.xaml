@@ -35,6 +35,7 @@
                                 ToolTip="Zooms the preview until reaching the corners, may result in letterboxes"
                                 Content="Fit" 
                                 FontSize="20"
+                             d:IsChecked="True"
                                 Margin="5,5,5,5"
                                 IsChecked="{Binding settings.PreviewFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=2}"
                                 Style="{StaticResource DF_RadioButton_Border}"/>
@@ -44,7 +45,7 @@
                                 FontSize="20"
                                 Margin="5,5,5,5"
                                 IsChecked="{Binding settings.PreviewFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=3}"
-                                Style="{StaticResource DF_RadioButton_Border}"/>
+                                Style="{StaticResource DF_RadioButton_Border}" ClickMode="Release"/>
             </StackPanel>
         </StackPanel>
         <Border Background="{StaticResource BorderBrush}"

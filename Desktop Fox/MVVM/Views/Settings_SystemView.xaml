@@ -37,17 +37,71 @@
                                  Margin="5,5,5,5"
                                  Style="{StaticResource DF_RadioButton_Border_Round}" 
                                  IsChecked="{Binding settings.AutoSetChange}">
-                        <Image Source="\Icons\Icons_On.png"
-                               Margin="10"
-                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <Grid>
+                            <Image Source="\Icons\Icons_On.png" 
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <Border Margin="10">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                                   Mode=FindAncestor, 
+                                                                                   AncestorType={x:Type RadioButton}}, 
+                                                                                   Path=IsChecked}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                                   Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="\Icons\Icons_On.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
                     </RadioButton>
                     <RadioButton x:Name="radio_AutoSetChangeOff"
                                  Margin="5,5,5,5"
                                  Style="{StaticResource DF_RadioButton_Border_Round}"
                                  IsChecked="{Binding settings.AutoSetChange, Converter={StaticResource BoolInverter}}">
-                        <Image Source="\Icons\Icons_Off.png"
-                               Margin="10"
-                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <Grid>
+                            <Image Source="\Icons\Icons_Off.png" 
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <Border Margin="10">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                                   Mode=FindAncestor, 
+                                                                                   AncestorType={x:Type RadioButton}}, 
+                                                                                   Path=IsChecked}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                                   Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="\Icons\Icons_Off.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
                     </RadioButton>
                 </StackPanel>
             </StackPanel>
@@ -77,17 +131,71 @@
                                  Margin="5,5,5,5"
                                  Style="{StaticResource DF_RadioButton_Border_Round}" 
                                  IsChecked="{Binding settings.AutostartOn}">
-                        <Image Source="\Icons\Icons_On.png"
-                               Margin="10"
-                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <Grid>
+                            <Image Source="\Icons\Icons_On.png" 
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <Border Margin="10">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                                   Mode=FindAncestor, 
+                                                                                   AncestorType={x:Type RadioButton}}, 
+                                                                                   Path=IsChecked}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                                   Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="\Icons\Icons_On.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
                     </RadioButton>
                     <RadioButton x:Name="radio_AutoStartOff"
                                  Margin="5,5,5,5"
                                  Style="{StaticResource DF_RadioButton_Border_Round}"
                                  IsChecked="{Binding settings.AutostartOn, Converter={StaticResource BoolInverter}}">
-                        <Image Source="\Icons\Icons_Off.png"
-                               Margin="10"
-                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <Grid>
+                            <Image Source="\Icons\Icons_Off.png" 
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <Border Margin="10">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                                   Mode=FindAncestor, 
+                                                                                   AncestorType={x:Type RadioButton}}, 
+                                                                                   Path=IsChecked}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                                   Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="\Icons\Icons_Off.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
                     </RadioButton>
                 </StackPanel>
             </StackPanel>
@@ -120,17 +228,71 @@
                                  Margin="5,5,5,5"
                                  Style="{StaticResource DF_RadioButton_Border_Round}" 
                                  IsChecked="{Binding settings.AutoFileCorrection}">
-                        <Image Source="\Icons\Icons_On.png"
-                               Margin="10"
-                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <Grid>
+                            <Image Source="\Icons\Icons_On.png" 
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <Border Margin="10">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                                   Mode=FindAncestor, 
+                                                                                   AncestorType={x:Type RadioButton}}, 
+                                                                                   Path=IsChecked}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                                   Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="\Icons\Icons_On.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
                     </RadioButton>
                     <RadioButton x:Name="radio_FileCheckOff"
                                  Margin="5,5,5,5"
                                  Style="{StaticResource DF_RadioButton_Border_Round}"
                                  IsChecked="{Binding settings.AutoFileCorrection, Converter={StaticResource BoolInverter}}">
-                        <Image Source="\Icons\Icons_Off.png"
-                               Margin="10"
-                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <Grid>
+                            <Image Source="\Icons\Icons_Off.png" 
+                                   Stretch="Uniform" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <Border Margin="10">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource 
+                                                                                   Mode=FindAncestor, 
+                                                                                   AncestorType={x:Type RadioButton}}, 
+                                                                                   Path=IsChecked}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Width}" 
+                                                   Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Height}">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{StaticResource Color_ControlPressedText}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="\Icons\Icons_Off.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
                     </RadioButton>
                 </StackPanel>
             </StackPanel>

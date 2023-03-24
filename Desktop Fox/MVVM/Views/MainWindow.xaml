@@ -78,8 +78,8 @@
                             IsEnabled="{Binding CanActivate, Converter={StaticResource BoolInverter}}"
                             Command="{Binding StopSetCommand}"
                             Style="{StaticResource DF_Button_Border}">
-                        <Image Source="\Icons\Icons_Pause.png" 
-                               Margin="10"/>
+                        <Image Source="\Icons\Icons_Stop.png" 
+                               Margin="14"/>
                     </Button>
                     <Button x:Name="button_ActivateSet"
                             ToolTip="Start the wallpaper manager"
@@ -87,7 +87,7 @@
                             Visibility="{Binding CanActivate, Converter={StaticResource BoolConverter}}"
                             Command="{Binding ActivateSetCommand}"
                             Style="{StaticResource DF_Button_Border}">
-                        <Border Margin="15,15,10,15">
+                        <Border Margin="14,14,10,14">
                             <Image Source="\Icons\Icons_Play.png" 
                                    RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Border>
@@ -129,7 +129,7 @@
                 </Button>
 
                 <Button x:Name="button_Animation" 
-                        ToolTip="Opens the configuration menu for video wallpaper"
+                        ToolTip="Open the configuration menu for animated wallpapers"
                         FontSize="20"
                         Grid.Column="0" 
                         Style="{StaticResource DF_Button_Border}"
@@ -140,7 +140,7 @@
                 </Button>
                 
                 <Button x:Name="button_Settings"
-                        ToolTip="Opens the settings menu"
+                        ToolTip="Open the settings menu"
                         FontSize="20"
                         Grid.Column="1" 
                         Style="{StaticResource DF_Button_Border}"
@@ -329,7 +329,7 @@
                             VerticalAlignment="Bottom"
                             Margin="0,0,30,30"
                             Content="{Binding CurrentView}"
-                            d:Content="{view:ContextPopupView}"
+                            d:Content="{view:Settings_MainView}"
                             Panel.ZIndex="2"/>
 
             <StackPanel Orientation="Horizontal"

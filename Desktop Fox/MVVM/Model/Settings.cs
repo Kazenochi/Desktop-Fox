@@ -1,5 +1,7 @@
 ﻿using IDesktopWallpaperWrapper.Win32;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Diagnostics;
 using System.Windows.Media;
 
 namespace DesktopFox

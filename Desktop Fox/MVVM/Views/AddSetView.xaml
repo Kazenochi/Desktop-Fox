@@ -180,6 +180,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label x:Name="label_SelectedFolder"
+                               ToolTip="{Binding Path=AddSetModel.FolderPath}"
                                FontFamily="{StaticResource Default}"
                                Foreground="{StaticResource TextBrush}"
                                FontSize="15"

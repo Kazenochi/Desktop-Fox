@@ -16,14 +16,12 @@ namespace DesktopFox.MVVM.ViewModels
         public Settings_ShuffleModel ShuffleModel { get; set; } = new();
         public Settings_InfoModel InfoModel { get; set; } = new();
 
-        private Settings_DaytimeView _daytimeView = new();
-        //private Settings_DModeView _dmodeView = new();
-        private Settings_PreviewView _previewView = new();
-        private Settings_ShuffleView _shuffleView = new();
-        private Settings_StyleView _styleView = new();
-        private Settings_SystemView _systemView = new();
-        private Settings_LanguageView _languageView = new();
-        private Settings_Info _info = new();
+        private readonly Settings_DaytimeView _daytimeView = new();
+        private readonly Settings_PreviewView _previewView = new();
+        private readonly Settings_ShuffleView _shuffleView = new();
+        private readonly Settings_StyleView _styleView = new();
+        private readonly Settings_SystemView _systemView = new();   
+        private readonly Settings_Info _info = new();
 
         /// <summary>
         /// Konstruktor
@@ -33,12 +31,10 @@ namespace DesktopFox.MVVM.ViewModels
         {
             this.settings = settings;
             _daytimeView.DataContext = this;
-            //_dmodeView.DataContext = this;
             _previewView.DataContext = this;
             _shuffleView.DataContext = this;
             _styleView.DataContext = this;
             _systemView.DataContext = this;
-            _languageView.DataContext = this;
             _info.DataContext = this;
 
             CurrentView = _previewView; 

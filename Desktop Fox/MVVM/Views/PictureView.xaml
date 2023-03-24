@@ -139,7 +139,7 @@
                       Visibility="{Binding Path=pictureSet.IsActive3, Mode=TwoWay, 
                                     Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
-                    <Ellipse Fill="#FFFF3C3C"
+                    <Ellipse Fill="{StaticResource HighlightBrushRed}"
                              Margin="2"/>
                     <Label Background="Transparent"
                            Foreground="Black"
@@ -173,8 +173,8 @@
                                 <TranslateTransform/>
                             </TransformGroup>
                         </LinearGradientBrush.RelativeTransform>
-                        <GradientStop Color="{StaticResource Color_HighlightBrushRed}"/>
-                        <GradientStop Color="{StaticResource Color_HighlightBrushRed}" Offset="1"/>
+                        <GradientStop Color="{StaticResource Color_ControlPressedText}"/>
+                        <GradientStop Color="{StaticResource Color_ControlPressedText}" Offset="1"/>
                         <GradientStop Color="#00000000" Offset="0.1"/>
                         <GradientStop Color="#00000000" Offset="0.9"/>
                     </LinearGradientBrush>
@@ -190,8 +190,8 @@
                                      Converter={StaticResource BoolConverter}}">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF362806" Offset="1"/>
-                        <GradientStop Color="{StaticResource Color_HighlightBrushRed}" Offset="0.398"/>
+                        <GradientStop Color="{StaticResource Color_ControlPressed}" Offset="1"/>
+                        <GradientStop Color="{StaticResource Color_ControlPressedText}" Offset="0.398"/>
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>

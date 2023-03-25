@@ -148,12 +148,16 @@
                                     HorizontalAlignment="Right">
                             <Button x:Name="button_CreateNewSet"
                                     ToolTip="Generates a new pictureset for the new pictures. Name can be changed later."
-                                    Content="New"
                                     FontSize="20"
                                     Style="{StaticResource DF_Button_Border}"
                                     HorizontalAlignment="Right"
                                     Grid.Column="1"
-                                    Command="{Binding GenerateSetName}"/>
+                                    Command="{Binding GenerateSetName}">
+                                <Image Source="\Icons\Icons_Plus.png" 
+                                    Stretch="Uniform"
+                                    Margin="10"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                            </Button>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -216,11 +220,10 @@
                             Style="{StaticResource DF_Button_Border}"
                             Grid.Row="3"
                             Command="{Binding AddNewSet}">
-                        <Image Source="\Icons\Icons_Plus.png" 
+                        <Image Source="\Icons\Icons_CheckMark.png" 
                                 Stretch="Uniform"
                                 Margin="10"
                                RenderOptions.BitmapScalingMode="HighQuality"/>
-
                     </Button>
                 </Grid>
             </StackPanel>

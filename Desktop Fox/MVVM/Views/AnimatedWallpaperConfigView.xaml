@@ -173,15 +173,15 @@
                                 ToolTip="Decrease the volume of the video"
                                 IsEnabled="{Binding AWPConfigModel.IsMuted, Converter={StaticResource BoolInverter}}"
                                 Command="{Binding VolumeDownCommand}">
-                            <Image Source="\Icons\Icons_Minus.png"     
-                                   Margin="10"
+                            <Image Source="\Icons\Icons_Volume_Down.png"     
+                                   Margin="15"
                                    RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Button>
                         <Button Style="{StaticResource DF_Button_Border}"
                                 ToolTip="Increase the volume of the video"
                                 IsEnabled="{Binding AWPConfigModel.IsMuted, Converter={StaticResource BoolInverter}}"
                                 Command="{Binding VolumeUpCommand}">
-                            <Image Source="\Icons\Icons_Plus.png" 
+                            <Image Source="\Icons\Icons_Volume_Up.png" 
                                    Margin="10"
                                    RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Button>
@@ -189,7 +189,7 @@
                                 ToolTip="Mute/Unmute video"
                                 Command="{Binding MuteCommand}">
                             <Grid>
-                                <Image Source="\Icons\Icons_Music_Simple.png" 
+                                <Image Source="\Icons\Icons_Volume_Mute.png" 
                                        Margin="9,10,11,10"
                                        RenderOptions.BitmapScalingMode="HighQuality"/>
               

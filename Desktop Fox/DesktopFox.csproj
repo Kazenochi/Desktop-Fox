@@ -35,7 +35,10 @@
     <None Remove="Icons\Icons_Off.png" />
     <None Remove="Icons\Icons_On.png" />
     <None Remove="Icons\Icons_Pause.png" />
+    <None Remove="Icons\Icons_Picture.png" />
+    <None Remove="Icons\Icons_Picture_Add.png" />
     <None Remove="Icons\Icons_Play.png" />
+    <None Remove="Icons\Icons_Play_Soft.png" />
     <None Remove="Icons\Icons_Plus.png" />
     <None Remove="Icons\Icons_Rename.png" />
     <None Remove="Icons\Icons_Save.png" />
@@ -43,6 +46,12 @@
     <None Remove="Icons\Icons_Stop.png" />
     <None Remove="Icons\Icons_Transfer.png" />
     <None Remove="Icons\Icons_Video.png" />
+    <None Remove="Icons\Icons_Volume_Down.png" />
+    <None Remove="Icons\Icons_Volume_Mute.png" />
+    <None Remove="Icons\Icons_Volume_Up.png" />
+    <None Remove="Icons\Icon_Volume_Down.png" />
+    <None Remove="Icons\Icon_Volume_Mute.png" />
+    <None Remove="Icons\Icon_Volume_Up.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -102,9 +111,12 @@
     <Resource Include="Icons\Icons_Pause.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\Icons_Picture.png" />
+    <Resource Include="Icons\Icons_Picture_Add.png" />
     <Resource Include="Icons\Icons_Play.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\Icons_Play_Soft.png" />
     <Resource Include="Icons\Icons_Plus.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -118,6 +130,9 @@
     <Resource Include="Icons\Icons_Stop.png" />
     <Resource Include="Icons\Icons_Transfer.png" />
     <Resource Include="Icons\Icons_Video.png" />
+    <Resource Include="Icons\Icons_Volume_Down.png" />
+    <Resource Include="Icons\Icons_Volume_Mute.png" />
+    <Resource Include="Icons\Icons_Volume_Up.png" />
   </ItemGroup>
 
   <ItemGroup>

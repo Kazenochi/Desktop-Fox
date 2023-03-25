@@ -87,8 +87,8 @@
                             Visibility="{Binding CanActivate, Converter={StaticResource BoolConverter}}"
                             Command="{Binding ActivateSetCommand}"
                             Style="{StaticResource DF_Button_Border}">
-                        <Border Margin="14,14,10,14">
-                            <Image Source="\Icons\Icons_Play.png" 
+                        <Border Margin="13,13,8,13">
+                            <Image Source="\Icons\Icons_Play_Soft.png" 
                                    RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Border>
                     </Button>
@@ -123,7 +123,7 @@
                         Style="{StaticResource DF_Button_Border}"
                         Command="{Binding AddSetViewCommand}">
                     <Image Name="AddImage"
-                           Source="\Icons\Icons_Plus.png" 
+                           Source="\Icons\Icons_Picture.png" 
                            Margin="10"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>

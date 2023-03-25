@@ -37,7 +37,10 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Source="{Binding PreviewModel.BackgroundImage, NotifyOnTargetUpdated=True}"
-                       Stretch="{Binding PreviewModel.ImageStretch}">
+                       Stretch="{Binding PreviewModel.ImageStretch}"
+                       d:Source="/Assets/よぞら - 夜空.png"
+                       d:Stretch="UniformToFill">
+               
                     <Image.Triggers>
                         <EventTrigger RoutedEvent="Binding.TargetUpdated">
                             <BeginStoryboard>

@@ -309,7 +309,7 @@
                             Opacity="{Binding BlurOpacity}"
                             Panel.ZIndex="1">
                 <ContentControl.Effect>
-                    <BlurEffect Radius="{Binding BlurStrength}" d:Radius="20"/>
+                    <BlurEffect Radius="{Binding BlurStrength}" d:Radius="0"/>
                 </ContentControl.Effect>
             </ContentControl>
 
@@ -319,7 +319,7 @@
                             Grid.RowSpan="2"
                             Grid.Row="1"
                             Content="{Binding MainPanel}" 
-                            d:Content="{view:AnimatedWallpaperConfigView}"
+                            d:Content=""
                             Panel.ZIndex="1"/>
 
             <ContentControl x:Name="ContextViews"
@@ -329,7 +329,7 @@
                             VerticalAlignment="Bottom"
                             Margin="0,0,30,30"
                             Content="{Binding CurrentView}"
-                            d:Content="{view:Settings_MainView}"
+                            d:Content=""
                             Panel.ZIndex="2"/>
 
             <StackPanel Orientation="Horizontal"

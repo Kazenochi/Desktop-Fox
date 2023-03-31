@@ -12,7 +12,7 @@ namespace DesktopFox.MVVM.ViewModels
 {
     public class AnimatedWallpaperConfigVM
     {
-        private VirtualDesktop vDesk;
+        private protected VirtualDesktop vDesk;
         public AnimatedWallpaperConfigModel AWPConfigModel { get; set; } = new();
         private Wallpaper tmpWallpaper;
 
@@ -352,7 +352,7 @@ namespace DesktopFox.MVVM.ViewModels
 
             if(monitorList.Count > 0)
             {
-                vDesk.newAnimatedWPs(monitorList, tmpWallpaper);
+                vDesk.newAnimatedWPs(monitorList, tmpWallpaper, AWPConfigModel.Volume);
             }
             AWPConfigModel.AudioEnable = true;
         }

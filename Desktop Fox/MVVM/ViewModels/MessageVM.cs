@@ -33,7 +33,7 @@ namespace DesktopFox.MVVM.ViewModels
                 case MessageType.Error: break;
 
                 case MessageType.Delete:
-                    Model.Message = "Do you really want to delete this object?";
+                    Model.Message = "Do you really want to delete this collection?";
                     break;
 
                 case MessageType.Notification: break;

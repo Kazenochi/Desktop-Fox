@@ -122,7 +122,7 @@ namespace DesktopFox
         /// <param name="mediaUri">Pfad zur Datei die auf den Wallpaper angezeigt werden soll</param>
         /// <param name="imageRotation">Rotationswert den das Wallpaper haben soll</param>
         /// <param name="muted">Ob die Hintergrundbilder eine Tonausgabe haben sollen</param>
-        public void newAnimatedWPs(List<int> monitors, Wallpaper wallpaperBluePrint)
+        public void newAnimatedWPs(List<int> monitors, Wallpaper wallpaperBluePrint, VLCVolume volume)
         {
             wallpapers ??= new List<Wallpaper>();
 
@@ -133,7 +133,7 @@ namespace DesktopFox
             for(int i = 0; i < monitors.Count;i++)
             {
                 if(i == 0)
-                    wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitors[i], wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, wallpaperBluePrint.Volume));
+                    wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitors[i], wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, volume));
                 else
                     wallpapers.Add(WallpaperBuilder.makeWallpaper(this, monitors[i], wallpaperBluePrint.myMediaUri, wallpaperBluePrint.myRotation, VLCVolume.Mute));
             }

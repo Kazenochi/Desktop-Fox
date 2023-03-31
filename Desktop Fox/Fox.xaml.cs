@@ -170,10 +170,10 @@ namespace DesktopFox
                     mainWindowVM.Settings_MainView.DataContext = settingsVM;
                     mainWindowVM.ContextPopupView.DataContext = contextPopupVM;
                     mainWindowVM.PreviewView.DataContext = previewVM;
-                    animatedWPConfigVM.CheckSavedWallpapers();
-                    mainWindowVM.AnimatedWPConfigView.DataContext = animatedWPConfigVM;
+                    
                 }
-
+                animatedWPConfigVM.CheckSavedWallpapers();
+                mainWindowVM.AnimatedWPConfigView.DataContext = animatedWPConfigVM;
             }
             mainWindowVM.SetCurrentMain(MW);
             shuffler.StartPreviewShuffleTimer();

@@ -37,7 +37,7 @@ namespace DesktopFox
 
                     if (logging)
                     {
-                        File.WriteAllText(saveFolder + "DF_Gallery_" + DateTime.Now.ToString("yyyy-mm-dd--HH-mm-ss") + ".json", json);
+                        File.WriteAllText(saveFolder + "DF_Gallery_" + DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss") + ".json", json);
                     }                   
 
                     return true;
@@ -63,7 +63,7 @@ namespace DesktopFox
                     File.WriteAllText(saveFolder + "Settings.json", json);
                     if (logging)
                     {
-                        File.WriteAllText(saveFolder + "Settings_" + DateTime.Now.ToString("yyyy-mm-dd--HH-mm-ss") + ".json", json);
+                        File.WriteAllText(saveFolder + "Settings_" + DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss") + ".json", json);
                     }
                     return true;
                 }

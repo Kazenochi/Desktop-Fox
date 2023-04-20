@@ -146,6 +146,12 @@
                                Margin="12"
                                RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
+                    <Button Style="{StaticResource DF_Button_Border}"
+                            ToolTip="Syncs all Videos"
+                            IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
+                            Command="{Binding VideoSyncCommand}">
+                        
+                    </Button>
                 </StackPanel>
 
                 <Border Background="{StaticResource BorderBrush}"

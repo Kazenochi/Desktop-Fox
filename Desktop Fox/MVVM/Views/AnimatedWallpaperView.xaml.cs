@@ -58,9 +58,13 @@ namespace DesktopFox.MVVM.Views
                         {
                             _mediaPlayer.Play();
                         }
-                        else if(_mediaPlayer.IsPlaying)
+                        else if(((Wallpaper)sender).PlayPause == VLCState.Paused)
                         {
                             _mediaPlayer.Pause();
+                        }
+                        else if(((Wallpaper)sender).PlayPause == VLCState.Stopped) 
+                        {
+                            _mediaPlayer.Stop();
                         }
                     }
                     catch (System.AccessViolationException)
@@ -68,6 +72,7 @@ namespace DesktopFox.MVVM.Views
                         Debug.WriteLine("Fehler beim Entladen des Mediaplayer Objekts in AnimatedWallpaperView");
                     }     
                     break;
+                    
             }
         }
 

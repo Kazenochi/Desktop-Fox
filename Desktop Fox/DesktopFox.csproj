@@ -10,6 +10,8 @@
     <StartupObject>DesktopFox.App</StartupObject>
     <ApplicationIcon>Assets\DF_Icon.ico</ApplicationIcon>
     <PackageLicenseFile>license</PackageLicenseFile>
+    <SignAssembly>True</SignAssembly>
+    <Title>DesktopFox</Title>
   </PropertyGroup>
 
   <ItemGroup>
@@ -143,21 +145,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Language\Lang.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Lang.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Language\Lang_de-DE.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Lang_de-DE.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Language\Lang_en-EN.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Lang_en-EN.resx</DependentUpon>
-    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -166,18 +153,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Language\Lang.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Language\Lang_de-DE.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Lang_de-DE.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Language\Lang_en-EN.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Lang_en-EN.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

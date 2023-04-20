@@ -117,49 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Activate" xml:space="preserve">
-    <value>Activate</value>
-  </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="Both" xml:space="preserve">
-    <value>Both</value>
-  </data>
-  <data name="D" xml:space="preserve">
-    <value>         D</value>
-  </data>
-  <data name="Day" xml:space="preserve">
-    <value>Day</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="Linear" xml:space="preserve">
-    <value>Linear</value>
-  </data>
-  <data name="N" xml:space="preserve">
-    <value>         N</value>
-  </data>
-  <data name="New" xml:space="preserve">
-    <value>New</value>
-  </data>
-  <data name="Night" xml:space="preserve">
-    <value>Night</value>
-  </data>
-  <data name="Rename" xml:space="preserve">
-    <value>Rename</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value>Select</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="Shuffle" xml:space="preserve">
-    <value>Shuffle</value>
-  </data>
 </root>

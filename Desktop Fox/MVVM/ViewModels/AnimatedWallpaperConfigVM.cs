@@ -113,6 +113,8 @@ namespace DesktopFox.MVVM.ViewModels
         /// </summary>
         public ICommand VideoPauseCommand { get { return new DF_Command.DelegateCommand(o => VideoPause()); } }
 
+        public ICommand VideoSyncCommand { get { return new DF_Command.DelegateCommand(o => VideoSync()); } }
+
         /// <summary>
         /// Kommando Rotieren des Videos im Uhrzeigersinn in den gespeicherten Werten <see cref="VLCRotation"/>
         /// </summary>
@@ -233,6 +235,21 @@ namespace DesktopFox.MVVM.ViewModels
 
             if (tmpWallpaper == null) return;
             tmpWallpaper.PlayPause = VLCState.Paused;
+        }
+
+        /// <summary>
+        /// Setzt alle Videos auf Anfang zurück und Synchronisiert damit alle Wiedergaben
+        /// </summary>
+        private void VideoSync()
+        {
+            if (vDesk.getWallpapers != null)
+            {
+                foreach (var wallpaper in vDesk.getWallpapers)
+                {
+                    wallpaper.PlayPause = VLCState.Stopped;
+                    wallpaper.PlayPause = VLCState.Playing;
+                }
+            }
         }
 
         /// <summary>

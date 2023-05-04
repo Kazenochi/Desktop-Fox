@@ -63,8 +63,10 @@ Es können alle gängigen Videoformate verwendet werden wie bspw.: mp4, mkv, web
 
 # Credits
 * Author - Andreas Keimel
-* Thanks to @9eck0 for the Windows IDesktopWallpaper API - https://github.com/9eck0/IDesktopWallpaper-dotNet/blob/main/IDesktopWallpaperWrapper/DesktopWallpaper.cs
+* 9eck0 for the Windows IDesktopWallpaper API<br/> https://github.com/9eck0/IDesktopWallpaper-dotNet
+* The VLC Team for the LibVLCSharp Lib<br/> https://code.videolan.org/videolan/LibVLCSharp
+
 ## Tools
 * Visual Studio 
 * GitHub
-* VLCSharp
+* Clip Studio Paint

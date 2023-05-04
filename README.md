@@ -63,7 +63,7 @@ Es können alle gängigen Videoformate verwendet werden wie bspw.: mp4, mkv, web
 
 # Credits
 * Author - Andreas Keimel
-* Thanks to for the Windows IDesktopWallpaper API - https://github.com/9eck0/IDesktopWallpaper-dotNet/blob/main/IDesktopWallpaperWrapper/DesktopWallpaper.cs
+* Thanks to @9eck0 for the Windows IDesktopWallpaper API - https://github.com/9eck0/IDesktopWallpaper-dotNet/blob/main/IDesktopWallpaperWrapper/DesktopWallpaper.cs
 ## Tools
 * Visual Studio 
 * GitHub

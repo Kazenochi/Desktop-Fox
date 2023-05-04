@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:DesktopFox" 
-        xmlns:view="clr-namespace:DesktopFox.MVVM.Views"
+        xmlns:views="clr-namespace:DesktopFox.MVVM.Views"
         d:DataContext="{d:DesignInstance Type=local:MainWindowVM}"
         mc:Ignorable="d"      
         Title="MainWindow" 
@@ -220,16 +220,16 @@
                     </bh:EventTrigger>
                 </bh:Interaction.Triggers>
                 <d:ListBoxItem>
-                    <view:PictureView/>
+                    <views:PictureView/>
                 </d:ListBoxItem>
                 <d:ListBoxItem>
-                    <view:PictureView/>
+                    <views:PictureView/>
                 </d:ListBoxItem>
                 <d:ListBoxItem>
-                    <view:PictureView/>
+                    <views:PictureView/>
                 </d:ListBoxItem>
                 <d:ListBoxItem>
-                    <view:PictureView/>
+                    <views:PictureView/>
                 </d:ListBoxItem>
             </ListBox>
             
@@ -305,7 +305,7 @@
                             Grid.RowSpan="2"
                             Grid.Row="1"
                             Content="{Binding MainPanelBlur}" 
-                            d:Content="{view:PreviewView}"
+                            d:Content="{views:PreviewView}"
                             Opacity="{Binding BlurOpacity}"
                             Panel.ZIndex="1">
                 <ContentControl.Effect>
@@ -318,8 +318,7 @@
                             ClipToBounds="True"
                             Grid.RowSpan="2"
                             Grid.Row="1"
-                            Content="{Binding MainPanel}" 
-                            d:Content=""
+                            Content="{Binding MainPanel}"
                             Panel.ZIndex="1"/>
 
             <ContentControl x:Name="ContextViews"

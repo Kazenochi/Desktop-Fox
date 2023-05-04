@@ -38,7 +38,7 @@
                        HorizontalAlignment="Center"
                        Source="{Binding PreviewModel.BackgroundImage, NotifyOnTargetUpdated=True}"
                        Stretch="{Binding PreviewModel.ImageStretch}"
-                       d:Source="/Assets/よぞら - 夜空.png"
+                       d:Source="/Assets/96619278_p0.png"
                        d:Stretch="UniformToFill">
                
                     <Image.Triggers>
@@ -63,7 +63,7 @@
                        HorizontalAlignment="Center"
                        Source="{Binding PreviewModel.ForegroundImage}"
                        Stretch="{Binding PreviewModel.ImageStretch}"
-                       d:Source="/Assets/murmel.png"
+                       
                        d:Stretch="UniformToFill">
                 </Image>
             </Grid>

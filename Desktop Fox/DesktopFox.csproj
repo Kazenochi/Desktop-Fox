@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\DF_AllreadyRunning.png" />
     <None Remove="Assets\DF_Icon.ico" />
     <None Remove="Assets\DF_Icon.png" />
     <None Remove="Assets\DF_Icon_Small.png" />
@@ -57,6 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\DF_AllreadyRunning.png" />
     <Resource Include="Assets\DF_Icon.png" />
     <Resource Include="Assets\DF_Icon_Small.png" />
     <Resource Include="Assets\Dummy.jpg" />

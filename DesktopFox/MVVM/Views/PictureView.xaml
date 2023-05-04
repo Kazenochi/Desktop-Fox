@@ -45,7 +45,7 @@
                 </Style>
             </Grid.Style>
             <Image x:Name="pImageDay" Source="{Binding pictureSet.DayImage}" 
-                   Stretch="UniformToFill" d:Source="/Assets/murmel.png"/>
+                   Stretch="UniformToFill" d:Source="/Assets/promo/japan.jpg"/>
             <Border HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
                 <Border.Clip>
@@ -63,7 +63,7 @@
                 <Image x:Name="pImageNight" 
                        Source="{Binding pictureSet.NightImage}" 
                        Stretch="UniformToFill" 
-                       d:Source="/Assets/よぞら - 夜空 .png"/>
+                       d:Source="/Assets/promo/architecture_Night.jpg"/>
             </Border>
             <Label x:Name="pLabel" 
                    FontSize="22" FontFamily="{StaticResource Default}" 
@@ -72,6 +72,7 @@
                    VerticalAlignment="Bottom" 
                    Width="414" Height="30" 
                    Padding="20,1,5,0" 
+                   d:Visibility="Collapsed"
                    Grid.IsSharedSizeScope="True">
                 <TextBlock Text="{Binding pictureSet.SetName}"
                            d:Text="Pictureset great. Test eines sehr langen Sets"
@@ -98,6 +99,7 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
+                      d:Visibility="Collapsed"
                       Visibility="{Binding Path=pictureSet.IsActive1, Mode=TwoWay, 
                                     Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
@@ -117,13 +119,14 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
+                      d:Visibility="Collapsed"
                       Visibility="{Binding Path=pictureSet.IsActive2, Mode=TwoWay, 
                                     Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
                     <Ellipse Fill="#FF41A6FF"
                              Margin="2"/>
                     <Label Background="Transparent"
-                           Foreground="Black"
+                           Foreground="Black"        
                            Content="II"
                            Margin="0,-6"
                            HorizontalContentAlignment="Center"
@@ -136,6 +139,7 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
+                      d:Visibility="Collapsed"
                       Visibility="{Binding Path=pictureSet.IsActive3, Mode=TwoWay, 
                                     Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
@@ -152,7 +156,7 @@
                 </Grid>
             </StackPanel>
 
-            <Border d:Visibility="Visible">
+            <Border d:Visibility="Collapsed">
                 <Border.Style>
                     <Style TargetType="Border">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -186,6 +190,7 @@
                        HorizontalAlignment="Left" 
                        RenderTransformOrigin="0.5,0.5"
                        Margin="0,0,0,0"
+                       d:Visibility="Collapsed"
                        Visibility="{Binding Path=pictureSet.IsSelectedDF, Mode=TwoWay, 
                                      Converter={StaticResource BoolConverter}}">
                 <Rectangle.Fill>

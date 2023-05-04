@@ -1,11 +1,10 @@
 <img src="DesktopFox/Assets/promo/DF_Icon_CorrectionL.png" height="150">
 
-# Desktop Fox
+# Desktop Fox - Desktop Wallpaper Manager for Windows
 
 <img src="DesktopFox/Assets/promo/DF_TitelBar.png" align="right" height="350">
-Desktop Wallpaper Manager for Windows
 
-Desktop Fox ist ein Hintergrundmanager für Windows. Er bietet die möglichkeit feinerer Einstellungen an den bekannten Windows funktionen durchzuführen und enthält darüber    hinaus noch eine Vielzahl von zusätzlichen Funktionen.
+Desktop Fox ist ein Hintergrundbildmanager für Windows. Er bietet die möglichkeit feinerer Einstellungen an den bekannten Windows funktionen durchzuführen und enthält darüber    hinaus noch eine Vielzahl von zusätzlichen Funktionen.
 
 * Ändern der Bildkollectionen bei Tag/Nacht Wechsel
 * Erweiterte Funktionalität der Windows Hintergrundbilder
@@ -33,16 +32,22 @@ Zu den bekannten Funktionen die Windows für die Hintergrundbilder bereitstellt,
 <br/><br/><br/>
 
 ## Multimonitor Support
+<img src="DesktopFox/Assets/promo/DF_Multimonitor.png" height="350" align="right">
 Eine Kollektion zu wenig?<br/>
-Vieleicht verwendest du mehrere Monitore aber nicht alle sind im Landscape format aufgestellt.<br/>
-Mit diesem Feature kannst du bis zu 3 Monitore mit seperaten Kollektionen konfigurieren. Damit kann spezielle Kollektionen verwenden die für unterschiedliche Formate geeigneter sind.
+Vielleicht verwendest du mehrere Monitore aber nicht alle sind im Landscape Format aufgestellt.<br/>
+Jetzt kannst du bis zu 3 Monitore mit seperaten Kollektionen konfigurieren. <br/>
+Hiermit ist es möglich Bilder mit speziellen Formaten auf dem richtigen Monitor anzeigen zu lassen.
+<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/>
 
 ## Custom Icons
 <img src="DesktopFox/Assets/promo/DF_CustomIcons.png" height="350" align="right">
 
-Alle Icons der Applikation wurden von mir selbst gezeichnet, um der Benutzeroberfläche einen eigenen Touch zu geben.
+Alle Icons der Applikation wurden von mir selbst gezeichnet, um der Benutzeroberfläche einen eigenen Touch zu geben.<br/>
+Durch sie soll ein weicher abgerundeter Eindruck erzeugt werden. <br/>
+Auserdem erhöht es die Barrierefreiheit durch leicht verständliche Symbolic für die wichtigsten Funktionen.
 <br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/>
 
 
 ## Bewegte Hintergrundbilder
@@ -53,5 +58,15 @@ Reicht es dir nicht nur jede Minute ein neues Bild zu sehen?<br/>
 <br/>
 Mit bewegten Hintergründen kannst du deinem Desktophintergrund endlich Leben einhauchen und Videos mit Audio verwenden.
 Es können alle gängigen Videoformate verwendet werden wie bspw.: mp4, mkv, webm, avi, flv, mov, mkv 
+<br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/>
 
+# Credits
+* Author - Andreas Keimel
+* 9eck0 for the Windows IDesktopWallpaper API<br/> https://github.com/9eck0/IDesktopWallpaper-dotNet
+* The VLC Team for the LibVLCSharp Lib<br/> https://code.videolan.org/videolan/LibVLCSharp
 
+## Tools
+* Visual Studio 
+* GitHub
+* Clip Studio Paint

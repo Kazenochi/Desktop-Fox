@@ -14,10 +14,12 @@ Desktop Fox ist ein Hintergrundmanager für Windows. Er bietet die möglichkeit 
 <br/><br/><br/>
 
 ## Tageszeitenwechsel
-**Passe die Hintergründe der Tageszeit an**
-<p>Lass dir wunderschöne Landschaften und Strände am Tag und ruhige Nachtaufnahmen von Städten oder einem funkelnden Sternenhimmel in der Nacht anzeigen.</p>  
+<img src="DesktopFox/Assets/promo/DF_NightDay.png" height="350" align="right">
 
-<img src="DesktopFox/Assets/promo/DF_NightDay.png" height="350" style="border-radius:50%">
+**Passe die Hintergründe der Tageszeit an**
+Lass dir wunderschöne Landschaften und Strände am Tag und ruhige Nachtaufnahmen von Städten oder einem funkelnden Sternenhimmel in der Nacht anzeigen.  
+<br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/>
 
 ## Einstellungsmöglichkeiten
 <img src="DesktopFox/Assets/promo/DF_FillModes.png" height="350" align="right">
@@ -29,16 +31,25 @@ Zu den bekannten Funktionen die Windows für die Hintergrundbilder bereitstellt,
 <br/><br/><br/><br/><br/><br/><br/>
 
 ## Multimonitor Support
+Eine Kollektion zu wenig?<br/>
+Vieleicht verwendest du mehrere Monitore aber nicht alle sind im Landscape format aufgestellt.<br/>
+Mit diesem Feature kannst du bis zu 3 Monitore mit seperaten Kollektionen konfigurieren. Damit kann spezielle Kollektionen verwenden die für unterschiedliche Formate geeigneter sind.
 
 ## Custom Icons
-Alle Icons der Applikation wurden von mir selbst gezeichnet, um der Benutzeroberfläche einen eigenen Touch zu geben.
+<img src="DesktopFox/Assets/promo/DF_CustomIcons.png" height="350" align="right">
 
-<img src="DesktopFox/Assets/promo/DF_CustomIcons.png" height="350" >
+Alle Icons der Applikation wurden von mir selbst gezeichnet, um der Benutzeroberfläche einen eigenen Touch zu geben.
+<br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/>
+
 
 ## Bewegte Hintergrundbilder
 <img src="DesktopFox/Assets/promo/DF_AnimatedConfigMenu.png" height="350" align="right">
-Sind dir einfache Bilder zu langweilig. Reicht es dir nicht nur jede Minute ein neues Bild zu sehen.
-Mit Bewegten Hintergründen kannst du deinem Desktophintergrund Leben einhauchen und Videos mit Audio verwenden.
+
+Sind dir einfache Bilder zu langweilig?<br/>
+Reicht es dir nicht nur jede Minute ein neues Bild zu sehen?<br/>
+<br/>
+Mit bewegten Hintergründen kannst du deinem Desktophintergrund endlich Leben einhauchen und Videos mit Audio verwenden.
 Es können alle gängigen Videoformate verwendet werden wie bspw.: mp4, mkv, webm, avi, flv, mov, mkv 
 
 

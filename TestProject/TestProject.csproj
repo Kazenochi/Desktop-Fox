@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Desktop Fox\DesktopFox.csproj" />
+    <ProjectReference Include="..\DesktopFox\DesktopFox.csproj" />
   </ItemGroup>
 
 </Project>

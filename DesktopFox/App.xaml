@@ -47,9 +47,6 @@
             <DataTemplate DataType="{x:Type views:ContextPopupView}">
                 <views:ContextPopupView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type views:Settings_DModeView}">
-                <views:Settings_DModeView/>
-            </DataTemplate>
             <DataTemplate DataType="{x:Type views:Settings_SystemView}">
                 <views:Settings_SystemView/>
             </DataTemplate>

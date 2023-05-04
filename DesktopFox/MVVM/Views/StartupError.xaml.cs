@@ -12,7 +12,7 @@ namespace DesktopFox.MVVM.Views
     public partial class StartupError : Window
     {
         private readonly Timer _timer;
-        private readonly double _shutdownTimeSeconds = 30;
+        private readonly double _shutdownTimeSeconds = 10;
 
         public StartupError()
         {

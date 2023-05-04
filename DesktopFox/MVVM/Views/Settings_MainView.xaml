@@ -27,7 +27,7 @@
                 <ContentControl x:Name="SettingsPage"
                                 Grid.Row="1"
                                 Content="{Binding CurrentView}"
-                                d:Content="{views:Settings_DaytimeView}"/>
+                                d:Content="{views:Settings_PreviewView}"/>
             </Border>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom"

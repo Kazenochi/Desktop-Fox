@@ -85,6 +85,7 @@
                                   HorizontalContentAlignment="Center"
                                   IsEnabled="{Binding AWPConfigModel.VideoPreviewEnable}"
                           d:IsChecked="True">
+                        <d:Image Source="\Assets\promo\architecture_Night.jpg" Stretch="UniformToFill"/>
                     </ToggleButton>
                 </Grid>
                 <Grid Height="auto" Width="auto">
@@ -104,7 +105,7 @@
                                   d:IsChecked="False">
                     </ToggleButton>
                 </Grid>
-                <Grid Height="auto" Width="auto">
+                <Grid Height="auto" Width="auto" d:Visibility="Collapsed">
                     <Border>
                         <ContentControl x:Name="Monitor3_Video"
                                     Visibility="{Binding AWPConfigModel.Video3Visibility, Converter={StaticResource BoolConverter}}"
@@ -150,7 +151,9 @@
                             ToolTip="Syncs all Videos"
                             IsEnabled="{Binding AWPConfigModel.ActivateControlEnable}"
                             Command="{Binding VideoSyncCommand}">
-                        
+                        <Image Source="\Icons\Icons_Sync.png" 
+                               Margin="6"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
                 </StackPanel>
 

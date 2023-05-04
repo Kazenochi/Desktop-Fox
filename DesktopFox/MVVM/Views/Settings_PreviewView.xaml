@@ -91,6 +91,7 @@
                                  Content="Fill" 
                                  FontSize="20"
                                  Margin="5,5,5,5"
+                                 d:IsChecked="True"
                                  IsChecked="{Binding settings.DesktopFillMode, Converter={StaticResource BoolToIntConverter}, ConverterParameter=4}"
                                  Style="{StaticResource DF_RadioButton_Border}"/>
                     <RadioButton x:Name="radio_DMode_Span"

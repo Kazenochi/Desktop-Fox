@@ -47,6 +47,7 @@
     <None Remove="Icons\Icons_Save.png" />
     <None Remove="Icons\Icons_Settings.png" />
     <None Remove="Icons\Icons_Stop.png" />
+    <None Remove="Icons\Icons_Sync.png" />
     <None Remove="Icons\Icons_Transfer.png" />
     <None Remove="Icons\Icons_Video.png" />
     <None Remove="Icons\Icons_Volume_Down.png" />
@@ -132,6 +133,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Icons_Stop.png" />
+    <Resource Include="Icons\Icons_Sync.png" />
     <Resource Include="Icons\Icons_Transfer.png" />
     <Resource Include="Icons\Icons_Video.png" />
     <Resource Include="Icons\Icons_Volume_Down.png" />

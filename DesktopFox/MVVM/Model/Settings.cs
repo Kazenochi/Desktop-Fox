@@ -33,7 +33,7 @@ namespace DesktopFox
 
         /// <summary>
         /// Gibt den Zeitpunkt an ab dem ein neuer Tag angebrochen ist. 
-        /// Bezieht sich auf das Ende der Programm Tageszeit nicht auf auf den Tatsächlichen Datumswechsel
+        /// Bezieht sich auf das Ende der Programm Tageszeit nicht auf auf den tatsächlichen Datumswechsel
         /// </summary>
         public DateTime NextDaySwitch { get { return _nextDaySwitch; } set { _nextDaySwitch = value; RaisePropertyChanged(nameof(NextDaySwitch)); } }
         private DateTime _nextDaySwitch = new DateTime();

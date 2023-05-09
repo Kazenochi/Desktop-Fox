@@ -97,6 +97,11 @@ namespace DesktopFox
                     }
                     break;
 
+                case nameof(_settings.DayStart):
+                    if(_settings.NextDaySwitch.TimeOfDay != _settings.DayStart)
+                        _settings.NextDaySwitch.Subtract(_settings.NextDaySwitch.TimeOfDay).Add(_settings.DayStart);
+                    break;
+
                 default: return;
             }
         }

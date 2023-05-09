@@ -65,8 +65,9 @@ Es können alle gängigen Videoformate verwendet werden wie bspw.: mp4, mkv, web
 * Author - Andreas Keimel
 * 9eck0 for the Windows IDesktopWallpaper API<br/> https://github.com/9eck0/IDesktopWallpaper-dotNet
 * The VLC Team for the LibVLCSharp Lib<br/> https://code.videolan.org/videolan/LibVLCSharp
+> Aufgrund von [Lizenzen der VLCSharpLib](https://videolabs.io/solutions/libvlcsharp/), enthält dieses Projekt keine Kompilierte Version des Programms.
 
-## Tools
+# Tools
 * Visual Studio 
 * GitHub
 * Clip Studio Paint

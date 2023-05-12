@@ -191,7 +191,7 @@
                                 IsEnabled="{Binding AWPConfigModel.IsMuted, Converter={StaticResource BoolInverter}}"
                                 Command="{Binding VolumeUpCommand}">
                             <Image Source="\Icons\Icons_Volume_Up.png" 
-                                   Margin="10"
+                                   Margin="8,10,12,10"
                                    RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Button>
                         <Button Style="{StaticResource DF_Button_Border}"

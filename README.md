@@ -42,7 +42,7 @@ Hiermit ist es möglich Bilder mit speziellen Formaten auf dem richtigen Monitor
 
 ## Custom Icons
 <img src="DesktopFox/Assets/promo/DF_CustomIcons.png" height="350" align="right">
-<img src="DesktopFox/Assets/promo/DF_Error.png" height="350" align="left">
+<img src="DesktopFox/Assets/promo/DF_Error.png" height="350" align="right">
 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 

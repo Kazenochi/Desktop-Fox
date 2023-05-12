@@ -42,18 +42,23 @@ Hiermit ist es möglich Bilder mit speziellen Formaten auf dem richtigen Monitor
 
 ## Custom Icons
 <img src="DesktopFox/Assets/promo/DF_CustomIcons.png" height="350" align="right">
-<img src="DesktopFox/Assets/promo/DF_Error.png" height="350" align="left">
-
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 Alle Icons der Applikation wurden selbst erstellt, um der Benutzeroberfläche einen eigenen Touch zu geben.<br/>
 Durch sie soll ein weicher abgerundeter Eindruck erzeugt werden. <br/>
 Auserdem erhöht es die Barrierefreiheit durch leicht verständliche Symbolic für die wichtigsten Funktionen.
 Sowie handgezeichnete Bilder zur veranschaulichung von Fehlermeldungen
 
+<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/>
 
+## Handdrawn Errors
+<img src="DesktopFox/Assets/promo/DF_Error.png" height="350" align="right">
 
+Zur Auflockerung wurden handgezeichnete Bilder verwendet.
+Hiermit wird sowohl zum Teil die Barrierefreiheit erhöht, in erster Linie wollte ich der Applikation jedoch einen verspielten touch geben.  
 
+<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
 
 
 ## Bewegte Hintergrundbilder
@@ -71,7 +76,8 @@ Es können alle gängigen Videoformate verwendet werden wie bspw.: mp4, mkv, web
 * Author - Andreas Keimel
 * 9eck0 for the Windows IDesktopWallpaper API<br/> https://github.com/9eck0/IDesktopWallpaper-dotNet
 * The VLC Team for the LibVLCSharp Lib<br/> https://code.videolan.org/videolan/LibVLCSharp
-> Aufgrund von [Lizenzen der VLCSharpLib](https://videolabs.io/solutions/libvlcsharp/), enthält dieses Projekt keine Kompilierte Version des Programms.
+> Aufgrund der [Lizenz von VLCSharpLib](https://videolabs.io/solutions/libvlcsharp/), enthält dieses Git-Projekt keine Kompilierte Version des Programms.<br/><br/>
+> Due to the [licenses of VLCSharpLib](https://videolabs.io/solutions/libvlcsharp/), this Git project does not include a compiled version of the program.
 
 # Tools
 * Visual Studio 

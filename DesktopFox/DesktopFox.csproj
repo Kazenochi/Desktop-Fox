@@ -10,7 +10,7 @@
     <StartupObject>DesktopFox.App</StartupObject>
     <ApplicationIcon>Assets\DF_Icon.ico</ApplicationIcon>
     <PackageLicenseFile>license</PackageLicenseFile>
-    <SignAssembly>True</SignAssembly>
+    <SignAssembly>False</SignAssembly>
     <Title>DesktopFox</Title>
   </PropertyGroup>
 

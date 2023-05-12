@@ -42,16 +42,16 @@ Hiermit ist es möglich Bilder mit speziellen Formaten auf dem richtigen Monitor
 
 ## Custom Icons
 <img src="DesktopFox/Assets/promo/DF_CustomIcons.png" height="350" align="right">
-<img src="DesktopFox/Assets/promo/DF_Error.png" height="350" align="right">
 
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
 
 Alle Icons der Applikation wurden selbst erstellt, um der Benutzeroberfläche einen eigenen Touch zu geben.<br/>
 Durch sie soll ein weicher abgerundeter Eindruck erzeugt werden. <br/>
 Auserdem erhöht es die Barrierefreiheit durch leicht verständliche Symbolic für die wichtigsten Funktionen.
 Sowie handgezeichnete Bilder zur veranschaulichung von Fehlermeldungen
 
-
+<img src="DesktopFox/Assets/promo/DF_Error.png" height="350" align="left">
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 

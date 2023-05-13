@@ -21,7 +21,7 @@ Lass dir wunderschöne Landschaften und Strände am Tag und ruhige Nachtaufnahme
 <br/><br/><br/><br/>
 
 
-## Einstellungsmöglichkeiten
+## Erweiterte Einstellungsmöglichkeiten
 <img src="DesktopFox/Assets/promo/DF_FillModes.png" height="350" align="right">
 
 Zu den bekannten Funktionen die Windows für die Hintergrundbilder bereitstellt, gibt es auch noch viele weitere Einstellungsmöglichkeiten.

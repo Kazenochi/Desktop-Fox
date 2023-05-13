@@ -10,7 +10,7 @@ Desktop Fox ist ein Hintergrundbildmanager für Windows. Er bietet die möglichk
 * Erweiterte Funktionalität der Windows Hintergrundbilder
 * Support für bis zu 3 Monitoren mit Unterschiedlichen Kollektionen
 * Bewegte Hintergrundbilder ***(Experimentel)***
-<br/><br/><br/>
+<br/><br/><br/><br/><br/>
 
 ## Tageszeitenwechsel
 <img src="DesktopFox/Assets/promo/DF_NightDay.png" height="350" align="right">

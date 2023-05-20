@@ -18,7 +18,7 @@ namespace DesktopFox
     {
         private static Mutex onlyOneMutex;
         /// <summary>
-        /// Verhindert das mehrere Instancen des programms gestartet werden können.
+        /// Verhindert das mehrere Instanzen des Programs gestartet werden können.
         /// </summary>
         /// <param name="e"></param>
         protected override void OnStartup(StartupEventArgs e)

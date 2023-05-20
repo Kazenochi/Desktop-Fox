@@ -38,7 +38,7 @@
                        HorizontalAlignment="Center"
                        Source="{Binding PreviewModel.BackgroundImage, NotifyOnTargetUpdated=True}"
                        Stretch="{Binding PreviewModel.ImageStretch}"
-                       d:Source="/Assets/96619278_p0.png"
+                       d:Source="/Assets/promo/96619278_p0.png"
                        d:Stretch="UniformToFill">
                
                     <Image.Triggers>
@@ -74,9 +74,6 @@
                 <Border Background="{StaticResource TextBrush}"
                         CornerRadius="0,20,0,0"
                         Opacity="0.6">
-                    <Border.Effect>
-                        <BlurEffect Radius="5"/>
-                    </Border.Effect>
                 </Border>
                 <Label Background="Transparent"
                        FontFamily="{StaticResource Default}"
@@ -84,7 +81,7 @@
                        Padding="15,5,10,5"
                        FontWeight="Heavy">
                     <TextBlock Text="{Binding PreviewModel.SetName}"
-                               d:Text="Super Cooles langes Set"
+                               d:Text="Langer Testname für Bilder [...............................................]"
                                TextTrimming="CharacterEllipsis">
                         
                     </TextBlock>
@@ -98,9 +95,7 @@
                 <Border Background="{StaticResource TextBrush}"
                         CornerRadius="20,0,0,0"
                         Opacity="0.6">
-                    <Border.Effect>
-                        <BlurEffect Radius="5"/>
-                    </Border.Effect>
+
                 </Border>
                 <StackPanel Orientation="Horizontal">
                     <Label Background="Transparent"

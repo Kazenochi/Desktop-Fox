@@ -19,7 +19,7 @@
                    TextAlignment="Center"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center">
-            <Run Text="Please select which Monitor"/><LineBreak/>
+            <Run Text="Please select which monitor"/><LineBreak/>
             <Run Text="should display an animated wallpaper"/>
 
             </TextBlock>

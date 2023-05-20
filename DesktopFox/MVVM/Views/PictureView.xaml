@@ -72,12 +72,13 @@
                    VerticalAlignment="Bottom" 
                    Width="414" Height="30" 
                    Padding="20,1,5,0" 
-                   d:Visibility="Collapsed"
                    Grid.IsSharedSizeScope="True">
                 <TextBlock Text="{Binding pictureSet.SetName}"
-                           d:Text="Pictureset great. Test eines sehr langen Sets"
+                           d:Text="Name des Bildsets. Test eines sehr langen Namens"
                            TextTrimming="CharacterEllipsis"
                            Width="320"/>
+                <!--Fade ist evtl. schlecht wegen leserlichkeit. 
+                    Aktuell finde ich den Effekt jedoch besser-->
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.7">
                         <LinearGradientBrush.RelativeTransform>
@@ -99,7 +100,7 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
-                      d:Visibility="Collapsed"
+                      
                       Visibility="{Binding Path=pictureSet.IsActive1, Mode=TwoWay, 
                                     Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
@@ -119,7 +120,7 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
-                      d:Visibility="Collapsed"
+                      
                       Visibility="{Binding Path=pictureSet.IsActive2, Mode=TwoWay, 
                                     Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
@@ -139,7 +140,7 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left" 
                       Margin="5"
-                      d:Visibility="Collapsed"
+                      
                       Visibility="{Binding Path=pictureSet.IsActive3, Mode=TwoWay, 
                                     Converter={StaticResource BoolConverter}}">
                     <Ellipse Fill="Black"/>
@@ -189,8 +190,7 @@
                        VerticalAlignment="Top"
                        HorizontalAlignment="Left" 
                        RenderTransformOrigin="0.5,0.5"
-                       Margin="0,0,0,0"
-                       d:Visibility="Collapsed"
+                       Margin="0,0,0,0"                      
                        Visibility="{Binding Path=pictureSet.IsSelectedDF, Mode=TwoWay, 
                                      Converter={StaticResource BoolConverter}}">
                 <Rectangle.Fill>

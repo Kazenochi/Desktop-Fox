@@ -23,6 +23,7 @@ namespace DesktopFox
 
         /// <summary>
         /// <see cref="previewCount"/> -1 wird benötigt für Doppelaufruf. Beim Start wird <see cref="previewRefresh"/> & <see cref="Dispatcher"/> ausgeführt.
+        /// Nicht schön aber ...
         /// </summary>
         private int previewCount = -1;
         private Timer previewTimer;

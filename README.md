@@ -10,18 +10,17 @@ Desktop Fox ist ein Hintergrundbildmanager für Windows. Er bietet die möglichk
 * Erweiterte Funktionalität der Windows Hintergrundbilder
 * Support für bis zu 3 Monitoren mit Unterschiedlichen Kollektionen
 * Bewegte Hintergrundbilder ***(Experimentel)***
-<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
 
 ## Tageszeitenwechsel
 <img src="DesktopFox/Assets/promo/DF_NightDay.png" height="350" align="right">
 
-**Passe die Hintergründe der Tageszeit an**
-Lass dir wunderschöne Landschaften und Strände am Tag und ruhige Nachtaufnahmen von Städten oder einem funkelnden Sternenhimmel in der Nacht anzeigen.  
+Passe die Hintergründe der Tageszeit an und lasse dir wunderschöne Landschaften am Tag und ruhige Nachtaufnahmen von Städten oder einem funkelnden Sternenhimmel in der Nacht anzeigen.  
 <br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/>
 
 
-## Einstellungsmöglichkeiten
+## Erweiterte Einstellungsmöglichkeiten
 <img src="DesktopFox/Assets/promo/DF_FillModes.png" height="350" align="right">
 
 Zu den bekannten Funktionen die Windows für die Hintergrundbilder bereitstellt, gibt es auch noch viele weitere Einstellungsmöglichkeiten.
@@ -54,8 +53,8 @@ Sowie handgezeichnete Bilder zur veranschaulichung von Fehlermeldungen
 ## Handdrawn Errors
 <img src="DesktopFox/Assets/promo/DF_Error.png" height="350" align="right">
 
-Zur Auflockerung wurden handgezeichnete Bilder verwendet.
-Hiermit wird sowohl zum Teil die Barrierefreiheit erhöht, in erster Linie wollte ich der Applikation jedoch einen verspielten touch geben.  
+Das Benutzen einer App sollte Spaß machen, selbst wenn unerwartete Dinge passieren. 
+Zur Auflockerung wurden deshalb handgezeichnete Bilder verwendet.
 
 <br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>

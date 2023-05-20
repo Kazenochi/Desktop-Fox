@@ -231,7 +231,7 @@ namespace DesktopFox
                 DF_Json.deleteFile(SaveFileType.Wallpaper);
             }
 
-            if (DF_Json.saveFile(gallery, logging: true) & DF_Json.saveFile(settings, logging: true))
+            if (DF_Json.saveFile(gallery) & DF_Json.saveFile(settings))
                 Debug.WriteLine("App Close. Speichern der Daten war erfolgreich");
             else
                 Debug.WriteLine("App Close. FEHLER. Daten konnten nicht gespeichert werden.");

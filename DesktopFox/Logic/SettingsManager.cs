@@ -12,11 +12,11 @@ namespace DesktopFox
     /// </summary>
     public class SettingsManager
     {
-        private Settings _settings;
+        private readonly Settings _settings;
         private GalleryManager GM;
-        private VirtualDesktop vDesk;
-        private Fox DF;
-        Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+        private readonly VirtualDesktop vDesk;
+        private readonly Fox DF;
+        private readonly Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
         /// <summary>
         /// Konstruktor

@@ -4,12 +4,12 @@
 
 <img src="DesktopFox/Assets/promo/DF_TitelBar.png" align="right" height="350">
 
-Desktop Fox ist ein Hintergrundbildmanager für Windows. Er bietet die möglichkeit feinerer Einstellungen an den bekannten Windows funktionen durchzuführen und enthält darüber    hinaus noch eine Vielzahl von zusätzlichen Funktionen.
+Desktop Fox ist ein Hintergrundbildmanager für Windows. Er bietet die Möglichkeit feinerer Einstellungen an den bekannten Windows Funktionen durchzuführen und enthält darüber    hinaus noch eine Vielzahl von zusätzlichen Funktionen.
 
-* Ändern der Bildkollectionen bei Tag/Nacht Wechsel
+* Ändern der Bildkollektionen bei Tag/Nacht-Wechsel
 * Erweiterte Funktionalität der Windows Hintergrundbilder
-* Support für bis zu 3 Monitoren mit Unterschiedlichen Kollektionen
-* Bewegte Hintergrundbilder ***(Experimentel)***
+* Support für bis zu 3 Monitoren mit unterschiedlichen Kollektionen
+* Bewegte Hintergrundbilder ***(Experimentell)***
 <br/><br/><br/><br/><br/>
 
 ## Tageszeitenwechsel
@@ -23,9 +23,9 @@ Passe die Hintergründe der Tageszeit an und lasse dir wunderschöne Landschafte
 ## Erweiterte Einstellungsmöglichkeiten
 <img src="DesktopFox/Assets/promo/DF_FillModes.png" height="350" align="right">
 
-Zu den bekannten Funktionen die Windows für die Hintergrundbilder bereitstellt, gibt es auch noch viele weitere Einstellungsmöglichkeiten.
-* Tageszeit Wechsel
-* Feinere Einstellungsmöglichkeiten für die Intervallzeit des Bildwechsels
+Zu den bekannten Funktionen, die Windows für die Hintergrundbilder bereitstellt, gibt es auch noch viele weitere Einstellungsmöglichkeiten.
+* Tageszeit-Wechsel
+* Feinere Einstellungsmöglichkeiten für die Intervall-Zeit des Bildwechsels
 * Unterschiedliche Kollektionen für bis zu 3 Monitore
 <br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/>
@@ -33,9 +33,9 @@ Zu den bekannten Funktionen die Windows für die Hintergrundbilder bereitstellt,
 ## Multimonitor Support
 <img src="DesktopFox/Assets/promo/DF_Multimonitor.png" height="350" align="right">
 Eine Kollektion zu wenig?<br/>
-Vielleicht verwendest du mehrere Monitore aber nicht alle sind im Landscape Format aufgestellt.<br/>
-Jetzt kannst du bis zu 3 Monitore mit seperaten Kollektionen konfigurieren. <br/>
-Hiermit ist es möglich Bilder mit speziellen Formaten auf dem richtigen Monitor anzeigen zu lassen.
+Vielleicht verwendest du mehrere Monitore, aber nicht alle sind im Landscape-Format aufgestellt.<br/>
+Es können bis zu 3 Monitore mit separaten Kollektionen konfiguriert werden. <br/>
+Hiermit ist es möglich, Bilder mit speziellen Formaten auf dem richtigen Monitor anzeigen zu lassen.
 <br/><br/><br/><br/><br/><br/>
 <br/><br/><br/>
 
@@ -43,9 +43,9 @@ Hiermit ist es möglich Bilder mit speziellen Formaten auf dem richtigen Monitor
 <img src="DesktopFox/Assets/promo/DF_CustomIcons.png" height="350" align="right">
 
 Alle Icons der Applikation wurden selbst erstellt, um der Benutzeroberfläche einen eigenen Touch zu geben.<br/>
-Durch sie soll ein weicher abgerundeter Eindruck erzeugt werden. <br/>
-Auserdem erhöht es die Barrierefreiheit durch leicht verständliche Symbolic für die wichtigsten Funktionen.
-Sowie handgezeichnete Bilder zur veranschaulichung von Fehlermeldungen
+Durch sie soll ein weicher, abgerundeter Eindruck erzeugt werden. <br/>
+Außerdem erhöht es die Barrierefreiheit durch leicht verständliche Symbolik für die wichtigsten Funktionen.
+Sowie handgezeichnete Bilder zur Veranschaulichung von Fehlermeldungen.
 
 <br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/>

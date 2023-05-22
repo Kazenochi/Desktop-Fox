@@ -27,10 +27,14 @@ namespace DesktopFox
         {
             workerw = IntPtr.Zero;
             String[] test = wrapper.GetAllMonitorIDs();
+
+            /* Test
             foreach (String testID in test)
             {
-                Console.WriteLine("MonitorIDS: " + testID);
+                Debug.WriteLine("MonitorIDS: " + testID);
             }
+            */
+
             convertMonitorID(wrapper.GetActiveMonitorIDs());
             this.monitorCount = monitorDict.Count;
 
@@ -55,8 +59,9 @@ namespace DesktopFox
                 if (wrapper.GetMonitorRECT(monitor[i]).X == 0)
                     addNewMonitor(monitor[i], MonitorEnum.MainMonitor);
             }
+
             foreach (var pair in monitorDict)
-                Console.WriteLine($"Monitor: {pair.Key} ----- Name der Adresse: {pair.Value}");
+                Debug.WriteLine($"Monitor: {pair.Key} ----- Name der Adresse: {pair.Value}");
 
             if (monitor.Length > 1)
             {
@@ -305,12 +310,18 @@ namespace DesktopFox
         /// <returns></returns>
         public Monitor GetMonitor(int number)
         {
-            switch (number)
+            try { 
+                switch (number)
+                {
+                    case 1: return monitorDict[MonitorEnum.MainMonitor]; 
+                    case 2: return monitorDict[MonitorEnum.SecondMonitor]; 
+                    case 3: return monitorDict[MonitorEnum.ThirdMonitor];
+                    default: Debug.WriteLine("Kein Monitor mit diesem Wert verfügbar"); return null;            
+                }
+            }catch(System.Collections.Generic.KeyNotFoundException e)
             {
-                case 1: return monitorDict[MonitorEnum.MainMonitor]; 
-                case 2: return monitorDict[MonitorEnum.SecondMonitor]; 
-                case 3: return monitorDict[MonitorEnum.ThirdMonitor];
-                default: Debug.WriteLine("Kein Monitor mit diesem Wert verfügbar"); return null;            
+                Debug.WriteLine($"!!!Critical Error!!! \n Maybe new monitors are not detected. Restart may be necessary. \n { e.ToString()}");
+                return monitorDict[MonitorEnum.MainMonitor];
             }
         }
         /// <summary>

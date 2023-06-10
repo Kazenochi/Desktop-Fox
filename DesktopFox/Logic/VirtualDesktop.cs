@@ -18,7 +18,7 @@ namespace DesktopFox
         private readonly int monitorCount;
         private List<Wallpaper> wallpapers;
         private IntPtr progman, workerw;
-        private readonly bool debug = true;
+        private readonly bool debug = false;
 
         /// <summary>
         /// Konstruktor

@@ -196,7 +196,7 @@ namespace DesktopFox
                 Debug.WriteLine("Löschen erfolgreich");
                 return;
             }
-            catch (System.IO.FileNotFoundException)
+            catch (System.IO.FileNotFoundException e)
             {
                 Debug.WriteLine("Fehler beim Löschen der Datei!!! \n" + e);
                 return;

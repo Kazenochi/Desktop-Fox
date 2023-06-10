@@ -47,7 +47,7 @@ namespace DesktopFox
         /// </summary>
         public void GallerySort()
         {
-            bool debug = true;
+            bool debug = false;
             if (debug)
             {
                 Debug.WriteLine("Gallery PicCount Before: " + _gallery.PictureSetList.Count);

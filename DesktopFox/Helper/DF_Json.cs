@@ -154,9 +154,9 @@ namespace DesktopFox
                 }
                 return null;
             }
-            catch (System.IO.FileNotFoundException)
+            catch (System.IO.FileNotFoundException e)
             {
-                Console.WriteLine("Fehler beim Lesen der Datei!!!");
+                Debug.WriteLine("Fehler beim Lesen der Datei!!! \n" + e);
                 return null;
             }
 
@@ -198,7 +198,7 @@ namespace DesktopFox
             }
             catch (System.IO.FileNotFoundException)
             {
-                Console.WriteLine("Fehler beim Löschen der Datei!!!");
+                Debug.WriteLine("Fehler beim Löschen der Datei!!! \n" + e);
                 return;
             }
         }

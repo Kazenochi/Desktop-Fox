@@ -114,8 +114,6 @@ namespace DesktopFox
                 }
             }
             bound[0] = width;
-            //this.boundary = bound;
-            //Console.WriteLine("Gesamte Desktop Auflösung Breite:" + width + " Höhe: " + hight);
         }
 
         #region FensterMethoden für Custom / Animierte Hintergründe

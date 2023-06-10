@@ -74,7 +74,6 @@ namespace DesktopFox
             foreach (FileInfo file in filesArray)
             {
                 String ext = System.IO.Path.GetExtension(file.FullName).ToUpper();
-                Console.WriteLine("Erweiterung der Dateien: " + ext);
                 if (ext == ".PNG" || ext == ".JPG" || ext == ".JPEG" || ext == ".BMP")
                     picFiles.Add(file);
             }

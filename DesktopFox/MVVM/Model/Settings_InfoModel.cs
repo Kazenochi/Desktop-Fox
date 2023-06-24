@@ -12,7 +12,7 @@ namespace DesktopFox.MVVM.Model
         private string _appName = System.AppDomain.CurrentDomain.FriendlyName;
 
         public string AppVersion { get { return _appVersion; } set { _appVersion = value; RaisePropertyChanged(nameof(AppVersion)); } }
-        public string _appVersion { get; set;} = "Beta 1.0";
+        public string _appVersion { get; set;} = "Release 1.0";
 
         public string FrameworkVersion { get { return _frameworkVersion; } set { _frameworkVersion = value; RaisePropertyChanged(nameof(FrameworkVersion)); } }
         public string _frameworkVersion { get; set; } = Environment.Version.ToString();
